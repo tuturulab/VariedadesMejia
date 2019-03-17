@@ -28,8 +28,6 @@ namespace Variedades.Views
             ViewModel = pageViewModel;
             DataContext = ViewModel;
 
-
-
             UtilidadPaginacion();
         }
 
@@ -60,15 +58,11 @@ namespace Variedades.Views
             var producto = ViewModel.SelectedProduct;
 
             //Iniciamos la ventana de crear un producto
-            window = new AgregarProductoWindow(producto) { DataContext = this.DataContext };
-
-
+            window = new AgregarProductoWindow(ViewModel, producto);
 
             window.UpdatePagination += new EventHandler(EventoPaginacion);
 
             window.Show();
-
-
         }
 
 

@@ -28,6 +28,7 @@ namespace Variedades.Views
         bool ImeiCheck = true;
         public PageViewModel ViewModel;
         public Proveedor _Proveedor;
+        private Producto _producto;
 
         //Evento de Actualizar Paginacion
         public event EventHandler UpdatePagination;
@@ -41,20 +42,67 @@ namespace Variedades.Views
             }
         }
 
-        public AgregarProductoWindow(Producto producto = null)
+        public AgregarProductoWindow(PageViewModel viewModel, Producto producto = null)
         {
-
             InitializeComponent();
+            ViewModel = viewModel;
+            DataContext = ViewModel;
             _Proveedor = new Proveedor();
             ImeiList = new ObservableCollection<ImeiClass>();
 
             //Si el ID no es 0, entonces la ventana de agregar producto, pasara a ser de editar producto
             if (producto != null)
             {
-                WindowTitle.Text = "Editar Producto";
-                InsertarButton.Content = "Editar Producto";
-                MarcaTextBox.Text = producto.Marca;
+                SetProductoDatatoView(producto);
             }
+        }
+
+        public void SetProductoDatatoView(Producto producto)
+        {
+            _producto = producto;
+
+            //Seteo de datos a la vista
+            Title = "Editar Producto";
+            InsertarButton.Content = "Editar Producto";
+            MarcaTextBox.Text = producto.Marca;
+            ModeloTextBox.Text = producto.Modelo;
+            PrecioTextBox.Text = producto.Precio_Venta.ToString();
+            CategoriaComboBox.SelectedIndex = GetIndexCategory(producto.Tipo_Producto);
+            TextBoxCantidad.Text = producto.Cantidad_Disponible.ToString();
+            ImeiGridBtn.Content = "Editar Imeis";
+
+            //Verificar si tiene imeis
+            if (producto.Especificaciones_producto == null)
+            {
+                ImeiGridBtn.IsEnabled = true;
+            }
+            else
+            {
+                //Hacer visible el grid de imeis
+                if (ImeiDatagrid.Visibility == Visibility.Hidden)
+                {
+                    ImeiDatagrid.Visibility = Visibility.Visible;
+
+                    //Iterar sobre las especificaciones y agregar los imeis al grid
+                    producto.Especificaciones_producto.ToList().ForEach(e => {
+                        if (e.IMEI != null)
+                        {
+                            ImeiList.Add(new ImeiClass() { Imei = e.IMEI });
+                        }
+                    });
+
+                    ImeiDatagrid.ItemsSource = ImeiList;
+                }
+            }
+        }
+
+        public int GetIndexCategory(string Category)
+        {
+            //Iterar sobre el contenido las propiedades del combobox categoria, para obtener una list<string> de las categorias
+            List<string> Lista = CategoriaComboBox.Items.Cast<ComboBoxItem>()
+                .Select(item => item.Content.ToString()).ToList();
+
+            return Lista.IndexOf(Category);
         }
 
         //Observable for dependency property
@@ -95,13 +143,9 @@ namespace Variedades.Views
             //Iniciamos la ventana de crear de proveedor
             var window = new ProveedorWindow(ViewModel);
 
-
-
             //Subscribimos al evento
             window.ActualizarProveedor += EventoProveedor;
             window.Show();
-
-
         }
 
 
@@ -145,7 +189,6 @@ namespace Variedades.Views
 
         }
 
-
         //Acción del boton insertar
         private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
@@ -181,7 +224,6 @@ namespace Variedades.Views
                             Especificaciones.Add(new Especificacion_producto() { Producto = product, IMEI = item.Imei });
                         }
                     }
-
                     else
                     {
                         for (int i = 0; i < cantidad; i++)
@@ -190,7 +232,6 @@ namespace Variedades.Views
                         }
                     }
                 }
-
                 catch
                 {
                     MessageBoxResult result = MessageBox.Show("Por favor Ingrese un numero de menor tamaño y que sea entero.",
@@ -204,7 +245,6 @@ namespace Variedades.Views
                     //Llamar al viewmodel para agregarlo a la base de datos
                     ViewModel.AddProduct(product, Especificaciones, _Proveedor);
                 }
-
                 else
                 {
                     ViewModel.AddProduct(product, Especificaciones);
@@ -235,7 +275,6 @@ namespace Variedades.Views
 
                 }
             }
-
             catch
             {
                 MessageBoxResult result = MessageBox.Show("Por favor Ingrese Los campos correctamente",
@@ -243,9 +282,6 @@ namespace Variedades.Views
                                                  MessageBoxButton.OK,
                                                  MessageBoxImage.Question);
             }
-
-
-
         }
     }
 

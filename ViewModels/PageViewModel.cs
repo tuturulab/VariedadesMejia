@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -108,10 +109,8 @@ namespace Variedades
                     _context.Proveedor_producto.Add(ProveedorProducto);
 
                 }
-
                 _context.SaveChanges();
             }
-
             catch
             {
                 Console.WriteLine("Error al agregar en la base de datos");
@@ -227,6 +226,19 @@ namespace Variedades
         {
             var producto = _context.Producto.Find(id);
             
+        }
+
+        //Actualizar producto
+        public void UpdateProduct<T>(T item) where T: Producto
+        {
+            var entity = _context.Producto.Find(item.IdProducto);
+            if(entity == null)
+            {
+                return;
+            }
+
+            _context.Entry(entity).CurrentValues.SetValues(item);
+            _context.SaveChanges();
         }
 
         //Modulo de borrado

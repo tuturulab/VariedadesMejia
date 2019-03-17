@@ -79,7 +79,7 @@
                 <DockPanel>
                     <TextBlock VerticalAlignment="Center" Text="Cantidad" Width="100px"></TextBlock>
                     <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" Name="TextBoxCantidad" FontSize="20" HorizontalAlignment="Left" Width="200" Height="30" Margin="30,0,0,0"/>
-                    <Button Content="Insertar Imei" Click="BtnInsertarImei" HorizontalAlignment="Left" BorderBrush="{x:Null}"  Foreground="White" Width="100" Margin="30,0,0,0">
+                    <Button Content="Insertar Imei" Name="ImeiGridBtn" Click="BtnInsertarImei" HorizontalAlignment="Left" BorderBrush="{x:Null}"  Foreground="White" Width="100" Margin="30,0,0,0">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="{StaticResource ColorBotones}" />
@@ -91,14 +91,12 @@
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
-
                                 </Setter>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
                                     </Trigger>
                                 </Style.Triggers>
-
                             </Style>
                         </Button.Style>
                     </Button>

@@ -13,7 +13,7 @@ namespace Variedades.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201903170653194_initial"; }
+            get { return "201903171757317_initial"; }
         }
         
         string IMigrationMetadata.Source

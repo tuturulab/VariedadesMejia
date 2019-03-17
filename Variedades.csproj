@@ -90,9 +90,9 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903170653194_initial.cs" />
-    <Compile Include="Migrations\201903170653194_initial.Designer.cs">
-      <DependentUpon>201903170653194_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201903171757317_initial.cs" />
+    <Compile Include="Migrations\201903171757317_initial.Designer.cs">
+      <DependentUpon>201903171757317_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -202,8 +202,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201903170653194_initial.resx">
-      <DependentUpon>201903170653194_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903171757317_initial.resx">
+      <DependentUpon>201903171757317_initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
