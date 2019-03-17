@@ -36,10 +36,7 @@ namespace Variedades.Views
         //Validación
         private void EventoPaginacion()
         {
-            if (UpdatePagination != null)
-            {
-                UpdatePagination(this, EventArgs.Empty);
-            }
+            UpdatePagination?.Invoke(this, EventArgs.Empty);
         }
 
         public AgregarProductoWindow(PageViewModel viewModel, Producto producto = null)
