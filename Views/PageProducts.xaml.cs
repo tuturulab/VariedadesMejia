@@ -15,6 +15,7 @@ namespace Variedades.Views
         public PageViewModel ViewModel;
         static Paging PagedTable = new Paging();
         AgregarProductoWindow window;
+        //test user github
 
         //Numeros a mostrar de pagina
         public int NumeroPaginaActual;

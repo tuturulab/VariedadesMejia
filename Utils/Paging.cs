@@ -14,6 +14,8 @@ namespace Variedades.Utils
 
         public IList<Models.Producto> Productos { get; set; }
         public IList<Models.Cliente> Clientes { get; set; }
+        public IList<Models.Venta> Ventas { get; set; }
+        public IList<Models.Pedido> Pedidos { get; set; }
 
         public void SomeMethod<T>(IList<T> List, int RecordsPerPage)
         {
@@ -23,12 +25,24 @@ namespace Variedades.Utils
                 var lista2 = List.Cast<Models.Producto>().ToList();
                 SetProductPaging(lista2, RecordsPerPage);
             }
+            else if (typeof(T) == typeof(Models.Venta))
+            {
+                var lista2 = List.Cast<Models.Venta>().ToList();
+                SetVentaPaging(lista2, RecordsPerPage);
+            }
+            else if (typeof(T) == typeof(Models.Pedido))
+            {
+                var lista2 = List.Cast<Models.Pedido>().ToList();
+                SetImportacionPaging(lista2, RecordsPerPage);
+            }
             else
             {
                 var lista2 = List.Cast<Models.Cliente>().ToList();
                 SetClientPaging(lista2, RecordsPerPage);
             }
         }
+
+        //Metodos de paginacion
 
         public void SetClientPaging(IList<Models.Cliente> ListToPage, int RecordsPerPage)
         {
@@ -40,6 +54,25 @@ namespace Variedades.Utils
 
         }
 
+        public void SetVentaPaging(IList<Models.Venta> ListToPage, int RecordsPerPage)
+        {
+            int PageGroup = PageIndex * RecordsPerPage;
+
+            IList<Models.Venta> PagedList = new List<Models.Venta>();
+
+            Ventas = ListToPage.Skip(PageGroup).Take(RecordsPerPage).ToList();
+
+        }
+
+        public void SetImportacionPaging(IList<Models.Pedido> ListToPage, int RecordsPerPage)
+        {
+            int PageGroup = PageIndex * RecordsPerPage;
+
+            IList<Models.Pedido> PagedList = new List<Models.Pedido>();
+
+            Pedidos = ListToPage.Skip(PageGroup).Take(RecordsPerPage).ToList();
+
+        }
 
         public void SetProductPaging (IList<Models.Producto> ListToPage, int RecordsPerPage)
         {
@@ -53,6 +86,7 @@ namespace Variedades.Utils
         }
         
        
+        //Accion de botones para avanzar y navegar entre las paginas
         public void Next<T>(IList<T> ListToPage, int RecordsPerPage)
         {
             PageIndex++;
