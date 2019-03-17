@@ -4,19 +4,63 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Variedades.Views"
+      xmlns:fa5="http://schemas.fontawesome.com/icons/"
+      xmlns:variedades="clr-namespace:Variedades"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageVentas">
 
-    <Grid>
 
-        <StackPanel Margin="10,10,10,5" Background="white">
-            <DockPanel Margin="0,0,0,10">
-                <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Ventas" FontSize="17" Foreground="black" ></TextBlock>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*"/>
+
+
+        </Grid.RowDefinitions>
+
+        <StackPanel  Grid.Row="0" Margin="10,10,10,5">
+            <Grid Margin="0,0,0,10">
+                <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Registros de Ventas" FontSize="17" Foreground="black" ></TextBlock>
+
+                <DockPanel HorizontalAlignment="Center">
+                    <TextBox Name="SearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0"/>
+                    <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="15,0,5,0" HorizontalAlignment="Left">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+
+
+                        <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_Search" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                    </Button>
+                </DockPanel>
+
                 <Button BorderBrush="{x:Null}" Content="Agregar Venta" x:Name="btnInsertar" Height="40px" Width="150px" Foreground="White"  HorizontalAlignment="Right" Padding="10,10,10,10" VerticalAlignment="Center" Margin="0,0,15,0">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="#333238" />
+                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -29,17 +73,198 @@
                             </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#616265"/>
+                                    <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
                                 </Trigger>
                             </Style.Triggers>
 
                         </Style>
                     </Button.Style>
                 </Button>
+            </Grid>
+
+        </StackPanel>
+
+
+        <DataGrid  Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding VentasCollection}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" Name="venta_table" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+            AlternatingRowBackground="Gainsboro" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
+
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="" MaxWidth="0"  Binding="{Binding IdProducto, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Orden Pagare" Binding="{Binding Orden_Pagare, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Tipo de Venta" Binding="{Binding Tipo_Venta, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha de Venta" Binding="{Binding Fecha_Venta, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad, IsAsync=True}" Width="*" ></DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="Detalle">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                    x:Name="btnDetalle"
+                                    Width="30"
+                                    Height="30"
+                                    Margin="10"
+                                    
+                                    BorderBrush="{x:Null}"
+                                   
+                                    >
+                                <Button.Content>
+                                    <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_InfoCircle" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Button.Content>
+
+                                <!--    -->
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="MediumSeaGreen" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="SeaGreen"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+                                </Button.Style>
+
+
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Editar">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                    x:Name="btnEditar"
+                                    Width="30"
+                                    Height="30"
+                                    Margin="10"
+                                    Click="BtnEditarVenta"
+                                    BorderBrush="{x:Null}"
+                                   
+                                    >
+                                <Button.Content>
+                                    <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_Edit" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Button.Content>
+
+                                <!--    -->
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+                                </Button.Style>
+
+
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Eliminar">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                    x:Name="btnBorrar"
+                                    Width="30"
+                                    Height="30"
+                                    Margin="10"
+                                    Click="BtnBorrarClick"
+                                    BorderBrush="{x:Null}"
+                                   
+                                    >
+                                <Button.Content>
+                                    <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_Trash" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Button.Content>
+
+                                <!--    -->
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#dc4636" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#ad1e0f"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+                                </Button.Style>
+
+
+
+                            </Button>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <Grid VerticalAlignment="Center" Margin="10,5,10,5" Grid.Row="2" Background="White">
+
+            <Button Background="{StaticResource ColorBotones}" Click="BtnFirstClick" Name="BtnFirst" Width="50px" Margin="5,0,5,0" HorizontalAlignment="Left">
+                <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_AngleDoubleLeft" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Button>
+
+            <Button Background="{StaticResource ColorBotones}" Name="BtnPrevious" Click="BtnPreviousClick" Width="50px" Margin="75,0,5,0" HorizontalAlignment="Left">
+                <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_AngleLeft" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+            </Button>
+            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label VerticalContentAlignment="Center" Name="PageInfo" FontSize="16" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"  />
+
             </DockPanel>
 
 
-        </StackPanel>
+
+            <Button Background="{StaticResource ColorBotones}" Click="BtnNextClick" Name="BtnNext" Width="50px"  Margin="5,0,75,0" HorizontalAlignment="Right">
+                <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_AngleRight" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Button>
+
+            <Button Background="{StaticResource ColorBotones}" Click="BtnLastClick" Name="BtnLast" Width="50px" Margin="5,0,5,0" HorizontalAlignment="Right">
+                <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_AngleDoubleRight" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Button>
+
+        </Grid>
 
     </Grid>
 </Page>

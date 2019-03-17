@@ -84,8 +84,8 @@ namespace Variedades
                     break;
 
                 case "ItemSales":
-                    var PaginaVentas = new Views.PageVentas { DataContext = this.DataContext, ViewModel = MainViewModel };
-                    ContentMain.Navigate(new Views.PageVentas());
+                    var PaginaVentas = new Views.PageVentas (MainViewModel);
+                    ContentMain.Navigate(PaginaVentas);
                     break;
 
                 case "ItemImports":

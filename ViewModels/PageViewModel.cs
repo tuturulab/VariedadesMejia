@@ -21,9 +21,14 @@ namespace Variedades
 
         static Paging PagedProductTable = new Paging();
         static Paging PagedClientTable = new Paging();
+        static Paging PagedVentaTable = new Paging();
+        static Paging PagedImportacionTable = new Paging();
 
         public List<Producto> ProductosList;
         public List<Cliente> ClientesList;
+        public List<Venta> VentasList;
+        public List<Pedido> PedidosList;
+
 
         //Declaracion del evento para llamar a la paginacion de la pagina productos una vez se llena la observable productos
         //public event EventHandler EventPaginationProduct;
@@ -49,6 +54,14 @@ namespace Variedades
         {
             get { return Productos; }
             set { Productos = value; NotifyPropertyChanged("ProductosCollection"); }
+        }
+
+        //Observable for VentassList
+        private ObservableCollection<Venta> Ventas;
+        public ObservableCollection<Venta> VentasCollection
+        {
+            get { return Ventas; }
+            set { Ventas = value; NotifyPropertyChanged("VentasCollection"); }
         }
 
         //Observable for ClientList
@@ -205,21 +218,25 @@ namespace Variedades
         {
             ProductosList = _context.Producto.ToList();
             ClientesList = _context.Cliente.ToList();
+            VentasList = _context.Venta.ToList();
 
             //Paginacion
             PagedProductTable.SomeMethod(ProductosList, 3);
             PagedClientTable.SomeMethod(ClientesList, 3);
-            
+            PagedVentaTable.SomeMethod(VentasList, 3);
+
             //Vaciando las colecciones anteriores
             ProductosCollection = null;
             ClientesCollection = null;
+            VentasCollection = null;
 
             //Procedemos a actualizar
 
             ProductosCollection = new ObservableCollection<Producto>( PagedProductTable.Productos);
             
             ClientesCollection = new ObservableCollection<Cliente>( PagedClientTable.Clientes );
-            
+
+            VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
         }
         
         //Modulo de editar producto
@@ -362,6 +379,109 @@ namespace Variedades
             //Actualizamos el datagrid
             UpdateClients(3);
         }
+
+
+        /*
+        * 
+        *  Métodos de la Página Ventas
+        * 
+       */
+
+        //Agrega en la base de datos, el producto especificado
+        public void AddVenta(Venta _Venta)
+        {
+            
+        }
+
+        // Botones de la paginacion de la tabla productos
+
+        public void NextVenta(int NumberOfRecords)
+        {
+            PagedVentaTable.Next(VentasList, NumberOfRecords);
+            UpdateVentas(NumberOfRecords);
+        }
+
+        public void PreviousVenta(int NumberOfRecords)
+        {
+            PagedVentaTable.Previous(VentasList, NumberOfRecords);
+            UpdateVentas(NumberOfRecords);
+        }
+
+        public void FirstVenta(int NumberOfRecords)
+        {
+            PagedVentaTable.First(VentasList, NumberOfRecords);
+            UpdateVentas(NumberOfRecords);
+        }
+
+        public void LastVenta(int NumberOfRecords)
+        {
+            PagedVentaTable.Last(ClientesList, NumberOfRecords);
+            UpdateVentas(NumberOfRecords);
+        }
+
+        //Actualiza unicamente la tabla Ventas
+        public void UpdateVentas(int NumberOfRecords)
+        {
+            //Consulta
+            VentasList = _context.Venta.ToList();
+
+            //Paginacion
+            PagedClientTable.SomeMethod(VentasList, NumberOfRecords);
+            VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
+        }
+
+        //Obtener la pagina actual ()
+        public int PageVentasNumber()
+        {
+            return PagedVentaTable.PageIndex;
+        }
+
+        //Obtener el maximo numero de paginas ()
+        public int PageVentasNumberMax()
+        {
+            int count = VentasList.Count;
+            //Obtenemos el total de calculos
+            float calculo = (float)count / 3;
+
+            //Si es decimal le sumamos 1
+            if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
+            {
+                return (int)calculo;
+            }
+
+            else
+            {
+                return (int)calculo + 1;
+            }
+        }
+
+
+
+        //Modulo de editar Venta
+        private void EditVenta(int id)
+        {
+            //var producto = _context.Producto.Find(id);
+
+        }
+
+        //Modulo de borrado de venta
+        public void DeleteVenta(int id)
+        {
+            //Buscamos el producto seleccionado y lo eliminamos de la base de datos
+            var venta = _context.Venta.Find(id);
+            _context.Venta.Remove(venta);
+
+            //Eliminar del observable collection
+            Ventas.Remove(venta);
+
+            //Guardamos los cambios de la base de datos
+            _context.SaveChanges();
+
+            //Actualizamos el datagrid
+            UpdateVentas(3);
+        }
+
+
     }
 
     //Clase usada para rellenar la datagrid de los Imei
