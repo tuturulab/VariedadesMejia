@@ -42,7 +42,7 @@ namespace Variedades.Views
         private void BtnInsertarVenta(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            window = new AgregarProductoWindow { DataContext = this.DataContext, ViewModel = ViewModel };
+            window = new AgregarProductoWindow(ViewModel);
 
             //Subscribimos al evento
             window.UpdatePagination += new EventHandler(EventoPaginacion);
@@ -60,14 +60,11 @@ namespace Variedades.Views
             var producto = ViewModel.SelectedProduct;
 
             //Iniciamos la ventana de crear un producto
-            window = new AgregarProductoWindow(producto) { DataContext = this.DataContext };
-
-
+            window = new AgregarProductoWindow(ViewModel, producto);
 
             window.UpdatePagination += new EventHandler(EventoPaginacion);
 
             window.Show();
-
 
         }
 
