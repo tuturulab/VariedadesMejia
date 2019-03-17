@@ -1,0 +1,180 @@
+﻿<Window x:Class="Variedades.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Variedades"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Sistema X" Height="500" Width="1100">
+
+    <Grid>
+
+        <!--Main Layout-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Name="Sidebar" Width="*"/>
+            <ColumnDefinition Width="5*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Sidebar-->
+        <Grid Grid.Column="0" Name="Menu" Background="{StaticResource ColorSecundario}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Image Margin="20,20,20,20" Source="./Assets/LogoMakr_8JKPva.png" />
+
+            </Grid>
+
+            <!--Sidebar Items-->
+            <ListView Name="SidebarItems" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged" BorderThickness="0" Background="{StaticResource ColorSidebar}" Grid.Row="1" Foreground="White" >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Background" Value="gray"/>
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <!--- Elements -->
+                <ListViewItem x:Name="ItemProducts" Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_BoxOpen" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="Productos" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem x:Name="ItemClients" Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_User" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="Clientes" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem x:Name="ItemSales" Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_CartPlus" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="Ventas" VerticalAlignment="Center"  Margin="20 10"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem x:Name="ItemImports" Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_PlaneArrival" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="Encargos" VerticalAlignment="Center"  Margin="20 10"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem x:Name="ItemStats" Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ChartPie" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="Estadísticas" VerticalAlignment="Center"  Margin="20 10"/>
+                    </StackPanel>
+                </ListViewItem>
+
+
+            </ListView>
+
+        </Grid>
+
+        <!--The Content Layout-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="70px" Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <!--TopBar-->
+            <Grid Grid.Row="0" Background="{StaticResource ColorPrimario}">
+                <!--Hamburguer Button-->
+                <Button Click="ToggleMenu" Background="{StaticResource ColorBotonesMenu}" Padding="8,8,8,8" Width="40px" Height="40px" Margin="10,5,5,5" HorizontalAlignment="Left">
+                    <fa5:SvgAwesome Foreground="{StaticResource ColorIconosNegros}" Margin="0,0,0,0" Width="20px" Icon="Solid_Bars" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
+                <!--Logo title-->
+                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource ColorLetraBlanca}" VerticalAlignment="Center" FontSize="22"> Variedades Mejía</TextBlock>
+                <!--Notification Image Button-->
+
+                <extToolkit:DropDownButton FlowDirection="RightToLeft" Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,70,5" HorizontalAlignment="Right" >
+                    <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="20px" Icon="Solid_Bell" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                    <extToolkit:DropDownButton.DropDownContent>
+                        <ListView FlowDirection="RightToLeft" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="#3b3c40" Foreground="White" >
+
+                            <ListViewItem  Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ExclamationCircle" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Text="Notificacion 1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem  Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ExclamationCircle" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Text="Notification 2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem  Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ArrowsAlt" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Text="Ver más" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                        </ListView>
+                    </extToolkit:DropDownButton.DropDownContent>
+                </extToolkit:DropDownButton>
+
+                <!--Account Image Button-->
+                <extToolkit:DropDownButton FlowDirection="RightToLeft" Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,10,5" HorizontalAlignment="Right" >
+                    <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="20px" Icon="Solid_User" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <extToolkit:DropDownButton.DropDownContent>
+
+                        <ListView FlowDirection="RightToLeft" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="#3b3c40" Foreground="White" >
+
+                            <ListViewItem  Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_UsersCog" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Text="Configuración" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem  Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_SignOutAlt" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Text="Cerrar Sesión" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+
+
+                        </ListView>
+                    </extToolkit:DropDownButton.DropDownContent>
+                </extToolkit:DropDownButton>
+
+
+            </Grid>
+
+            <!--Main Content-->
+
+            <Border Grid.Row="1" Background="LightGray">
+                <Grid Grid.Row="1"  Background="White">
+                    <!--Contenido-->
+                    <Frame
+                    x:Name="ContentMain"
+                    Grid.Column="1" Grid.Row="0"
+                    Grid.RowSpan="8"
+                    NavigationUIVisibility="Hidden"/>
+
+                </Grid>
+            </Border>
+        </Grid>
+
+
+
+    </Grid>
+</Window>

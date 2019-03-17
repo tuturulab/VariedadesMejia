@@ -1,0 +1,19 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+
+    <SolidColorBrush x:Key="ColorBotonesMenu" Color="White" />
+    <SolidColorBrush x:Key="ColorBotones" Color="#297eae" />
+    <SolidColorBrush x:Key="ColorBotonesPresionados" Color="#273c75" />
+    
+    <SolidColorBrush x:Key="ColorLetra" Color="#2962ff" />
+    <SolidColorBrush x:Key="ColorLetraBlanca" Color="White" />
+    <SolidColorBrush x:Key="ColorIconos" Color="White" />
+    <SolidColorBrush x:Key="ColorIconosNegros" Color="Black" />
+
+    <SolidColorBrush x:Key="ColorSidebar" Color="#222d32" />
+    <SolidColorBrush x:Key="ColorPrimario" Color="#3c8dbc" />
+    <SolidColorBrush x:Key="ColorSecundario" Color="#367fa9" />
+    <SolidColorBrush x:Key="ColorTerciario" Color="#ecf0f5" />
+
+</ResourceDictionary>

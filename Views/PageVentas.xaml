@@ -1,0 +1,45 @@
+﻿<Page x:Class="Variedades.Views.PageVentas"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Variedades.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageVentas">
+
+    <Grid>
+
+        <StackPanel Margin="10,10,10,5" Background="white">
+            <DockPanel Margin="0,0,0,10">
+                <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Ventas" FontSize="17" Foreground="black" ></TextBlock>
+                <Button BorderBrush="{x:Null}" Content="Agregar Venta" x:Name="btnInsertar" Height="40px" Width="150px" Foreground="White"  HorizontalAlignment="Right" Padding="10,10,10,10" VerticalAlignment="Center" Margin="0,0,15,0">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#333238" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#616265"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </DockPanel>
+
+
+        </StackPanel>
+
+    </Grid>
+</Page>

@@ -1,0 +1,144 @@
+﻿<Window x:Class="Variedades.Views.AgregarProductoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Variedades.Views"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Height="650" Width="500">
+    <Grid>
+
+        <StackPanel Background="white">
+
+            <DockPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
+                <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Agregar Producto" FontSize="17" ></TextBlock>
+            </DockPanel>
+
+            <StackPanel Margin="10,10,10,5">
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Marca" Width="100px"></TextBlock>
+                    <TextBox VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="300" Height="30" Name="MarcaTextBox" Margin="30,0,0,0"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Modelo" Width="100px"></TextBlock>
+                    <TextBox VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="300" Height="30" Name="ModeloTextBox" Margin="30,0,0,0"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Precio de Venta" Width="100px"></TextBlock>
+                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="100" Height="30" Name="PrecioTextBox" Margin="30,0,0,0"/>
+
+                    <TextBlock Margin="30,0,0,0" VerticalAlignment="Center" Text="Disponibilidad de Credito" Width="150px"></TextBlock>
+                    <CheckBox IsChecked="True" Margin="0,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Center" Name="CreditoCheckBox"></CheckBox>
+
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Tipo de producto" Width="100px"></TextBlock>
+                    <ComboBox Width="300" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Height="30" Margin="30,0,0,0" Name="CategoriaComboBox">
+                        <ComboBoxItem>Celular</ComboBoxItem>
+                        <ComboBoxItem>Tablet</ComboBoxItem>
+                        <ComboBoxItem>Laptop</ComboBoxItem>
+                        <ComboBoxItem>Accesorio</ComboBoxItem>
+                        <ComboBoxItem>Otro</ComboBoxItem>
+                    </ComboBox>
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Proveedor" Width="100px"></TextBlock>
+                    <TextBox Name="ProveedorTextBox" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" IsReadOnly="True" Width="200" Height="30" Margin="30,0,0,0"/>
+                    <Button Content="Sel. Proveedor" Click="BtnInsertarProveedor" HorizontalAlignment="Left" BorderBrush="{x:Null}"  Foreground="White" Width="100" Margin="30,0,0,0">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </DockPanel>
+
+                <DockPanel>
+                    <TextBlock VerticalAlignment="Center" Text="Cantidad" Width="100px"></TextBlock>
+                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" Name="TextBoxCantidad" FontSize="20" HorizontalAlignment="Left" Width="200" Height="30" Margin="30,0,0,0"/>
+                    <Button Content="Insertar Imei" Click="BtnInsertarImei" HorizontalAlignment="Left" BorderBrush="{x:Null}"  Foreground="White" Width="100" Margin="30,0,0,0">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </DockPanel>
+
+                <DockPanel Height="170">
+                    <DataGrid Visibility="Hidden" Name="ImeiDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True"  Binding="{Binding Numero, IsAsync=True}" Header="Numero" Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Imei, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
+
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+                <Button Name="InsertarButton" Click="BtnInsertarProducto" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Producto"  Height="40px">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
