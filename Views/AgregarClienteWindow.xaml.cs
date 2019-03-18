@@ -50,42 +50,63 @@ namespace Variedades.Views
 
                 if (String.IsNullOrEmpty(NombreTextBox.Text) == false)
                 {
-                    //Ingresando el Cliente
-                    var client = new Cliente()
+                    if (String.IsNullOrEmpty(DiaPago1TextBox.Text) == true || int.Parse(DiaPago1TextBox.Text) >31 || int.Parse(DiaPago1TextBox.Text) < 1)
                     {
-                        Nombre = NombreTextBox.Text,
-                        Email = EmailTextBox.Text,
-                        Domicilio = DomicilioTextBox.Text,
-                        Tipo_Pago = "Cordobas",
-                    };
-
-                    var Telefonos = new List<Telefono>();
-                    //Si el producto tiene Imeis se agregan, de lo contrario no
-                    var Cantidad = int.Parse(CantidadTextBox.Text);
-                    foreach (var item in TelefonosList)
-                    {
-                        Telefonos.Add(new Telefono() { Cliente = client, Numero = item.Numero, Empresa = item.Empresa, Tipo_Numero = item.Tipo_Numero });
+                        MessageBoxResult result = MessageBox.Show("Por Favor Ingrese almenos un dia de pago, y asegurese de que sea entre 1 y 30 dias", "Confirmation",
+                                                MessageBoxButton.OK,
+                                                MessageBoxImage.Exclamation);
                     }
-
-
-                    //Agregamos a la base de datos y actualizamos la paginación
-                    ViewModel.AddClient(client, Telefonos);
-
-                    EventoPaginacion();
-
-                    if (MessageBox.Show("Se ha ingresado correctamente el cliente, ¿desea seguir ingresando clientes?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                    {
-                        this.Close();
-                    }
+                    
                     else
                     {
-                        //Limpiamos los campos para seguir insertando
-                        NombreTextBox.Text = String.Empty;
-                        EmailTextBox.Text = String.Empty;
-                        DomicilioTextBox.Text = String.Empty;
-                        TipoPagoComboBox.Text = String.Empty;
+                        //Ingresando el Cliente
+                        var client = new Cliente()
+                        {
+                            Nombre = NombreTextBox.Text,
+                            Email = EmailTextBox.Text,
+                            Domicilio = DomicilioTextBox.Text,
+                            Tipo_Pago = "Cordobas",
+                            Compania = CompañiaTextBox.Text,
+                            Fecha_Pago_1 = int.Parse(DiaPago1TextBox.Text),
+                        };
 
+
+                        //Parametro opcional
+                        if (String.IsNullOrEmpty (DiaPago2TextBox.Text) == false )
+                        {
+                            client.Fecha_Pago_2 = int.Parse(DiaPago2TextBox.Text);
+                        }
+                        
+                        var Telefonos = new List<Telefono>();
+                        //Si el producto tiene Imeis se agregan, de lo contrario no
+                        var Cantidad = int.Parse(CantidadTextBox.Text);
+                        foreach (var item in TelefonosList)
+                        {
+                            Telefonos.Add(new Telefono() { Cliente = client, Numero = item.Numero, Empresa = item.Empresa, Tipo_Numero = item.Tipo_Numero });
+                        }
+
+
+                        //Agregamos a la base de datos y actualizamos la paginación
+                        ViewModel.AddClient(client, Telefonos);
+
+                        EventoPaginacion();
+
+                        if (MessageBox.Show("Se ha ingresado correctamente el cliente, ¿desea seguir ingresando clientes?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                        {
+                            this.Close();
+                        }
+                        else
+                        {
+                            //Limpiamos los campos para seguir insertando
+                            NombreTextBox.Text = String.Empty;
+                            EmailTextBox.Text = String.Empty;
+                            DomicilioTextBox.Text = String.Empty;
+                            TipoPagoComboBox.Text = String.Empty;
+
+                        }
                     }
+
+                    
                 }
 
                 else

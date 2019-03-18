@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="Agregar Cliente" Height="650" Width="500">
+        Title="Agregar Cliente" Height="720" Width="500">
     <Grid>
 
         <StackPanel Background="white">
@@ -40,8 +40,8 @@
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Dia de Pago" Width="100px"></TextBlock>
-                    <DatePicker Width="300" FontSize="16" Height="30" Margin="30,0,0,0"  HorizontalAlignment="Left" Name="DateFechaPago"/>
-                   
+                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="100" Height="30" Name="DiaPago1TextBox" Margin="30,0,0,0"/>
+                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="100" Height="30" Name="DiaPago2TextBox" Margin="100,0,0,0"/>
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">

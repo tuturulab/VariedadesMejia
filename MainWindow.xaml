@@ -8,7 +8,7 @@
         xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Sistema X" Height="500" Width="1100">
+        Title="Variedades Mejía" Height="500" Width="1100">
 
     <Grid>
 
