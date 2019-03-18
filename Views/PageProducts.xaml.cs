@@ -145,6 +145,13 @@ namespace Variedades.Views
 
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            string Filtrado = SearchBox.Text;
+
+            ViewModel.SearchProduct(Filtrado);
+        }
 
         private void BtnBorrarClick(object sender, RoutedEventArgs e)
         {
