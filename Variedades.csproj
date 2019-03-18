@@ -90,13 +90,12 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903171757317_initial.cs" />
-    <Compile Include="Migrations\201903171757317_initial.Designer.cs">
-      <DependentUpon>201903171757317_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201903180134150_remove_company.cs" />
+    <Compile Include="Migrations\201903180134150_remove_company.Designer.cs">
+      <DependentUpon>201903180134150_remove_company.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Compania.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
     <Compile Include="Models\Especificacion_producto.cs" />
     <Compile Include="Models\Pago.cs" />
@@ -209,8 +208,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201903171757317_initial.resx">
-      <DependentUpon>201903171757317_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903180134150_remove_company.resx">
+      <DependentUpon>201903180134150_remove_company.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

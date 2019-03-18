@@ -21,9 +21,10 @@ namespace Variedades.Models
         public string Email { get; set; }
         public string Domicilio { get; set; }
         public string Tipo_Pago { get; set; }
-    
+        public string Compania { get; set; }
+        public DateTime? Fecha_Pago { get; set; }
+
         public virtual ICollection<Venta> Ventas { get; set; }
-        public virtual Compania Compania { get; set; }
         
         public virtual ICollection<Pedido> Pedidos { get; set; }
         public virtual ICollection<Telefono> Telefonos { get; set; }

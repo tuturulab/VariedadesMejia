@@ -283,7 +283,7 @@ namespace Variedades
        */
 
         //Agrega en la base de datos, el producto especificado
-        public void AddClient(Cliente Cliente, List<Telefono> telefonos = null,  Compania compania = null)
+        public void AddClient(Cliente Cliente, List<Telefono> telefonos = null)
         {
             try
             {
