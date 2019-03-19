@@ -58,7 +58,7 @@ namespace Variedades.Views
             //var producto = ViewModel.SelectedProduct;
 
             //Iniciamos la ventana de crear un producto
-            //window = new AgregarProductoWindow(producto) { DataContext = this.DataContext };
+            //window = new MultiUsesProductoWindow(producto) { DataContext = this.DataContext };
 
 
 

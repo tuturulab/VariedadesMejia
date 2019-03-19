@@ -21,9 +21,9 @@ using Variedades.Models;
 namespace Variedades.Views
 {
     /// <summary>
-    /// Lógica de interacción para VentanaAgregarProducto.xaml
+    /// Lógica de interacción para MultiUsesProductoWindow.xaml
     /// </summary
-    public partial class AgregarProductoWindow : Window
+    public partial class MultiUsesProductoWindow : Window
     {
         bool ImeiCheck = true;
         public PageViewModel ViewModel;
@@ -39,7 +39,7 @@ namespace Variedades.Views
             UpdatePagination?.Invoke(this, EventArgs.Empty);
         }
 
-        public AgregarProductoWindow(PageViewModel viewModel, Producto producto = null)
+        public MultiUsesProductoWindow(PageViewModel viewModel, Producto producto = null)
         {
             InitializeComponent();
             ViewModel = viewModel;
@@ -113,7 +113,7 @@ namespace Variedades.Views
         public static DependencyProperty ImeiProperty =
             DependencyProperty.Register("Imei",
                 typeof(ObservableCollection<ImeiClass>),
-                typeof(AgregarProductoWindow),
+                typeof(MultiUsesProductoWindow),
                 new PropertyMetadata(null));
 
         //Validar que en los campos numericos solo se escriban numeros
