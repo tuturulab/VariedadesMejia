@@ -363,6 +363,8 @@ namespace Variedades
 
             _context.Entry(entity).CurrentValues.SetValues(item);
             _context.SaveChanges();
+
+            UpdateProducts(3);
         }
 
         //Modulo de borrado
