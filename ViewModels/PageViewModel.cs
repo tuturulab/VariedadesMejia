@@ -332,7 +332,7 @@ namespace Variedades
             ImportacionList = _context.Pedido.ToList();
 
             //Collecciones usadas en las ventanas donde saldra para seleccionar 
-            ProductosFullCollection = new ObservableCollection<Producto>(_context.Producto.ToList() );
+            ProductosFullCollection = new ObservableCollection<Producto>(_context.Producto.ToList());
             ClientesFullCollection = new ObservableCollection<Cliente>( _context.Cliente.ToList());
             
             //Paginacion

@@ -4,9 +4,89 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Variedades.Views"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
-        Title="SelectProductWindow" Height="450" Width="800">
+        Title="SelectProductWindow" Height="550" Width="600">
     <Grid>
-        
+        <StackPanel Background="white">
+            <DockPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
+                <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Seleccionar Producto" FontSize="17" ></TextBlock>
+            </DockPanel>
+
+            <DockPanel>
+                <TextBox Name="SearchBar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450px" Margin="30,0,0,0" FontSize="20"></TextBox>
+                <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="45,0,5,0" HorizontalAlignment="Left">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+
+
+                    <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_Search" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                </Button>
+            </DockPanel>
+
+            <DockPanel Height="300">
+                <DataGrid SelectedItem="{Binding SelectedClientWindow, Mode=TwoWay}" Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ClientesFullCollection}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" Name="client_table" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+            AlternatingRowBackground="Gainsboro" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
+
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="" MaxWidth="0"  Binding="{Binding IdCliente, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Domicilio" Binding="{Binding Domicilio, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Tipo Pago" Binding="{Binding Tipo_Pago, IsAsync=True}" Width="*" ></DataGridTextColumn>
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </DockPanel>
+
+            <Button Content="Seleccionar Producto"  Name="SeleccionarBtn" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Height="40px">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </StackPanel>
     </Grid>
 </Window>

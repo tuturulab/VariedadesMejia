@@ -19,9 +19,14 @@ namespace Variedades.Views
     /// </summary>
     public partial class SelectProductWindow : Window
     {
-        public SelectProductWindow()
+        PageViewModel ViewModel;
+
+        public SelectProductWindow(PageViewModel viewModel)
         {
             InitializeComponent();
+
+            ViewModel = viewModel;
+            DataContext = ViewModel;
         }
     }
 }

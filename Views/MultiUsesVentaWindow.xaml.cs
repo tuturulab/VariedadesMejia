@@ -24,6 +24,7 @@ namespace Variedades.Views
         PageViewModel ViewModel;
         SelectClientWindow window;
         MultiUsesClienteWindow window2;
+        SelectProductWindow ProductWindow;
 
         public Cliente cliente;
         public Venta venta;
@@ -69,7 +70,17 @@ namespace Variedades.Views
             cliente = window2.cliente;
             ClienteTextBox.Text = cliente.Nombre;
         }
-        
+
+        private void BtnSelectProduct(object sender, RoutedEventArgs e)
+        {
+            //Iniciamos la ventana de crear un producto
+            ProductWindow = new SelectProductWindow(ViewModel);
+
+            //Subscribimos al evento
+            //window.EventSelectedClient += new EventHandler(EventoActualizarCliente);
+            ProductWindow.Show();
+        }
+
 
         private void BtnSelectClient(object sender, RoutedEventArgs e)
         {

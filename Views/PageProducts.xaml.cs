@@ -198,6 +198,7 @@ namespace Variedades.Views
                 ViewModel.SearchProduct(FiltradoProducto);
             }
 
+            UtilidadPaginacion();
             
         }
     }
