@@ -169,9 +169,9 @@ namespace Variedades.Views
 
         }
 
-<<<<<<< HEAD
+
         
-=======
+
         //Boton de Busqueda
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -181,7 +181,7 @@ namespace Variedades.Views
 
             UtilidadPaginacion();
         }
->>>>>>> c342311a0675416eacea3e7aea94490f1e7c9b7b
+
 
         private void ProductSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -200,11 +200,5 @@ namespace Variedades.Views
 
             
         }
-<<<<<<< HEAD
-   
-=======
->>>>>>> c342311a0675416eacea3e7aea94490f1e7c9b7b
-
-
     }
 }
