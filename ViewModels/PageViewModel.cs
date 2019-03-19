@@ -65,11 +65,10 @@ namespace Variedades
         }
 
         //Observable for ProductListCompleteFull List
-        private ObservableCollection<Producto> ProductosFull;
         public ObservableCollection<Producto> ProductosFullCollection
         {
-            get { return ProductosFull; }
-            set { ProductosFull = value; NotifyPropertyChanged("ProductosCollection"); }
+            get { return Productos; }
+            set { Productos = value; NotifyPropertyChanged("ProductosCollection"); }
         }
 
         //Observable for ImportacionList
@@ -260,11 +259,10 @@ namespace Variedades
         //Actualiza unicamente la tabla productos
         public void UpdateProducts(int NumberOfRecords, List<Producto> SearchProductList = null)
         {
-           
+            ProductosFullCollection = new ObservableCollection<Producto>(_context.Producto.ToList());
 
             if(SearchProductList !=null)
             {
-               
                 PagedProductTable.SomeMethod(SearchProductList, NumberOfRecords);
                 ProductosCollection = new ObservableCollection<Producto>(PagedProductTable.Productos);
                
@@ -288,14 +286,23 @@ namespace Variedades
         //Obtener el maximo numero de paginas ()
         public int PageProductsNumberMax()
         {
-            int count = ProductosList.Count;
+            int count = 0;
+
+            //Validamos si buscamos en la lista normal de productos, o en la lista generada al buscar
+            if (SearchProductList != null)
+            {
+                count = SearchProductList.Count;
+            }
+            else
+            {
+                count = ProductosList.Count;
+            }
 
 
             //Obtenemos el total de calculos
             float calculo = (float)count / 3;
 
-
-
+            
             //Si es decimal le sumamos 1
 
             if ( Math.Abs(calculo % 1) <= (Double.Epsilon * 100) )
@@ -672,8 +679,8 @@ namespace Variedades
         }
 
 
-//Obtener la pagina actual ()
-public int PageVentasNumber()
+        //Obtener la pagina actual ()
+        public int PageVentasNumber()
         {
             return PagedVentaTable.PageIndex;
         }

@@ -12,7 +12,7 @@ namespace Variedades.Models
         public int IdPago { get; set; }
 
         public double Monto { get; set; }
-        public DateTime? Plazo { get; set; }
+        
         public DateTime Fecha_Pago { get; set; }
 
         public virtual Venta Venta { get; set; } 

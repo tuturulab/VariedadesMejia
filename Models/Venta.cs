@@ -19,8 +19,10 @@ namespace Variedades.Models
         public System.DateTime Fecha_Venta { get; set; }
         public string Orden_Pagare { get; set; }
         public string Tipo_Venta { get; set; }
-        public int Cantidad { get; set; }
-        
+
+        //Quincenal , mensual
+        public string Plazo { get; set; }
+
         public virtual Cliente Cliente { get; set; }
         
         public virtual ICollection<Pago> Pagos { get; set;  }
