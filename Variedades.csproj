@@ -224,6 +224,7 @@
     </EmbeddedResource>
     <None Include="connections.config">
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
