@@ -173,14 +173,7 @@ namespace Variedades.Views
         
 
         //Boton de Busqueda
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string FiltradoProducto = ProductSearchBox.Text;
-
-            ViewModel.SearchProduct(FiltradoProducto);
-
-            UtilidadPaginacion();
-        }
+       
 
 
         private void ProductSearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -193,9 +186,9 @@ namespace Variedades.Views
             }
             else
             {
-                string FiltradoProducto = ProductSearchBox.Text;
+                
 
-                ViewModel.SearchProduct(FiltradoProducto);
+                ViewModel.SearchProduct(vacio);
             }
 
             

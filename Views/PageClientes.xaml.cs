@@ -177,23 +177,17 @@ namespace Variedades.Views
 
         //Boton de Busqueda
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            
-            string FiltradoCliente = ClientSearchBox.Text;
-
-            ViewModel.SearchClient(FiltradoCliente);
-
-            UtilidadPaginacion();
-        }
-
         private void ClientSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string vacio = ClientSearchBox.Text;
 
             if (vacio == string.Empty)
             {
-                ViewModel.SearchProduct(vacio);
+                ViewModel.SearchClient(vacio);
+            }
+            else
+            {
+                ViewModel.SearchClient(vacio);
             }
         }
     }

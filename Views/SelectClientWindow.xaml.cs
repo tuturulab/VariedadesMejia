@@ -59,6 +59,15 @@ namespace Variedades.Views
                 this.Close();
             }
         }
+        //NOT YET 
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string busqueda = SearchBar.Text;
 
+            if (busqueda== string.Empty)
+            {
+                ViewModel.SearchClient(busqueda);
+            }
+        }
     }
 }

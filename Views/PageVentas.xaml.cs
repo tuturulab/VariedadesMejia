@@ -169,14 +169,18 @@ namespace Variedades.Views
             }
 
         }
-        
 
-        //Boton de Busqueda
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void VentaSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string FiltradoCliente = VentaSearchBox.Text;
-
-            ViewModel.SearchClient(FiltradoCliente);
+            string FiltradoVenta = VentaSearchBox.Text;
+            if (FiltradoVenta == string.Empty)
+            {
+                ViewModel.SearchVenta(FiltradoVenta);
+            }
+            else
+            {
+                ViewModel.SearchVenta(FiltradoVenta);
+            }
         }
     }
 }
