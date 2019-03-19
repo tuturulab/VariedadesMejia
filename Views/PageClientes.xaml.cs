@@ -179,11 +179,12 @@ namespace Variedades.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
-
+            
             string FiltradoCliente = ClientSearchBox.Text;
 
             ViewModel.SearchClient(FiltradoCliente);
+
+            UtilidadPaginacion();
         }
     }
 }
