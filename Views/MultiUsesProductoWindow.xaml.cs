@@ -60,13 +60,15 @@ namespace Variedades.Views
 
             //Seteo de datos a la vista
             Title = "Editar Producto";
+            WindowTitle.Text = "Editar Producto";
             InsertarButton.Content = "Editar Producto";
-            ProveedoresBtn.Content = "Editar proveedores";
+            ProveedoresBtn.Content = "Editar Proveedor";
 
             MarcaTextBox.Text = producto.Marca;
             ModeloTextBox.Text = producto.Modelo;
             PrecioTextBox.Text = producto.Precio_Venta.ToString();
             CategoriaComboBox.SelectedIndex = GetIndexCategory(producto.Tipo_Producto);
+            ProveedorTextBox.Text = producto.Proveedores_producto.FirstOrDefault().Proveedor.Empresa;
             TextBoxCantidad.Text = producto.Cantidad_Disponible.ToString();
             ImeiGridBtn.Content = "Editar Imeis";
 
