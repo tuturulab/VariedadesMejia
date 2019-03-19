@@ -186,5 +186,15 @@ namespace Variedades.Views
 
             UtilidadPaginacion();
         }
+
+        private void ClientSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string vacio = ClientSearchBox.Text;
+
+            if (vacio == string.Empty)
+            {
+                ViewModel.SearchProduct(vacio);
+            }
+        }
     }
 }

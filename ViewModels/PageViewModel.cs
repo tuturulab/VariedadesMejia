@@ -186,12 +186,17 @@ namespace Variedades
 
             if (filtro != string.Empty)
             {
+
+                SearchProductList = ProductosList.Where(s => (s.Modelo.ToLower().Contains(filtro.ToLower())) || s.Marca.ToLower().Contains(filtro.ToLower())).ToList();
+
                 SearchProductList = (_context.Producto.ToList().Where(s => (s.Modelo.ToLower() == filtro.ToLower()) || (s.Marca.ToLower() == filtro.ToLower() ))).ToList();
+
 
                 UpdateProducts(3, SearchProductList);
             }
             else
             {
+                SearchProductList = null;
                 UpdateProducts(3, ProductosList);
             }
 
@@ -219,6 +224,7 @@ namespace Variedades
             {
                 PagedProductTable.Previous(SearchProductList, NumberOfRecords);
                 UpdateProducts(NumberOfRecords, SearchProductList);
+                
             }
             else
             {
@@ -427,7 +433,7 @@ namespace Variedades
 
             if (FiltroClient != string.Empty)
             {
-                SearchClientList = ClientesList.Where(c => c.Nombre == FiltroClient ).ToList();
+                SearchClientList = ClientesList.Where(c => c.Nombre.ToLower() == FiltroClient.ToLower() ).ToList();
                 UpdateClients(3, SearchClientList);
             }
             else
