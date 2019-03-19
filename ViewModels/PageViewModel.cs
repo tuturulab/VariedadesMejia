@@ -195,7 +195,6 @@ namespace Variedades
         {
             if (SearchProductList != null)
             {
-                Debug.WriteLine("estoy saltando pagina de busqueda");
                 PagedProductTable.Next(SearchProductList, NumberOfRecords);
                 UpdateProducts(NumberOfRecords, SearchProductList);
             }
@@ -256,6 +255,7 @@ namespace Variedades
 
             if(SearchProductList !=null)
             {
+               
                 PagedProductTable.SomeMethod(SearchProductList, NumberOfRecords);
                 ProductosCollection = new ObservableCollection<Producto>(PagedProductTable.Productos);
                
@@ -424,7 +424,7 @@ namespace Variedades
         {
             if (SearchClientList != null)
             {
-                PagedClientTable.Next(SearchProductList, NumberOfRecords);
+                PagedClientTable.Next(SearchClientList, NumberOfRecords);
                 UpdateClients(NumberOfRecords, SearchClientList);
             }
             else
@@ -438,7 +438,7 @@ namespace Variedades
         {
             if (SearchClientList != null)
             {
-                PagedClientTable.Previous(SearchProductList, NumberOfRecords);
+                PagedClientTable.Previous(SearchClientList, NumberOfRecords);
                 UpdateClients(NumberOfRecords, SearchClientList);
             }
             else
@@ -557,6 +557,21 @@ namespace Variedades
         * 
        */
 
+        public void SearchVenta(string FiltroVenta)
+        {
+
+            if (FiltroVenta != string.Empty)
+            {
+                SearchVentaList = VentasList.Where(v => (v.Orden_Pagare == FiltroVenta) || (v.Cliente.Nombre == FiltroVenta)).ToList();
+                UpdateVentas(3, SearchVentaList);
+            }
+            else
+            {
+                UpdateVentas(3, VentasList);
+            }
+
+        }
+
         //Agrega en la base de datos, el producto especificado
         public void AddVenta(Venta _Venta)
         {
@@ -567,41 +582,87 @@ namespace Variedades
 
         public void NextVenta(int NumberOfRecords)
         {
-            PagedVentaTable.Next(VentasList, NumberOfRecords);
-            UpdateVentas(NumberOfRecords);
+            if (SearchVentaList != null)
+            {
+                PagedClientTable.Next(SearchVentaList, NumberOfRecords);
+                UpdateVentas(NumberOfRecords, SearchVentaList);
+            }
+            else
+            {
+                PagedVentaTable.Next(VentasList, NumberOfRecords);
+                UpdateVentas(NumberOfRecords);
+            }
         }
 
         public void PreviousVenta(int NumberOfRecords)
         {
-            PagedVentaTable.Previous(VentasList, NumberOfRecords);
-            UpdateVentas(NumberOfRecords);
+            if (SearchVentaList != null)
+            {
+                PagedVentaTable.Previous(SearchVentaList, NumberOfRecords);
+                UpdateVentas(NumberOfRecords, SearchVentaList);
+            }
+            else
+            {
+                PagedVentaTable.Previous(VentasList, NumberOfRecords);
+                UpdateVentas(NumberOfRecords);
+            }
         }
 
         public void FirstVenta(int NumberOfRecords)
         {
-            PagedVentaTable.First(VentasList, NumberOfRecords);
-            UpdateVentas(NumberOfRecords);
+            if (SearchVentaList != null)
+            {
+                PagedVentaTable.First(SearchVentaList, NumberOfRecords);
+                UpdateVentas(NumberOfRecords, SearchVentaList);
+            }
+            else
+            {
+                PagedVentaTable.First(VentasList, NumberOfRecords);
+                UpdateVentas(NumberOfRecords);
+            }
         }
 
         public void LastVenta(int NumberOfRecords)
         {
-            PagedVentaTable.Last(ClientesList, NumberOfRecords);
-            UpdateVentas(NumberOfRecords);
+            if (SearchVentaList != null)
+            {
+                PagedVentaTable.Last(SearchVentaList, NumberOfRecords);
+                UpdateVentas(NumberOfRecords, SearchVentaList);
+            }
+            else
+            {
+                PagedVentaTable.Last(ClientesList, NumberOfRecords);
+                UpdateVentas(NumberOfRecords);
+            }
         }
 
         //Actualiza unicamente la tabla Ventas
-        public void UpdateVentas(int NumberOfRecords)
-        {
-            //Consulta
-            VentasList = _context.Venta.ToList();
+        public void UpdateVentas(int NumberOfRecords, List<Venta> SearchVentaList = null)
+        { 
+        
 
-            //Paginacion
-            PagedClientTable.SomeMethod(VentasList, NumberOfRecords);
-            VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
+            //Si hay algo en la busqueda la mostrara
+            if (SearchVentaList != null)
+            {
+                PagedVentaTable.SomeMethod(SearchVentaList, NumberOfRecords);
+                VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
+
+            }
+            else
+            { 
+          
+                //Consulta
+                VentasList = _context.Venta.ToList();
+
+                //Paginacion
+                PagedClientTable.SomeMethod(VentasList, NumberOfRecords);
+                VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
+            }
         }
 
-        //Obtener la pagina actual ()
-        public int PageVentasNumber()
+
+//Obtener la pagina actual ()
+public int PageVentasNumber()
         {
             return PagedVentaTable.PageIndex;
         }

@@ -174,10 +174,14 @@ namespace Variedades.Views
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        //Boton de Busqueda
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
-            string FiltradoCliente = SearchClientBox.Text;
+
+            string FiltradoCliente = ClientSearchBox.Text;
 
             ViewModel.SearchClient(FiltradoCliente);
         }
