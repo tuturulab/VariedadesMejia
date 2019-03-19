@@ -14,7 +14,7 @@ namespace Variedades.Views
     {
         public PageViewModel ViewModel;
         static Paging PagedTable = new Paging();
-        AgregarClienteWindow window;
+        MultiUsesClienteWindow window;
 
         //Numeros a mostrar de pagina
         public int NumeroPaginaActual;
@@ -40,7 +40,7 @@ namespace Variedades.Views
         private void BtnInsertarCliente(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            window = new AgregarClienteWindow (ViewModel);
+            window = new MultiUsesClienteWindow (ViewModel);
 
             //Subscribimos al evento
             window.UpdatePagination += new EventHandler(EventoPaginacion);
