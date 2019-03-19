@@ -57,7 +57,7 @@
                     </Button>
                 </DockPanel>
 
-                <Button BorderBrush="{x:Null}" Content="Agregar Venta" x:Name="btnInsertar" Height="40px" Width="150px" Foreground="White"  HorizontalAlignment="Right" Padding="10,10,10,10" VerticalAlignment="Center" Margin="0,0,15,0">
+                <Button Click="BtnInsertarVenta" BorderBrush="{x:Null}" Content="Agregar Venta" x:Name="btnInsertar" Height="40px" Width="150px" Foreground="White"  HorizontalAlignment="Right" Padding="10,10,10,10" VerticalAlignment="Bottom" Margin="0,0,15,7">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="{StaticResource ColorBotones}" />

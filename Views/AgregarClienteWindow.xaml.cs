@@ -25,13 +25,21 @@ namespace Variedades.Views
         //Evento de Actualizar Paginacion
         public event EventHandler UpdatePagination;
 
+        //Evento de Pasar cliente
+        //public event EventHandler PassClient;
+
+
         ObservableCollection<Telefonos> TelefonosList = new ObservableCollection<Telefonos>();
 
-        public AgregarClienteWindow()
+        public PageViewModel ViewModel;
+
+        public AgregarClienteWindow(PageViewModel viewModel)
         {
+            ViewModel = viewModel;
+            DataContext = ViewModel;
             InitializeComponent();
         }
-
+        
         //Validación
         private void EventoPaginacion()
         {
@@ -40,8 +48,6 @@ namespace Variedades.Views
                 UpdatePagination(this, EventArgs.Empty);
             }
         }
-
-        public PageViewModel ViewModel;
 
         public void BtnInsertarCliente(object sender, RoutedEventArgs e)
         {

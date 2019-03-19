@@ -28,7 +28,7 @@ namespace Variedades
         public List<Producto> ProductosList;
         public List<Cliente> ClientesList;
         public List<Venta> VentasList;
-        public List<Pedido> PedidosList;
+        public List<Pedido> ImportacionList;
 
 
         //Declaracion del evento para llamar a la paginacion de la pagina productos una vez se llena la observable productos
@@ -57,6 +57,23 @@ namespace Variedades
             set { Productos = value; NotifyPropertyChanged("ProductosCollection"); }
         }
 
+        //Observable for ProductListCompleteFull List
+        private ObservableCollection<Producto> ProductosFull;
+        public ObservableCollection<Producto> ProductosFullCollection
+        {
+            get { return ProductosFull; }
+            set { ProductosFull = value; NotifyPropertyChanged("ProductosCollection"); }
+        }
+
+        //Observable for ImportacionList
+        private ObservableCollection<Pedido> Pedidos;
+        public ObservableCollection<Pedido> PedidosCollection
+        {
+            get { return Pedidos; }
+            set { Pedidos = value; NotifyPropertyChanged("PedidosCollection"); }
+        }
+
+
         //Observable for VentassList
         private ObservableCollection<Venta> Ventas;
         public ObservableCollection<Venta> VentasCollection
@@ -73,6 +90,15 @@ namespace Variedades
             set { Clientes = value; NotifyPropertyChanged("ClientesCollection"); }
         }
 
+        //Observable for ClientFullList
+        private ObservableCollection<Cliente> ClientesFull;
+        public ObservableCollection<Cliente> ClientesFullCollection
+        {
+            get { return ClientesFull; }
+            set { ClientesFull = value; NotifyPropertyChanged("ClientesFullCollection"); }
+        }
+
+
         private Producto _SelectedProduct;
         public Producto SelectedProduct
         {
@@ -80,7 +106,15 @@ namespace Variedades
             set { _SelectedProduct = value; NotifyPropertyChanged("SelectedProduct"); }
         }
 
-       
+        //Selected Client in SelectClientWindow
+        private Cliente _SelectedClientWindow;
+        public Cliente SelectedClientWindow
+        {
+            get { return _SelectedClientWindow; }
+            set { _SelectedClientWindow = value; NotifyPropertyChanged("SelectedClientWindow"); }
+        }
+
+
         public PageViewModel()
         {
             _context = new DbmejiaEntities();
@@ -218,16 +252,23 @@ namespace Variedades
             ProductosList = _context.Producto.ToList();
             ClientesList = _context.Cliente.ToList();
             VentasList = _context.Venta.ToList();
+            ImportacionList = _context.Pedido.ToList();
 
+            //Collecciones usadas en las ventanas donde saldra para seleccionar 
+            ProductosFullCollection = new ObservableCollection<Producto>(_context.Producto.ToList() );
+            ClientesFullCollection = new ObservableCollection<Cliente>( _context.Cliente.ToList());
+            
             //Paginacion
             PagedProductTable.SomeMethod(ProductosList, 3);
             PagedClientTable.SomeMethod(ClientesList, 3);
             PagedVentaTable.SomeMethod(VentasList, 3);
+            PagedImportacionTable.SomeMethod(ImportacionList, 3);
 
             //Vaciando las colecciones anteriores
             ProductosCollection = null;
             ClientesCollection = null;
             VentasCollection = null;
+            PedidosCollection = null;
 
             //Procedemos a actualizar
 
@@ -236,6 +277,8 @@ namespace Variedades
             ClientesCollection = new ObservableCollection<Cliente>( PagedClientTable.Clientes );
 
             VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
+
+            PedidosCollection = new ObservableCollection<Pedido>(PagedImportacionTable.Pedidos); 
         }
         
         //Modulo de editar producto
@@ -402,7 +445,7 @@ namespace Variedades
         //Agrega en la base de datos, el producto especificado
         public void AddVenta(Venta _Venta)
         {
-            
+
         }
 
         // Botones de la paginacion de la tabla productos
@@ -493,7 +536,106 @@ namespace Variedades
             UpdateVentas(3);
         }
 
+        /*
+        * 
+        *  Métodos de la Página Importación
+        * 
+       */
 
+        //Agrega en la base de datos, el producto especificado
+        public void AddImportacion(Venta _Venta)
+        {
+
+        }
+
+        // Botones de la paginacion de la tabla productos
+
+        public void NextImportacion(int NumberOfRecords)
+        {
+            PagedImportacionTable.Next(ImportacionList, NumberOfRecords);
+            UpdateImportacion(NumberOfRecords);
+        }
+
+        public void PreviousImportacion(int NumberOfRecords)
+        {
+            PagedImportacionTable.Previous(ImportacionList, NumberOfRecords);
+            UpdateImportacion(NumberOfRecords);
+        }
+
+        public void FirstImportacion(int NumberOfRecords)
+        {
+            PagedImportacionTable.First(ImportacionList, NumberOfRecords);
+            UpdateImportacion(NumberOfRecords);
+        }
+
+        public void LastImportacion(int NumberOfRecords)
+        {
+            PagedImportacionTable.Last(ImportacionList, NumberOfRecords);
+            UpdateImportacion(NumberOfRecords);
+        }
+
+        //Actualiza unicamente la tabla Ventas
+        public void UpdateImportacion(int NumberOfRecords)
+        {
+            //Consulta
+            ImportacionList = _context.Pedido.ToList();
+
+            //Paginacion
+            PagedImportacionTable.SomeMethod(ImportacionList, NumberOfRecords);
+            //ImportacionCol = new ObservableCollection<Pedido>(PagedImportacionTable.Pedidos);
+        }
+
+        //Obtener la pagina actual ()
+        public int PageImportacionNumber()
+        {
+            return PagedImportacionTable.PageIndex;
+        }
+
+        //Obtener el maximo numero de paginas ()
+        public int PageImportacionNumberMax()
+        {
+            int count = ImportacionList.Count;
+            //Obtenemos el total de calculos
+            float calculo = (float)count / 3;
+
+            //Si es decimal le sumamos 1
+            if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
+            {
+                return (int)calculo;
+            }
+
+            else
+            {
+                return (int)calculo + 1;
+            }
+        }
+
+
+
+        //Modulo de editar Importacion
+        private void EditImportacion(int id)
+        {
+            //var producto = _context.Producto.Find(id);
+
+        }
+
+        //Modulo de borrado de venta
+        public void DeleteImportacion(int id)
+        {
+            //Buscamos el producto seleccionado y lo eliminamos de la base de datos
+            var venta = _context.Pedido.Find(id);
+            _context.Pedido.Remove(venta);
+
+            //Eliminar del observable collection
+            //Pedido.Remove(venta);
+
+            //Guardamos los cambios de la base de datos
+            _context.SaveChanges();
+
+            //Actualizamos el datagrid
+            UpdateImportacion(3);
+        }
+        
     }
 
     //Clase usada para rellenar la datagrid de los Imei

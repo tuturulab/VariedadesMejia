@@ -38,6 +38,8 @@ namespace Variedades
         //Hide and show sidebar menu
         private void ToggleMenu(object sender, RoutedEventArgs e)
         {
+            
+
             if (Sidebar.Width == new GridLength(1, GridUnitType.Star))
             {
                 Duration duration = new Duration(TimeSpan.FromMilliseconds(500));
@@ -89,8 +91,8 @@ namespace Variedades
                     break;
 
                 case "ItemImports":
-                    var PaginaImportaciones = new Views.PageImportaciones() ;
-                    ContentMain.Navigate(new Views.PageImportaciones());
+                    var PaginaImportaciones = new Views.PageImportaciones(MainViewModel) ;
+                    ContentMain.Navigate(PaginaImportaciones);
                     break;
 
                 case "ItemStats":

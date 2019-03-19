@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Variedades.Models;
 
 namespace Variedades.Views
 {
@@ -20,8 +21,19 @@ namespace Variedades.Views
     /// </summary>
     public partial class AgregarVentaWindow : Window
     {
-        public AgregarVentaWindow()
+        PageViewModel ViewModel;
+        SelectClientWindow window;
+        AgregarClienteWindow window2;
+
+        public Cliente cliente;
+        public Venta venta;
+        public List<Especificacion_producto> Especificacion_Productos;
+
+        public AgregarVentaWindow(PageViewModel viewModel)
         {
+            ViewModel = viewModel;
+            DataContext = ViewModel;
+
             InitializeComponent();
         }
 
@@ -34,12 +46,43 @@ namespace Variedades.Views
 
         private void BtnInsertarVenta(object sender, RoutedEventArgs e)
         {
-            // do something
+            
+            
+
         }
 
         private void BtnInsertarPagos(object sender, RoutedEventArgs e)
         {
             // do something
+        }
+
+        //Recibiendo el id creado
+        public void EventoActualizarCliente(object sender, EventArgs e)
+        {
+            //Obtenemos el cliente seleccionado de la ventana SelectClient
+            cliente = ViewModel.SelectedClientWindow;
+            ClienteTextBox.Text = cliente.Nombre;
+            
+        }
+
+        private void BtnSelectClient(object sender, RoutedEventArgs e)
+        {
+            //Iniciamos la ventana de crear un producto
+            window = new SelectClientWindow(ViewModel);
+
+            //Subscribimos al evento
+            window.EventSelectedClient += new EventHandler(EventoActualizarCliente);
+            window.Show();
+        }
+
+        private void BtnCreateClient (object sender, RoutedEventArgs e)
+        {
+            //Iniciamos la ventana de crear un producto
+            window2 = new AgregarClienteWindow(ViewModel);
+
+            //Subscribimos al evento
+            //window.EventSelectedClient += new EventHandler(EventoActualizarCliente);
+            window.Show();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Variedades.Views
         private void BtnInsertarCliente(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            window = new AgregarClienteWindow { DataContext = this.DataContext, ViewModel = ViewModel };
+            window = new AgregarClienteWindow (ViewModel);
 
             //Subscribimos al evento
             window.UpdatePagination += new EventHandler(EventoPaginacion);
