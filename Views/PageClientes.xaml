@@ -24,7 +24,7 @@
 
         <StackPanel  Grid.Row="0" Margin="10,10,10,5">
             <Grid Margin="0,0,0,10">
-                <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Clientes" FontSize="17" Foreground="black" ></TextBlock>
+                <TextBlock Name="SearchClientBox"  Padding="5,15,15,15" VerticalAlignment="Center" Text="Clientes" FontSize="17" Foreground="black" ></TextBlock>
 
                 <DockPanel HorizontalAlignment="Center">
                     <TextBox Name="SearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0"/>
