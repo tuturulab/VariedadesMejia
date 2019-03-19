@@ -7,13 +7,13 @@ namespace Variedades.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class diaspago : IMigrationMetadata
+    public sealed partial class search : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(diaspago));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(search));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903180225194_diaspago"; }
+            get { return "201903190352411_search"; }
         }
         
         string IMigrationMetadata.Source

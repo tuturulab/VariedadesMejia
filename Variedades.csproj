@@ -90,13 +90,9 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903180134150_remove_company.cs" />
-    <Compile Include="Migrations\201903180134150_remove_company.Designer.cs">
-      <DependentUpon>201903180134150_remove_company.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903180225194_diaspago.cs" />
-    <Compile Include="Migrations\201903180225194_diaspago.Designer.cs">
-      <DependentUpon>201903180225194_diaspago.cs</DependentUpon>
+    <Compile Include="Migrations\201903190352411_search.cs" />
+    <Compile Include="Migrations\201903190352411_search.Designer.cs">
+      <DependentUpon>201903190352411_search.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -219,18 +215,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201903180134150_remove_company.resx">
-      <DependentUpon>201903180134150_remove_company.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903180225194_diaspago.resx">
-      <DependentUpon>201903180225194_diaspago.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903190352411_search.resx">
+      <DependentUpon>201903190352411_search.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="connections.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

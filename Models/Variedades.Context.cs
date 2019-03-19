@@ -8,7 +8,7 @@ namespace Variedades.Models
     {
         public DbmejiaEntities() : base("DbMejia")
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<DbmejiaEntities, Variedades.Migrations.Configuration>());      
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DbmejiaEntities, Variedades.Migrations.Configuration>());      
         }
 
         public virtual DbSet<Cliente> Cliente { get; set; }
