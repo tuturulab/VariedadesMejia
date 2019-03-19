@@ -3,5 +3,6 @@ Sistema de control de inventario para la microempresa variedades mejia, desarrol
 
 # Tutorial
 
-1. Open the command console and make update-database\
+1. Open the command console and make update-database
 2. Create a connections.config in the root directory, and put your connection string 
+3. Select the connections.config, click properties, and select add to output
