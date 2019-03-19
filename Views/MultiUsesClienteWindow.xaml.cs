@@ -41,7 +41,8 @@ namespace Variedades.Views
             DataContext = ViewModel;
             InitializeComponent();
 
-            EventoPasarCliente();
+            
+            PassClient(this, EventArgs.Empty);
         }
 
         //Si la ventana de agregar Cliente es llamada desde ventas o pedido
@@ -52,7 +53,7 @@ namespace Variedades.Views
                 Console.WriteLine("es nulo");
                 //SomeEvent();
             }
-            //PassClient?.Invoke(this, EventArgs.Empty);
+            PassClient?.Invoke(this, EventArgs.Empty);
         }
         
         //Validación
