@@ -27,11 +27,10 @@
                 <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Historial de Importaciones" FontSize="17" Foreground="black" ></TextBlock>
 
                 <DockPanel HorizontalAlignment="Center">
-                    <TextBox Name="SearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0"/>
-                    <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="15,0,5,0" HorizontalAlignment="Left">
+                    <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="5,0,15,0" HorizontalAlignment="Left">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Background" Value="{x:Null}" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
@@ -44,7 +43,7 @@
                                 </Setter>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                        <Setter Property="Background" Value="{x:Null}"/>
                                     </Trigger>
                                 </Style.Triggers>
 
@@ -52,9 +51,12 @@
                         </Button.Style>
 
 
-                        <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_Search" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="17px" Icon="Solid_Search" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
                     </Button>
+
+                    <TextBox Name="SearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0"/>
+                   
                 </DockPanel>
 
                 <Button BorderBrush="{x:Null}" Content="Agregar Importación" x:Name="btnInsertar" Height="40px" Width="150px" Foreground="White"  HorizontalAlignment="Right" Padding="10,10,10,10" VerticalAlignment="Center" Margin="0,0,15,0">
