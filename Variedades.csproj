@@ -119,8 +119,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Views\AgregarClienteWindow.xaml.cs">
-      <DependentUpon>AgregarClienteWindow.xaml</DependentUpon>
+    <Compile Include="Views\MultiUsesClienteWindow.xaml.cs">
+      <DependentUpon>MultiUsesClienteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AgregarProductoWindow.xaml.cs">
       <DependentUpon>AgregarProductoWindow.xaml</DependentUpon>
@@ -160,7 +160,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AgregarClienteWindow.xaml">
+    <Page Include="Views\MultiUsesClienteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,9 +18,9 @@ using Variedades.Models;
 namespace Variedades.Views
 {
     /// <summary>
-    /// Lógica de interacción para AgregarClienteWindow.xaml
+    /// Lógica de interacción para MultiUsesClienteWindow.xaml
     /// </summary>
-    public partial class AgregarClienteWindow : Window
+    public partial class MultiUsesClienteWindow : Window
     {
         //Evento de Actualizar Paginacion
         public event EventHandler UpdatePagination;
@@ -33,7 +33,7 @@ namespace Variedades.Views
 
         public PageViewModel ViewModel;
 
-        public AgregarClienteWindow(PageViewModel viewModel)
+        public MultiUsesClienteWindow(PageViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = ViewModel;

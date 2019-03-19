@@ -23,7 +23,7 @@ namespace Variedades.Views
     {
         PageViewModel ViewModel;
         SelectClientWindow window;
-        AgregarClienteWindow window2;
+        MultiUsesClienteWindow window2;
 
         public Cliente cliente;
         public Venta venta;
@@ -78,7 +78,7 @@ namespace Variedades.Views
         private void BtnCreateClient (object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            window2 = new AgregarClienteWindow(ViewModel);
+            window2 = new MultiUsesClienteWindow(ViewModel);
 
             //Subscribimos al evento
             //window.EventSelectedClient += new EventHandler(EventoActualizarCliente);
