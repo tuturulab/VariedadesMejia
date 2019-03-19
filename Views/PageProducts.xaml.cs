@@ -169,12 +169,7 @@ namespace Variedades.Views
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string FiltradoProducto = ProductSearchBox.Text;
-
-            ViewModel.SearchProduct(FiltradoProducto);
-        }
+        
 
         private void ProductSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -184,8 +179,16 @@ namespace Variedades.Views
             {
                 ViewModel.SearchProduct(vacio);
             }
+            else
+            {
+                string FiltradoProducto = ProductSearchBox.Text;
+
+                ViewModel.SearchProduct(FiltradoProducto);
+            }
+
+            
         }
-        //Boton de Busqueda
+   
 
 
     }
