@@ -67,10 +67,10 @@ namespace Variedades.Views
 
         public void EventoInsertarCliente (object sender, EventArgs e)
         {
-            Console.WriteLine(window2.cliente);
+            //Console.WriteLine(window2.cliente);
 
-            cliente = window2.cliente;
-            ClienteTextBox.Text = cliente.Nombre;
+            //cliente = window2.cliente;
+            //ClienteTextBox.Text = cliente.Nombre;
         }
         
 
