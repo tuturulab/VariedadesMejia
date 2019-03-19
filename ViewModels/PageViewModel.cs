@@ -187,7 +187,12 @@ namespace Variedades
 
             if (filtro != string.Empty)
             {
+<<<<<<< HEAD
                 SearchProductList = ProductosList.Where(s => (s.Modelo.ToLower().Contains(filtro.ToLower())) || s.Marca.ToLower().Contains(filtro.ToLower())).ToList();
+=======
+                SearchProductList = (_context.Producto.ToList().Where(s => (s.Modelo.ToLower() == filtro.ToLower()) || (s.Marca.ToLower() == filtro.ToLower() ))).ToList();
+
+>>>>>>> c342311a0675416eacea3e7aea94490f1e7c9b7b
                 UpdateProducts(3, SearchProductList);
             }
             else
@@ -364,6 +369,8 @@ namespace Variedades
 
             _context.Entry(entity).CurrentValues.SetValues(item);
             _context.SaveChanges();
+
+            UpdateProducts(3);
         }
 
         //Modulo de borrado
