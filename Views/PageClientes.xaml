@@ -28,7 +28,7 @@
 
                 <DockPanel HorizontalAlignment="Center">
                     <TextBox Name="ClientSearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0" TextChanged="ClientSearchBox_TextChanged" />
-                    <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="15,0,5,0" HorizontalAlignment="Left" Click="Button_Click_1">
+                    <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="15,0,5,0" HorizontalAlignment="Left" >
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="{StaticResource ColorBotones}" />

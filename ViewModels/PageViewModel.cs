@@ -189,7 +189,6 @@ namespace Variedades
 
                 SearchProductList = ProductosList.Where(s => (s.Modelo.ToLower().Contains(filtro.ToLower())) || s.Marca.ToLower().Contains(filtro.ToLower())).ToList();
 
-                SearchProductList = (_context.Producto.ToList().Where(s => (s.Modelo.ToLower() == filtro.ToLower()) || (s.Marca.ToLower() == filtro.ToLower() ))).ToList();
 
 
                 UpdateProducts(3, SearchProductList);
@@ -433,11 +432,12 @@ namespace Variedades
 
             if (FiltroClient != string.Empty)
             {
-                SearchClientList = ClientesList.Where(c => c.Nombre.ToLower() == FiltroClient.ToLower() ).ToList();
+                SearchClientList = ClientesList.Where(c => (c.Nombre.ToLower().Contains(FiltroClient.ToLower())) || (c.Compania.ToLower().Contains(FiltroClient.ToLower())) ).ToList();
                 UpdateClients(3, SearchClientList);
             }
             else
             {
+                SearchClientList = null;
                 UpdateClients(3, ClientesList);
             }
 
@@ -586,11 +586,12 @@ namespace Variedades
 
             if (FiltroVenta != string.Empty)
             {
-                SearchVentaList = VentasList.Where(v => (v.Orden_Pagare == FiltroVenta) || (v.Cliente.Nombre == FiltroVenta)).ToList();
+                SearchVentaList = VentasList.Where(v => (v.Orden_Pagare.ToLower().Contains(FiltroVenta.ToLower())) || (v.Cliente.Nombre.ToLower().Contains(FiltroVenta.ToLower()))).ToList();
                 UpdateVentas(3, SearchVentaList);
             }
             else
             {
+                SearchVentaList = null;
                 UpdateVentas(3, VentasList);
             }
 
@@ -655,7 +656,7 @@ namespace Variedades
             }
             else
             {
-                PagedVentaTable.Last(ClientesList, NumberOfRecords);
+                PagedVentaTable.Last(VentasList, NumberOfRecords);
                 UpdateVentas(NumberOfRecords);
             }
         }

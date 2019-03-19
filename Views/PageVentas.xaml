@@ -27,8 +27,8 @@
                 <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Registros de Ventas" FontSize="17" Foreground="black" ></TextBlock>
 
                 <DockPanel HorizontalAlignment="Center">
-                    <TextBox Name="VentaSearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0"/>
-                    <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="15,0,5,0" HorizontalAlignment="Left" Click="Button_Click">
+                    <TextBox Name="VentaSearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0" TextChanged="VentaSearchBox_TextChanged"/>
+                    <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="15,0,5,0" HorizontalAlignment="Left" >
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="{StaticResource ColorBotones}" />
