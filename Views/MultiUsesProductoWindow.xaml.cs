@@ -61,6 +61,8 @@ namespace Variedades.Views
             //Seteo de datos a la vista
             Title = "Editar Producto";
             InsertarButton.Content = "Editar Producto";
+            ProveedoresBtn.Content = "Editar proveedores";
+
             MarcaTextBox.Text = producto.Marca;
             ModeloTextBox.Text = producto.Modelo;
             PrecioTextBox.Text = producto.Precio_Venta.ToString();
