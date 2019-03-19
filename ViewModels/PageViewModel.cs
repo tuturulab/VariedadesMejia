@@ -680,7 +680,7 @@ namespace Variedades
                 VentasList = _context.Venta.ToList();
 
                 //Paginacion
-                PagedClientTable.SomeMethod(VentasList, NumberOfRecords);
+                PagedVentaTable.SomeMethod(VentasList, NumberOfRecords);
                 VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
             }
         }
