@@ -173,5 +173,13 @@ namespace Variedades.Views
 
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            string FiltradoCliente = SearchClientBox.Text;
+
+            ViewModel.SearchClient(FiltradoCliente);
+        }
     }
 }

@@ -25,12 +25,19 @@ namespace Variedades
         static Paging PagedVentaTable = new Paging();
         static Paging PagedImportacionTable = new Paging();
 
+
+        //Lists Methods
         public List<Producto> ProductosList;
         public List<Cliente> ClientesList;
         public List<Venta> VentasList;
         public List<Pedido> ImportacionList;
 
-
+        
+        public List<Pedido> PedidosList;
+        public List<Producto> SearchProductList;
+        public List<Venta> SearchVentaList;
+        public List<Cliente> SearchClientList;
+    
         //Declaracion del evento para llamar a la paginacion de la pagina productos una vez se llena la observable productos
         //public event EventHandler EventPaginationProduct;
 
@@ -165,55 +172,103 @@ namespace Variedades
 
             UpdateProducts(3);
         }
+        //Metodo de busqueda en la base de datos 
+
+        public void SearchProduct(string filtro)
+        {
+
+            if (filtro != string.Empty)
+            {
+                SearchProductList = (ProductosList.Where(s => (s.Modelo == filtro) || (s.Marca == filtro))).ToList();
+                UpdateProducts(3, SearchProductList);
+            }
+            else
+            {
+                UpdateProducts(3, ProductosList);
+            }
+
+        }
 
         // Botones de la paginacion de la tabla productos
 
         public void NextProduct(int NumberOfRecords)
         {
-            PagedProductTable.Next(ProductosList, NumberOfRecords);
-            UpdateProducts(NumberOfRecords);
+            if (SearchProductList != null)
+            {
+                Debug.WriteLine("estoy saltando pagina de busqueda");
+                PagedProductTable.Next(SearchProductList, NumberOfRecords);
+                UpdateProducts(NumberOfRecords, SearchProductList);
+            }
+            else
+            {
+                PagedProductTable.Next(ProductosList, NumberOfRecords);
+                UpdateProducts(NumberOfRecords);
+            }
         }
 
         public void PreviousProduct(int NumberOfRecords)
         {
-            PagedProductTable.Previous(ProductosList, NumberOfRecords);
-            UpdateProducts(NumberOfRecords);
+            if (SearchProductList != null)
+            {
+                PagedProductTable.Previous(SearchProductList, NumberOfRecords);
+                UpdateProducts(NumberOfRecords, SearchProductList);
+            }
+            else
+            {
+                PagedProductTable.Previous(ProductosList, NumberOfRecords);
+                UpdateProducts(NumberOfRecords);
+            }
+            
         }
 
         public void FirstProduct(int NumberOfRecords)
         {
-            PagedProductTable.First(ProductosList, NumberOfRecords);
-            UpdateProducts(NumberOfRecords);
+            if (SearchProductList != null)
+            {
+                PagedProductTable.First(SearchProductList, NumberOfRecords);
+                UpdateProducts(NumberOfRecords, SearchProductList);
+            }
+            else
+            {
+                PagedProductTable.First(ProductosList, NumberOfRecords);
+                UpdateProducts(NumberOfRecords);
+            }
         }
 
         public void LastProduct(int NumberOfRecords)
         {
-            PagedProductTable.Last(ProductosList, NumberOfRecords);
-            UpdateProducts(NumberOfRecords);
+            if (SearchProductList != null)
+            {
+                PagedProductTable.Last(SearchProductList, NumberOfRecords);
+                UpdateProducts(NumberOfRecords, SearchProductList);
+            }
+            else
+            {
+                PagedProductTable.Last(ProductosList, NumberOfRecords);
+                UpdateProducts(NumberOfRecords);
+            }
         }
 
         //Actualiza unicamente la tabla productos
-        public void UpdateProducts(int NumberOfRecords)
+        public void UpdateProducts(int NumberOfRecords, List<Producto> SearchProductList = null)
         {
-            //Consulta
-            ProductosList = _context.Producto.ToList();
-            //Paginacion
-            PagedProductTable.SomeMethod(ProductosList, NumberOfRecords);
-            ProductosCollection = new ObservableCollection<Producto>(PagedProductTable.Productos);
-        }
+           
 
-        //Texto para mostrar el numero de paginas , y la pagina actual de la paginacion en la tabla productos
-        /*Por si se llega a necesitar
-        public string PageProductNumberDisplay(int NumberOfRecords)
-        {
-            int PagedNumber = NumberOfRecords * (PagedTable.PageIndex + 1);
-            if (PagedNumber > ProductosList.Count)
+            if(SearchProductList !=null)
             {
-                PagedNumber = ProductosList.Count;
+                PagedProductTable.SomeMethod(SearchProductList, NumberOfRecords);
+                ProductosCollection = new ObservableCollection<Producto>(PagedProductTable.Productos);
+               
+            }else
+            {
+                //Consulta
+                ProductosList = _context.Producto.ToList();
+                //Paginacion
+                PagedProductTable.SomeMethod(ProductosList, NumberOfRecords);
+                ProductosCollection = new ObservableCollection<Producto>(PagedProductTable.Productos);
             }
-            return "Showing " + PagedNumber + " of " + ProductosList.Count;
+            
         }
-        */
 
         //Obtener la pagina actual ()
         public int PageProductsNumber()
@@ -349,39 +404,99 @@ namespace Variedades
 
         // Botones de la paginacion de la tabla productos
 
+       public void SearchClient(string FiltroClient)
+        {
+
+            if (FiltroClient != string.Empty)
+            {
+                SearchClientList = ClientesList.Where(c => c.Nombre == FiltroClient ).ToList();
+                UpdateClients(3, SearchClientList);
+            }
+            else
+            {
+                UpdateClients(3, ClientesList);
+            }
+
+        }
+
+        // Botones de la paginacion de la tabla cliente
         public void NextClient(int NumberOfRecords)
         {
-            PagedClientTable.Next(ClientesList, NumberOfRecords);
-            UpdateClients(NumberOfRecords);
+            if (SearchClientList != null)
+            {
+                PagedClientTable.Next(SearchProductList, NumberOfRecords);
+                UpdateClients(NumberOfRecords, SearchClientList);
+            }
+            else
+            {
+                PagedClientTable.Next(ClientesList, NumberOfRecords);
+                UpdateClients(NumberOfRecords);
+            }
         }
 
         public void PreviousClient(int NumberOfRecords)
         {
-            PagedClientTable.Previous(ClientesList, NumberOfRecords);
-            UpdateClients(NumberOfRecords);
+            if (SearchClientList != null)
+            {
+                PagedClientTable.Previous(SearchProductList, NumberOfRecords);
+                UpdateClients(NumberOfRecords, SearchClientList);
+            }
+            else
+            {
+                PagedClientTable.Previous(ClientesList, NumberOfRecords);
+                UpdateClients(NumberOfRecords);
+            }
+
         }
 
         public void FirstClient(int NumberOfRecords)
         {
-            PagedClientTable.First(ClientesList, NumberOfRecords);
-            UpdateClients(NumberOfRecords);
+            if (SearchClientList != null)
+            {
+                PagedClientTable.First(SearchClientList, NumberOfRecords);
+                UpdateClients(NumberOfRecords, SearchClientList);
+            }
+            else
+            {
+                PagedClientTable.First(ClientesList, NumberOfRecords);
+                UpdateClients(NumberOfRecords);
+            }
         }
 
         public void LastClient(int NumberOfRecords)
         {
-            PagedClientTable.Last(ClientesList, NumberOfRecords);
-            UpdateClients(NumberOfRecords);
+            if (SearchClientList != null)
+            {
+                PagedClientTable.Last(SearchClientList, NumberOfRecords);
+                UpdateClients(NumberOfRecords, SearchClientList);
+            }
+            else
+            {
+                PagedClientTable.Last(ClientesList, NumberOfRecords);
+                UpdateClients(NumberOfRecords);
+            }
         }
 
         //Actualiza unicamente la tabla productos
-        public void UpdateClients(int NumberOfRecords)
+        public void UpdateClients(int NumberOfRecords, List<Cliente> SearchClientList = null)
         {
-            //Consulta
-            ClientesList = _context.Cliente.ToList();
 
-            //Paginacion
-            PagedClientTable.SomeMethod(ClientesList, NumberOfRecords);
-            ClientesCollection = new ObservableCollection<Cliente>(PagedClientTable.Clientes);
+
+            if (SearchClientList != null)
+            {
+                PagedClientTable.SomeMethod(SearchClientList, NumberOfRecords);
+                ClientesCollection = new ObservableCollection<Cliente>(PagedClientTable.Clientes);
+
+            }
+            else
+            {
+                //Consulta
+                ClientesList = _context.Cliente.ToList();
+                //Paginacion
+                PagedClientTable.SomeMethod(ClientesList, NumberOfRecords);
+                ClientesCollection = new ObservableCollection<Cliente>(PagedClientTable.Clientes);
+            }
+
         }
 
         //Obtener la pagina actual ()
