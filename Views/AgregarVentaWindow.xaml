@@ -45,7 +45,7 @@
                         </Button.Style>
                     </Button>
 
-                    <Button Content="Nuevo" HorizontalAlignment="Left" BorderBrush="{x:Null}"  Foreground="White" Width="70" Margin="20,0,0,0">
+                    <Button Click="BtnCreateClient" Content="Nuevo" HorizontalAlignment="Left" BorderBrush="{x:Null}"  Foreground="White" Width="70" Margin="20,0,0,0">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="{StaticResource ColorBotones}" />

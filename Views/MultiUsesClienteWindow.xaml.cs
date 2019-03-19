@@ -26,27 +26,39 @@ namespace Variedades.Views
         public event EventHandler UpdatePagination;
 
         //Evento de Pasar cliente
-        //public event EventHandler PassClient;
+        public event EventHandler PassClient;
 
 
         ObservableCollection<Telefonos> TelefonosList = new ObservableCollection<Telefonos>();
 
         public PageViewModel ViewModel;
+        public Cliente cliente;
 
+        
         public MultiUsesClienteWindow(PageViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = ViewModel;
             InitializeComponent();
+
+            EventoPasarCliente();
+        }
+
+        //Si la ventana de agregar Cliente es llamada desde ventas o pedido
+        private void EventoPasarCliente()
+        {
+            if (PassClient == null)
+            {
+                Console.WriteLine("es nulo");
+                //SomeEvent();
+            }
+            //PassClient?.Invoke(this, EventArgs.Empty);
         }
         
         //Validación
         private void EventoPaginacion()
         {
-            if (UpdatePagination != null)
-            {
-                UpdatePagination(this, EventArgs.Empty);
-            }
+            UpdatePagination?.Invoke(this, EventArgs.Empty);
         }
 
         public void BtnInsertarCliente(object sender, RoutedEventArgs e)
@@ -66,7 +78,7 @@ namespace Variedades.Views
                     else
                     {
                         //Ingresando el Cliente
-                        var client = new Cliente()
+                        cliente = new Cliente()
                         {
                             Nombre = NombreTextBox.Text,
                             Email = EmailTextBox.Text,
@@ -80,7 +92,7 @@ namespace Variedades.Views
                         //Parametro opcional
                         if (String.IsNullOrEmpty (DiaPago2TextBox.Text) == false )
                         {
-                            client.Fecha_Pago_2 = int.Parse(DiaPago2TextBox.Text);
+                            cliente.Fecha_Pago_2 = int.Parse(DiaPago2TextBox.Text);
                         }
                         
                         var Telefonos = new List<Telefono>();
@@ -88,14 +100,16 @@ namespace Variedades.Views
                         var Cantidad = int.Parse(CantidadTextBox.Text);
                         foreach (var item in TelefonosList)
                         {
-                            Telefonos.Add(new Telefono() { Cliente = client, Numero = item.Numero, Empresa = item.Empresa, Tipo_Numero = item.Tipo_Numero });
+                            Telefonos.Add(new Telefono() { Cliente = cliente, Numero = item.Numero, Empresa = item.Empresa, Tipo_Numero = item.Tipo_Numero });
                         }
 
 
                         //Agregamos a la base de datos y actualizamos la paginación
-                        ViewModel.AddClient(client, Telefonos);
+                        ViewModel.AddClient(cliente, Telefonos);
 
                         EventoPaginacion();
+
+                        
 
                         if (MessageBox.Show("Se ha ingresado correctamente el cliente, ¿desea seguir ingresando clientes?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                         {

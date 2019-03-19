@@ -65,6 +65,15 @@ namespace Variedades.Views
             
         }
 
+        public void EventoInsertarCliente (object sender, EventArgs e)
+        {
+            Console.WriteLine(window2.cliente);
+
+            cliente = window2.cliente;
+            ClienteTextBox.Text = cliente.Nombre;
+        }
+        
+
         private void BtnSelectClient(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
@@ -81,8 +90,9 @@ namespace Variedades.Views
             window2 = new MultiUsesClienteWindow(ViewModel);
 
             //Subscribimos al evento
-            //window.EventSelectedClient += new EventHandler(EventoActualizarCliente);
-            window.Show();
+            window2.PassClient += new EventHandler(EventoInsertarCliente);
+           
+            window2.Show();
         }
     }
 }
