@@ -187,7 +187,7 @@ namespace Variedades
 
             if (filtro != string.Empty)
             {
-                SearchProductList = (ProductosList.Where(s => (s.Modelo == filtro) || (s.Marca == filtro))).ToList();
+                SearchProductList = (ProductosList.Where(s => (s.Modelo.ToLower() == filtro) || (s.Marca.ToLower() == filtro.ToLower()))).ToList();
                 UpdateProducts(3, SearchProductList);
             }
             else
