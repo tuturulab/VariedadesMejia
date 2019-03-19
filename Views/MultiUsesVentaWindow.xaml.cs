@@ -62,15 +62,12 @@ namespace Variedades.Views
             //Obtenemos el cliente seleccionado de la ventana SelectClient
             cliente = ViewModel.SelectedClientWindow;
             ClienteTextBox.Text = cliente.Nombre;
-            
         }
 
         public void EventoInsertarCliente (object sender, EventArgs e)
         {
-            //Console.WriteLine(window2.cliente);
-
-            //cliente = window2.cliente;
-            //ClienteTextBox.Text = cliente.Nombre;
+            cliente = window2.cliente;
+            ClienteTextBox.Text = cliente.Nombre;
         }
         
 

@@ -13,6 +13,9 @@ namespace Variedades.Models
         public string Garantia { get; set; }
         public string IMEI { get; set; }
 
+        //Color, detalle
+        public string Descripcion { get; set; }
+
         public virtual Venta Venta { get; set; }
         public virtual Producto Producto { get; set; }
     }
