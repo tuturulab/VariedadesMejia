@@ -17,9 +17,9 @@ using Variedades.Models;
 namespace Variedades.Views
 {
     /// <summary>
-    /// Lógica de interacción para AgregarVentaWindow.xaml
+    /// Lógica de interacción para MultiUsesVentaWindow.xaml
     /// </summary>
-    public partial class AgregarVentaWindow : Window
+    public partial class MultiUsesVentaWindow : Window
     {
         PageViewModel ViewModel;
         SelectClientWindow window;
@@ -29,7 +29,7 @@ namespace Variedades.Views
         public Venta venta;
         public List<Especificacion_producto> Especificacion_Productos;
 
-        public AgregarVentaWindow(PageViewModel viewModel)
+        public MultiUsesVentaWindow(PageViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = ViewModel;
@@ -62,13 +62,10 @@ namespace Variedades.Views
             //Obtenemos el cliente seleccionado de la ventana SelectClient
             cliente = ViewModel.SelectedClientWindow;
             ClienteTextBox.Text = cliente.Nombre;
-            
         }
 
         public void EventoInsertarCliente (object sender, EventArgs e)
         {
-            Console.WriteLine(window2.cliente);
-
             cliente = window2.cliente;
             ClienteTextBox.Text = cliente.Nombre;
         }

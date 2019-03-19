@@ -122,11 +122,11 @@
     <Compile Include="Views\MultiUsesClienteWindow.xaml.cs">
       <DependentUpon>MultiUsesClienteWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgregarProductoWindow.xaml.cs">
-      <DependentUpon>AgregarProductoWindow.xaml</DependentUpon>
+    <Compile Include="Views\MultiUsesProductoWindow.xaml.cs">
+      <DependentUpon>MultiUsesProductoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgregarVentaWindow.xaml.cs">
-      <DependentUpon>AgregarVentaWindow.xaml</DependentUpon>
+    <Compile Include="Views\MultiUsesVentaWindow.xaml.cs">
+      <DependentUpon>MultiUsesVentaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -164,11 +164,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgregarProductoWindow.xaml">
+    <Page Include="Views\MultiUsesProductoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgregarVentaWindow.xaml">
+    <Page Include="Views\MultiUsesVentaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

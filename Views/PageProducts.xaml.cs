@@ -14,7 +14,7 @@ namespace Variedades.Views
     {
         public PageViewModel ViewModel;
         static Paging PagedTable = new Paging();
-        AgregarProductoWindow window;
+        MultiUsesProductoWindow window;
         //test user github
 
         //Numeros a mostrar de pagina
@@ -41,7 +41,7 @@ namespace Variedades.Views
         private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            window = new AgregarProductoWindow(ViewModel);
+            window = new MultiUsesProductoWindow(ViewModel);
 
             //Subscribimos al evento
             window.UpdatePagination += new EventHandler(EventoPaginacion);
@@ -59,7 +59,7 @@ namespace Variedades.Views
             var producto = ViewModel.SelectedProduct;
 
             //Iniciamos la ventana de crear un producto
-            window = new AgregarProductoWindow(ViewModel, producto);
+            window = new MultiUsesProductoWindow(ViewModel, producto);
 
             window.UpdatePagination += new EventHandler(EventoPaginacion);
 

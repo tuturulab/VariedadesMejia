@@ -40,7 +40,7 @@ namespace Variedades.Views
         private void BtnInsertarImportacion(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            //window = new AgregarProductoWindow(ViewModel);
+            //window = new MultiUsesProductoWindow(ViewModel);
 
             //Subscribimos al evento
             //window.UpdatePagination += new EventHandler(EventoPaginacion);
@@ -58,7 +58,7 @@ namespace Variedades.Views
             //var producto = ViewModel.SelectedProduct;
 
             //Iniciamos la ventana de crear un producto
-            //window = new AgregarProductoWindow(ViewModel, producto);
+            //window = new MultiUsesProductoWindow(ViewModel, producto);
 
             //window.UpdatePagination += new EventHandler(EventoPaginacion);
 

@@ -47,12 +47,7 @@ namespace Variedades.Views
         //Si la ventana de agregar Cliente es llamada desde ventas o pedido
         private void EventoPasarCliente()
         {
-            if (PassClient == null)
-            {
-                Console.WriteLine("es nulo");
-                //SomeEvent();
-            }
-            //PassClient?.Invoke(this, EventArgs.Empty);
+            PassClient?.Invoke(this, EventArgs.Empty);
         }
         
         //Validación
@@ -109,23 +104,32 @@ namespace Variedades.Views
 
                         EventoPaginacion();
 
-                        
-
-                        if (MessageBox.Show("Se ha ingresado correctamente el cliente, ¿desea seguir ingresando clientes?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                        //Si no se le subscribio un evento por tanto fue llamado desde la pagina cliente
+                        if (PassClient == null)
                         {
-                            this.Close();
+                            if (MessageBox.Show("Se ha ingresado correctamente el cliente, ¿desea seguir ingresando clientes?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                            {
+                                this.Close();
+                            }
+                            else
+                            {
+                                //Limpiamos los campos para seguir insertando
+                                NombreTextBox.Text = String.Empty;
+                                EmailTextBox.Text = String.Empty;
+                                DomicilioTextBox.Text = String.Empty;
+                                TipoPagoComboBox.Text = String.Empty;
+
+                            }
                         }
+
+                        //Si fue llamado desde una subventana
                         else
                         {
-                            //Limpiamos los campos para seguir insertando
-                            NombreTextBox.Text = String.Empty;
-                            EmailTextBox.Text = String.Empty;
-                            DomicilioTextBox.Text = String.Empty;
-                            TipoPagoComboBox.Text = String.Empty;
-
+                            EventoPasarCliente();
+                            this.Close();
                         }
+                        
                     }
-
                     
                 }
 
