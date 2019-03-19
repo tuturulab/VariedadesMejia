@@ -205,8 +205,6 @@ namespace Variedades.Views
                     Precio_Venta = double.Parse(PrecioTextBox.Text)
                 };
 
-
-
                 //Ingresando sus especificaciones
                 var Especificaciones = new List<Especificacion_producto>();
 
@@ -237,14 +235,20 @@ namespace Variedades.Views
                                                   MessageBoxImage.Exclamation);
                 }
 
+                Especificaciones.ForEach(item =>
+                {
+                    product.Especificaciones_producto.Add(item);
+                });
+
                 if (_Proveedor != null)
                 {
                     //Llamar al viewmodel para agregarlo a la base de datos
-                    ViewModel.AddProduct(product, Especificaciones, _Proveedor);
+                    ViewModel.AddProduct(product, _Proveedor);
                 }
                 else
                 {
-                    ViewModel.AddProduct(product, Especificaciones);
+                    ViewModel.AddProduct(product);
+                    //ViewModel.AddProduct(product, Especificaciones);
                 }
 
                 //Llamamos a actualizar la paginacion

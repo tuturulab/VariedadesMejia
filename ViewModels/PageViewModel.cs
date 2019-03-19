@@ -135,16 +135,24 @@ namespace Variedades
          * 
         */
 
+
+        //AddProduct Version2
+        public void AddProductV2(Producto product)
+        {
+            _context.Producto.Add(product);
+            _context.SaveChanges();
+        }
+
         //Agrega en la base de datos, el producto especificado
-        public void AddProduct(Producto Product, List<Especificacion_producto> Especificaciones, Proveedor _Proveedor = null)
+        public void AddProduct(Producto Product, Proveedor _Proveedor = null)
         {
             try
             {
                 _context.Producto.Add(Product);
-                foreach (var especificacion in Especificaciones)
+                /*foreach (var especificacion in Especificaciones)
                 {
                     _context.Especificacion_producto.Add(especificacion);
-                }
+                }*/
 
                 //Al insertarse directamente en producto, no hace falta ya agregar el valor del seguimiento y verificar cuanto llego de lo que pidio
                 if (_Proveedor != null)
