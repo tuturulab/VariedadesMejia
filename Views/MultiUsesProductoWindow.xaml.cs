@@ -68,8 +68,7 @@ namespace Variedades.Views
             ModeloTextBox.Text = producto.Modelo;
             PrecioTextBox.Text = producto.Precio_Venta.ToString();
             CategoriaComboBox.SelectedIndex = GetIndexCategory(producto.Tipo_Producto);
-            ProveedorTextBox.Text = producto.Proveedores_producto.FirstOrDefault().Proveedor.Empresa;
-            TextBoxCantidad.Text = producto.Cantidad_Disponible.ToString();
+           
             ImeiGridBtn.Content = "Editar Imeis";
 
             //Verificar si tiene imeis
@@ -145,7 +144,7 @@ namespace Variedades.Views
             var window = new ProveedorWindow(ViewModel);
 
             //Subscribimos al evento
-            window.ActualizarProveedor += EventoProveedor;
+            //window.ActualizarProveedor += EventoProveedor;
             window.Show();
         }
 
@@ -201,7 +200,6 @@ namespace Variedades.Views
                 //Ingresando el producto 
                 var product = new Producto()
                 {
-                    Cantidad_Disponible = int.Parse(TextBoxCantidad.Text),
                     Marca = MarcaTextBox.Text,
                     Modelo = ModeloTextBox.Text,
                     Credito_Disponible = CreditoBox,
@@ -252,7 +250,7 @@ namespace Variedades.Views
                 }
                 else
                 {
-                    ViewModel.AddProduct(product, _Proveedor);
+                    //ViewModel.AddProduct(product, _Proveedor);
                     //ViewModel.AddProduct(product, Especificaciones);
                 }
 

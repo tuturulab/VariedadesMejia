@@ -143,30 +143,26 @@ namespace Variedades
         }
 
         //Agrega en la base de datos, el producto especificado
-        public void AddProduct(Producto Product, Proveedor _Proveedor = null)
+        public void AddProduct(Producto Product)
         {
             try
             {
                 _context.Producto.Add(Product);
-                /*foreach (var especificacion in Especificaciones)
-                {
-                    _context.Especificacion_producto.Add(especificacion);
-                }*/
-
+                
                 //Al insertarse directamente en producto, no hace falta ya agregar el valor del seguimiento y verificar cuanto llego de lo que pidio
-                if (_Proveedor != null)
+                //if (_Proveedor != null)
                 {
                     var ProveedorProducto = new Proveedor_producto();
-                    ProveedorProducto.Producto = Product;
+                    //ProveedorProducto.Especificacion_Producto = Product;
                     
                     //Creamos la entidad intermedia
                     var ProveedoresProductos = new List<Proveedor_producto>();
                     ProveedoresProductos.Add(ProveedorProducto);
 
                     //Agregamos ambas y las relacionamos
-                    _Proveedor.Proveedores_producto = ProveedoresProductos;
+                  //  _Proveedor.Proveedores_producto = ProveedoresProductos;
 
-                    _context.Proveedor.Add(_Proveedor);
+                   // _context.Proveedor.Add(_Proveedor);
                     _context.Proveedor_producto.Add(ProveedorProducto);
 
                 }

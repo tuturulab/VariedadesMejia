@@ -16,7 +16,10 @@ namespace Variedades.Models
         public string Descripcion { get; set; }
         public string Cantidad { get; set; }
 
+
         public virtual Pedido Pedido { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
+
+        [Required]
+        public virtual DetalleProveedor DetalleProveedor { get; set; }
     }
 }

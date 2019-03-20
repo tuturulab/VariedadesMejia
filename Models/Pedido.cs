@@ -16,7 +16,7 @@ namespace Variedades.Models
         [Key]
         public int IdPedido { get; set; }
         public DateTime Fecha_Pedido { get; set; }
-        public int Cantidad_Pedido { get; set; }
+
         public DateTime? Fecha_Entrega { get; set; }
 
         public virtual Cliente Cliente { get; set; }

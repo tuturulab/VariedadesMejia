@@ -1,7 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Variedades.Models
 {
@@ -10,19 +13,14 @@ namespace Variedades.Models
     {
         public Proveedor()
         {
-            this.Especificaciones_pedido = new HashSet<Especificacion_pedido>();
-            this.Proveedores_producto = new HashSet<Proveedor_producto>();
+            this.DetalleProveedor = new HashSet<DetalleProveedor>();
         }
 
         [Key]
-        public int Id { get; set; }
+        public int IdProveedor { get; set; }
         public string Empresa { get; set; }
-        public double Precio_Costo { get; set; }
         public string Lugar_Importacion { get; set; }
-        public DateTime? Fecha_Llegada { get; set; }
-        public DateTime? Garantia_Original { get; set; }
 
-        public virtual ICollection<Proveedor_producto> Proveedores_producto { get; set; }
-        public virtual ICollection<Especificacion_pedido> Especificaciones_pedido { get; set; }
+        public virtual ICollection<DetalleProveedor> DetalleProveedor { get; set; }
     }
 }

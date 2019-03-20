@@ -21,13 +21,13 @@ namespace Variedades.Views
     /// </summary>
     public partial class ProveedorWindow : Window
     {
-        public event Action<Proveedor> ActualizarProveedor;
-        public Proveedor proveedor;
+        //public event Action<Proveedor> ActualizarProveedor;
+        //public Proveedor proveedor;
 
         //Llamando al evento de la clase padre que instancio esta ventana
         private void LLamarEventoProveedor()
         {
-            ActualizarProveedor?.Invoke(proveedor);
+            //ActualizarProveedor?.Invoke(proveedor);
         }
 
         public PageViewModel ViewModel;
@@ -39,7 +39,7 @@ namespace Variedades.Views
             DataContext = ViewModel;
             InitializeComponent();
 
-            proveedor = new Proveedor();
+            //proveedor = new Proveedor();
         }
 
         //Validar que en los campos numericos solo se escriban numeros
@@ -72,7 +72,7 @@ namespace Variedades.Views
             //Si tanto el precio costo, y el nombre que son parametros requeridos no estan vacios, devolvemos el proveedor a la ventana padre
             else
             {
-                proveedor.Empresa = NombreTextBox.Text;
+                /*proveedor.Empresa = NombreTextBox.Text;
                 proveedor.Lugar_Importacion = LugarImportacionTextBox.Text;
                 proveedor.Precio_Costo = double.Parse(PrecioCostoTextBox.Text);
                 proveedor.Fecha_Llegada = Fecha_LLegada_Datepick.DisplayDate;
@@ -80,6 +80,7 @@ namespace Variedades.Views
                 LLamarEventoProveedor();
 
                 this.Close();
+                */
             }
 
         }

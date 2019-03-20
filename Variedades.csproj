@@ -90,13 +90,9 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903190352411_search.cs" />
-    <Compile Include="Migrations\201903190352411_search.Designer.cs">
-      <DependentUpon>201903190352411_search.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903190652134_fix-pagos.cs" />
-    <Compile Include="Migrations\201903190652134_fix-pagos.Designer.cs">
-      <DependentUpon>201903190652134_fix-pagos.cs</DependentUpon>
+    <Compile Include="Migrations\201903200301323_Initial.cs" />
+    <Compile Include="Migrations\201903200301323_Initial.Designer.cs">
+      <DependentUpon>201903200301323_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -105,6 +101,7 @@
     <Compile Include="Models\Pago.cs" />
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\DetalleProveedor.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Proveedor_producto.cs" />
     <Compile Include="Models\Telefono.cs" />
@@ -226,11 +223,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201903190352411_search.resx">
-      <DependentUpon>201903190352411_search.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903190652134_fix-pagos.resx">
-      <DependentUpon>201903190652134_fix-pagos.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903200301323_Initial.resx">
+      <DependentUpon>201903200301323_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -11,7 +11,6 @@ namespace Variedades.Models
         public Producto()
         {
             this.Especificaciones_producto = new HashSet<Especificacion_producto>();
-            this.Proveedores_producto = new HashSet<Proveedor_producto>();
         }
         
         [Key]
@@ -20,11 +19,9 @@ namespace Variedades.Models
         public string Marca { get; set; }
         public string Tipo_Producto { get; set; }
         public string Modelo { get; set; }
-        public int Cantidad_Disponible { get; set; }
         public int Credito_Disponible { get; set; }
 
         public virtual ICollection<Especificacion_producto> Especificaciones_producto { get; set; }
-        public virtual ICollection<Proveedor_producto> Proveedores_producto { get; set; }      
         
     }
 }

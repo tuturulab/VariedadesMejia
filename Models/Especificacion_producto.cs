@@ -10,7 +10,7 @@ namespace Variedades.Models
     {
         [Key]
         public int IdEspecificaciones_Producto { get; set; }
-        public string Garantia { get; set; }
+        public DateTime? Garantia { get; set; }
         public string IMEI { get; set; }
 
         //Color, detalle
@@ -18,5 +18,6 @@ namespace Variedades.Models
 
         public virtual Venta Venta { get; set; }
         public virtual Producto Producto { get; set; }
+        public virtual Proveedor Proveedor { get; set; }
     }
 }

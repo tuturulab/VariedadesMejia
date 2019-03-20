@@ -15,6 +15,7 @@ namespace Variedades.Models
         public virtual DbSet<Pedido> Pedido { get; set; }
         public virtual DbSet<Especificacion_producto> Especificacion_producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<DetalleProveedor> DetalleProveedor { get; set; }
         public virtual DbSet<Especificacion_pedido> Especificacion_pedido { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Venta> Venta { get; set; }
@@ -27,11 +28,6 @@ namespace Variedades.Models
             //Borrado en cascada
             modelBuilder.Entity<Producto>()
                 .HasMany(c => c.Especificaciones_producto)
-                .WithOptional(x => x.Producto)
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<Producto>()
-                .HasMany(c => c.Proveedores_producto)
                 .WithOptional(x => x.Producto)
                 .WillCascadeOnDelete(true);
 
