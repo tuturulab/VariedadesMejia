@@ -3,7 +3,7 @@ namespace Variedades.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -74,32 +74,28 @@ namespace Variedades.Migrations
                         Idproveedor_producto = c.Int(nullable: false),
                         Cantidad_Recibida = c.Int(nullable: false),
                         Numero_Seguimiento = c.String(),
-                        Especificacion_Producto_IdEspecificaciones_Producto = c.Int(),
                     })
                 .PrimaryKey(t => t.Idproveedor_producto)
                 .ForeignKey("dbo.DetalleProveedor", t => t.Idproveedor_producto)
-                .ForeignKey("dbo.Especificacion_producto", t => t.Especificacion_Producto_IdEspecificaciones_Producto)
-                .Index(t => t.Idproveedor_producto)
-                .Index(t => t.Especificacion_Producto_IdEspecificaciones_Producto);
+                .Index(t => t.Idproveedor_producto);
             
             CreateTable(
                 "dbo.Especificacion_producto",
                 c => new
                     {
-                        IdEspecificaciones_Producto = c.Int(nullable: false, identity: true),
+                        IdEspecificaciones_Producto = c.Int(nullable: false),
                         Garantia = c.DateTime(),
                         IMEI = c.String(),
                         Descripcion = c.String(),
                         Producto_IdProducto = c.Int(),
-                        Proveedor_IdProveedor = c.Int(),
                         Venta_IdVenta = c.Int(),
                     })
                 .PrimaryKey(t => t.IdEspecificaciones_Producto)
                 .ForeignKey("dbo.Producto", t => t.Producto_IdProducto, cascadeDelete: true)
-                .ForeignKey("dbo.Proveedor", t => t.Proveedor_IdProveedor)
+                .ForeignKey("dbo.Proveedor_producto", t => t.IdEspecificaciones_Producto)
                 .ForeignKey("dbo.Venta", t => t.Venta_IdVenta)
+                .Index(t => t.IdEspecificaciones_Producto)
                 .Index(t => t.Producto_IdProducto)
-                .Index(t => t.Proveedor_IdProveedor)
                 .Index(t => t.Venta_IdVenta);
             
             CreateTable(
@@ -114,16 +110,6 @@ namespace Variedades.Migrations
                         Credito_Disponible = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.IdProducto);
-            
-            CreateTable(
-                "dbo.Proveedor",
-                c => new
-                    {
-                        IdProveedor = c.Int(nullable: false, identity: true),
-                        Empresa = c.String(),
-                        Lugar_Importacion = c.String(),
-                    })
-                .PrimaryKey(t => t.IdProveedor);
             
             CreateTable(
                 "dbo.Venta",
@@ -167,38 +153,46 @@ namespace Variedades.Migrations
                 .ForeignKey("dbo.Cliente", t => t.Cliente_IdCliente, cascadeDelete: true)
                 .Index(t => t.Cliente_IdCliente);
             
+            CreateTable(
+                "dbo.Proveedor",
+                c => new
+                    {
+                        IdProveedor = c.Int(nullable: false, identity: true),
+                        Empresa = c.String(),
+                        Lugar_Importacion = c.String(),
+                    })
+                .PrimaryKey(t => t.IdProveedor);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.DetalleProveedor", "Proveedor_IdProveedor", "dbo.Proveedor");
             DropForeignKey("dbo.Venta", "Cliente_IdCliente", "dbo.Cliente");
             DropForeignKey("dbo.Telefono", "Cliente_IdCliente", "dbo.Cliente");
             DropForeignKey("dbo.Pedido", "Cliente_IdCliente", "dbo.Cliente");
             DropForeignKey("dbo.Especificacion_pedido", "Pedido_IdPedido", "dbo.Pedido");
             DropForeignKey("dbo.Especificacion_pedido", "IdEspecificacion_Pedido", "dbo.DetalleProveedor");
-            DropForeignKey("dbo.Proveedor_producto", "Especificacion_Producto_IdEspecificaciones_Producto", "dbo.Especificacion_producto");
             DropForeignKey("dbo.Pago", "Venta_IdVenta", "dbo.Venta");
             DropForeignKey("dbo.Especificacion_producto", "Venta_IdVenta", "dbo.Venta");
-            DropForeignKey("dbo.Especificacion_producto", "Proveedor_IdProveedor", "dbo.Proveedor");
-            DropForeignKey("dbo.DetalleProveedor", "Proveedor_IdProveedor", "dbo.Proveedor");
+            DropForeignKey("dbo.Especificacion_producto", "IdEspecificaciones_Producto", "dbo.Proveedor_producto");
             DropForeignKey("dbo.Especificacion_producto", "Producto_IdProducto", "dbo.Producto");
             DropForeignKey("dbo.Proveedor_producto", "Idproveedor_producto", "dbo.DetalleProveedor");
             DropIndex("dbo.Telefono", new[] { "Cliente_IdCliente" });
             DropIndex("dbo.Pago", new[] { "Venta_IdVenta" });
             DropIndex("dbo.Venta", new[] { "Cliente_IdCliente" });
             DropIndex("dbo.Especificacion_producto", new[] { "Venta_IdVenta" });
-            DropIndex("dbo.Especificacion_producto", new[] { "Proveedor_IdProveedor" });
             DropIndex("dbo.Especificacion_producto", new[] { "Producto_IdProducto" });
-            DropIndex("dbo.Proveedor_producto", new[] { "Especificacion_Producto_IdEspecificaciones_Producto" });
+            DropIndex("dbo.Especificacion_producto", new[] { "IdEspecificaciones_Producto" });
             DropIndex("dbo.Proveedor_producto", new[] { "Idproveedor_producto" });
             DropIndex("dbo.DetalleProveedor", new[] { "Proveedor_IdProveedor" });
             DropIndex("dbo.Especificacion_pedido", new[] { "Pedido_IdPedido" });
             DropIndex("dbo.Especificacion_pedido", new[] { "IdEspecificacion_Pedido" });
             DropIndex("dbo.Pedido", new[] { "Cliente_IdCliente" });
+            DropTable("dbo.Proveedor");
             DropTable("dbo.Telefono");
             DropTable("dbo.Pago");
             DropTable("dbo.Venta");
-            DropTable("dbo.Proveedor");
             DropTable("dbo.Producto");
             DropTable("dbo.Especificacion_producto");
             DropTable("dbo.Proveedor_producto");

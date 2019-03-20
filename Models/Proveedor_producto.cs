@@ -15,6 +15,7 @@ namespace Variedades.Models
 
         [Required]
         public virtual DetalleProveedor DetalleProveedor { get; set; }
+
         public virtual Especificacion_producto Especificacion_Producto { get; set; }
     }
 }

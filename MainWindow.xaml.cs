@@ -39,14 +39,14 @@ namespace Variedades
         private void ToggleMenu(object sender, RoutedEventArgs e)
         {
             //Codigo para generar un diagrama de Db para tener una foto 
-            /*using (var ctx = new Models.DbmejiaEntities())
+             using (var ctx = new Models.DbmejiaEntities())
             {
                 using (var writer = new XmlTextWriter("./Model.edmx", Encoding.Default))
                 {
                     EdmxWriter.WriteEdmx(ctx, writer);
                 }
-            }
-            */
+            }            
+            
 
             if (Sidebar.Width == new GridLength(1, GridUnitType.Star))
             {

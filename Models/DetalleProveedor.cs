@@ -17,6 +17,7 @@ namespace Variedades.Models
 
         public virtual Especificacion_pedido Especificacion_pedido { get; set; }
         
+        public virtual Proveedor Proveedor { get; set; }
         public virtual Proveedor_producto Proveedor_producto { get; set; }
     }
 }

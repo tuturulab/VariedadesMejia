@@ -18,6 +18,8 @@ namespace Variedades.Models
 
         public virtual Venta Venta { get; set; }
         public virtual Producto Producto { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
+        
+        [Required]
+        public virtual Proveedor_producto Proveedor_Producto { get; set; }
     }
 }
