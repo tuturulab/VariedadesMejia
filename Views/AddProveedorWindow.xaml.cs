@@ -19,20 +19,20 @@ namespace Variedades.Views
     /// <summary>
     /// Lógica de interacción para ProveedorWindow.xaml
     /// </summary>
-    public partial class ProveedorWindow : Window
+    public partial class AddProveedorWindow : Window
     {
-        //public event Action<Proveedor> ActualizarProveedor;
+        public event EventHandler ActualizarProveedor;
         //public Proveedor proveedor;
 
         //Llamando al evento de la clase padre que instancio esta ventana
         private void LLamarEventoProveedor()
         {
-            //ActualizarProveedor?.Invoke(proveedor);
+            ActualizarProveedor?.Invoke(this,EventArgs.Empty);
         }
 
         public PageViewModel ViewModel;
 
-        public ProveedorWindow(PageViewModel viewModel)
+        public AddProveedorWindow(PageViewModel viewModel)
         {
             //Defining the viewmodel 
             ViewModel = viewModel;
@@ -52,7 +52,7 @@ namespace Variedades.Views
         //Acción del boton insertar
         private void BtnInsertarProveedor(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(NombreTextBox.Text) == true)
+            if (String.IsNullOrEmpty(EmpresaTextBox.Text) == true)
             {
                 MessageBoxResult result = MessageBox.Show("Por favor Ingrese un Nombre",
                                               "Confirmation",
@@ -60,27 +60,19 @@ namespace Variedades.Views
                                               MessageBoxImage.Exclamation);
             }
 
-            else if (String.IsNullOrEmpty(PrecioCostoTextBox.Text))
-            {
-                MessageBoxResult result = MessageBox.Show("Por favor ingrese el precio del costo original",
-                                              "Confirmation",
-                                              MessageBoxButton.OK,
-                                              MessageBoxImage.Exclamation);
-            }
-
-
+            
             //Si tanto el precio costo, y el nombre que son parametros requeridos no estan vacios, devolvemos el proveedor a la ventana padre
             else
             {
-                /*proveedor.Empresa = NombreTextBox.Text;
-                proveedor.Lugar_Importacion = LugarImportacionTextBox.Text;
-                proveedor.Precio_Costo = double.Parse(PrecioCostoTextBox.Text);
-                proveedor.Fecha_Llegada = Fecha_LLegada_Datepick.DisplayDate;
+                var Proveedor = new Proveedor();
+                Proveedor.Empresa = EmpresaTextBox.Text;
+                Proveedor.Lugar_Importacion = LugarImportacionTextBox.Text;
+
+                ViewModel.AddProveedor(Proveedor);
 
                 LLamarEventoProveedor();
 
                 this.Close();
-                */
             }
 
         }

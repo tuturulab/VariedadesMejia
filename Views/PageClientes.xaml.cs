@@ -175,7 +175,7 @@ namespace Variedades.Views
         }
 
 
-        //Boton de Busqueda
+        //Barra de Busqueda
 
         private void ClientSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {

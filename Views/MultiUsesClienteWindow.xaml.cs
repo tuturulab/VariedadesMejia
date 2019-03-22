@@ -29,11 +29,12 @@ namespace Variedades.Views
         public event EventHandler PassClient;
 
 
-        ObservableCollection<Telefonos> TelefonosList = new ObservableCollection<Telefonos>();
+        ObservableCollection<TelefonosAddList> TelefonosList = new ObservableCollection<TelefonosAddList>();
 
         public PageViewModel ViewModel;
         public Cliente cliente;
 
+        private List<Telefono> TelefonoMainList;
         
         public MultiUsesClienteWindow(PageViewModel viewModel)
         {
@@ -41,7 +42,8 @@ namespace Variedades.Views
             DataContext = ViewModel;
             InitializeComponent();
 
-            EventoPasarCliente();
+            //Los seteamos en el datagris
+            TelefonoDatagrid.ItemsSource = TelefonosList;
         }
 
         //Si la ventana de agregar Cliente es llamada desde ventas o pedido
@@ -89,20 +91,25 @@ namespace Variedades.Views
                         {
                             cliente.Fecha_Pago_2 = int.Parse(DiaPago2TextBox.Text);
                         }
-                        
-                        var Telefonos = new List<Telefono>();
-                        //Si el producto tiene Imeis se agregan, de lo contrario no
-                        var Cantidad = int.Parse(CantidadTextBox.Text);
-                        foreach (var item in TelefonosList)
+
+
+                        TelefonoMainList = new List<Telefono>();
+
+                        foreach (var i in TelefonosList)
                         {
-                            Telefonos.Add(new Telefono() { Cliente = cliente, Numero = item.Numero, Empresa = item.Empresa, Tipo_Numero = item.Tipo_Numero });
+                            TelefonoMainList.Add(new Telefono()
+                            {
+                                Cliente = cliente,
+                                Empresa = i.Empresa ,
+                                Tipo_Numero = i.Tipo_Numero,
+                                Numero = i.Numero
+                            });
                         }
 
-
-                        //Agregamos a la base de datos y actualizamos la paginación
-                        ViewModel.AddClient(cliente, Telefonos);
+                        ViewModel.AddClient(cliente, TelefonoMainList);
 
                         EventoPaginacion();
+                       
 
                         //Si no se le subscribio un evento por tanto fue llamado desde la pagina cliente
                         if (PassClient == null)
@@ -162,25 +169,76 @@ namespace Variedades.Views
         //Agregar telefonos
         private void BtnInsertarTelefono(object sender, RoutedEventArgs e)
         {
-            //Limpiamos la anterior lista
-            TelefonosList.Clear();
+            var Tipo_Numero = TipoTelefonoComboBox.Text;
 
-            //Generamos la cantidad de registros a agregar
-            var cantidad = int.Parse(CantidadTextBox.Text);
+            var Empresa = TipoCompañiaComboBox.Text;
 
-            for (int i = 0; i < cantidad; i++)
+            if (Tipo_Numero != String.Empty && Empresa != String.Empty)
             {
-                TelefonosList.Add(new Telefonos() { IdNumero = (i + 1), Numero = " ", Tipo_Numero = " ", Empresa = " " });
+                TelefonosList.Add(new TelefonosAddList() { IdNumero = (TelefonosList.Count() + 1), Numero = " ", Tipo_Numero = Tipo_Numero, Empresa = Empresa });
             }
 
-            //Los seteamos en el datagris
-            TelefonoDatagrid.ItemsSource = TelefonosList;
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor ingrese los campos requeridos para añadir un telefono",
+                                             "Confirmation",
+                                             MessageBoxButton.OK,
+                                             MessageBoxImage.Exclamation);
+            }
+            
+            
+        }
+
+        private void BtnBorrarClick (object sender, RoutedEventArgs e)
+        {
+            var Numero = ViewModel.SelectedTelefonoAdd;
+
+            TelefonosList.Remove(Numero);
+
+        }
+
+        //Metodo para que el datagrid sea simple clickeable
+        private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)
+        {
+            // Lookup for the source to be DataGridCell
+            if (e.OriginalSource.GetType() == typeof(DataGridCell))
+            {
+                // Starts the Edit on the row;
+                DataGrid grd = (DataGrid)sender;
+                grd.BeginEdit(e);
+
+                Control control = GetFirstChildByType<Control>(e.OriginalSource as DataGridCell);
+                if (control != null)
+                {
+                    control.Focus();
+                }
+            }
+        }
+
+        private T GetFirstChildByType<T>(DependencyObject prop) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(prop); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild((prop), i) as DependencyObject;
+                if (child == null)
+                    continue;
+
+                T castedProp = child as T;
+                if (castedProp != null)
+                    return castedProp;
+
+                castedProp = GetFirstChildByType<T>(child);
+
+                if (castedProp != null)
+                    return castedProp;
+            }
+            return null;
         }
 
     }
 
     //Clase para generar la lista de Telefonos
-    public class Telefonos
+    public class TelefonosAddList
     {
         public int IdNumero { get; set; }
         public string Numero { get; set; }

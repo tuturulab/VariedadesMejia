@@ -47,7 +47,7 @@ namespace Variedades
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-
+        
         //Observable for ImeiList
         private ObservableCollection<ImeiClass> ImeiList;
         public ObservableCollection<ImeiClass> ImeiCollection
@@ -70,6 +70,17 @@ namespace Variedades
             get { return Productos; }
             set { Productos = value; NotifyPropertyChanged("ProductosCollection"); }
         }
+
+        private ObservableCollection<Proveedor> Proveedors;
+
+        //Observable for ProveedorFull List
+        public ObservableCollection<Proveedor> ProveedorFullCollection
+        {
+            get { return Proveedors; }
+            set { Proveedors = value; NotifyPropertyChanged("ProveedorFullCollection"); }
+        }
+
+
 
         //Observable for ImportacionList
         private ObservableCollection<Pedido> Pedidos;
@@ -112,6 +123,13 @@ namespace Variedades
             set { _SelectedProduct = value; NotifyPropertyChanged("SelectedProduct"); }
         }
 
+        private TelefonosAddList _SelectedTelefonoAdd;
+        public TelefonosAddList SelectedTelefonoAdd
+        {
+            get { return _SelectedTelefonoAdd; }
+            set { _SelectedTelefonoAdd = value; NotifyPropertyChanged("SelectedTelefonoAdd"); }
+        }
+
         //Selected Client in SelectClientWindow
         private Cliente _SelectedClientWindow;
         public Cliente SelectedClientWindow
@@ -120,11 +138,26 @@ namespace Variedades
             set { _SelectedClientWindow = value; NotifyPropertyChanged("SelectedClientWindow"); }
         }
 
+        //Selected Proveedor in SelectProveedorWindow
+        private Proveedor _SelectedProveedorWindow;
+        public Proveedor SelectedProveedorWindow
+        {
+            get { return _SelectedProveedorWindow; }
+            set { _SelectedProveedorWindow = value; NotifyPropertyChanged("SelectedProveedorWindow"); }
+        }
+
 
         public PageViewModel()
         {
             _context = new DbmejiaEntities();
             UpdateAll();
+        }
+
+        //Find Proveedor
+
+        public Proveedor GetProveedor(int Id)
+        {
+            return _context.Proveedor.Find(Id);
         }
 
 
@@ -141,14 +174,37 @@ namespace Variedades
             _context.Producto.Add(product);
             _context.SaveChanges();
         }
+        
+        public void AddEspecificacionProducto (Especificacion_producto _especificacion_producto, Proveedor_producto _proveedor_Producto, DetalleProveedor _detalleProveedor)
+        {
+            _context.Especificacion_producto.Add(_especificacion_producto);
+            _context.Proveedor_producto.Add(_proveedor_Producto);
+            _context.DetalleProveedor.Add(_detalleProveedor);
+
+            _context.SaveChanges();
+        }
+
 
         //Agrega en la base de datos, el producto especificado
         public void AddProduct(Producto Product)
         {
+            Console.WriteLine(Product.Especificaciones_producto.Count);
+
             try
             {
                 _context.Producto.Add(Product);
                 
+                /*
+                foreach (var i in ListaEspecificacion)
+                {
+                    _context.Especificacion_producto.Add(i);
+                }
+
+                _context.Proveedor_producto.Add(_ProveedorProducto);
+                _context.DetalleProveedor.Add(detalleProveedor);
+                */
+
+                /*
                 //Al insertarse directamente en producto, no hace falta ya agregar el valor del seguimiento y verificar cuanto llego de lo que pidio
                 //if (_Proveedor != null)
                 {
@@ -164,8 +220,8 @@ namespace Variedades
 
                    // _context.Proveedor.Add(_Proveedor);
                     _context.Proveedor_producto.Add(ProveedorProducto);
-
-                }
+                    
+                }*/
                 _context.SaveChanges();
             }
             catch
@@ -404,7 +460,7 @@ namespace Variedades
         {
             try
             {
-                _context.Cliente.Add(Cliente);
+                var cliente =_context.Cliente.Add(Cliente);
 
                 foreach (var telefono in telefonos)
                 {
@@ -412,11 +468,14 @@ namespace Variedades
                 }
 
                 _context.SaveChanges();
+
             }
             catch
             {
                 Console.WriteLine("Error Al ingresar en la base de datos");
             }
+
+          
 
             UpdateClients(3);
         }
@@ -831,6 +890,41 @@ namespace Variedades
 
             //Actualizamos el datagrid
             UpdateImportacion(3);
+        }
+
+
+        /*
+         * 
+         * Metodos Proveedor
+         *
+        */
+        
+        //Se asegura de rellenar la lista de Proveedores actual
+        public void FillProveedorFullList()
+        {
+            ProveedorFullCollection = new ObservableCollection<Proveedor>(_context.Proveedor.ToList());
+        }
+
+        //Método de busqueda
+        public void SearchProveedorList(string Filtro)
+        {
+            if (Filtro != string.Empty)
+            {
+                ProveedorFullCollection = new ObservableCollection<Proveedor>(_context.Proveedor.Where(s => (s.Empresa.ToLower().Contains(Filtro.ToLower()))));
+            }
+            else
+            {
+                ProveedorFullCollection = new ObservableCollection<Proveedor>(_context.Proveedor.ToList());
+            }
+        }
+
+        //Agregar Proveedor
+        public void AddProveedor(Proveedor proveedor)
+        {
+            var Proveedor = _context.Proveedor.Add(proveedor);
+            _context.SaveChanges();
+
+            SelectedProveedorWindow = proveedor;
         }
         
     }
