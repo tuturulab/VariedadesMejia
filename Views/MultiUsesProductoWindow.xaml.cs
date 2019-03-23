@@ -30,6 +30,7 @@ namespace Variedades.Views
         public PageViewModel ViewModel;
         public Proveedor _Proveedor;
         private Producto _Product;
+        private Producto _SelectedProduct;
 
         AddProveedorWindow addProveedorWindow;
         SelectProveedorWindow selectProveedorWindow;
@@ -55,9 +56,53 @@ namespace Variedades.Views
             DataContext = ViewModel;
 
             EspecificacionList = new ObservableCollection<EspecificacionClass>();
-
             ProductosDatagrid.ItemsSource = EspecificacionList;
 
+            if(producto != null)
+            {
+                _SelectedProduct = producto;
+                SetAndChangeWindowAppareance();
+            }
+
+        }
+
+        private void SetAndChangeWindowAppareance()
+        {
+            WindowTitle.Text = "Editar Producto";
+            MarcaTextBox.Text = _SelectedProduct.Marca;
+            ModeloTextBox.Text = _SelectedProduct.Modelo;
+            PrecioTextBox.Text = _SelectedProduct.Precio_Venta.ToString();
+            ComboBoxCredito.SelectedIndex = _SelectedProduct.Credito_Disponible == 1 ? 0 : 1;
+            ComboBoxImei.SelectedIndex = _SelectedProduct.Imei_Disponible == 1 ? 0 : 1;
+            ComboBoxGarantia.SelectedIndex = _SelectedProduct.Garantia_Disponible == 1 ? 0 : 1;
+            CategoriaComboBox.SelectedIndex = GetIndexCategory(_SelectedProduct.Tipo_Producto);
+
+            if(ComboBoxImei.Text == "Si")
+            {
+                ImeiColumn.Visibility = Visibility.Visible;
+            }
+
+            if (ComboBoxGarantia.Text == "Si")
+            {
+                GarantiaColumn.Visibility = Visibility.Visible;
+            }
+
+            if (ComboBoxGarantia.SelectedIndex > -1 && ComboBoxImei.SelectedIndex > -1)
+            {
+                //EspecificacionList.Clear();
+                ChangeBetweenImei();
+
+
+            }
+        }
+
+        public int GetIndexCategory(string Category)
+        {
+            //Iterar sobre el contenido las propiedades del combobox categoria, para obtener una list<string> de las categorias
+            List<string> Lista = CategoriaComboBox.Items.Cast<ComboBoxItem>()
+                .Select(item => item.Content.ToString()).ToList();
+
+            return Lista.IndexOf(Category);
         }
 
         public void OnComboBoxImeiSelect (object sender, EventArgs e)

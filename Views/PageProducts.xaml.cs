@@ -72,7 +72,7 @@ namespace Variedades.Views
 
             var producto = ViewModel.SelectedProduct;
 
-            //Iniciamos la ventana de crear un producto
+            //Iniciamos la ventana de crear o editar un producto
             window = new MultiUsesProductoWindow(ViewModel, producto);
 
             window.UpdatePagination += new EventHandler(EventoPaginacion);
