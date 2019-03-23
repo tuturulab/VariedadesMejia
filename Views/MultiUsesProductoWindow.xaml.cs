@@ -43,7 +43,7 @@ namespace Variedades.Views
 
         ObservableCollection<EspecificacionClass> EspecificacionList;
 
-        ObservableCollection<Especificacion_producto> EspProductoSource;
+        ObservableCollection<Especificacion_producto> EspecificacionesToEditProductoList;
 
         //Validación
         private void EventoPaginacion()
@@ -58,13 +58,15 @@ namespace Variedades.Views
             DataContext = ViewModel;
 
             EspecificacionList = new ObservableCollection<EspecificacionClass>();
-            //ProductosDatagrid.ItemsSource = EspecificacionList;
+            ProductosDatagrid.ItemsSource = EspecificacionList;
 
-            if(producto != null)
+            if (producto != null)
             {
                 _SelectedProduct = producto;
-                EspProductoSource = new ObservableCollection<Especificacion_producto>();
-                ProductosDatagrid.ItemsSource = _SelectedProduct.Especificaciones_producto.ToList();
+                EspecificacionesToEditProductoList = new ObservableCollection<Especificacion_producto>();
+                _SelectedProduct.Especificaciones_producto.ToList().ForEach(item => EspecificacionesToEditProductoList.Add(item));
+                ProductosDatagrid.ItemsSource = EspecificacionesToEditProductoList;
+
                 SetAndChangeWindowAppareance();
             }
 
@@ -106,18 +108,11 @@ namespace Variedades.Views
                 AgregarATablaBtn.IsEnabled = false;
                 AgregarATablaBtn.Visibility = Visibility.Hidden;
 
-                /*_SelectedProduct.Especificaciones_producto.ToList().ForEach(esp =>
-                {
-                    EspecificacionList.Add(new EspecificacionClass {
-                        Numero = (int.Parse(TextBoxCantidad.Text) + 1),
-                        Imei = esp.IMEI,
-                        Garantia = esp.Garantia,
-                        Proveedor = esp.Proveedor_Producto.DetalleProveedor.Proveedor.Empresa,
-                        ProveedorId = esp.Proveedor_Producto.DetalleProveedor.Proveedor.IdProveedor,
-                        Descripcion = esp.Descripcion,
-                        Precio_Costo = esp.Proveedor_Producto.DetalleProveedor.Precio_Costo
-                    });
-                });*/
+                //Grid productos - Cambiar los bindings
+                ImeiColumn.Binding = new Binding("IMEI");
+                Precio_Costo_Column.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Precio_Costo");
+                ProveedorColumn.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Proveedor.Empresa");
+
             }
         }
 
@@ -156,6 +151,7 @@ namespace Variedades.Views
             if (ComboBoxGarantia.SelectedIndex > -1 && ComboBoxImei.SelectedIndex > -1)
             {
                 EspecificacionList.Clear();
+                //EspecificacionesToEditProductoList.Clear();
                 ChangeBetweenImei();
             }
 
@@ -170,12 +166,16 @@ namespace Variedades.Views
                 {
                     for (int i=0; i< int.Parse (TextBoxCantidad.Text); i++  )
                     {
-                        EspecificacionList.Add(new EspecificacionClass() {Numero = (i+1),  Descripcion = " ", Imei = " ", Proveedor = _Proveedor.Empresa, ProveedorId = _Proveedor.IdProveedor });
+                        EspecificacionList.Add(new EspecificacionClass()
+                        {
+                            Numero = (i+1),
+                            Descripcion = " ",
+                            Imei = " ",
+                            Proveedor = _Proveedor.Empresa,
+                            ProveedorId = _Proveedor.IdProveedor
+                        });
                     }
-
-                   
                 }
-
                 else
                 {
                     MessageBoxResult result = MessageBox.Show("Por favor ingrese La cantidad de Datos a ingresar que sean de ese mismo proveedor",
@@ -191,6 +191,148 @@ namespace Variedades.Views
                                                   "Confirmation",
                                                   MessageBoxButton.OK,
                                                   MessageBoxImage.Exclamation);
+            }
+        }
+
+        //Acción del boton insertar
+        private void BtnInsertarProducto(object sender, RoutedEventArgs e)
+        {
+            if(EspecificacionesToEditProductoList != null && EspecificacionesToEditProductoList.Count > 0)
+            {
+                _SelectedProduct.Especificaciones_producto.Clear();
+
+                foreach(var item in EspecificacionesToEditProductoList)
+                {
+                    _SelectedProduct.Especificaciones_producto.Add(item);
+                }
+
+                ViewModel.UpdateProduct(_SelectedProduct);
+                this.Close();
+            }
+
+            if (EspecificacionList.Count < 1)
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor Especifique almenos 1 en los campo asociados a este producto",
+                                                 "Confirmation",
+                                                 MessageBoxButton.OK,
+                                                 MessageBoxImage.Exclamation);
+            }
+
+            else
+            {
+                //Si los campos fueron llenados
+                if (MarcaTextBox.Text != String.Empty && ModeloTextBox.Text != String.Empty && PrecioTextBox.Text != String.Empty && CategoriaComboBox.Text != String.Empty)
+                {
+                    _Product = new Producto()
+                    {
+                        Marca = MarcaTextBox.Text,
+                        Modelo = ModeloTextBox.Text,
+                        Precio_Venta = double.Parse(PrecioTextBox.Text),
+                        Tipo_Producto = CategoriaComboBox.Text,
+                    };
+
+                    //Insertamos si el producto tiene garantia o no
+                    if (ComboBoxGarantia.Text == "Si")
+                    {
+                        _Product.Garantia_Disponible = 1;
+                    }
+                    else
+                    {
+                        _Product.Garantia_Disponible = 0;
+                    }
+
+                    //Insertamos si tiene opcion de credito este producto
+                    if (ComboBoxCredito.Text == "Si")
+                    {
+                        _Product.Credito_Disponible = 1;
+                    }
+                    else
+                    {
+                        _Product.Credito_Disponible = 0;
+                    }
+
+                    List<Especificacion_producto> ListaEspecificaciones = new List<Especificacion_producto>();
+
+                    foreach (var i in EspecificacionList)
+                    {
+                        var ElementoProducto = new Especificacion_producto();
+
+                        ElementoProducto.Producto = _Product;
+                        ElementoProducto.Descripcion = i.Descripcion;
+
+                        Console.WriteLine(i.Garantia.ToString());
+
+                        var ProveedorAsignado = new DetalleProveedor()
+                        {
+                            Garantia_Original = i.Garantia,
+                            Precio_Costo = i.Precio_Costo,
+                            Proveedor = ViewModel.GetProveedor(i.ProveedorId),
+                        };
+
+                        var TablaSeguimiento = new Proveedor_producto()
+                        {
+                            Especificacion_Producto = ElementoProducto,
+                            DetalleProveedor = ProveedorAsignado,
+                        };
+
+                        ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
+
+                        ElementoProducto.Proveedor_Producto = TablaSeguimiento;
+                        ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
+
+                        //Si la columnas estan visibles, agregar el dato insertado a la relacion
+                        if (GarantiaColumn.Visibility == Visibility.Visible)
+                        {
+                            ElementoProducto.Garantia = i.Garantia;
+                        }
+
+                        if (ImeiColumn.Visibility == Visibility.Visible)
+                        {
+                            ElementoProducto.IMEI = i.Imei;
+                        }
+
+                        ListaEspecificaciones.Add(ElementoProducto);
+
+                    }
+
+                    _Product.Especificaciones_producto = ListaEspecificaciones;
+                    //Agregamos el producto finalmente con todos los datos que se pudieron obtener
+                    ViewModel.AddProduct(_Product);
+                    EventoPaginacion();
+
+                    if (MessageBox.Show("Se ha ingresado correctamente el producto, ¿desea seguir ingresando productos?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        //Limpiamos los campos para volver a insertar
+                        TextBoxCantidad.Text = String.Empty;
+                        MarcaTextBox.Text = String.Empty;
+                        ModeloTextBox.Text = String.Empty;
+                        CategoriaComboBox.Text = String.Empty;
+                        PrecioTextBox.Text = String.Empty;
+                        ComboBoxImei.Text = String.Empty;
+                        ComboBoxGarantia.Text = String.Empty;
+                        ComboBoxCredito.Text = String.Empty;
+
+                        EspecificacionList.Clear();
+
+                        PanelImei.Visibility = Visibility.Hidden;
+                        ProductosDatagrid.Visibility = Visibility.Hidden;
+                        InsertarButton.Visibility = Visibility.Hidden;
+                    }
+
+
+                }
+
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("Por favor Rellene los campos requeridos",
+                                                      "Confirmation",
+                                                      MessageBoxButton.OK,
+                                                      MessageBoxImage.Exclamation);
+                }
             }
         }
 
@@ -343,136 +485,6 @@ namespace Variedades.Views
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
-        }
-
-        //Acción del boton insertar
-        private void BtnInsertarProducto(object sender, RoutedEventArgs e)
-        {
-            if (EspecificacionList.Count < 1)
-            {
-                MessageBoxResult result = MessageBox.Show("Por favor Especifique almenos 1 en los campo asociados a este producto",
-                                                 "Confirmation",
-                                                 MessageBoxButton.OK,
-                                                 MessageBoxImage.Exclamation);
-            }
-
-            else
-            {
-                //Si los campos fueron llenados
-                if (MarcaTextBox.Text != String.Empty && ModeloTextBox.Text != String.Empty && PrecioTextBox.Text != String.Empty && CategoriaComboBox.Text != String.Empty)
-                {
-                    _Product = new Producto()
-                    {
-                        Marca = MarcaTextBox.Text,
-                        Modelo = ModeloTextBox.Text,
-                        Precio_Venta = double.Parse(PrecioTextBox.Text),
-                        Tipo_Producto = CategoriaComboBox.Text,
-                    };
-
-                    //Insertamos si el producto tiene garantia o no
-                    if (ComboBoxGarantia.Text == "Si")
-                    {
-                        _Product.Garantia_Disponible = 1;
-                    }
-                    else
-                    {
-                        _Product.Garantia_Disponible = 0; 
-                    }
-                    
-                    //Insertamos si tiene opcion de credito este producto
-                    if (ComboBoxCredito.Text == "Si")
-                    {
-                        _Product.Credito_Disponible = 1;
-                    }
-                    else
-                    {
-                        _Product.Credito_Disponible = 0;
-                    }
-
-                    List<Especificacion_producto> ListaEspecificaciones = new List<Especificacion_producto>();
-
-                    foreach (var i in EspecificacionList)
-                    {
-                        var ElementoProducto = new Especificacion_producto();
-
-                        ElementoProducto.Producto = _Product;
-                        ElementoProducto.Descripcion = i.Descripcion;
-
-                        Console.WriteLine(i.Garantia.ToString());
-
-                        var ProveedorAsignado = new DetalleProveedor()
-                        {
-                            Garantia_Original = i.Garantia,
-                            Precio_Costo = i.Precio_Costo,
-                            Proveedor = ViewModel.GetProveedor(i.ProveedorId),
-                        };
-
-                        var TablaSeguimiento = new Proveedor_producto()
-                        {
-                            Especificacion_Producto = ElementoProducto,
-                            DetalleProveedor = ProveedorAsignado,
-                        };
-
-                        ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
-
-                        ElementoProducto.Proveedor_Producto = TablaSeguimiento;
-                        ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
-
-                        //Si la columnas estan visibles, agregar el dato insertado a la relacion
-                        if (GarantiaColumn.Visibility == Visibility.Visible)
-                        {
-                            ElementoProducto.Garantia = i.Garantia;
-                        }
-
-                        if (ImeiColumn.Visibility == Visibility.Visible)
-                        {
-                            ElementoProducto.IMEI = i.Imei;
-                        }
-
-                        ListaEspecificaciones.Add(ElementoProducto);
-                        
-                    }
-
-                    _Product.Especificaciones_producto = ListaEspecificaciones;
-                    //Agregamos el producto finalmente con todos los datos que se pudieron obtener
-                    ViewModel.AddProduct(_Product);
-                    EventoPaginacion();
-
-                    if (MessageBox.Show("Se ha ingresado correctamente el producto, ¿desea seguir ingresando productos?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                    {
-                        this.Close();
-                    }
-                    else
-                    {
-                        //Limpiamos los campos para volver a insertar
-                        TextBoxCantidad.Text = String.Empty;
-                        MarcaTextBox.Text = String.Empty;
-                        ModeloTextBox.Text = String.Empty;
-                        CategoriaComboBox.Text = String.Empty;
-                        PrecioTextBox.Text = String.Empty;
-                        ComboBoxImei.Text = String.Empty;
-                        ComboBoxGarantia.Text = String.Empty;
-                        ComboBoxCredito.Text = String.Empty;
-
-                        EspecificacionList.Clear();
-
-                        PanelImei.Visibility = Visibility.Hidden;
-                        ProductosDatagrid.Visibility = Visibility.Hidden;
-                        InsertarButton.Visibility = Visibility.Hidden;
-                    }
-
-
-                }
-
-                else
-                {
-                    MessageBoxResult result = MessageBox.Show("Por favor Rellene los campos requeridos",
-                                                      "Confirmation",
-                                                      MessageBoxButton.OK,
-                                                      MessageBoxImage.Exclamation);
-                }
-            }
-            
         }
 
             /*
