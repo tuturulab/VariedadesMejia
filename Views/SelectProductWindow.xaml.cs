@@ -37,7 +37,6 @@ namespace Variedades.Views
             ViewModel = viewModel;
             DataContext = ViewModel;
 
-            ViewModel.FillEspecificacionesProducts();
         }
 
         private void BtnSelectProduct(object sender, RoutedEventArgs e)
@@ -56,6 +55,9 @@ namespace Variedades.Views
             {
                 //Pasamos el dato a la ventana que lo invoque
                 EventoPasarProducto();
+
+                //Removemos el producto temporalmente para evitar que el usuario agregue este denuevo
+                ViewModel.especificacion_Productos.Remove(idSelected);
 
                 this.Close();
             }

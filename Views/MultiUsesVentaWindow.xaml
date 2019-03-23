@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="Agregar Venta" Height="600" Width="900">
+        Title="Agregar Venta" Height="400" Width="900">
     <Grid>
 
         <StackPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
@@ -82,65 +82,10 @@
                     </ComboBox>
                 </DockPanel>
 
-                <DockPanel Visibility="Hidden" Name="PlazosPanel" Margin="0,10,0,10">
-                    <TextBlock VerticalAlignment="Center" Text="Plazos" Width="100px"></TextBlock>
-                    <ComboBox Width="300" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Height="30" Margin="30,0,0,0" Name="PlazoComboBox">
-                        <ComboBoxItem>Quincenal</ComboBoxItem>
-                        <ComboBoxItem>Mensual</ComboBoxItem>
-                    </ComboBox>
-                </DockPanel>
-
-
                 <DockPanel Visibility="Hidden" Name="PagosPanel" Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="N# de Pagos" Width="100px"></TextBlock>
                     <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" Name="CantidadTextBox" FontSize="20" HorizontalAlignment="Left" Width="70" Height="30" Margin="30,0,0,0"/>
-                    <Button Click="BtnInsertarPagos" Content="Detallar pagos" HorizontalAlignment="Left" BorderBrush="{x:Null}"  Foreground="White" Width="120" Margin="30,0,0,0">
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </DockPanel>
-
-                <DockPanel Visibility="Hidden" Name="PagosDataGridPanel" Height="170">
-                    <DataGrid Visibility="Visible" Name="PagosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
-                    AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
-                        <DataGrid.Columns>
-
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Id, IsAsync=True}" Header="Id" Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Monto, IsAsync=True}" Header="Número" Width="2*" ></DataGridTextColumn>
-
-                            <DataGridTemplateColumn Header="Pagos" Width="2*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <DatePicker Name="btnFecha"/>
-
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-
-                            </DataGridTemplateColumn>
-
-
-
-                        </DataGrid.Columns>
-                    </DataGrid>
+                   
                 </DockPanel>
 
                 <Button Click="BtnInsertarVenta" Name="InsertarButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Venta"  Height="40px">
@@ -229,7 +174,7 @@
 
                 </DockPanel>
 
-                <DockPanel Height="350">
+                <DockPanel Height="200">
                     <DataGrid Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>

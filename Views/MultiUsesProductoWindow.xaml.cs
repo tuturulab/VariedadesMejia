@@ -298,9 +298,19 @@ namespace Variedades.Views
                         Modelo = ModeloTextBox.Text,
                         Precio_Venta = double.Parse(PrecioTextBox.Text),
                         Tipo_Producto = CategoriaComboBox.Text,
-
                     };
+
+                    //Insertamos si el producto tiene garantia o no
+                    if (ComboBoxGarantia.Text == "Si")
+                    {
+                        _Product.Garantia_Disponible = 1;
+                    }
+                    else
+                    {
+                        _Product.Garantia_Disponible = 0; 
+                    }
                     
+                    //Insertamos si tiene opcion de credito este producto
                     if (ComboBoxCredito.Text == "Si")
                     {
                         _Product.Credito_Disponible = 1;
@@ -351,11 +361,6 @@ namespace Variedades.Views
                         }
 
                         ListaEspecificaciones.Add(ElementoProducto);
-                        
-                        
-
-                       // ViewModel.AddEspecificacionProducto(ElementoProducto,TablaSeguimiento, ProveedorAsignado);
-
                         
                     }
 

@@ -106,6 +106,18 @@
     <Compile Include="Migrations\201903220426080_Add-Garantia-Disponible.Designer.cs">
       <DependentUpon>201903220426080_Add-Garantia-Disponible.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903230317269_edit-pagos.cs" />
+    <Compile Include="Migrations\201903230317269_edit-pagos.Designer.cs">
+      <DependentUpon>201903230317269_edit-pagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903230444301_fixing.cs" />
+    <Compile Include="Migrations\201903230444301_fixing.Designer.cs">
+      <DependentUpon>201903230444301_fixing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903230617441_optional-datetime-pagos.cs" />
+    <Compile Include="Migrations\201903230617441_optional-datetime-pagos.Designer.cs">
+      <DependentUpon>201903230617441_optional-datetime-pagos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -260,6 +272,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903220426080_Add-Garantia-Disponible.resx">
       <DependentUpon>201903220426080_Add-Garantia-Disponible.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903230317269_edit-pagos.resx">
+      <DependentUpon>201903230317269_edit-pagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903230444301_fixing.resx">
+      <DependentUpon>201903230444301_fixing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903230617441_optional-datetime-pagos.resx">
+      <DependentUpon>201903230617441_optional-datetime-pagos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

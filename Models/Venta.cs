@@ -20,9 +20,12 @@ namespace Variedades.Models
         public string Orden_Pagare { get; set; }
         public string Tipo_Venta { get; set; }
 
-        //Quincenal , mensual
-        public string Plazo { get; set; }
+        //Almacena el total de dinero que tendrá que pagar por la venta realizada.
+        public double MontoVenta { get; set; }
 
+        //Almacenar si esta venta ya se completó
+        public string VentaCompletada { get; set; }
+        
         public virtual Cliente Cliente { get; set; }
         
         public virtual ICollection<Pago> Pagos { get; set;  }

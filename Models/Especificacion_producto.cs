@@ -29,6 +29,9 @@ namespace Variedades.Models
         [NotMapped]
         public string Tipo_Producto { get { return Producto.Tipo_Producto; } }
 
+        [NotMapped]
+        public string GarantiaDisponible { get { if (Producto.Garantia_Disponible == 0) return "No"; else return "Si";  } }
+
         [Required]
         public virtual Proveedor_producto Proveedor_Producto { get; set; }
     }

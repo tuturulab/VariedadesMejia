@@ -35,7 +35,8 @@ namespace Variedades.Views
 
         public List<Especificacion_producto> Especificacion_Productos;
 
-        ObservableCollection<Especificacion_producto> ProductosList = new ObservableCollection<Especificacion_producto>();
+        ObservableCollection<Especificacion_producto> ProductosList;
+        
 
         public MultiUsesVentaWindow(PageViewModel viewModel)
         {
@@ -44,8 +45,13 @@ namespace Variedades.Views
 
             InitializeComponent();
 
+            ProductosList = new ObservableCollection<Especificacion_producto>(); 
+    
             //Los seteamos en el datagris
             ProductosDatagrid.ItemsSource = ProductosList;
+
+            //Seteamos los productos disponibles
+            ViewModel.FillEspecificacionesProducts();
         }
 
         //Validar que en los campos numericos solo se escriban numeros
@@ -58,9 +64,111 @@ namespace Variedades.Views
       
         private void BtnInsertarVenta(object sender, RoutedEventArgs e)
         {
-            
-            
+            try
+            {
+                //Validando campos
+                if (ProductosList.Count <1)
+                {
+                    MessageBoxResult result = MessageBox.Show("Por Favor ingrese almenos un producto a vender antes de agregar la venta" + "",
+                                             "Confirmation",
+                                             MessageBoxButton.OK,
+                                             MessageBoxImage.Exclamation);
+                }
 
+                else
+                {
+                    if (TipoPagoComboBox.Text == String.Empty )
+                    {
+                        MessageBoxResult result = MessageBox.Show("Por Favor escriba el tipo de pago a la venta, si es de contado, o si es de crédito" + "",
+                                             "Confirmation",
+                                             MessageBoxButton.OK,
+                                             MessageBoxImage.Exclamation);
+                    }
+                    
+                    else
+                    {
+                        int contadorProductosGarantia = 0;
+                        //Haciendo un recorrido en la lista de productos, si algun producto tiene garantia, es necesario que se le asocie un cliente
+                        foreach (var i in ProductosList)
+                        {
+                            if (i.Producto.Garantia_Disponible == 1)
+                            {
+                                contadorProductosGarantia++;
+                            }
+                        }
+                        
+                        if (contadorProductosGarantia > 0 && cliente == null)
+                        {
+                            MessageBoxResult result = MessageBox.Show("Por Favor ingrese el cliente que desea comprar los productos, puesto que uno de los productos escogidos tiene Garantía" + "",
+                                            "Confirmation",
+                                            MessageBoxButton.OK,
+                                            MessageBoxImage.Exclamation);
+                        }
+                       
+                        else
+                        {
+                            //Finalmente agregamos 
+                            var venta = new Venta()
+                            {
+                                Fecha_Venta = DateTime.Now,
+                                MontoVenta = TotalPago,
+                                Tipo_Venta = TipoPagoComboBox.Text,
+                                Especificaciones_producto = ProductosList,
+                            };
+
+                            List<Pago> Pagos = new List<Pago>(); 
+                            
+                            //Validamos que datos insertaremos según si es una venta al crédito o venta al contado
+                            if (TipoPagoComboBox.Text == "Crédito")
+                            {
+                                venta.VentaCompletada = "No";
+                                if (CantidadTextBox.Text != String.Empty)
+                                {
+                                    int cantidad = int.Parse(CantidadTextBox.Text);
+
+                                    for (int i = 0; i < cantidad; i++)
+                                    {
+                                        var pago = new Pago
+                                        {
+                                            Venta = venta
+                                           
+                                        };
+                                        Pagos.Add(pago);
+                                    }
+
+                                    venta.Pagos = Pagos;
+                                }
+                            }
+                            //Venta al contado
+                            else
+                            {
+                                venta.VentaCompletada = "Si";
+                                var pago = new Pago
+                                {
+                                    Venta = venta
+                                };
+                                Pagos.Add(pago);
+                            }
+
+                            //Si el producto vendido tiene un cliente asociado
+                            if (ClienteTextBox.Text != string.Empty)
+                            {
+                                venta.Cliente = cliente;
+                            }
+
+                            //Finalmente agregamos la venta
+                            ViewModel.AddVenta(venta );
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                MessageBoxResult result = MessageBox.Show("Error al ingresar la venta, revise si todos los datos fueron escritos correctamente" + "",
+                                             "Confirmation",
+                                             MessageBoxButton.OK,
+                                             MessageBoxImage.Exclamation);
+            }
         }
         
         //Boton de agregar productos a la tabla de venta
@@ -70,6 +178,8 @@ namespace Variedades.Views
             {
                 //Agregamos a la lista
                 ProductosList.Add(_producto);
+
+                TotalPago = 0;
 
                 //Actualizamos el total a pagar
                 foreach (var i in ProductosList)
@@ -91,31 +201,23 @@ namespace Variedades.Views
 
         }
 
+        //Cambiar la interfaz segun el tipo de pagos
         public void OnComboBoxTipoPago(object sender, EventArgs e)
         {
             if (TipoPagoComboBox.Text == "Crédito")
             {
                 PagosPanel.Visibility = Visibility.Visible;
-                PagosDataGridPanel.Visibility = Visibility.Visible;
-                PlazosPanel.Visibility = Visibility.Visible;
             }
 
             else
             {
-                
+                CantidadTextBox.Text = String.Empty;
 
                 PagosPanel.Visibility = Visibility.Hidden;
-                PagosDataGridPanel.Visibility = Visibility.Hidden;
-                PlazosPanel.Visibility = Visibility.Hidden;
             }
         }
 
-
-        private void BtnInsertarPagos(object sender, RoutedEventArgs e)
-        {
-            // do something
-        }
-
+       
         //Recibiendo el id creado
         public void EventoActualizarCliente(object sender, EventArgs e)
         {
@@ -124,7 +226,7 @@ namespace Variedades.Views
             ClienteTextBox.Text = cliente.Nombre;
         }
 
-        //Pasar cliente
+        //Obtener el cliente desde la ventana de productos
         public void EventoPasarProducto (object sender, EventArgs e)
         {
             _producto = ViewModel.SelectedProductWindow;

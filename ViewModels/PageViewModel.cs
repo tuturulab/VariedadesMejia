@@ -67,7 +67,7 @@ namespace Variedades
         }
 
         //Observable for ProductListCompleteFull List
-        private ObservableCollection<Especificacion_producto> especificacion_Productos;
+        public ObservableCollection<Especificacion_producto> especificacion_Productos;
         public ObservableCollection<Especificacion_producto> ProductosEspecificacionesCollection
         {
             get { return especificacion_Productos; }
@@ -201,39 +201,9 @@ namespace Variedades
         //Agrega en la base de datos, el producto especificado
         public void AddProduct(Producto Product)
         {
-
             try
             {
                 _context.Producto.Add(Product);
-                
-                /*
-                foreach (var i in ListaEspecificacion)
-                {
-                    _context.Especificacion_producto.Add(i);
-                }
-
-                _context.Proveedor_producto.Add(_ProveedorProducto);
-                _context.DetalleProveedor.Add(detalleProveedor);
-                */
-
-                /*
-                //Al insertarse directamente en producto, no hace falta ya agregar el valor del seguimiento y verificar cuanto llego de lo que pidio
-                //if (_Proveedor != null)
-                {
-                    var ProveedorProducto = new Proveedor_producto();
-                    //ProveedorProducto.Especificacion_Producto = Product;
-                    
-                    //Creamos la entidad intermedia
-                    var ProveedoresProductos = new List<Proveedor_producto>();
-                    ProveedoresProductos.Add(ProveedorProducto);
-
-                    //Agregamos ambas y las relacionamos
-                  //  _Proveedor.Proveedores_producto = ProveedoresProductos;
-
-                   // _context.Proveedor.Add(_Proveedor);
-                    _context.Proveedor_producto.Add(ProveedorProducto);
-                    
-                }*/
                 _context.SaveChanges();
             }
             catch
@@ -243,8 +213,8 @@ namespace Variedades
 
             UpdateProducts(3);
         }
-        //Metodo de busqueda en la base de datos 
 
+        //Metodo de busqueda en la base de datos 
         public void SearchProduct(string filtro)
         {
 
@@ -672,7 +642,15 @@ namespace Variedades
         //Agrega en la base de datos, el producto especificado
         public void AddVenta(Venta _Venta)
         {
-
+            try
+            {
+                _context.Venta.Add(_Venta);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                Console.WriteLine("Error al agregar en la base de datos");
+            }
         }
 
         // Botones de la paginacion de la tabla productos

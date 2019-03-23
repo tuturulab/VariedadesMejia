@@ -54,6 +54,7 @@
 
                         <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre, IsAsync=False}" Width="*" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Precio venta" Binding="{Binding Precio, IsAsync=False}" Width="*" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Garantia Disponible" Binding="{Binding GarantiaDisponible, IsAsync=True}" Width="*" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion, IsAsync=True}" Width="*" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Tipo Producto" Binding="{Binding Tipo_Producto, IsAsync=True}" Width="*" ></DataGridTextColumn>
 
