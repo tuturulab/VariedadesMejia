@@ -238,6 +238,10 @@ namespace Variedades.Views
                 ObtenerTotalPago();
 
                 PrecioFinalTextBox.Text = TotalPago.ToString();
+
+                //Reseteamos los valores
+                _producto = null;
+                ProductoTextBox.Text = String.Empty;
             }
 
             else
