@@ -45,27 +45,13 @@ namespace Variedades.Views
             window = new MultiUsesVentaWindow(ViewModel);
 
             //Subscribimos al evento
-            //window.UpdatePagination += new EventHandler(EventoPaginacion);
+            window.UpdatePagination += new EventHandler(EventoPaginacion);
             window.Show();
         }
 
         private void BtnEditarVenta(object sender, RoutedEventArgs e)
         {
-            //Obtenemos el Id del Producto seleccionado 
-            /*object item = product_table.SelectedItem;
-            string IdProducto = (product_table.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
-            string Nombre = (product_table.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text + " " +
-                (product_table.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;*/
-
-            //var producto = ViewModel.SelectedProduct;
-
-            //Iniciamos la ventana de crear un producto
-            //window = new MultiUsesVentaWindow(ViewModel, producto);
-
-            //window.UpdatePagination += new EventHandler(EventoPaginacion);
-
-            //window.Show();
-
+            
         }
 
 
@@ -150,21 +136,17 @@ namespace Variedades.Views
 
         private void BtnBorrarClick(object sender, RoutedEventArgs e)
         {
-            //Obtenemos el Id del Producto seleccionado 
-            object item = venta_table.SelectedItem;
-            string IdVenta = (venta_table.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
-            string Nombre = (venta_table.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text + " " +
-                (venta_table.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
+            var venta = ViewModel.SelectedVenta;
 
             //Pestaña de confirmación
 
-            if (MessageBox.Show(" Estás seguro que deseas eliminar la venta: " + Nombre + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (MessageBox.Show(" Estás seguro que deseas eliminar la venta: del dia " + venta.Fecha_Venta.Date + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
                 //
             }
             else
             {
-                //ViewModel.DeleteProduct(int.Parse(IdVenta));
+                ViewModel.DeleteVenta(venta);
                 UtilidadPaginacion();
             }
 

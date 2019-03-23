@@ -36,7 +36,10 @@ namespace Variedades.Views
         public List<Especificacion_producto> Especificacion_Productos;
 
         ObservableCollection<Especificacion_producto> ProductosList;
-        
+
+        //Evento de Actualizar Paginacion
+        public event EventHandler UpdatePagination;
+
 
         public MultiUsesVentaWindow(PageViewModel viewModel)
         {
@@ -52,6 +55,12 @@ namespace Variedades.Views
 
             //Seteamos los productos disponibles
             ViewModel.FillEspecificacionesProducts();
+        }
+
+        //Validación
+        private void EventoPaginacion()
+        {
+            UpdatePagination?.Invoke(this, EventArgs.Empty);
         }
 
         //Validar que en los campos numericos solo se escriban numeros
@@ -156,8 +165,33 @@ namespace Variedades.Views
                                 venta.Cliente = cliente;
                             }
 
-                            //Finalmente agregamos la venta
-                            ViewModel.AddVenta(venta );
+                            //Finalmente agregamos la venta y actualizamos la pagina venta
+                            ViewModel.AddVenta(venta);
+                            EventoPaginacion();
+
+                            if (MessageBox.Show("Se ha ingresado correctamente la venta, ¿desea seguir ingresando ventas?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                            {
+                                this.Close();
+                            }
+                            else
+                            {
+                                CantidadTextBox.Text = String.Empty;
+                                ProductoTextBox.Text = String.Empty;
+                                PrecioFinalTextBox.Text = String.Empty;
+                                TotalPago = 0;
+                                cliente = null;
+                                ClienteTextBox.Text = String.Empty;
+                                TipoPagoComboBox.Text = String.Empty;
+
+                                PagosPanel.Visibility = Visibility.Hidden;
+
+                                ProductosList.Clear();
+                                ProductosDatagrid.Visibility = Visibility.Hidden;
+
+                                ViewModel.FillEspecificacionesProducts();
+                            }
+
+
                         }
                     }
                 }
@@ -170,6 +204,26 @@ namespace Variedades.Views
                                              MessageBoxImage.Exclamation);
             }
         }
+
+        //Boton para borrar productos del datagrid
+        private void BtnBorrarClick (object sender, RoutedEventArgs e)
+        {
+            ViewModel.especificacion_Productos.Add(ViewModel.SelectedEspecificacionProducto);
+            ProductosList.Remove(ViewModel.SelectedEspecificacionProducto);
+            ObtenerTotalPago();
+        }
+
+        private void ObtenerTotalPago()
+        {
+            TotalPago = 0;
+            //Actualizamos el total a pagar
+            foreach (var i in ProductosList)
+            {
+                TotalPago = TotalPago + i.Precio;
+            }
+
+            PrecioFinalTextBox.Text = TotalPago.ToString();
+        }
         
         //Boton de agregar productos a la tabla de venta
         private void BtnAddProduct (object sender, RoutedEventArgs e)
@@ -181,11 +235,7 @@ namespace Variedades.Views
 
                 TotalPago = 0;
 
-                //Actualizamos el total a pagar
-                foreach (var i in ProductosList)
-                {
-                    TotalPago = TotalPago + i.Precio;
-                }
+                ObtenerTotalPago();
 
                 PrecioFinalTextBox.Text = TotalPago.ToString();
             }

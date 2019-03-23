@@ -126,6 +126,13 @@ namespace Variedades
             set { _SelectedProduct = value; NotifyPropertyChanged("SelectedProduct"); }
         }
 
+        private Venta _SelectedVenta;
+        public Venta SelectedVenta
+        {
+            get { return _SelectedVenta; }
+            set { _SelectedVenta = value; NotifyPropertyChanged("SelectedVenta"); }
+        }
+        
         private TelefonosAddList _SelectedTelefonoAdd;
         public TelefonosAddList SelectedTelefonoAdd
         {
@@ -157,11 +164,18 @@ namespace Variedades
             set { _SelectedProveedorWindow = value; NotifyPropertyChanged("SelectedProveedorWindow"); }
         }
 
+        private Especificacion_producto _SelectedEspecificacionProducto;
+        public Especificacion_producto SelectedEspecificacionProducto
+        {
+            get { return _SelectedEspecificacionProducto; }
+            set { _SelectedEspecificacionProducto = value; NotifyPropertyChanged("SelectedEspecificacionProducto"); }
+        }
+
 
         public PageViewModel()
         {
             _context = new DbmejiaEntities();
-            UpdateAll();
+            //UpdateAll();
         }
 
         //Find Proveedor
@@ -362,9 +376,16 @@ namespace Variedades
             }
         }
 
+        public void FillClientesFullCollection ()
+        {
+            //Collecciones usadas en las ventanas donde saldra para seleccionar
+            ClientesFullCollection = new ObservableCollection<Cliente>(_context.Cliente.ToList());
+        }
 
+
+        
         //Actualizamos todas las lista de todas las datagrid de cada una de las paginas
-        private void UpdateAll()
+        /*private void UpdateAll()
         {
             ProductosList = _context.Producto.ToList();
             ClientesList = _context.Cliente.ToList();
@@ -397,6 +418,7 @@ namespace Variedades
             PedidosCollection = new ObservableCollection<Pedido>(PagedImportacionTable.Pedidos); 
         }
         
+        */
         //Modulo de editar producto
         private void EditProduct (int id )
         {
@@ -651,6 +673,8 @@ namespace Variedades
             {
                 Console.WriteLine("Error al agregar en la base de datos");
             }
+
+            UpdateVentas(3);
         }
 
         // Botones de la paginacion de la tabla productos
@@ -771,14 +795,13 @@ namespace Variedades
         }
 
         //Modulo de borrado de venta
-        public void DeleteVenta(int id)
+        public void DeleteVenta(Venta _venta)
         {
-            //Buscamos el producto seleccionado y lo eliminamos de la base de datos
-            var venta = _context.Venta.Find(id);
-            _context.Venta.Remove(venta);
+            _venta.Especificaciones_producto.Clear();
+            _context.Venta.Remove(_venta);
 
             //Eliminar del observable collection
-            Ventas.Remove(venta);
+            Ventas.Remove(_venta);
 
             //Guardamos los cambios de la base de datos
             _context.SaveChanges();

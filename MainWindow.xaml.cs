@@ -83,22 +83,25 @@ namespace Variedades
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
                 case "ItemClients":
+                    MainViewModel.UpdateClients(3);
                     var PaginaClientes = new Views.PageClientes(MainViewModel);
                     ContentMain.Navigate(PaginaClientes);
                     break;
 
                 case "ItemProducts":
-                    //var PaginaProductos = new Views.PageProducts { DataContext = this.DataContext, ViewModel = MainViewModel };
+                    MainViewModel.UpdateProducts(3);
                     var PaginaProductos = new Views.PageProducts(MainViewModel);
                     ContentMain.Navigate(PaginaProductos);
                     break;
 
                 case "ItemSales":
+                    MainViewModel.UpdateVentas(3);
                     var PaginaVentas = new Views.PageVentas (MainViewModel);
                     ContentMain.Navigate(PaginaVentas);
                     break;
 
                 case "ItemImports":
+                    MainViewModel.UpdateImportacion(3);
                     var PaginaImportaciones = new Views.PageImportaciones(MainViewModel) ;
                     ContentMain.Navigate(PaginaImportaciones);
                     break;

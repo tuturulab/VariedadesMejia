@@ -118,6 +118,14 @@
     <Compile Include="Migrations\201903230617441_optional-datetime-pagos.Designer.cs">
       <DependentUpon>201903230617441_optional-datetime-pagos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903230639305_cascade-delete-products.cs" />
+    <Compile Include="Migrations\201903230639305_cascade-delete-products.Designer.cs">
+      <DependentUpon>201903230639305_cascade-delete-products.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903230844311_venta-pago-cascade-delete.cs" />
+    <Compile Include="Migrations\201903230844311_venta-pago-cascade-delete.Designer.cs">
+      <DependentUpon>201903230844311_venta-pago-cascade-delete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -281,6 +289,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903230617441_optional-datetime-pagos.resx">
       <DependentUpon>201903230617441_optional-datetime-pagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903230639305_cascade-delete-products.resx">
+      <DependentUpon>201903230639305_cascade-delete-products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903230844311_venta-pago-cascade-delete.resx">
+      <DependentUpon>201903230844311_venta-pago-cascade-delete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

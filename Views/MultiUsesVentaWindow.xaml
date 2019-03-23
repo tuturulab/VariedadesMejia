@@ -175,14 +175,61 @@
                 </DockPanel>
 
                 <DockPanel Height="200">
-                    <DataGrid Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    <DataGrid SelectedItem="{Binding SelectedEspecificacionProducto, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
                             
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Nombre, IsAsync=True}" Header="Nombre" Width="2*" ></DataGridTextColumn>
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Precio, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
-                            
+
+                            <DataGridTemplateColumn Header="Eliminar">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                        x:Name="btnBorrar"
+                                        Width="35"
+                                        Height="15"
+                                        FontSize="8"
+                                        Foreground="White"
+                                        Margin="2"
+                                        Content="Borrar"
+                                        Click="BtnBorrarClick"
+                                        BorderBrush="{x:Null}"
+                                            >
+
+
+                                            <!--    -->
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Background" Value="#dc4636" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#ad1e0f"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+
+                                                </Style>
+                                            </Button.Style>
+
+
+
+                                        </Button>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>

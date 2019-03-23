@@ -28,6 +28,10 @@ namespace Variedades.Models
         
         public virtual Cliente Cliente { get; set; }
         
+        [NotMapped]
+        public int CantidadProductos { get { return Especificaciones_producto.Count; } }
+
+
         public virtual ICollection<Pago> Pagos { get; set;  }
         public virtual ICollection<Especificacion_producto> Especificaciones_producto{ get; set; }
     }

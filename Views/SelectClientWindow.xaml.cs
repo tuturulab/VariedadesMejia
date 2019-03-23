@@ -36,6 +36,8 @@ namespace Variedades.Views
             //Restablecemos el valor a nulo 
             ViewModel.SelectedClientWindow = null;
             InitializeComponent();
+
+            ViewModel.FillClientesFullCollection();
         }
 
         private void BtnSelectClient(object sender, RoutedEventArgs e)
