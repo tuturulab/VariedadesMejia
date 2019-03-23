@@ -170,8 +170,9 @@
 
 
                 </DockPanel>
-
-                <DockPanel Height="170">
+                
+                <!--
+                                <DockPanel Height="170">
                     <DataGrid DataGridCell.GotFocus="DataGrid_CellGotFocus"  Visibility="Hidden" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
@@ -181,6 +182,41 @@
                             <DataGridTextColumn Binding="{Binding Precio_Costo, IsAsync=True}" Header="PrecioCosto" Width="2*" ></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Descripcion, IsAsync=True}" Header="Descripción" Width="3*" ></DataGridTextColumn>
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Proveedor, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
+
+                            <DataGridTemplateColumn x:Name="GarantiaColumn" Width="4*" Header="Garantía" SortMemberPath="NextRun">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <wpfx:DateTimePicker  Value="{Binding Garantia, 
+                                             UpdateSourceTrigger=PropertyChanged, 
+                                             Mode=TwoWay}" 
+                                            Format="Custom" 
+                                            FormatString="M/d/yyyy" 
+                                            Height="Auto" 
+                                            HorizontalAlignment="Left" 
+                                            Width="120"
+                                            IsEnabled="True" 
+                                            x:Name="dateTimePicker1" >
+                                        </wpfx:DateTimePicker>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+                -->
+                
+                <DockPanel Height="170">
+                    <DataGrid DataGridCell.GotFocus="DataGrid_CellGotFocus"  Visibility="Hidden" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True"  Binding="{Binding Numero, IsAsync=True}" Header="N#" Width="1*" ></DataGridTextColumn>
+                            <DataGridTextColumn x:Name="ImeiColumn" Binding="{Binding IMEI, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
+
+                            <DataGridTextColumn Binding="{Binding Proveedor_Producto.DetalleProveedor.Precio_Costo, IsAsync=True}" Header="PrecioCosto" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Descripcion, IsAsync=True}" Header="Descripción" Width="3*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Proveedor_Producto.DetalleProveedor.Proveedor.Empresa, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
 
                             <DataGridTemplateColumn x:Name="GarantiaColumn" Width="4*" Header="Garantía" SortMemberPath="NextRun">
                                 <DataGridTemplateColumn.CellTemplate>

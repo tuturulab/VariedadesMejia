@@ -43,6 +43,8 @@ namespace Variedades.Views
 
         ObservableCollection<EspecificacionClass> EspecificacionList;
 
+        ObservableCollection<Especificacion_producto> EspProductoSource;
+
         //Validación
         private void EventoPaginacion()
         {
@@ -56,11 +58,13 @@ namespace Variedades.Views
             DataContext = ViewModel;
 
             EspecificacionList = new ObservableCollection<EspecificacionClass>();
-            ProductosDatagrid.ItemsSource = EspecificacionList;
+            //ProductosDatagrid.ItemsSource = EspecificacionList;
 
             if(producto != null)
             {
                 _SelectedProduct = producto;
+                EspProductoSource = new ObservableCollection<Especificacion_producto>();
+                ProductosDatagrid.ItemsSource = _SelectedProduct.Especificaciones_producto.ToList();
                 SetAndChangeWindowAppareance();
             }
 
@@ -73,7 +77,7 @@ namespace Variedades.Views
             ModeloTextBox.Text = _SelectedProduct.Modelo;
             PrecioTextBox.Text = _SelectedProduct.Precio_Venta.ToString();
             ComboBoxCredito.SelectedIndex = _SelectedProduct.Credito_Disponible == 1 ? 0 : 1;
-            ComboBoxImei.SelectedIndex = _SelectedProduct.Imei_Disponible == 1 ? 0 : 1;
+            ComboBoxImei.SelectedIndex = _SelectedProduct.Imei_Disponible == 1 ? 1 : 0;
             ComboBoxGarantia.SelectedIndex = _SelectedProduct.Garantia_Disponible == 1 ? 0 : 1;
             CategoriaComboBox.SelectedIndex = GetIndexCategory(_SelectedProduct.Tipo_Producto);
 
@@ -92,7 +96,28 @@ namespace Variedades.Views
                 //EspecificacionList.Clear();
                 ChangeBetweenImei();
 
+                TextBoxProveedor.Text = _SelectedProduct.Especificaciones_producto.FirstOrDefault()
+                    .Proveedor_Producto.DetalleProveedor.Proveedor
+                    .Empresa;
 
+                TextBoxCantidad.Text = _SelectedProduct.NumeroDeEspecificacionesDisponibles.ToString();
+                TextBoxCantidad.IsEnabled = false;
+
+                AgregarATablaBtn.IsEnabled = false;
+                AgregarATablaBtn.Visibility = Visibility.Hidden;
+
+                /*_SelectedProduct.Especificaciones_producto.ToList().ForEach(esp =>
+                {
+                    EspecificacionList.Add(new EspecificacionClass {
+                        Numero = (int.Parse(TextBoxCantidad.Text) + 1),
+                        Imei = esp.IMEI,
+                        Garantia = esp.Garantia,
+                        Proveedor = esp.Proveedor_Producto.DetalleProveedor.Proveedor.Empresa,
+                        ProveedorId = esp.Proveedor_Producto.DetalleProveedor.Proveedor.IdProveedor,
+                        Descripcion = esp.Descripcion,
+                        Precio_Costo = esp.Proveedor_Producto.DetalleProveedor.Precio_Costo
+                    });
+                });*/
             }
         }
 
@@ -176,7 +201,6 @@ namespace Variedades.Views
             PanelImei.Visibility = Visibility.Visible;
             ProductosDatagrid.Visibility = Visibility.Visible;
             InsertarButton.Visibility = Visibility.Visible;
-            
         }
 
         //Si el usuario crea un Proveedor, abrimos la ventana y obtenemos el dato
