@@ -37,6 +37,8 @@ namespace Variedades
         public List<Producto> SearchProductList;
         public List<Venta> SearchVentaList;
         public List<Cliente> SearchClientList;
+
+  
     
         //Declaracion del evento para llamar a la paginacion de la pagina productos una vez se llena la observable productos
         //public event EventHandler EventPaginationProduct;
@@ -65,10 +67,11 @@ namespace Variedades
         }
 
         //Observable for ProductListCompleteFull List
-        public ObservableCollection<Producto> ProductosFullCollection
+        private ObservableCollection<Especificacion_producto> especificacion_Productos;
+        public ObservableCollection<Especificacion_producto> ProductosEspecificacionesCollection
         {
-            get { return Productos; }
-            set { Productos = value; NotifyPropertyChanged("ProductosCollection"); }
+            get { return especificacion_Productos; }
+            set { especificacion_Productos = value; NotifyPropertyChanged("ProductosEspecificacionesCollection"); }
         }
 
         private ObservableCollection<Proveedor> Proveedors;
@@ -138,6 +141,14 @@ namespace Variedades
             set { _SelectedClientWindow = value; NotifyPropertyChanged("SelectedClientWindow"); }
         }
 
+        //Selected Product in SelectProductWindow
+        private Especificacion_producto _SelectedProductWindow;
+        public Especificacion_producto SelectedProductWindow
+        {
+            get { return _SelectedProductWindow; }
+            set { _SelectedProductWindow = value; NotifyPropertyChanged("SelectedProductWindow"); }
+        }
+
         //Selected Proveedor in SelectProveedorWindow
         private Proveedor _SelectedProveedorWindow;
         public Proveedor SelectedProveedorWindow
@@ -175,11 +186,13 @@ namespace Variedades
             _context.SaveChanges();
         }
         
-        public void AddEspecificacionProducto (Especificacion_producto _especificacion_producto, Proveedor_producto _proveedor_Producto, DetalleProveedor _detalleProveedor)
+        //Agregar existencias a x producto
+        public void AddEspecificacionProducto (List<Especificacion_producto> _especificacion_producto)
         {
-            _context.Especificacion_producto.Add(_especificacion_producto);
-            _context.Proveedor_producto.Add(_proveedor_Producto);
-            _context.DetalleProveedor.Add(_detalleProveedor);
+            foreach (var i in _especificacion_producto)
+            {
+                _context.Especificacion_producto.Add(i);
+            }
 
             _context.SaveChanges();
         }
@@ -188,7 +201,6 @@ namespace Variedades
         //Agrega en la base de datos, el producto especificado
         public void AddProduct(Producto Product)
         {
-            Console.WriteLine(Product.Especificaciones_producto.Count);
 
             try
             {
@@ -316,7 +328,7 @@ namespace Variedades
         //Actualiza unicamente la tabla productos
         public void UpdateProducts(int NumberOfRecords, List<Producto> SearchProductList = null)
         {
-            ProductosFullCollection = new ObservableCollection<Producto>(_context.Producto.ToList());
+            
 
             if(SearchProductList !=null)
             {
@@ -338,6 +350,13 @@ namespace Variedades
         public int PageProductsNumber()
         {
             return PagedProductTable.PageIndex;
+        }
+
+        //Set the Especificaciones Product List 
+        public void FillEspecificacionesProducts()
+        {
+            //Obtener los productos que no se han vendido
+            especificacion_Productos = new ObservableCollection<Especificacion_producto>(_context.Especificacion_producto.Where(t => t.Venta == null).ToList());
         }
 
         //Obtener el maximo numero de paginas ()
@@ -382,8 +401,7 @@ namespace Variedades
             VentasList = _context.Venta.ToList();
             ImportacionList = _context.Pedido.ToList();
 
-            //Collecciones usadas en las ventanas donde saldra para seleccionar 
-            ProductosFullCollection = new ObservableCollection<Producto>(_context.Producto.ToList());
+            //Collecciones usadas en las ventanas donde saldra para seleccionar
             ClientesFullCollection = new ObservableCollection<Cliente>( _context.Cliente.ToList());
             
             //Paginacion
@@ -432,14 +450,13 @@ namespace Variedades
         }
 
         //Modulo de borrado
-        public void DeleteProduct(int id)
+        public void DeleteProduct(Producto _Producto)
         {
             //Buscamos el producto seleccionado y lo eliminamos de la base de datos
-            var producto = _context.Producto.Find(id);
-            _context.Producto.Remove(producto);
+            _context.Producto.Remove(_Producto);
             
             //Eliminar del observable collection
-            Productos.Remove(producto);
+            Productos.Remove(_Producto);
 
             //Eliminar de base de datos
             _context.SaveChanges();

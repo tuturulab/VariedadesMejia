@@ -18,7 +18,17 @@ namespace Variedades.Models
 
         public virtual Venta Venta { get; set; }
         public virtual Producto Producto { get; set; }
-        
+
+        //Variable para mostrar el nombre del producto al que fue asignado
+        [NotMapped]
+        public string Nombre { get { return Producto.Marca + " " + Producto.Modelo; } }
+
+        [NotMapped]
+        public double Precio { get { return Producto.Precio_Venta; } }
+
+        [NotMapped]
+        public string Tipo_Producto { get { return Producto.Tipo_Producto; } }
+
         [Required]
         public virtual Proveedor_producto Proveedor_Producto { get; set; }
     }

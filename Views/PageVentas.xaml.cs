@@ -164,7 +164,7 @@ namespace Variedades.Views
             }
             else
             {
-                ViewModel.DeleteProduct(int.Parse(IdVenta));
+                //ViewModel.DeleteProduct(int.Parse(IdVenta));
                 UtilidadPaginacion();
             }
 

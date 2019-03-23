@@ -98,6 +98,14 @@
     <Compile Include="Migrations\201903200349516_test.Designer.cs">
       <DependentUpon>201903200349516_test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903220420071_addImeiBool.cs" />
+    <Compile Include="Migrations\201903220420071_addImeiBool.Designer.cs">
+      <DependentUpon>201903220420071_addImeiBool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903220426080_Add-Garantia-Disponible.cs" />
+    <Compile Include="Migrations\201903220426080_Add-Garantia-Disponible.Designer.cs">
+      <DependentUpon>201903220426080_Add-Garantia-Disponible.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -120,6 +128,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\AddToExistentProductWindow.xaml.cs">
+      <DependentUpon>AddToExistentProductWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MultiUsesClienteWindow.xaml.cs">
       <DependentUpon>MultiUsesClienteWindow.xaml</DependentUpon>
     </Compile>
@@ -166,6 +177,10 @@
     <Page Include="Utils\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AddToExistentProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MultiUsesClienteWindow.xaml">
       <SubType>Designer</SubType>
@@ -239,6 +254,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903200349516_test.resx">
       <DependentUpon>201903200349516_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903220420071_addImeiBool.resx">
+      <DependentUpon>201903220420071_addImeiBool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903220426080_Add-Garantia-Disponible.resx">
+      <DependentUpon>201903220426080_Add-Garantia-Disponible.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

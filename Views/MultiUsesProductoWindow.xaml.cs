@@ -29,7 +29,7 @@ namespace Variedades.Views
         
         public PageViewModel ViewModel;
         public Proveedor _Proveedor;
-        private Producto _producto;
+        private Producto _Product;
 
         AddProveedorWindow addProveedorWindow;
         SelectProveedorWindow selectProveedorWindow;
@@ -53,19 +53,11 @@ namespace Variedades.Views
             InitializeComponent();
             ViewModel = viewModel;
             DataContext = ViewModel;
-            
 
             EspecificacionList = new ObservableCollection<EspecificacionClass>();
 
             ProductosDatagrid.ItemsSource = EspecificacionList;
 
-            //ImeiList = new ObservableCollection<ImeiClass>();
-
-            //Si el ID no es 0, entonces la ventana de agregar producto, pasara a ser de editar producto
-            //if (producto != null)
-            //{
-            //    SetProductoDatatoView(producto);
-            //}
         }
 
         public void OnComboBoxImeiSelect (object sender, EventArgs e)
@@ -90,10 +82,13 @@ namespace Variedades.Views
                 GarantiaColumn.Visibility = Visibility.Hidden;
             }
 
+            //Si se seleccionaron las dos opciones
+            if (ComboBoxGarantia.SelectedIndex > -1 && ComboBoxImei.SelectedIndex > -1)
+            {
+                EspecificacionList.Clear();
+                ChangeBetweenImei();
+            }
 
-            EspecificacionList.Clear();
-            ChangeBetweenImei();
-            
         }
 
         //Si el usuario Agrega elementos a la tabla
@@ -297,7 +292,7 @@ namespace Variedades.Views
                 //Si los campos fueron llenados
                 if (MarcaTextBox.Text != String.Empty && ModeloTextBox.Text != String.Empty && PrecioTextBox.Text != String.Empty && CategoriaComboBox.Text != String.Empty)
                 {
-                    var _Product = new Producto()
+                    _Product = new Producto()
                     {
                         Marca = MarcaTextBox.Text,
                         Modelo = ModeloTextBox.Text,
@@ -305,8 +300,15 @@ namespace Variedades.Views
                         Tipo_Producto = CategoriaComboBox.Text,
 
                     };
-
-                   
+                    
+                    if (ComboBoxCredito.Text == "Si")
+                    {
+                        _Product.Credito_Disponible = 1;
+                    }
+                    else
+                    {
+                        _Product.Credito_Disponible = 0;
+                    }
 
                     List<Especificacion_producto> ListaEspecificaciones = new List<Especificacion_producto>();
 
@@ -314,7 +316,7 @@ namespace Variedades.Views
                     {
                         var ElementoProducto = new Especificacion_producto();
 
-                        ElementoProducto.Producto = _producto;
+                        ElementoProducto.Producto = _Product;
                         ElementoProducto.Descripcion = i.Descripcion;
 
                         Console.WriteLine(i.Garantia.ToString());
@@ -360,6 +362,32 @@ namespace Variedades.Views
                     _Product.Especificaciones_producto = ListaEspecificaciones;
                     //Agregamos el producto finalmente con todos los datos que se pudieron obtener
                     ViewModel.AddProduct(_Product);
+                    EventoPaginacion();
+
+                    if (MessageBox.Show("Se ha ingresado correctamente el producto, ¿desea seguir ingresando productos?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        //Limpiamos los campos para volver a insertar
+                        TextBoxCantidad.Text = String.Empty;
+                        MarcaTextBox.Text = String.Empty;
+                        ModeloTextBox.Text = String.Empty;
+                        CategoriaComboBox.Text = String.Empty;
+                        PrecioTextBox.Text = String.Empty;
+                        ComboBoxImei.Text = String.Empty;
+                        ComboBoxGarantia.Text = String.Empty;
+                        ComboBoxCredito.Text = String.Empty;
+
+                        EspecificacionList.Clear();
+
+                        PanelImei.Visibility = Visibility.Hidden;
+                        ProductosDatagrid.Visibility = Visibility.Hidden;
+                        InsertarButton.Visibility = Visibility.Hidden;
+                    }
+
+
                 }
 
                 else

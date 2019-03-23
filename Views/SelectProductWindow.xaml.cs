@@ -21,12 +21,45 @@ namespace Variedades.Views
     {
         PageViewModel ViewModel;
 
+        //Agregar los productos a otra ventana al ser llamada
+        public event EventHandler UpdateProduct;
+
+        private void EventoPasarProducto()
+        {
+            UpdateProduct?.Invoke(this, EventArgs.Empty);
+        }
+
+
         public SelectProductWindow(PageViewModel viewModel)
         {
             InitializeComponent();
 
             ViewModel = viewModel;
             DataContext = ViewModel;
+
+            ViewModel.FillEspecificacionesProducts();
+        }
+
+        private void BtnSelectProduct(object sender, RoutedEventArgs e)
+        {
+            var idSelected = ViewModel.SelectedProductWindow;
+
+            if (idSelected == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor seleccione un producto de la lista, del que desea realizar una venta ",
+                                                 "Confirmation",
+                                                 MessageBoxButton.OK,
+                                                 MessageBoxImage.Exclamation);
+            }
+
+            else
+            {
+                //Pasamos el dato a la ventana que lo invoque
+                EventoPasarProducto();
+
+                this.Close();
+            }
+
         }
     }
 }
