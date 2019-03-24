@@ -125,7 +125,10 @@ namespace Variedades.Views
                                 EmailTextBox.Text = String.Empty;
                                 DomicilioTextBox.Text = String.Empty;
                                 TipoPagoComboBox.Text = String.Empty;
-
+                                DiaPago1TextBox.Text = String.Empty;
+                                DiaPago2TextBox.Text = String.Empty;
+                                CompañiaTextBox.Text = String.Empty;
+                                TelefonosList.Clear();
                             }
                         }
 
@@ -235,6 +238,9 @@ namespace Variedades.Views
             return null;
         }
 
+      
+
+      
     }
 
     //Clase para generar la lista de Telefonos

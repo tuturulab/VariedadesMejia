@@ -229,6 +229,7 @@ namespace Variedades.Views
                 }
 
             }
+            this.Close();
         }
 
         //Agregar Elementos a la tabla
