@@ -16,6 +16,7 @@ namespace Variedades.Utils
         public IList<Models.Cliente> Clientes { get; set; }
         public IList<Models.Venta> Ventas { get; set; }
         public IList<Models.Pedido> Pedidos { get; set; }
+        public IList<Models.DetalleProveedor> Importaciones { get; set; }
 
         public void SomeMethod<T>(IList<T> List, int RecordsPerPage)
         {
@@ -33,6 +34,11 @@ namespace Variedades.Utils
             else if (typeof(T) == typeof(Models.Pedido))
             {
                 var lista2 = List.Cast<Models.Pedido>().ToList();
+                SetPedidoPaging(lista2, RecordsPerPage);
+            }
+            else if (typeof(T) == typeof(Models.DetalleProveedor))
+            {
+                var lista2 = List.Cast<Models.DetalleProveedor>().ToList();
                 SetImportacionPaging(lista2, RecordsPerPage);
             }
             else
@@ -64,7 +70,17 @@ namespace Variedades.Utils
 
         }
 
-        public void SetImportacionPaging(IList<Models.Pedido> ListToPage, int RecordsPerPage)
+        public void SetImportacionPaging(IList<Models.DetalleProveedor> ListToPage, int RecordsPerPage)
+        {
+            int PageGroup = PageIndex * RecordsPerPage;
+
+            IList<Models.DetalleProveedor> PagedList = new List<Models.DetalleProveedor>();
+
+            Importaciones = ListToPage.Skip(PageGroup).Take(RecordsPerPage).ToList();
+
+        }
+
+        public void SetPedidoPaging(IList<Models.Pedido> ListToPage, int RecordsPerPage)
         {
             int PageGroup = PageIndex * RecordsPerPage;
 

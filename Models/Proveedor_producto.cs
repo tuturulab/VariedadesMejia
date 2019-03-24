@@ -8,14 +8,18 @@ namespace Variedades.Models
     [Table("Proveedor_producto")]
     public partial class Proveedor_producto
     {
+        public Proveedor_producto()
+        {
+            this.Especificacion_Productos = new HashSet<Especificacion_producto>();
+        }
+
         [Key]
         public int Idproveedor_producto { get; set; }
         public int Cantidad_Recibida { get; set; }
         public string Numero_Seguimiento { get; set; }
 
-        [Required]
         public virtual DetalleProveedor DetalleProveedor { get; set; }
 
-        public virtual Especificacion_producto Especificacion_Producto { get; set; }
+        public virtual ICollection<Especificacion_producto> Especificacion_Productos { get; set; }
     }
 }

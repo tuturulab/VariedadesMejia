@@ -189,13 +189,16 @@ namespace Variedades.Views
                         Proveedor = ViewModel.GetProveedor(i.ProveedorId),
                     };
 
+                    var ListProductos = new List<Especificacion_producto>();
+                    ListProductos.Add(ElementoProducto);
+
                     var TablaSeguimiento = new Proveedor_producto()
                     {
-                        Especificacion_Producto = ElementoProducto,
+                        Especificacion_Productos = ListProductos,
                         DetalleProveedor = ProveedorAsignado,
                     };
 
-                    ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
+                    //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
 
                     ElementoProducto.Proveedor_Producto = TablaSeguimiento;
                     ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;

@@ -15,14 +15,15 @@ namespace Variedades.Models
 
         [Key]
         public int IdPedido { get; set; }
-        public DateTime Fecha_Pedido { get; set; }
+        public DateTime? Fecha_Pedido { get; set; }
 
         public DateTime? Fecha_Entrega { get; set; }
 
         public virtual Cliente Cliente { get; set; }
         public virtual ICollection<Especificacion_pedido> Especificaciones_pedido { get; set; }
 
-       
+        [NotMapped]
+        public string NombreCliente { get { return Cliente.Nombre; } }
         
     }
 }

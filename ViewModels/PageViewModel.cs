@@ -24,22 +24,23 @@ namespace Variedades
         static Paging PagedClientTable = new Paging();
         static Paging PagedVentaTable = new Paging();
         static Paging PagedImportacionTable = new Paging();
+        static Paging PagedPedidoTable = new Paging();
 
 
         //Lists Methods
         public List<Producto> ProductosList;
         public List<Cliente> ClientesList;
         public List<Venta> VentasList;
-        public List<Pedido> ImportacionList;
-
-        
+        public List<DetalleProveedor> ImportacionList;
         public List<Pedido> PedidosList;
+
+        //Lists for searchs
         public List<Producto> SearchProductList;
         public List<Venta> SearchVentaList;
         public List<Cliente> SearchClientList;
+        public List<Pedido> SearchPedidoList;
 
-  
-    
+        
         //Declaracion del evento para llamar a la paginacion de la pagina productos una vez se llena la observable productos
         //public event EventHandler EventPaginationProduct;
 
@@ -85,12 +86,20 @@ namespace Variedades
 
 
 
-        //Observable for ImportacionList
+        //Observable for PedidosList
         private ObservableCollection<Pedido> Pedidos;
         public ObservableCollection<Pedido> PedidosCollection
         {
             get { return Pedidos; }
             set { Pedidos = value; NotifyPropertyChanged("PedidosCollection"); }
+        }
+
+        //Observable for ImportacionList
+        private ObservableCollection<DetalleProveedor> Importaciones;
+        public ObservableCollection<DetalleProveedor> ImportacionesCollection
+        {
+            get { return Importaciones; }
+            set { Importaciones = value; NotifyPropertyChanged("ImportacionesCollection"); }
         }
 
 
@@ -132,7 +141,14 @@ namespace Variedades
             get { return _SelectedVenta; }
             set { _SelectedVenta = value; NotifyPropertyChanged("SelectedVenta"); }
         }
-        
+
+        private Especificacion_pedido _SelectedEspecificacion_Pedido;
+        public Especificacion_pedido SelectedEspecificacionPedido
+        {
+            get { return _SelectedEspecificacion_Pedido; }
+            set { _SelectedEspecificacion_Pedido = value; NotifyPropertyChanged("SelectedEspecificacionPedido"); }
+        }
+
         private TelefonosAddList _SelectedTelefonoAdd;
         public TelefonosAddList SelectedTelefonoAdd
         {
@@ -205,9 +221,16 @@ namespace Variedades
         {
             foreach (var i in _especificacion_producto)
             {
+                Console.WriteLine(i.IdEspecificaciones_Producto);
                 _context.Especificacion_producto.Add(i);
             }
 
+            _context.SaveChanges();
+        }
+
+        public void AddSingleEspecificacionProducto (Especificacion_producto especificacion)
+        {
+            _context.Especificacion_producto.Add(especificacion);
             _context.SaveChanges();
         }
 
@@ -568,8 +591,6 @@ namespace Variedades
         //Actualiza unicamente la tabla productos
         public void UpdateClients(int NumberOfRecords, List<Cliente> SearchClientList = null)
         {
-
-
             if (SearchClientList != null)
             {
                 PagedClientTable.SomeMethod(SearchClientList, NumberOfRecords);
@@ -738,8 +759,6 @@ namespace Variedades
         //Actualiza unicamente la tabla Ventas
         public void UpdateVentas(int NumberOfRecords, List<Venta> SearchVentaList = null)
         { 
-        
-
             //Si hay algo en la busqueda la mostrara
             if (SearchVentaList != null)
             {
@@ -749,7 +768,6 @@ namespace Variedades
             }
             else
             { 
-          
                 //Consulta
                 VentasList = _context.Venta.ToList();
 
@@ -852,7 +870,7 @@ namespace Variedades
         public void UpdateImportacion(int NumberOfRecords)
         {
             //Consulta
-            ImportacionList = _context.Pedido.ToList();
+            ImportacionList = _context.DetalleProveedor.ToList();
 
             //Paginacion
             PagedImportacionTable.SomeMethod(ImportacionList, NumberOfRecords);
@@ -910,13 +928,171 @@ namespace Variedades
             UpdateImportacion(3);
         }
 
+        /*
+       * 
+       *  Métodos de la Página Pedidos
+       * 
+      */
+
+        //Agrega en la base de datos, el Pedido especificado
+        public void AddPedido(Pedido _Pedido)
+        {
+            try
+            {
+                _context.Pedido.Add(_Pedido);
+                _context.SaveChanges();
+                UpdatePedido(3);
+            }
+            catch
+            {
+                Console.WriteLine("Error al guardar en la base de datos");
+            }
+           
+        }
+
+        // Botones de la paginacion de la tabla productos
+        public void NextPedido(int NumberOfRecords)
+        {
+            PagedImportacionTable.Next(PedidosList, NumberOfRecords);
+            UpdatePedido(NumberOfRecords);
+        }
+
+        public void PreviousPedido(int NumberOfRecords)
+        {
+            PagedImportacionTable.Previous(PedidosList, NumberOfRecords);
+            UpdatePedido(NumberOfRecords);
+        }
+
+        public void FirstPedido(int NumberOfRecords)
+        {
+            PagedImportacionTable.First(PedidosList, NumberOfRecords);
+            UpdatePedido(NumberOfRecords);
+        }
+
+        public void LastPedido(int NumberOfRecords)
+        {
+            PagedImportacionTable.Last(PedidosList, NumberOfRecords);
+            UpdatePedido(NumberOfRecords);
+        }
+
+        //Actualiza unicamente la tabla Ventas
+        public void UpdatePedido(int NumberOfRecords, List<Pedido> SearchPedidoList = null)
+        {
+            //Si hay algo en la busqueda la mostrara
+            if (SearchPedidoList != null)
+            {
+                PagedPedidoTable.SomeMethod(SearchPedidoList, NumberOfRecords);
+                PedidosCollection = new ObservableCollection<Pedido>(PagedPedidoTable.Pedidos);
+
+            }
+            else
+            {
+                //Consulta
+                PedidosList = _context.Pedido.ToList();
+
+                //Paginacion
+                PagedPedidoTable.SomeMethod(PedidosList, NumberOfRecords);
+                PedidosCollection = new ObservableCollection<Pedido>(PagedPedidoTable.Pedidos);
+            }
+        }
+
+        //Obtener la pagina actual ()
+        public int PagePedidosNumber()
+        {
+            return PagedPedidoTable.PageIndex;
+        }
+
+        //Obtener el maximo numero de paginas ()
+        public int PagePedidosNumberMax()
+        {
+            int count = PedidosList.Count;
+            //Obtenemos el total de calculos
+            float calculo = (float)count / 3;
+
+            //Si es decimal le sumamos 1
+            if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
+            {
+                return (int)calculo;
+            }
+
+            else
+            {
+                return (int)calculo + 1;
+            }
+        }
+
+
+
+        //Modulo de editar Pedido
+        private void EditPedido(int id)
+        {
+            //var producto = _context.Producto.Find(id);
+
+        }
+
+        //Modulo de borrado de Pedido
+        public void DeletePedido(int id)
+        {
+            //Buscamos el producto seleccionado y lo eliminamos de la base de datos
+            var venta = _context.Pedido.Find(id);
+            _context.Pedido.Remove(venta);
+
+            //Eliminar del observable collection
+            //Pedido.Remove(venta);
+
+            //Guardamos los cambios de la base de datos
+            _context.SaveChanges();
+
+            //Actualizamos el datagrid
+            UpdatePedido(3);
+        }
+
+        //Metodo de busqueda en la base de datos 
+        public void SearchPedido(string filtro)
+        {
+
+            if (filtro != string.Empty)
+            {
+
+                SearchPedidoList = PedidosList.Where(s => s.Cliente.Nombre.ToLower().Contains(filtro.ToLower() )).ToList();
+
+                UpdatePedido(3,SearchPedidoList);
+            }
+            else
+            {
+                SearchPedidoList = null;
+                UpdatePedido(3);
+            }
+
+        }
 
         /*
          * 
          * Metodos Proveedor
          *
         */
-        
+
+        public void AddProveedorProducto(Proveedor_producto proveedor)
+        {
+            _context.Proveedor_producto.Add(proveedor);
+            _context.SaveChanges();
+        }
+
+        public void AddEspecificacionPedido (List<Especificacion_pedido> especificacions)
+        {
+            foreach (var i in especificacions)
+            {
+                _context.Especificacion_pedido.Add(i);
+            }
+            _context.SaveChanges();
+        }
+
+        public void AddDetalleProveedor (DetalleProveedor DetalleProveedor)
+        {
+            _context.DetalleProveedor.Add(DetalleProveedor);
+            _context.SaveChanges();
+        }
+
         //Se asegura de rellenar la lista de Proveedores actual
         public void FillProveedorFullList()
         {

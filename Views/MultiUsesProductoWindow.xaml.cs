@@ -91,8 +91,7 @@ namespace Variedades.Views
             {
                 //EspecificacionList.Clear();
                 ChangeBetweenImei();
-
-
+                
             }
         }
 
@@ -365,6 +364,8 @@ namespace Variedades.Views
                         _Product.Credito_Disponible = 0;
                     }
 
+                    ViewModel.AddProduct(_Product);
+
                     List<Especificacion_producto> ListaEspecificaciones = new List<Especificacion_producto>();
 
                     foreach (var i in EspecificacionList)
@@ -374,8 +375,6 @@ namespace Variedades.Views
                         ElementoProducto.Producto = _Product;
                         ElementoProducto.Descripcion = i.Descripcion;
 
-                        Console.WriteLine(i.Garantia.ToString());
-
                         var ProveedorAsignado = new DetalleProveedor()
                         {
                             Garantia_Original = i.Garantia,
@@ -383,13 +382,16 @@ namespace Variedades.Views
                             Proveedor = ViewModel.GetProveedor(i.ProveedorId),
                         };
 
+                        var ListProductos = new List<Especificacion_producto>();
+                        ListProductos.Add(ElementoProducto);
+
                         var TablaSeguimiento = new Proveedor_producto()
                         {
-                            Especificacion_Producto = ElementoProducto,
+                            Especificacion_Productos = ListProductos,
                             DetalleProveedor = ProveedorAsignado,
                         };
 
-                        ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
+                        //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
 
                         ElementoProducto.Proveedor_Producto = TablaSeguimiento;
                         ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
@@ -406,12 +408,11 @@ namespace Variedades.Views
                         }
 
                         ListaEspecificaciones.Add(ElementoProducto);
-                        
-                    }
 
-                    _Product.Especificaciones_producto = ListaEspecificaciones;
-                    //Agregamos el producto finalmente con todos los datos que se pudieron obtener
-                    ViewModel.AddProduct(_Product);
+                    }
+                    //Agregamos existencias al producto
+                    ViewModel.AddEspecificacionProducto(ListaEspecificaciones);
+
                     EventoPaginacion();
 
                     if (MessageBox.Show("Se ha ingresado correctamente el producto, ¿desea seguir ingresando productos?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)

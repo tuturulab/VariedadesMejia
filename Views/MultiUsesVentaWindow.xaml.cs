@@ -145,7 +145,7 @@ namespace Variedades.Views
                                         Pagos.Add(pago);
                                     }
 
-                                    venta.Pagos = Pagos;
+                                    //venta.Pagos = Pagos;
                                 }
                             }
                             //Venta al contado
@@ -305,7 +305,7 @@ namespace Variedades.Views
 
         private void BtnSelectClient(object sender, RoutedEventArgs e)
         {
-            //Iniciamos la ventana de crear un producto
+            //Iniciamos la ventana de crear un cliente
             window = new SelectClientWindow(ViewModel);
 
             //Subscribimos al evento

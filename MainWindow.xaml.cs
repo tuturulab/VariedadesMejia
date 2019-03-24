@@ -39,7 +39,7 @@ namespace Variedades
         private void ToggleMenu(object sender, RoutedEventArgs e)
         {
             //Codigo para generar un diagrama de Db para tener una foto 
-             using (var ctx = new Models.DbmejiaEntities())
+            using (var ctx = new Models.DbmejiaEntities())
             {
                 using (var writer = new XmlTextWriter("./Model.edmx", Encoding.Default))
                 {
@@ -105,6 +105,13 @@ namespace Variedades
                     var PaginaImportaciones = new Views.PageImportaciones(MainViewModel) ;
                     ContentMain.Navigate(PaginaImportaciones);
                     break;
+
+                case "ItemPedidos":
+                    MainViewModel.UpdatePedido(3);
+                    var PaginaPedidos = new Views.PagePedidos(MainViewModel);
+                    ContentMain.Navigate(PaginaPedidos);
+                    break;
+
 
                 case "ItemStats":
 

@@ -5,31 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using Variedades.Utils;
 
 namespace Variedades.Views
 {
     /// <summary>
-    /// Interaction logic for PageProducts.xaml
+    /// Lógica de interacción para PagePedidos.xaml
     /// </summary>
-    public partial class PageVentas : Page
+    public partial class PagePedidos : Page
     {
         public PageViewModel ViewModel;
         static Paging PagedTable = new Paging();
-        MultiUsesVentaWindow window;
+        MultiUsesPedidoWindow window;
 
         //Numeros a mostrar de pagina
         public int NumeroPaginaActual;
         public int NumeroPaginaMax;
 
-        public PageVentas(PageViewModel pageViewModel)
+        public PagePedidos(PageViewModel pageViewModel)
         {
             InitializeComponent();
 
             //Obtener el viewmodel de la ventana principal y lo incializamos
             ViewModel = pageViewModel;
             DataContext = ViewModel;
-            
+
             UtilidadPaginacion();
         }
 
@@ -39,43 +46,60 @@ namespace Variedades.Views
         }
 
         //Botones de edicion
-        private void BtnInsertarVenta(object sender, RoutedEventArgs e)
+        private void BtnInsertarPedido(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            window = new MultiUsesVentaWindow(ViewModel);
+            window = new MultiUsesPedidoWindow(ViewModel);
 
             //Subscribimos al evento
             window.UpdatePagination += new EventHandler(EventoPaginacion);
             window.Show();
         }
 
-        private void BtnEditarVenta(object sender, RoutedEventArgs e)
+        private void BtnEditarPedido(object sender, RoutedEventArgs e)
         {
-            
+            //Obtenemos el Id del Producto seleccionado 
+            /*object item = product_table.SelectedItem;
+            string IdProducto = (product_table.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
+            string Nombre = (product_table.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text + " " +
+                (product_table.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;*/
+
+            //var producto = ViewModel.SelectedProduct;
+
+            //Iniciamos la ventana de crear un producto
+            //window = new MultiUsesProductoWindow(producto) { DataContext = this.DataContext };
+
+
+
+            //window.UpdatePagination += new EventHandler(EventoPaginacion);
+
+            //window.Show();
+
+
         }
 
 
         private void BtnNextClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.NextVenta(3);
+            ViewModel.NextPedido(3);
             UtilidadPaginacion();
         }
 
         private void BtnPreviousClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.PreviousVenta(3);
+            ViewModel.PreviousPedido(3);
             UtilidadPaginacion();
         }
 
         private void BtnFirstClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.FirstVenta(3);
+            ViewModel.FirstPedido(3);
             UtilidadPaginacion();
         }
 
         private void BtnLastClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.LastVenta(3);
+            ViewModel.LastPedido(3);
             UtilidadPaginacion();
         }
 
@@ -85,14 +109,14 @@ namespace Variedades.Views
         */
         private void UtilidadPaginacion()
         {
-            NumeroPaginaActual = (ViewModel.PageVentasNumber() + 1);
-            NumeroPaginaMax = (ViewModel.PageVentasNumberMax());
+            NumeroPaginaActual = (ViewModel.PagePedidosNumber() + 1);
+            NumeroPaginaMax = (ViewModel.PagePedidosNumberMax());
 
 
             //Hotfix si se elimina el ultimo registro y se queda fuera de tabla
             if (NumeroPaginaActual > NumeroPaginaMax && NumeroPaginaMax != 0)
             {
-                ViewModel.PreviousVenta(3);
+                ViewModel.PreviousPedido(3);
                 NumeroPaginaActual--;
             }
 
@@ -134,35 +158,47 @@ namespace Variedades.Views
         }
 
 
-        private void BtnBorrarClick(object sender, RoutedEventArgs e)
+        private void BtnBorrarPedido(object sender, RoutedEventArgs e)
         {
-            var venta = ViewModel.SelectedVenta;
+            //Obtenemos el Id del Cliente seleccionado 
+
+
+            object item = client_table.SelectedItem;
+            string IdCliente = (client_table.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
+            string Nombre = (client_table.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text + " " +
+                (client_table.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
 
             //Pestaña de confirmación
 
-            if (MessageBox.Show(" Estás seguro que deseas eliminar la venta: del dia " + venta.Fecha_Venta + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (MessageBox.Show(" Estás seguro que deseas eliminar el pedido: " + Nombre + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
                 //
             }
             else
             {
-                ViewModel.DeleteVenta(venta);
+                ViewModel.DeletePedido(int.Parse(IdCliente));
                 UtilidadPaginacion();
             }
 
+
         }
 
-        private void VentaSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+
+        //Barra de Busqueda
+
+        private void PedidoSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string FiltradoVenta = VentaSearchBox.Text;
-            if (FiltradoVenta == string.Empty)
+            string vacio = PedidosSearchBox.Text;
+
+            if (vacio == string.Empty)
             {
-                ViewModel.SearchVenta(FiltradoVenta);
+                ViewModel.SearchPedido(vacio);
             }
             else
             {
-                ViewModel.SearchVenta(FiltradoVenta);
+                ViewModel.SearchPedido(vacio);
             }
         }
     }
 }
+

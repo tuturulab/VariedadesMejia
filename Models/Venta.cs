@@ -16,7 +16,7 @@ namespace Variedades.Models
 
         [Key]
         public int IdVenta { get; set; }
-        public System.DateTime Fecha_Venta { get; set; }
+        public DateTime? Fecha_Venta { get; set; }
         public string Orden_Pagare { get; set; }
         public string Tipo_Venta { get; set; }
 
