@@ -221,7 +221,6 @@ namespace Variedades
         {
             foreach (var i in _especificacion_producto)
             {
-                Console.WriteLine(i.IdEspecificaciones_Producto);
                 _context.Especificacion_producto.Add(i);
             }
 
