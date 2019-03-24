@@ -135,6 +135,14 @@ namespace Variedades
             set { _SelectedProduct = value; NotifyPropertyChanged("SelectedProduct"); }
         }
 
+        private Pedido _SelectedPedido;
+        public Pedido SelectedPedido
+        {
+            get { return _SelectedPedido; }
+            set { _SelectedPedido = value; NotifyPropertyChanged("SelectedPedido"); }
+        }
+
+
         private Venta _SelectedVenta;
         public Venta SelectedVenta
         {
@@ -952,25 +960,25 @@ namespace Variedades
         // Botones de la paginacion de la tabla productos
         public void NextPedido(int NumberOfRecords)
         {
-            PagedImportacionTable.Next(PedidosList, NumberOfRecords);
+            PagedPedidoTable.Next(PedidosList, NumberOfRecords);
             UpdatePedido(NumberOfRecords);
         }
 
         public void PreviousPedido(int NumberOfRecords)
         {
-            PagedImportacionTable.Previous(PedidosList, NumberOfRecords);
+            PagedPedidoTable.Previous(PedidosList, NumberOfRecords);
             UpdatePedido(NumberOfRecords);
         }
 
         public void FirstPedido(int NumberOfRecords)
         {
-            PagedImportacionTable.First(PedidosList, NumberOfRecords);
+            PagedPedidoTable.First(PedidosList, NumberOfRecords);
             UpdatePedido(NumberOfRecords);
         }
 
         public void LastPedido(int NumberOfRecords)
         {
-            PagedImportacionTable.Last(PedidosList, NumberOfRecords);
+            PagedPedidoTable.Last(PedidosList, NumberOfRecords);
             UpdatePedido(NumberOfRecords);
         }
 
@@ -1030,11 +1038,11 @@ namespace Variedades
         }
 
         //Modulo de borrado de Pedido
-        public void DeletePedido(int id)
+        public void DeletePedido(Pedido pedido)
         {
-            //Buscamos el producto seleccionado y lo eliminamos de la base de datos
-            var venta = _context.Pedido.Find(id);
-            _context.Pedido.Remove(venta);
+            //Buscamos el pedido seleccionado y lo eliminamos de la base de datos
+
+            _context.Pedido.Remove(pedido);
 
             //Eliminar del observable collection
             //Pedido.Remove(venta);
@@ -1053,7 +1061,7 @@ namespace Variedades
             if (filtro != string.Empty)
             {
 
-                SearchPedidoList = PedidosList.Where(s => s.Cliente.Nombre.ToLower().Contains(filtro.ToLower() )).ToList();
+                SearchPedidoList = PedidosList.Where(s => s.cliente.Nombre.ToLower().Contains(filtro.ToLower() )).ToList();
 
                 UpdatePedido(3,SearchPedidoList);
             }

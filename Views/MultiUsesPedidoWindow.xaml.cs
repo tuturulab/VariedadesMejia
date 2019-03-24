@@ -97,7 +97,7 @@ namespace Variedades.Views
                     //Finalmente Agregamos
                     Pedido pedido = new Pedido()
                     {
-                        Cliente = cliente,
+                        cliente = cliente,
                         Fecha_Pedido = DateTime.Now,
                     };
 
@@ -122,6 +122,21 @@ namespace Variedades.Views
                     ViewModel.AddPedido(pedido);
                     ViewModel.AddEspecificacionPedido(ListaProductos);
                     EventoPaginacion();
+
+                    if (MessageBox.Show("Se ha ingresado correctamente el pedido, ¿desea seguir ingresando pedidos?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        ClienteTextBox.Text = String.Empty;
+                        cliente = null;
+                        CategoriaComboBox.Text = String.Empty;
+
+
+                        EspecificacionList.Clear();
+                    }
+
                 }
             }
         }

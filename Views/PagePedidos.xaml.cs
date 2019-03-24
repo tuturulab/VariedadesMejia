@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Variedades.Models;
 using Variedades.Utils;
 
 namespace Variedades.Views
@@ -162,21 +163,17 @@ namespace Variedades.Views
         {
             //Obtenemos el Id del Cliente seleccionado 
 
-
-            object item = client_table.SelectedItem;
-            string IdCliente = (client_table.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
-            string Nombre = (client_table.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text + " " +
-                (client_table.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
+            Pedido pedido = ViewModel.SelectedPedido;
 
             //Pestaña de confirmación
 
-            if (MessageBox.Show(" Estás seguro que deseas eliminar el pedido: " + Nombre + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (MessageBox.Show(" Estás seguro que deseas eliminar el pedido Orden Pagare : " + pedido.IdPedido.ToString() + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
                 //
             }
             else
             {
-                ViewModel.DeletePedido(int.Parse(IdCliente));
+                ViewModel.DeletePedido(pedido);
                 UtilidadPaginacion();
             }
 

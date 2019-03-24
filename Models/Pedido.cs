@@ -19,11 +19,13 @@ namespace Variedades.Models
 
         public DateTime? Fecha_Entrega { get; set; }
 
-        public virtual Cliente Cliente { get; set; }
+        public virtual Cliente cliente { get; set; }
         public virtual ICollection<Especificacion_pedido> Especificaciones_pedido { get; set; }
 
         [NotMapped]
-        public string NombreCliente { get { return Cliente.Nombre; } }
+        public string NombreCliente { get { if (this.cliente != null) return this.cliente.Nombre; else return "Eliminado";  } }
         
+        [NotMapped]
+        public int NumeroProductos { get { return this.Especificaciones_pedido.Count; }   }
     }
 }
