@@ -14,15 +14,15 @@
             <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#333238">
-            <TextBlock VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Sistema Variedades"/>
+        <Grid Grid.Row="0" Background="{StaticResource ColorPrimario}">
+            <TextBlock VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Sistema Variedades Mejía"/>
         </Grid>
-        <Grid HorizontalAlignment="Center" Grid.Row="1">
+        <Grid Width="360px" HorizontalAlignment="Center" Grid.Row="1">
             <StackPanel Margin="0,40,0,0">
-                <TextBlock FontSize="30" Text="Usuario"/>
-                <TextBox VerticalAlignment="Center" FontSize="20" Width="150" Height="30" Grid.Row="1" Name="UserTextBox" Margin="5"/>
-                <TextBlock Margin="0,20,0,0" FontSize="30" Text="Contraseña"/>
-                <PasswordBox VerticalAlignment="Center" FontSize="15" Width="150" Height="30" Grid.Row="1" Name="PassTextBox" Margin="5"/>
+                <TextBlock FontSize="24" Text="Usuario"/>
+                <TextBox VerticalAlignment="Center" FontSize="20" Width="350" Height="30" Grid.Row="1" Name="UserTextBox" Margin="5"/>
+                <TextBlock Margin="0,20,0,0" FontSize="24" Text="Contraseña"/>
+                <PasswordBox VerticalAlignment="Center" FontSize="15" Width="350" Height="30" Grid.Row="1" Name="PassTextBox" Margin="5"/>
                 <Button Click="LoginButton" Margin="0,20,0,0" Width="100px" Height="50px" Grid.Row="2" Content="Iniciar sesión" />
             </StackPanel>
 
