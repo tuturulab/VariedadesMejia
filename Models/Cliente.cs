@@ -22,7 +22,8 @@ namespace Variedades.Models
         public string Domicilio { get; set; }
         public string Tipo_Pago { get; set; }
         public string Compania { get; set; }
-
+        public string Cedula { get; set; }
+        
         public int Fecha_Pago_1 { get; set;  }
         public int Fecha_Pago_2 { get; set; }
 

@@ -245,7 +245,7 @@ namespace Variedades.Views
                     for (int i = 0; i < int.Parse(TextBoxCantidad.Text); i++)
                     {
                         n++;
-                        EspecificacionList.Add(new EspecificacionClass() { Numero = (n), Descripcion = " ", Imei = " ", Proveedor = _Proveedor.Empresa, ProveedorId = _Proveedor.IdProveedor });
+                        EspecificacionList.Add(new EspecificacionClass() {  Descripcion = " ", Imei = " ", Proveedor = _Proveedor.Empresa, ProveedorId = _Proveedor.IdProveedor });
                     }
 
 

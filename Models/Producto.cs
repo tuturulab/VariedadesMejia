@@ -21,6 +21,9 @@ namespace Variedades.Models
         public string Tipo_Producto { get; set; }
         public string Modelo { get; set; }
 
+        //Garantia numero de meses
+        public int Garantia { get; set; }
+
         //Proceso almacenado para saber si un producto tiene acceso a crédito a la hora de venta, o si este tiene imei, puesto que hay tablets que tienen o no imei
         public int Credito_Disponible { get; set; }
         public int Imei_Disponible { get; set; }
