@@ -7,13 +7,13 @@ namespace Variedades.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class cascadedeletepedido : IMigrationMetadata
+    public sealed partial class Initialv2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(cascadedeletepedido));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initialv2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903240145309_cascade-delete-pedido"; }
+            get { return "201903262029387_Initial-v2"; }
         }
         
         string IMigrationMetadata.Source

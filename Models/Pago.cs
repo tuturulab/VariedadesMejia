@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Variedades.Models
 {
-    [Table("Pago")]
     public partial class Pago
     {   
         [Key]
