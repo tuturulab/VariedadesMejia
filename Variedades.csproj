@@ -90,17 +90,9 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903232355524_initial.cs" />
-    <Compile Include="Migrations\201903232355524_initial.Designer.cs">
-      <DependentUpon>201903232355524_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903240124027_client.cs" />
-    <Compile Include="Migrations\201903240124027_client.Designer.cs">
-      <DependentUpon>201903240124027_client.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903240145309_cascade-delete-pedido.cs" />
-    <Compile Include="Migrations\201903240145309_cascade-delete-pedido.Designer.cs">
-      <DependentUpon>201903240145309_cascade-delete-pedido.cs</DependentUpon>
+    <Compile Include="Migrations\201903262029387_Initial-v2.cs" />
+    <Compile Include="Migrations\201903262029387_Initial-v2.Designer.cs">
+      <DependentUpon>201903262029387_Initial-v2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -259,14 +251,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201903232355524_initial.resx">
-      <DependentUpon>201903232355524_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903240124027_client.resx">
-      <DependentUpon>201903240124027_client.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903240145309_cascade-delete-pedido.resx">
-      <DependentUpon>201903240145309_cascade-delete-pedido.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903262029387_Initial-v2.resx">
+      <DependentUpon>201903262029387_Initial-v2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

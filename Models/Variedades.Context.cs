@@ -25,6 +25,10 @@ namespace Variedades.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            //Disable pluralization convention
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
             //Borrado en cascada
             modelBuilder.Entity<Producto>()
                 .HasMany(c => c.Especificaciones_producto)

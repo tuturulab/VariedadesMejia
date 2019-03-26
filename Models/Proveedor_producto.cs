@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Variedades.Models
 {
-    [Table("Proveedor_producto")]
     public partial class Proveedor_producto
     {
         public Proveedor_producto()

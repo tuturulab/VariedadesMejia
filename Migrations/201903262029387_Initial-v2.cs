@@ -3,7 +3,7 @@ namespace Variedades.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class Initialv2 : DbMigration
     {
         public override void Up()
         {
@@ -29,11 +29,11 @@ namespace Variedades.Migrations
                         IdPedido = c.Int(nullable: false, identity: true),
                         Fecha_Pedido = c.DateTime(),
                         Fecha_Entrega = c.DateTime(),
-                        Cliente_IdCliente = c.Int(),
+                        cliente_IdCliente = c.Int(),
                     })
                 .PrimaryKey(t => t.IdPedido)
-                .ForeignKey("dbo.Cliente", t => t.Cliente_IdCliente, cascadeDelete: true)
-                .Index(t => t.Cliente_IdCliente);
+                .ForeignKey("dbo.Cliente", t => t.cliente_IdCliente, cascadeDelete: true)
+                .Index(t => t.cliente_IdCliente);
             
             CreateTable(
                 "dbo.Especificacion_pedido",
@@ -50,7 +50,7 @@ namespace Variedades.Migrations
                     })
                 .PrimaryKey(t => t.IdEspecificacion_Pedido)
                 .ForeignKey("dbo.DetalleProveedor", t => t.DetalleProveedor_IdDetalleProveedor)
-                .ForeignKey("dbo.Pedido", t => t.Pedido_IdPedido)
+                .ForeignKey("dbo.Pedido", t => t.Pedido_IdPedido, cascadeDelete: true)
                 .Index(t => t.DetalleProveedor_IdDetalleProveedor)
                 .Index(t => t.Pedido_IdPedido);
             
@@ -176,7 +176,7 @@ namespace Variedades.Migrations
         {
             DropForeignKey("dbo.Venta", "Cliente_IdCliente", "dbo.Cliente");
             DropForeignKey("dbo.Telefono", "Cliente_IdCliente", "dbo.Cliente");
-            DropForeignKey("dbo.Pedido", "Cliente_IdCliente", "dbo.Cliente");
+            DropForeignKey("dbo.Pedido", "cliente_IdCliente", "dbo.Cliente");
             DropForeignKey("dbo.Especificacion_pedido", "Pedido_IdPedido", "dbo.Pedido");
             DropForeignKey("dbo.Especificacion_producto", "Proveedor_Producto_Idproveedor_producto", "dbo.Proveedor_producto");
             DropForeignKey("dbo.Pago", "Venta_IdVenta", "dbo.Venta");
@@ -195,7 +195,7 @@ namespace Variedades.Migrations
             DropIndex("dbo.DetalleProveedor", new[] { "Proveedor_IdProveedor" });
             DropIndex("dbo.Especificacion_pedido", new[] { "Pedido_IdPedido" });
             DropIndex("dbo.Especificacion_pedido", new[] { "DetalleProveedor_IdDetalleProveedor" });
-            DropIndex("dbo.Pedido", new[] { "Cliente_IdCliente" });
+            DropIndex("dbo.Pedido", new[] { "cliente_IdCliente" });
             DropTable("dbo.Telefono");
             DropTable("dbo.Pago");
             DropTable("dbo.Venta");

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Variedades.Models
 {
-    [Table("Proveedor")]
     public partial class Proveedor
     {
         public Proveedor()

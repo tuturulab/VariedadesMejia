@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Variedades.Models
 {
-    [Table("Producto")]
     public partial class Producto
     {
         public Producto()
