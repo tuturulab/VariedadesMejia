@@ -194,9 +194,8 @@ namespace Variedades.Views
             }
         }
 
-        /*
         //Acción del boton insertar
-        private void BtnInsertarProducto(object sender, RoutedEventArgs e)
+        /*private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
             if(EspecificacionesToEditProductoList != null && EspecificacionesToEditProductoList.Count > 0)
             {
@@ -335,8 +334,7 @@ namespace Variedades.Views
                                                       MessageBoxImage.Exclamation);
                 }
             }
-        }
-        */
+        }*/
 
         //Esta Funcion se encarga de cambiar la apariencia de la ventana agregar Productos, segun si el producto tiene Imeis o no
         public void ChangeBetweenImei()
@@ -491,6 +489,19 @@ namespace Variedades.Views
         //Acción del boton insertar
         private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
+            if (EspecificacionesToEditProductoList != null && EspecificacionesToEditProductoList.Count > 0)
+            {
+                _SelectedProduct.Especificaciones_producto.Clear();
+
+                foreach (var item in EspecificacionesToEditProductoList)
+                {
+                    _SelectedProduct.Especificaciones_producto.Add(item);
+                }
+
+                ViewModel.UpdateProduct(_SelectedProduct);
+                this.Close();
+            }
+
             if (EspecificacionList.Count < 1)
             {
                 MessageBoxResult result = MessageBox.Show("Por favor Especifique almenos 1 en los campo asociados a este producto",
