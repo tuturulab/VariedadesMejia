@@ -9,6 +9,8 @@ namespace Variedades.Models
     {
         [Key]
         public int IdEspecificaciones_Producto { get; set; }
+
+        //Borrar
         public DateTime? Garantia { get; set; }
         public string IMEI { get; set; }
 

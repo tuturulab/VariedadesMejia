@@ -180,6 +180,14 @@ namespace Variedades
             set { _SelectedProductWindow = value; NotifyPropertyChanged("SelectedProductWindow"); }
         }
 
+        //Selected Product in the moment of Create Product
+        private EspecificacionClass _SelectedEspecificacionProductoInProductoWindow;
+        public EspecificacionClass SelectedEspecificacionProductoInProductoWindow
+        {
+            get { return _SelectedEspecificacionProductoInProductoWindow; }
+            set { _SelectedEspecificacionProductoInProductoWindow = value; NotifyPropertyChanged("SelectedEspecificacionProductoInProductoWindow"); }
+        }
+
         //Selected Proveedor in SelectProveedorWindow
         private Proveedor _SelectedProveedorWindow;
         public Proveedor SelectedProveedorWindow

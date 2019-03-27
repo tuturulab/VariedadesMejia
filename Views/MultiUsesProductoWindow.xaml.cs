@@ -140,11 +140,13 @@ namespace Variedades.Views
             if (ComboBoxGarantia.Text == "Si")
             {
                 GarantiaColumn.Visibility = Visibility.Visible;
+                PanelGarantia.Visibility = Visibility.Visible;
             }
 
             else
             {
                 GarantiaColumn.Visibility = Visibility.Hidden;
+                PanelGarantia.Visibility = Visibility.Hidden;
             }
 
             //Si se seleccionaron las dos opciones
@@ -157,6 +159,9 @@ namespace Variedades.Views
 
         }
 
+
+
+
         //Si el usuario Agrega elementos a la tabla
         private void AgregarATablaClick(object sender, RoutedEventArgs e)
         {
@@ -168,7 +173,6 @@ namespace Variedades.Views
                     {
                         EspecificacionList.Add(new EspecificacionClass()
                         {
-                            Numero = (i+1),
                             Descripcion = " ",
                             Imei = " ",
                             Proveedor = _Proveedor.Empresa,
@@ -194,6 +198,14 @@ namespace Variedades.Views
             }
         }
 
+        //Delete
+        private void BtnBorrarClick(object sender, RoutedEventArgs e)
+        {
+            var product = ViewModel.SelectedEspecificacionProductoInProductoWindow;
+            EspecificacionList.Remove(product);
+        }
+        
+        /*
         //Acción del boton insertar
         /*private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
@@ -801,7 +813,6 @@ namespace Variedades.Views
     
     public class EspecificacionClass
     {
-        public int Numero { get; set; }
         public string Imei { get; set; }
         public DateTime? Garantia { get; set; }
         public string Proveedor { get; set; }

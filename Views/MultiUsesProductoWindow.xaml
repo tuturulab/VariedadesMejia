@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Height="650" Width="600">
+        Height="700" Width="600">
     <Grid>
 
         <StackPanel Background="white">
@@ -68,8 +68,13 @@
                         <ComboBoxItem>Accesorio</ComboBoxItem>
                         <ComboBoxItem>Otro</ComboBoxItem>
                     </ComboBox>
+
                 </DockPanel>
 
+                <DockPanel Name="PanelGarantia" Visibility="Hidden" Margin="0,10,0,0">
+                    <TextBlock HorizontalAlignment="Left" Visibility="Visible" Margin="0,0,0,0" Name="TxtGarantiaVenta" VerticalAlignment="Center" Text="Garantía de venta (N# de Meses)" Width="190px"></TextBlock>
+                    <TextBox Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxGarantiaVenta" FontSize="20" HorizontalAlignment="Left" Width="330" Height="30" Margin="30,0,20,0"/>
+                </DockPanel>
 
                 <DockPanel Visibility="Hidden" Name="PanelImei" Margin="0,10,0,0">
 
@@ -79,10 +84,12 @@
                             <TextBox IsReadOnly="True" Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxProveedor" FontSize="20" HorizontalAlignment="Left" Width="140" Height="30" Margin="30,0,20,0"/>
                         </DockPanel>
 
+                        
                         <DockPanel Margin="0,10,0,0">
                             <TextBlock HorizontalAlignment="Left" Visibility="Visible" Margin="0,0,0,0" Name="TxtCantidad" VerticalAlignment="Center" Text="Cantidad" Width="100px"></TextBlock>
                             <TextBox Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxCantidad" FontSize="20" HorizontalAlignment="Left" Width="140" Height="30" Margin="30,0,20,0"/>
                         </DockPanel>
+                        
 
                     </StackPanel>
 
@@ -173,10 +180,9 @@
                 
  
                 <DockPanel Height="170">
-                    <DataGrid DataGridCell.GotFocus="DataGrid_CellGotFocus"  Visibility="Hidden" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    <DataGrid SelectedItem="{Binding SelectedEspecificacionProductoInProductoWindow, Mode=TwoWay}" DataGridCell.GotFocus="DataGrid_CellGotFocus"  Visibility="Hidden" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="NumeroColumn" IsReadOnly="True"  Binding="{Binding Numero, IsAsync=True}" Header="N#" Width="1*" ></DataGridTextColumn>
                             <DataGridTextColumn x:Name="ImeiColumn" Binding="{Binding Imei, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
 
                             <DataGridTextColumn x:Name="Precio_Costo_Column" Binding="{Binding Precio_Costo, IsAsync=True}" Header="PrecioCosto" Width="2*" ></DataGridTextColumn>
@@ -197,6 +203,53 @@
                                             IsEnabled="True" 
                                             x:Name="dateTimePicker1" >
                                         </wpfx:DateTimePicker>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Eliminar">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                        x:Name="btnBorrar"
+                                        Width="35"
+                                        Height="15"
+                                        FontSize="8"
+                                        Foreground="White"
+                                        Margin="2"
+                                        Content="Borrar"
+                                        Click="BtnBorrarClick"
+                                        BorderBrush="{x:Null}"
+                                            >
+
+
+                                            <!--    -->
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Background" Value="#dc4636" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#ad1e0f"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+
+                                                </Style>
+                                            </Button.Style>
+
+
+
+                                        </Button>
+
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

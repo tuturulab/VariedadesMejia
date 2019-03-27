@@ -11,9 +11,6 @@ namespace Variedades.Models
         public int IdPago { get; set; }
 
         public double Monto { get; set; }
-
-        //Variable para guardar si el cliente ya pagó este pago asignado.
-        public string Cancelado { get; set; }
         
         public DateTime? Fecha_Pago { get; set; }
 
