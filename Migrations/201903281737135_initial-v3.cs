@@ -3,7 +3,7 @@ namespace Variedades.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initialv2 : DbMigration
+    public partial class initialv3 : DbMigration
     {
         public override void Up()
         {
@@ -17,6 +17,7 @@ namespace Variedades.Migrations
                         Domicilio = c.String(),
                         Tipo_Pago = c.String(),
                         Compania = c.String(),
+                        Cedula = c.String(),
                         Fecha_Pago_1 = c.Int(nullable: false),
                         Fecha_Pago_2 = c.Int(nullable: false),
                     })
@@ -120,6 +121,7 @@ namespace Variedades.Migrations
                         Marca = c.String(),
                         Tipo_Producto = c.String(),
                         Modelo = c.String(),
+                        Garantia = c.Int(nullable: false),
                         Credito_Disponible = c.Int(nullable: false),
                         Imei_Disponible = c.Int(nullable: false),
                         Garantia_Disponible = c.Int(nullable: false),
@@ -148,7 +150,6 @@ namespace Variedades.Migrations
                     {
                         IdPago = c.Int(nullable: false, identity: true),
                         Monto = c.Double(nullable: false),
-                        Cancelado = c.String(),
                         Fecha_Pago = c.DateTime(),
                         Venta_IdVenta = c.Int(),
                     })

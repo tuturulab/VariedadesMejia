@@ -7,13 +7,13 @@ namespace Variedades.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class fixing : IMigrationMetadata
+    public sealed partial class initialv3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fixing));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initialv3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903262104121_fixing"; }
+            get { return "201903281737135_initial-v3"; }
         }
         
         string IMigrationMetadata.Source

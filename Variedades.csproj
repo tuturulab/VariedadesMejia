@@ -90,17 +90,9 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903262029387_Initial-v2.cs" />
-    <Compile Include="Migrations\201903262029387_Initial-v2.Designer.cs">
-      <DependentUpon>201903262029387_Initial-v2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903252244129_fexdates.cs" />
-    <Compile Include="Migrations\201903252244129_fexdates.Designer.cs">
-      <DependentUpon>201903252244129_fexdates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903262104121_fixing.cs" />
-    <Compile Include="Migrations\201903262104121_fixing.Designer.cs">
-      <DependentUpon>201903262104121_fixing.cs</DependentUpon>
+    <Compile Include="Migrations\201903281737135_initial-v3.cs" />
+    <Compile Include="Migrations\201903281737135_initial-v3.Designer.cs">
+      <DependentUpon>201903281737135_initial-v3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -259,14 +251,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201903262029387_Initial-v2.resx">
-      <DependentUpon>201903262029387_Initial-v2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903252244129_fexdates.resx">
-      <DependentUpon>201903252244129_fexdates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903262104121_fixing.resx">
-      <DependentUpon>201903262104121_fixing.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903281737135_initial-v3.resx">
+      <DependentUpon>201903281737135_initial-v3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
