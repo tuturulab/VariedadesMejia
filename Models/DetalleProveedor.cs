@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Variedades.Models
 {
@@ -9,7 +10,6 @@ namespace Variedades.Models
     {
         public DetalleProveedor()
         {
-            this.Especificacion_pedido = new HashSet<Especificacion_pedido>();
             this.Proveedor_Productos = new HashSet<Proveedor_producto>();
         }
 
@@ -20,7 +20,8 @@ namespace Variedades.Models
         public DateTime? Fecha_Llegada { get; set; }
         public DateTime? Garantia_Original { get; set; }
 
-        public virtual ICollection<Especificacion_pedido> Especificacion_pedido { get; set; }
+        
+        public virtual Pedido Pedido { get; set; }
         
         public virtual Proveedor Proveedor { get; set; }
 

@@ -17,7 +17,5 @@ namespace Variedades.Models
 
 
         public virtual Pedido Pedido { get; set; }
-
-        public virtual DetalleProveedor DetalleProveedor { get; set; }
     }
 }

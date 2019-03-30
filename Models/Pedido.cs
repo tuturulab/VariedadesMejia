@@ -10,6 +10,7 @@ namespace Variedades.Models
         public Pedido()
         {
             this.Especificaciones_pedido = new HashSet<Especificacion_pedido>();
+            this.DetalleProveedor = new HashSet<DetalleProveedor>();
         }
 
         [Key]
@@ -26,5 +27,7 @@ namespace Variedades.Models
         
         [NotMapped]
         public int NumeroProductos { get { return this.Especificaciones_pedido.Count; }   }
+
+        public virtual ICollection<DetalleProveedor> DetalleProveedor { get; set; }
     }
 }

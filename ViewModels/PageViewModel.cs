@@ -127,7 +127,15 @@ namespace Variedades
             set { ClientesFull = value; NotifyPropertyChanged("ClientesFullCollection"); }
         }
 
+        //Observable for ClientFullList
+        private ObservableCollection<DetalleProveedor> Importacion;
+        public ObservableCollection<DetalleProveedor> ImportacionCollection
+        {
+            get { return Importacion; }
+            set { Importacion = value; NotifyPropertyChanged("ImportacionCollection"); }
+        }
 
+        
         private Producto _SelectedProduct;
         public Producto SelectedProduct
         {
@@ -889,6 +897,7 @@ namespace Variedades
 
             //Paginacion
             PagedImportacionTable.SomeMethod(ImportacionList, NumberOfRecords);
+            ImportacionCollection = new ObservableCollection<DetalleProveedor>(PagedImportacionTable.Importaciones);
             //ImportacionCol = new ObservableCollection<Pedido>(PagedImportacionTable.Pedidos);
         }
 

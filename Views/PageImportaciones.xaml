@@ -92,16 +92,13 @@
 
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="" MaxWidth="0"  Binding="{Binding IdPedido, IsAsync=True}" Width="*" ></DataGridTextColumn>
-                <DataGridTextColumn  Header="Cantidad Disponible" Binding="{Binding Fecha_Pedido, IsAsync=True}" Width="*" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Tipo de Producto" Binding="{Binding Cantidad_Pedido, IsAsync=True}" Width="*" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Marca" Binding="{Binding Fecha_Entrega, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="NumeroSeguimiento" Binding="{Binding NumeroSeguimiento, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn  Header="Precio Costo" Binding="{Binding Precio_Costo, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Encargado" Binding="{Binding Fecha_Encargado, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Fecha Llegada" Binding="{Binding Fecha_Llegada, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado Pedido" Binding="{Binding EstadoPedido, IsAsync=True}" Width="*" ></DataGridTextColumn>
 
-
-                <DataGridTextColumn Header="Precio de venta" Binding="{Binding Precio_Venta, IsAsync=True}" Width="*" ></DataGridTextColumn>
-
-
-
+               
                 <DataGridTemplateColumn Header="Detalle">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
