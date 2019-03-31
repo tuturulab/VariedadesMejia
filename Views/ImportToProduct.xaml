@@ -8,6 +8,193 @@
         mc:Ignorable="d"
         Title="ImportToProduct" Height="450" Width="1000">
     <Grid>
-        
+
+        <StackPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
+            <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Completar Importación" FontSize="17" ></TextBlock>
+        </StackPanel>
+
+
+        <DockPanel Margin="0,50,0,0" Background="white">
+            <StackPanel Width="450" HorizontalAlignment="Left" Margin="10,10,10,5">
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Numero seguimiento" Width="140px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="260" Height="30" Name="PedidoTextBox" Margin="30,0,20,0"/>
+
+                </DockPanel>
+
+                <DockPanel Height="200">
+                    <DataGrid Visibility="Visible" Name="PedidosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Nombre, IsAsync=False}" Header="Nombre" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Cantidad, IsAsync=True}" Header="Cantidad" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Tipo_Producto, IsAsync=False}" Header="Tipo Producto" Width="2*" ></DataGridTextColumn>
+
+                            <DataGridTemplateColumn Header="Eliminar">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                        x:Name="btnBorrar"
+                                        Width="35"
+                                        Height="15"
+                                        FontSize="8"
+                                        Foreground="White"
+                                        Margin="2"
+                                        Content="Borrar"
+                                        Click="BtnBorrarClick"
+                                        BorderBrush="{x:Null}"
+                                            >
+
+
+                                            <!--    -->
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Background" Value="#dc4636" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#ad1e0f"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+
+                <Button Click="BtnInsertarImportacion" Name="InsertarButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="150px" Content="Finalizar Importación"  Height="40px">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Width="390" Margin="10,10,10,5" HorizontalAlignment="Right" >
+                <Button Click="BtnInsertarProductos" Name="AddButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Productos"  Height="40px">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <DockPanel Height="200">
+                    <DataGrid DataGridCell.GotFocus="DataGrid_CellGotFocus" SelectedItem="{Binding SelectedProductImportado, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Binding="{Binding Nombre, IsAsync=True}" Header="Nombre" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Precio, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding NombreProveedor, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
+
+                            <DataGridTemplateColumn Header="Eliminar">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                        x:Name="btnBorrar"
+                                        Width="35"
+                                        Height="15"
+                                        FontSize="8"
+                                        Foreground="White"
+                                        Margin="2"
+                                        Content="Borrar"
+                                        Click="BtnBorrarClick"
+                                        BorderBrush="{x:Null}"
+                                            >
+
+
+                                            <!--    -->
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Background" Value="#dc4636" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#ad1e0f"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+
+                                                </Style>
+                                            </Button.Style>
+
+
+
+                                        </Button>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </StackPanel>
+
+
+
+        </DockPanel>
+
     </Grid>
 </Window>
