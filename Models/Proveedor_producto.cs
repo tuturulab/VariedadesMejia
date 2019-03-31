@@ -15,7 +15,7 @@ namespace Variedades.Models
         [Key]
         public int Idproveedor_producto { get; set; }
         public int Cantidad_Recibida { get; set; }
-        public string Numero_Seguimiento { get; set; }
+        
 
         public virtual DetalleProveedor DetalleProveedor { get; set; }
 

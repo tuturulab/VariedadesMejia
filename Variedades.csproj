@@ -98,6 +98,30 @@
     <Compile Include="Migrations\201903300701355_hotfix-import.Designer.cs">
       <DependentUpon>201903300701355_hotfix-import.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903301747218_ImportacionProductos.cs" />
+    <Compile Include="Migrations\201903301747218_ImportacionProductos.Designer.cs">
+      <DependentUpon>201903301747218_ImportacionProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903301823126_ImportacionProductos2.cs" />
+    <Compile Include="Migrations\201903301823126_ImportacionProductos2.Designer.cs">
+      <DependentUpon>201903301823126_ImportacionProductos2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903302105144_ImportacionProductos3.cs" />
+    <Compile Include="Migrations\201903302105144_ImportacionProductos3.Designer.cs">
+      <DependentUpon>201903302105144_ImportacionProductos3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903302248307_estadoProveedor.cs" />
+    <Compile Include="Migrations\201903302248307_estadoProveedor.Designer.cs">
+      <DependentUpon>201903302248307_estadoProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903302254360_estadoProveedor2.cs" />
+    <Compile Include="Migrations\201903302254360_estadoProveedor2.Designer.cs">
+      <DependentUpon>201903302254360_estadoProveedor2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903302356046_estadoProveedor3.cs" />
+    <Compile Include="Migrations\201903302356046_estadoProveedor3.Designer.cs">
+      <DependentUpon>201903302356046_estadoProveedor3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -106,6 +130,7 @@
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\DetalleProveedor.cs" />
+    <Compile Include="Models\Producto_importado.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Proveedor_producto.cs" />
     <Compile Include="Models\Telefono.cs" />
@@ -123,8 +148,14 @@
     <Compile Include="Views\AddToExistentProductWindow.xaml.cs">
       <DependentUpon>AddToExistentProductWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ImportToProduct.xaml.cs">
+      <DependentUpon>ImportToProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MultiUsesClienteWindow.xaml.cs">
       <DependentUpon>MultiUsesClienteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MultiUsesImportacionWindow.xaml.cs">
+      <DependentUpon>MultiUsesImportacionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MultiUsesPedidoWindow.xaml.cs">
       <DependentUpon>MultiUsesPedidoWindow.xaml</DependentUpon>
@@ -162,6 +193,9 @@
     <Compile Include="Views\SelectClientWindow.xaml.cs">
       <DependentUpon>SelectClientWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SelectPedidoWindow.xaml.cs">
+      <DependentUpon>SelectPedidoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SelectProductWindow.xaml.cs">
       <DependentUpon>SelectProductWindow.xaml</DependentUpon>
     </Compile>
@@ -180,7 +214,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ImportToProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MultiUsesClienteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MultiUsesImportacionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,6 +274,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SelectPedidoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SelectProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -260,6 +306,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903300701355_hotfix-import.resx">
       <DependentUpon>201903300701355_hotfix-import.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903301747218_ImportacionProductos.resx">
+      <DependentUpon>201903301747218_ImportacionProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903301823126_ImportacionProductos2.resx">
+      <DependentUpon>201903301823126_ImportacionProductos2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903302105144_ImportacionProductos3.resx">
+      <DependentUpon>201903302105144_ImportacionProductos3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903302248307_estadoProveedor.resx">
+      <DependentUpon>201903302248307_estadoProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903302254360_estadoProveedor2.resx">
+      <DependentUpon>201903302254360_estadoProveedor2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903302356046_estadoProveedor3.resx">
+      <DependentUpon>201903302356046_estadoProveedor3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -19,6 +19,7 @@ namespace Variedades.Models
         public virtual DbSet<Especificacion_pedido> Especificacion_pedido { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Venta> Venta { get; set; }
+        public virtual DbSet<Producto_importado> Producto_Importado { get; set; }
         public virtual DbSet<Pago> Pago { get; set; }
         public virtual DbSet<Proveedor_producto> Proveedor_producto { get; set; }
         public virtual DbSet<Telefono> Telefono { get; set; }

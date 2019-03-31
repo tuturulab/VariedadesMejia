@@ -84,7 +84,12 @@ namespace Variedades
             set { Proveedors = value; NotifyPropertyChanged("ProveedorFullCollection"); }
         }
 
-
+        private ObservableCollection<Especificacion_pedido> Especificacion_Pedidos;
+        public ObservableCollection<Especificacion_pedido> Especificaciones_De_un_Pedido
+        {
+            get { return Especificacion_Pedidos;  }
+            set { Especificacion_Pedidos = value; NotifyPropertyChanged("EspecificacionesDePedidoCollection"); }
+        }
 
         //Observable for PedidosList
         private ObservableCollection<Pedido> Pedidos;
@@ -135,7 +140,15 @@ namespace Variedades
             set { Importacion = value; NotifyPropertyChanged("ImportacionCollection"); }
         }
 
-        
+        //Observable for ClientFullList
+        private ObservableCollection<Pedido> Pedido;
+        public ObservableCollection<Pedido> PedidoCollection
+        {
+            get { return Pedido; }
+            set { Pedido = value; NotifyPropertyChanged("ImportacionCollection"); }
+        }
+
+
         private Producto _SelectedProduct;
         public Producto SelectedProduct
         {
@@ -165,6 +178,13 @@ namespace Variedades
             set { _SelectedEspecificacion_Pedido = value; NotifyPropertyChanged("SelectedEspecificacionPedido"); }
         }
 
+        private Pedido _SelectedPedidoWindow;
+        public Pedido SelectedPedidoWindow
+        {
+            get { return _SelectedPedidoWindow; }
+            set { _SelectedPedidoWindow = value; NotifyPropertyChanged("SelectedPedidoWindow"); }
+        }
+
         private TelefonosAddList _SelectedTelefonoAdd;
         public TelefonosAddList SelectedTelefonoAdd
         {
@@ -186,6 +206,14 @@ namespace Variedades
         {
             get { return _SelectedProductWindow; }
             set { _SelectedProductWindow = value; NotifyPropertyChanged("SelectedProductWindow"); }
+        }
+
+        //Selected Product in SelectProductImportado
+        private Producto_importado _SelectedProductImportado;
+        public Producto_importado SelectedProductImportado
+        {
+            get { return _SelectedProductImportado; }
+            set { _SelectedProductImportado = value; NotifyPropertyChanged("SelectedProductImportado"); }
         }
 
         //Selected Product in the moment of Create Product
@@ -216,6 +244,12 @@ namespace Variedades
         {
             _context = new DbmejiaEntities();
             //UpdateAll();
+        }
+
+        public void SetEspecificacionPedido (Pedido pedido)
+        {
+            var Especifificaciones = pedido.Especificaciones_pedido.ToList();
+            Especificaciones_De_un_Pedido = new ObservableCollection<Especificacion_pedido>(Especifificaciones);
         }
 
         //Find Proveedor
@@ -422,12 +456,17 @@ namespace Variedades
             }
         }
 
+        //Colleciones para rellenar ventanas menores
         public void FillClientesFullCollection ()
         {
             //Collecciones usadas en las ventanas donde saldra para seleccionar
             ClientesFullCollection = new ObservableCollection<Cliente>(_context.Cliente.ToList());
         }
 
+        public void FillPedidos()
+        {
+            PedidosCollection = new ObservableCollection<Pedido>(_context.Pedido.Where(t => t.Estado_Pedido != "Completado"));
+        }
 
         
         //Actualizamos todas las lista de todas las datagrid de cada una de las paginas
@@ -469,7 +508,6 @@ namespace Variedades
         private void EditProduct (int id )
         {
             var producto = _context.Producto.Find(id);
-            
         }
 
         //Actualizar producto
@@ -537,9 +575,8 @@ namespace Variedades
 
         // Botones de la paginacion de la tabla productos
 
-       public void SearchClient(string FiltroClient)
+        public void SearchClient(string FiltroClient)
         {
-
             if (FiltroClient != string.Empty)
             {
                 SearchClientList = ClientesList.Where(c => (c.Nombre.ToLower().Contains(FiltroClient.ToLower())) || (c.Compania.ToLower().Contains(FiltroClient.ToLower())) ).ToList();
@@ -857,10 +894,19 @@ namespace Variedades
         * 
        */
 
-        //Agrega en la base de datos, el producto especificado
-        public void AddImportacion(Venta _Venta)
+        public void ChangeEstatusPedido(Pedido pedido)
         {
+            pedido.Estado_Pedido = "En Trámite";
+            _context.SaveChanges();
+        }
 
+        //Agrega en la base de datos, el producto especificado
+        public void AddImportacion(DetalleProveedor _Detalle, List<Producto_importado> producto_Importados)
+        {
+            _Detalle.Producto_Importados = producto_Importados;
+            _context.DetalleProveedor.Add(_Detalle);
+            
+            _context.SaveChanges();
         }
 
         // Botones de la paginacion de la tabla productos

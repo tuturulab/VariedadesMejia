@@ -81,6 +81,7 @@ namespace Variedades.Views
                             Email = EmailTextBox.Text,
                             Domicilio = DomicilioTextBox.Text,
                             Tipo_Pago = "Cordobas",
+                            Cedula = CedulaTextBox.Text,
                             Compania = CompañiaTextBox.Text,
                             Fecha_Pago_1 = int.Parse(DiaPago1TextBox.Text),
                         };

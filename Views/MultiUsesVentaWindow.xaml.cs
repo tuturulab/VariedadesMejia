@@ -39,8 +39,7 @@ namespace Variedades.Views
 
         //Evento de Actualizar Paginacion
         public event EventHandler UpdatePagination;
-
-
+        
         public MultiUsesVentaWindow(PageViewModel viewModel)
         {
             ViewModel = viewModel;

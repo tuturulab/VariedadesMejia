@@ -170,9 +170,10 @@
                 <DockPanel Margin="00,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Total a Pagar" Width="80px"></TextBlock>
                     <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="140" Height="30" Name="PrecioFinalTextBox" Margin="0,0,0,0"/>
-                   
+
 
                 </DockPanel>
+             
 
                 <DockPanel Height="200">
                     <DataGrid SelectedItem="{Binding SelectedEspecificacionProducto, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 

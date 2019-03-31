@@ -15,6 +15,18 @@ namespace Variedades.Models
         public string Descripcion { get; set; }
         public string Cantidad { get; set; }
 
+        [NotMapped]
+        public string Nombre { get
+        {
+            string nombre = "";
+            if (this.Marca != string.Empty)
+                nombre = nombre + this.Marca;
+
+            if (this.Modelo != string.Empty)
+                nombre = nombre + " " + this.Modelo;
+
+            return nombre;
+        }}
 
         public virtual Pedido Pedido { get; set; }
     }

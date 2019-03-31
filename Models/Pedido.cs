@@ -22,6 +22,9 @@ namespace Variedades.Models
         public virtual Cliente cliente { get; set; }
         public virtual ICollection<Especificacion_pedido> Especificaciones_pedido { get; set; }
 
+        //Completado o en tramite
+        public string Estado_Pedido { get; set; }
+
         [NotMapped]
         public string NombreCliente { get { if (this.cliente != null) return this.cliente.Nombre; else return "Eliminado";  } }
         
