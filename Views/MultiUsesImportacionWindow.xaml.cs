@@ -49,18 +49,19 @@ namespace Variedades.Views
             PedidosDatagrid.ItemsSource = PedidosList;
         }
 
-        //Validación
-        private void EventoPaginacion()
-        {
-            UpdatePagination?.Invoke(this, EventArgs.Empty);
-        }
-
         //Validar que en los campos numericos solo se escriban numeros
         public void TextBoxNumerico(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        //Validación
+        private void EventoPaginacion()
+        {
+            UpdatePagination?.Invoke(this, EventArgs.Empty);
+        }
+        
 
         private void BtnSelectPedido(object sender, RoutedEventArgs e)
         {

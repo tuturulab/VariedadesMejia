@@ -109,15 +109,28 @@
                 
 
                 <DockPanel Height="160">
-                    <DataGrid SelectedItem="{Binding SelectedEspecificacionPedido, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    <DataGrid DataGridCell.GotFocus="DataGrid_CellGotFocus" SelectedItem="{Binding SelectedEspecificacionPedido, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn Binding="{Binding Marca, IsAsync=True}" Header="Marca" Width="2*" ></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Modelo, IsAsync=True}" Header="Modelo" Width="2*" ></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Descripcion, IsAsync=True}" Header="Descripción" Width="2*" ></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Cantidad, IsAsync=True}" Header="Cantidad" Width="2*" ></DataGridTextColumn>
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Tipo_Producto, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
+                            
+                            <DataGridTemplateColumn Header="Cantidad" x:Name="Precio_Costo_Columns" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Cantidad}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox PreviewTextInput="TextBoxNumerico" Text="{Binding Cantidad}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Tipo_Producto, IsAsync=True}" Header="Tipo de Producto" Width="2*" ></DataGridTextColumn>
 
                             <DataGridTemplateColumn Header="Eliminar">
                                 <DataGridTemplateColumn.CellTemplate>

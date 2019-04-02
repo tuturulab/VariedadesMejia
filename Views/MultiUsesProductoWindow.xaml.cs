@@ -109,9 +109,10 @@ namespace Variedades.Views
                 AgregarATablaBtn.Visibility = Visibility.Hidden;
 
                 //Grid productos - Cambiar los bindings
-                ImeiColumn.Binding = new Binding("IMEI");
-                Precio_Costo_Column.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Precio_Costo");
-                ProveedorColumn.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Proveedor.Empresa");
+                //Este codigo no funciona Maykol revisar aca ya que cambiamos la propiedad que se va a mostrar en el codigo xaml con el fin de que solo se puedan meter numeros
+                //ImeiColumn.Binding = new Binding("IMEI");
+                //Precio_Costo_Column.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Precio_Costo");
+                //ProveedorColumn.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Proveedor.Empresa");
 
             }
         }
@@ -621,6 +622,7 @@ namespace Variedades.Views
                         ComboBoxImei.Text = String.Empty;
                         ComboBoxGarantia.Text = String.Empty;
                         ComboBoxCredito.Text = String.Empty;
+                        TxtGarantiaVenta.Text = String.Empty;
 
                         EspecificacionList.Clear();
 

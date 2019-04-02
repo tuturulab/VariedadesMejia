@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="Agregar Cliente" Height="750" Width="500">
+        Title="Agregar Cliente" Height="720" Width="500">
     <Grid>
 
         <StackPanel Background="white">
@@ -105,7 +105,19 @@
                         <DataGrid.Columns>
 
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding IdNumero, IsAsync=True}" Header="Id" Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Numero, IsAsync=True}" Header="Número" Width="2*" ></DataGridTextColumn>
+
+                            <DataGridTemplateColumn Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Numero}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox PreviewTextInput="TextBoxNumerico" Text="{Binding Numero}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
 
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Tipo_Numero, IsAsync=True}" Header="Tipo de Número" Width="2*" ></DataGridTextColumn>
 
@@ -162,7 +174,7 @@
                     </DataGrid>
                 </DockPanel>
 
-                <Button Click="BtnInsertarCliente" Name="InsertarButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Cliente"  Height="40px">
+                <Button Click="BtnInsertarCliente" Name="InsertarButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Cliente"  Height="40px">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="{StaticResource ColorBotones}" />

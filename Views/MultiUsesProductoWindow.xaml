@@ -72,8 +72,8 @@
                 </DockPanel>
 
                 <DockPanel Name="PanelGarantia" Visibility="Hidden" Margin="0,10,0,0">
-                    <TextBlock HorizontalAlignment="Left" Visibility="Visible" Margin="0,0,0,0" Name="TxtGarantiaVenta" VerticalAlignment="Center" Text="Garantía de venta (N# de Meses)" Width="190px"></TextBlock>
-                    <TextBox Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxGarantiaVenta" FontSize="20" HorizontalAlignment="Left" Width="330" Height="30" Margin="30,0,20,0"/>
+                    <TextBlock HorizontalAlignment="Left" PreviewTextInput="TextBoxNumerico" Visibility="Visible" Margin="0,0,0,0" Name="TxtGarantiaVenta" VerticalAlignment="Center" Text="Garantía de venta (N# de Meses)" Width="190px"></TextBlock>
+                    <TextBox PreviewTextInput="TextBoxNumerico" Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxGarantiaVenta" FontSize="20" HorizontalAlignment="Left" Width="330" Height="30" Margin="30,0,20,0"/>
                 </DockPanel>
 
                 <DockPanel Visibility="Hidden" Name="PanelImei" Margin="0,10,0,0">
@@ -87,7 +87,7 @@
                         
                         <DockPanel Margin="0,10,0,0">
                             <TextBlock HorizontalAlignment="Left" Visibility="Visible" Margin="0,0,0,0" Name="TxtCantidad" VerticalAlignment="Center" Text="Cantidad" Width="100px"></TextBlock>
-                            <TextBox Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxCantidad" FontSize="20" HorizontalAlignment="Left" Width="140" Height="30" Margin="30,0,20,0"/>
+                            <TextBox Visibility="Visible" PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" Name="TextBoxCantidad" FontSize="20" HorizontalAlignment="Left" Width="140" Height="30" Margin="30,0,20,0"/>
                         </DockPanel>
                         
 
@@ -183,13 +183,42 @@
                     <DataGrid SelectedItem="{Binding SelectedEspecificacionProductoInProductoWindow, Mode=TwoWay}" DataGridCell.GotFocus="DataGrid_CellGotFocus"  Visibility="Hidden" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="ImeiColumn" Binding="{Binding Imei, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
+                           
 
-                            <DataGridTextColumn x:Name="Precio_Costo_Column" Binding="{Binding Precio_Costo, IsAsync=True}" Header="PrecioCosto" Width="2*" ></DataGridTextColumn>
+                            <!--
+                             <DataGridTextColumn MaxWidth="0" x:Name="Precio_Costo_Column" Binding="{Binding Precio_Costo, IsAsync=True}" Header="PrecioCosto" Width="2*" ></DataGridTextColumn>
+                                <DataGridTextColumn x:Name="ImeiColumn" Binding="{Binding Imei, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
+                            -->
+                            <DataGridTemplateColumn Header="Imei" x:Name="ImeiColumn" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Imei}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox PreviewTextInput="TextBoxNumerico" Text="{Binding Imei}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Precio Original" x:Name="Precio_Costo_Columns" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Precio_Costo}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox PreviewTextInput="TextBoxNumerico" Text="{Binding Precio_Costo}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
                             <DataGridTextColumn x:Name="DescricionColumn" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripción" Width="3*" ></DataGridTextColumn>
                             <DataGridTextColumn x:Name="ProveedorColumn" IsReadOnly="True" Binding="{Binding Proveedor, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
 
-                            <DataGridTemplateColumn x:Name="GarantiaColumn" Width="4*" Header="Garantía" SortMemberPath="NextRun">
+                            <DataGridTemplateColumn x:Name="GarantiaColumn" Width="4*" Header="Garantía Original" SortMemberPath="NextRun">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <wpfx:DateTimePicker  Value="{Binding Garantia, 

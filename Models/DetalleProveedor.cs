@@ -24,7 +24,13 @@ namespace Variedades.Models
         //En espera, llegó
         public string EstadoEncargo { get; set; }
 
-        public string Numero_Seguimiento { get; set; }
+        public string Numero_Seguimiento { get ; set; }
+
+        [NotMapped]
+        public string Seguimiento { get { if (this.Numero_Seguimiento != null) return Numero_Seguimiento; else return "No Tiene";  } }
+
+        [NotMapped]
+        public int NumeroEncargos { get { if (this.Producto_Importados != null) return this.Producto_Importados.Count(); else return 0; }  }
 
         public virtual Pedido Pedido { get; set; }
         

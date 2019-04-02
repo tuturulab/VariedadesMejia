@@ -1182,6 +1182,18 @@ namespace Variedades
             }
         }
 
+        public void SearchClienteFullList (string Filtro)
+        {
+            if (Filtro != string.Empty)
+            {
+                ClientesFullCollection = new ObservableCollection<Cliente>(_context.Cliente.Where(s => (s.Nombre.ToLower().Contains(Filtro.ToLower()))));
+            }
+            else
+            {
+                ClientesFullCollection = new ObservableCollection<Cliente>(_context.Cliente.ToList());
+            }
+        }
+
         //Agregar Proveedor
         public void AddProveedor(Proveedor proveedor)
         {

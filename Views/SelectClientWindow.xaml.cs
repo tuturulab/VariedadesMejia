@@ -66,10 +66,8 @@ namespace Variedades.Views
         {
             string busqueda = SearchBar.Text;
 
-            if (busqueda== string.Empty)
-            {
-                ViewModel.SearchClient(busqueda);
-            }
+            ViewModel.SearchClienteFullList(busqueda);
+
         }
     }
 }

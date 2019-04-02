@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -72,6 +73,8 @@ namespace Variedades.Views
             window.EventSelectedClient += new EventHandler(EventoActualizarCliente);
             window.Show();
         }
+
+
 
         private void BtnInsertarPedido (object sender, RoutedEventArgs e)
         {
@@ -193,6 +196,13 @@ namespace Variedades.Views
             window2.PassClient += new EventHandler(EventoInsertarCliente);
 
             window2.Show();
+        }
+
+        //Validar que en los campos numericos solo se escriban numeros
+        public void TextBoxNumerico(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         //Agregar pedidos a la lista

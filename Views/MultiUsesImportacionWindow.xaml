@@ -169,7 +169,20 @@
 
                             <DataGridTextColumn Binding="{Binding Nombre, IsAsync=True}" Header="Nombre" Width="2*" ></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Precio, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
+                            
+                            <DataGridTemplateColumn Header="Precio" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Precio}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox PreviewTextInput="TextBoxNumerico" Text="{Binding Precio}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
                             <DataGridTextColumn Binding="{Binding NombreProveedor, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
 
                             <DataGridTemplateColumn Header="Eliminar">

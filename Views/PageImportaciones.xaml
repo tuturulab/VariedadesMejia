@@ -92,11 +92,13 @@
 
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="NumeroSeguimiento" Binding="{Binding NumeroSeguimiento, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="NumeroSeguimiento" Binding="{Binding Seguimiento, IsAsync=False}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn  Header="Precio Costo" Binding="{Binding Precio_Costo, IsAsync=True}" Width="*" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Fecha Encargado" Binding="{Binding Fecha_Encargado, IsAsync=True}" Width="*" ></DataGridTextColumn>
+
+                <DataGridTextColumn  Header="Numero de Productos" Binding="{Binding NumeroEncargos, IsAsync=False}" Width="*" ></DataGridTextColumn>
+
                 <DataGridTextColumn Header="Fecha Llegada" Binding="{Binding Fecha_Llegada, IsAsync=True}" Width="*" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Estado Pedido" Binding="{Binding EstadoPedido, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado Pedido" Binding="{Binding EstadoEncargo, IsAsync=True}" Width="*" ></DataGridTextColumn>
 
                
                 <DataGridTemplateColumn Header="Detalle">
