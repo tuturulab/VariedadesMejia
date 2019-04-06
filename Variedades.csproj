@@ -148,6 +148,9 @@
     <Compile Include="Views\AddToExistentProductWindow.xaml.cs">
       <DependentUpon>AddToExistentProductWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ImportacionToProductWindow.xaml.cs">
+      <DependentUpon>ImportacionToProductWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ImportToProduct.xaml.cs">
       <DependentUpon>ImportToProduct.xaml</DependentUpon>
     </Compile>
@@ -211,6 +214,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddToExistentProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ImportacionToProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

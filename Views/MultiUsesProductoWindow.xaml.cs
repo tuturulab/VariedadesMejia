@@ -38,6 +38,9 @@ namespace Variedades.Views
         //Evento de Actualizar Paginacion
         public event EventHandler UpdatePagination;
 
+        //Evento Actualizar Importaciones
+        public event EventHandler UpdateImportaciones;
+
         //Cambia la ventana segun si tiene imei o no, 0 No se ha seleccionado, 1 = Si hay Imei , 2 = No hay Imei
         public int ImeiActivate = 0;
 
@@ -45,11 +48,6 @@ namespace Variedades.Views
 
         ObservableCollection<Especificacion_producto> EspecificacionesToEditProductoList;
 
-        //Validación
-        private void EventoPaginacion()
-        {
-            UpdatePagination?.Invoke(this, EventArgs.Empty);
-        }
 
         public MultiUsesProductoWindow(PageViewModel viewModel, Producto producto = null)
         {
@@ -70,6 +68,20 @@ namespace Variedades.Views
                 SetAndChangeWindowAppareance();
             }
 
+        }
+
+        //Validación
+        private void EventoPaginacion()
+        {
+            UpdatePagination?.Invoke(this, EventArgs.Empty);
+        }
+
+
+
+        //Pasa productos insertados a la ventana ImportacionToProductWindow
+        private void EventoImportacion()
+        {
+            UpdateImportaciones?.Invoke(this, EventArgs.Empty);
         }
 
         private void SetAndChangeWindowAppareance()

@@ -51,12 +51,21 @@ namespace Variedades
         }
 
         
+
         //Observable for ImeiList
         private ObservableCollection<ImeiClass> ImeiList;
         public ObservableCollection<ImeiClass> ImeiCollection
         {
             get { return ImeiList; }
             set { ImeiList = value; NotifyPropertyChanged("ImeiCollection"); }
+        }
+
+        //Observable for ImeiList
+        private ObservableCollection<Especificacion_producto> ProductosDeUnaImportacion;
+        public ObservableCollection<Especificacion_producto> ListaProductosDeUnaImportacion
+        {
+            get { return ProductosDeUnaImportacion; }
+            set { ProductosDeUnaImportacion = value; NotifyPropertyChanged("ProductosDeUnaImportacion"); }
         }
 
         //Observable for ProductsList
@@ -156,6 +165,13 @@ namespace Variedades
             set { _SelectedProduct = value; NotifyPropertyChanged("SelectedProduct"); }
         }
 
+        private DetalleProveedor _SelectedImportacion;
+        public DetalleProveedor SelectedImportacion
+        {
+            get { return _SelectedImportacion; }
+            set { _SelectedImportacion = value; NotifyPropertyChanged("SelectedImportacion"); }
+        }
+
         private Pedido _SelectedPedido;
         public Pedido SelectedPedido
         {
@@ -243,13 +259,21 @@ namespace Variedades
         public PageViewModel()
         {
             _context = new DbmejiaEntities();
-            //UpdateAll();
+            UpdateAll();
         }
 
         public void SetEspecificacionPedido (Pedido pedido)
         {
             var Especifificaciones = pedido.Especificaciones_pedido.ToList();
             Especificaciones_De_un_Pedido = new ObservableCollection<Especificacion_pedido>(Especifificaciones);
+        }
+
+        //Rellena los datos insertados
+        public void SearchProductosDeUnaImportacion ()
+        {
+            ProductosDeUnaImportacion.Clear();
+            List<Especificacion_producto> _Productos = _context.Especificacion_producto.Where(t => t.Proveedor_Producto == this.SelectedImportacion.Proveedor_Productos).ToList();
+            ProductosDeUnaImportacion = new ObservableCollection<Especificacion_producto>(_Productos);
         }
 
         //Find Proveedor
@@ -470,27 +494,30 @@ namespace Variedades
 
         
         //Actualizamos todas las lista de todas las datagrid de cada una de las paginas
-        /*private void UpdateAll()
+        private void UpdateAll()
         {
             ProductosList = _context.Producto.ToList();
             ClientesList = _context.Cliente.ToList();
             VentasList = _context.Venta.ToList();
-            ImportacionList = _context.Pedido.ToList();
+            ImportacionList = _context.DetalleProveedor.ToList();
+            PedidosList = _context.Pedido.ToList();
 
             //Collecciones usadas en las ventanas donde saldra para seleccionar
-            ClientesFullCollection = new ObservableCollection<Cliente>( _context.Cliente.ToList());
+            //ClientesFullCollection = new ObservableCollection<Cliente>( _context.Cliente.ToList());
             
             //Paginacion
             PagedProductTable.SomeMethod(ProductosList, 3);
             PagedClientTable.SomeMethod(ClientesList, 3);
             PagedVentaTable.SomeMethod(VentasList, 3);
             PagedImportacionTable.SomeMethod(ImportacionList, 3);
+            PagedPedidoTable.SomeMethod(PedidosList, 3);
 
             //Vaciando las colecciones anteriores
             ProductosCollection = null;
             ClientesCollection = null;
             VentasCollection = null;
             PedidosCollection = null;
+            ImportacionCollection = null;
 
             //Procedemos a actualizar
 
@@ -500,10 +527,12 @@ namespace Variedades
 
             VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
 
-            PedidosCollection = new ObservableCollection<Pedido>(PagedImportacionTable.Pedidos); 
+            PedidosCollection = new ObservableCollection<Pedido>(PagedPedidoTable.Pedidos);
+
+            ImportacionCollection = new ObservableCollection<DetalleProveedor>(PagedImportacionTable.Importaciones);
         }
         
-        */
+        
         //Modulo de editar producto
         private void EditProduct (int id )
         {
