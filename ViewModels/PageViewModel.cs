@@ -973,7 +973,7 @@ namespace Variedades
             //Paginacion
             PagedImportacionTable.SomeMethod(ImportacionList, NumberOfRecords);
             ImportacionCollection = new ObservableCollection<DetalleProveedor>(PagedImportacionTable.Importaciones);
-            //ImportacionCol = new ObservableCollection<Pedido>(PagedImportacionTable.Pedidos);
+            
         }
 
         //Obtener la pagina actual ()

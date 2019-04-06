@@ -117,7 +117,7 @@ namespace Variedades.Views
                     DetalleProveedor detalleProveedor = new DetalleProveedor();
                     detalleProveedor.Pedido = _pedido;
 
-                    detalleProveedor.EstadoEncargo = "En Espera";
+                    
                     detalleProveedor.Numero_Seguimiento = SeguimientoTextBox.Text;
 
                     double precio = 0;

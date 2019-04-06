@@ -98,7 +98,7 @@
                 <DataGridTextColumn  Header="Numero de Productos" Binding="{Binding NumeroEncargos, IsAsync=False}" Width="*" ></DataGridTextColumn>
 
                 <DataGridTextColumn Header="Fecha Llegada" Binding="{Binding Fecha_Llegada, IsAsync=True}" Width="*" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Estado Pedido" Binding="{Binding EstadoEncargo, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Estado Pedido" Binding="{Binding EstadoEncargo, IsAsync=False}" Width="*" ></DataGridTextColumn>
 
                 <DataGridTemplateColumn Header="Llegada">
                     <DataGridTemplateColumn.CellTemplate>
@@ -108,6 +108,7 @@
                                     Width="30"
                                     Height="30"
                                     Margin="10"
+                                    IsEnabled="{Binding Path=Estado, TargetNullValue=True, IsAsync=False}"
                                     Click="BtnPassProduct"
                                     BorderBrush="{x:Null}"
                                    
@@ -291,26 +292,26 @@
 
         <Grid VerticalAlignment="Center" Margin="10,5,10,5" Grid.Row="2" Background="White">
 
-            <Button Background="{StaticResource ColorBotones}"  Name="BtnFirst" Width="50px" Margin="5,0,5,0" HorizontalAlignment="Left">
+            <Button Click="BtnFirstClick" Background="{StaticResource ColorBotones}"  Name="BtnFirst" Width="50px" Margin="5,0,5,0" HorizontalAlignment="Left">
                 <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_AngleDoubleLeft" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Button>
 
-            <Button Name="BtnPrevious" Background="{StaticResource ColorBotones}"  Width="50px" Margin="75,0,5,0" HorizontalAlignment="Left">
+            <Button Click="BtnPreviousClick" Name="BtnPrevious" Background="{StaticResource ColorBotones}"  Width="50px" Margin="75,0,5,0" HorizontalAlignment="Left">
                 <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_AngleLeft" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
             </Button>
-            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <DockPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label VerticalContentAlignment="Center" Name="PageInfo" FontSize="16" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"  />
 
             </DockPanel>
 
 
 
-            <Button Background="{StaticResource ColorBotones}" Name="BtnNext" Width="50px"  Margin="5,0,75,0" HorizontalAlignment="Right">
+            <Button Click="BtnNextClick" Background="{StaticResource ColorBotones}" Name="BtnNext" Width="50px"  Margin="5,0,75,0" HorizontalAlignment="Right">
                 <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_AngleRight" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Button>
 
-            <Button Background="{StaticResource ColorBotones}" Name="BtnLast" Width="50px" Margin="5,0,5,0" HorizontalAlignment="Right">
+            <Button Click="BtnLastClick" Background="{StaticResource ColorBotones}" Name="BtnLast" Width="50px" Margin="5,0,5,0" HorizontalAlignment="Right">
                 <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_AngleDoubleRight" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Button>
 

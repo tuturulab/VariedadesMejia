@@ -172,9 +172,7 @@ namespace Variedades.Views
 
         }
 
-
-
-
+        
         //Si el usuario Agrega elementos a la tabla
         private void AgregarATablaClick(object sender, RoutedEventArgs e)
         {
@@ -584,6 +582,7 @@ namespace Variedades.Views
                             Garantia_Original = i.Garantia,
                             Precio_Costo = i.Precio_Costo,
                             Proveedor = ViewModel.GetProveedor(i.ProveedorId),
+                            Estado = "Completado"
                         };
 
                         var ListProductos = new List<Especificacion_producto>();
@@ -593,6 +592,7 @@ namespace Variedades.Views
                         {
                             Especificacion_Productos = ListProductos,
                             DetalleProveedor = ProveedorAsignado,
+                            
                         };
 
                         //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;

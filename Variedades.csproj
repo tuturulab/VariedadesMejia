@@ -122,6 +122,10 @@
     <Compile Include="Migrations\201903302356046_estadoProveedor3.Designer.cs">
       <DependentUpon>201903302356046_estadoProveedor3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904060321597_EstadoEncargo.cs" />
+    <Compile Include="Migrations\201904060321597_EstadoEncargo.Designer.cs">
+      <DependentUpon>201904060321597_EstadoEncargo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -331,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903302356046_estadoProveedor3.resx">
       <DependentUpon>201903302356046_estadoProveedor3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904060321597_EstadoEncargo.resx">
+      <DependentUpon>201904060321597_EstadoEncargo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

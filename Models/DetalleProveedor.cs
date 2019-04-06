@@ -21,8 +21,11 @@ namespace Variedades.Models
         public DateTime? Fecha_Llegada { get; set; }
         public DateTime? Garantia_Original { get; set; }
         
+        public string Estado { get; set; }
+
         //En espera, llegó
-        public string EstadoEncargo { get; set; }
+        [NotMapped]
+        public string EstadoEncargo { get { if (this.Estado == null) return "En trámite"; else return "Concluido"; } }
 
         public string Numero_Seguimiento { get ; set; }
 

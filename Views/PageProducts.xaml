@@ -114,6 +114,7 @@
                                     Margin="10"
                                     Click="BtnAgregarExistencia"
                                     BorderBrush="{x:Null}"
+                                 
                                    
                                     >
                                 <Button.Content>
