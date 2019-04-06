@@ -23,16 +23,15 @@
                 </DockPanel>
 
                 <DockPanel Height="200">
-                    <DataGrid Visibility="Visible" Name="ImportacionesDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    <DataGrid Visibility="Visible" ItemsSource="{Binding ListaProductosImportados}" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Nombre, IsAsync=False}" Header="Nombre" Width="2*" ></DataGridTextColumn>
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Precio, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Cantidad, IsAsync=False}" Header="Cantidad" Width="2*" ></DataGridTextColumn>
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Proveedor, IsAsync=False}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
-
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding NombreProveedor, IsAsync=False}" Header="NombreProveedor" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Precio, IsAsync=False}" Header="Precio*Unidad" Width="3*" ></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
@@ -64,36 +63,65 @@
 
             <StackPanel Width="390" Margin="10,10,10,5" HorizontalAlignment="Right" >
 
-                <DockPanel Margin="00,10,0,10">
+                <DockPanel Margin="10,10,0,10">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="Cuantos Llegaron" Width="120px"></TextBlock>
+                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="200" Height="30" Name="LlegadaTextBox" Margin="30,0,20,0"/>
+                </DockPanel>
+                
+                <DockPanel Margin="10,10,0,10">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Insertado de Productos" Width="120px"></TextBlock>
-                    
+                    <Button Click="BtnSelectProducto" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="30,0,0,0"  VerticalAlignment="Center" Width="80px" Content="Existente"  Height="40px">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Click="BtnInsertarProducto" Name="AddButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,0"  VerticalAlignment="Center" Width="80px" Content="Nuevo"  Height="40px">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </DockPanel>
 
-                <Button Click="BtnInsertarProducto" Name="AddButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Un Producto"  Height="40px">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
+                
 
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
-                                </Trigger>
-                            </Style.Triggers>
-
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-                <DockPanel Height="200">
+                <DockPanel Height="230">
                     <DataGrid ItemsSource="{Binding ListaProductosDeUnaImportacion}" SelectedItem="{Binding SelectedProductImportado, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
@@ -103,7 +131,7 @@
 
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding Precio, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
                             
-                            <DataGridTextColumn Binding="{Binding NombreProveedor, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding NombreProveedor, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
 
                             <DataGridTemplateColumn  Header="Eliminar">
                                 <DataGridTemplateColumn.CellTemplate>

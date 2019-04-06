@@ -36,10 +36,12 @@ namespace Variedades.Views
 
         ObservableCollection<EspecificacionClass> EspecificacionList;
 
+        DetalleProveedor ProveedorFromImportacion;
+
         //Numero de registros
         public int n = 0;
 
-        public AddToExistentProductWindow(PageViewModel viewModel, Producto _Product)
+        public AddToExistentProductWindow(PageViewModel viewModel, Producto _Product, DetalleProveedor proveedor_Producto = null)
         {
             ViewModel = viewModel;
             DataContext = ViewModel;
@@ -53,6 +55,10 @@ namespace Variedades.Views
 
             NombreTextBox.Text = _Product.Marca + " " + _Product.Modelo;
 
+            //Se lo asignamos en caso de que fuese llamado por la ventana ImportacionToProduct
+            if (proveedor_Producto != null)
+                ProveedorFromImportacion = proveedor_Producto;
+            
 
             //Seteamos los campos editables en la tabla
             if (_Product.Imei_Disponible == 1)
@@ -182,26 +188,37 @@ namespace Variedades.Views
                     ElementoProducto.Producto = _Producto;
                     ElementoProducto.Descripcion = i.Descripcion;
 
-                    var ProveedorAsignado = new DetalleProveedor()
+                    //Conecto a la importacion conectada con el pedido de un cliente en caso de que sea llamada desde la ventana ImportacionToProductWindow
+                    if (ProveedorFromImportacion != null)
                     {
-                        Garantia_Original = i.Garantia,
-                        Precio_Costo = i.Precio_Costo,
-                        Proveedor = ViewModel.GetProveedor(i.ProveedorId),
-                    };
+                        ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorFromImportacion;
+                        ElementoProducto.Proveedor_Producto = ProveedorFromImportacion.Proveedor_Productos.FirstOrDefault();
+                    }
 
-                    var ListProductos = new List<Especificacion_producto>();
-                    ListProductos.Add(ElementoProducto);
-
-                    var TablaSeguimiento = new Proveedor_producto()
+                    else
                     {
-                        Especificacion_Productos = ListProductos,
-                        DetalleProveedor = ProveedorAsignado,
-                    };
+                        var ProveedorAsignado = new DetalleProveedor()
+                        {
+                            Garantia_Original = i.Garantia,
+                            Precio_Costo = i.Precio_Costo,
+                            Proveedor = ViewModel.GetProveedor(i.ProveedorId),
+                        };
 
-                    //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
+                        var ListProductos = new List<Especificacion_producto>();
+                        ListProductos.Add(ElementoProducto);
 
-                    ElementoProducto.Proveedor_Producto = TablaSeguimiento;
-                    ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
+                        var TablaSeguimiento = new Proveedor_producto()
+                        {
+                            Especificacion_Productos = ListProductos,
+                            DetalleProveedor = ProveedorAsignado,
+                        };
+
+                        //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
+
+                        ElementoProducto.Proveedor_Producto = TablaSeguimiento;
+                        ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
+
+                    }
 
                     //Si la columnas estan visibles, agregar el dato insertado a la relacion
                     if (GarantiaColumn.Visibility == Visibility.Visible)

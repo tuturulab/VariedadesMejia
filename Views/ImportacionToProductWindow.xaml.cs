@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +23,7 @@ namespace Variedades.Views
     {
         PageViewModel ViewModel;
         MultiUsesProductoWindow window;
-        DetalleProveedor Importacion;
+        Proveedor_producto Importacion;
 
 
         public ImportacionToProductWindow(PageViewModel viewModel)
@@ -32,9 +33,13 @@ namespace Variedades.Views
             ViewModel = viewModel;
             DataContext = ViewModel;
 
-            Importacion = ViewModel.SelectedImportacion;
+            Importacion = ViewModel.SelectedImportacion.Proveedor_Productos.FirstOrDefault();
 
-            SeguimientoTextBox.Text = Importacion.Numero_Seguimiento;
+            var DetalleImportacion = ViewModel.SelectedImportacion;
+
+            SeguimientoTextBox.Text = DetalleImportacion.Numero_Seguimiento;
+
+            ViewModel.SetProductosImportados(DetalleImportacion);
         }
 
         public void EventoInsertarProductos(object sender, EventArgs e)
@@ -57,10 +62,22 @@ namespace Variedades.Views
             //
         }
 
+        //Validar que en los campos numericos solo se escriban numeros
+        public void TextBoxNumerico(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void BtnSelectProducto (object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
         private void BtnInsertarProducto (object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            window = new MultiUsesProductoWindow(ViewModel);
+            window = new MultiUsesProductoWindow(ViewModel, null ,Importacion);
 
             //Subscribimos al evento
             window.UpdateImportaciones += new EventHandler(EventoInsertarProductos);

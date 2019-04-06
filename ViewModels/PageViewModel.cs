@@ -51,7 +51,6 @@ namespace Variedades
         }
 
         
-
         //Observable for ImeiList
         private ObservableCollection<ImeiClass> ImeiList;
         public ObservableCollection<ImeiClass> ImeiCollection
@@ -67,6 +66,16 @@ namespace Variedades
             get { return ProductosDeUnaImportacion; }
             set { ProductosDeUnaImportacion = value; NotifyPropertyChanged("ProductosDeUnaImportacion"); }
         }
+
+
+        //Observable for Pedidos Importados in ImportacionToProductWindow
+        private ObservableCollection<Producto_importado> ProductosImportados;
+        public ObservableCollection<Producto_importado> ListaProductosImportados
+        {
+            get { return ProductosImportados; }
+            set { ProductosImportados = value; NotifyPropertyChanged("ListaProductosImportados"); }
+        }
+
 
         //Observable for ProductsList
         private ObservableCollection<Producto> Productos;
@@ -84,9 +93,9 @@ namespace Variedades
             set { especificacion_Productos = value; NotifyPropertyChanged("ProductosEspecificacionesCollection"); }
         }
 
-        private ObservableCollection<Proveedor> Proveedors;
 
         //Observable for ProveedorFull List
+        private ObservableCollection<Proveedor> Proveedors;
         public ObservableCollection<Proveedor> ProveedorFullCollection
         {
             get { return Proveedors; }
@@ -262,6 +271,13 @@ namespace Variedades
             UpdateAll();
         }
 
+        //Rellenamos los productos importados de una importacion para la ventana ImportacionToProductWindow
+        public void SetProductosImportados (DetalleProveedor Importacion)
+        {
+            List<Producto_importado> ListaProductos = Importacion.Producto_Importados.ToList();
+            ListaProductosImportados = new ObservableCollection<Producto_importado>(ListaProductos);
+        }
+
         public void SetEspecificacionPedido (Pedido pedido)
         {
             var Especifificaciones = pedido.Especificaciones_pedido.ToList();
@@ -271,9 +287,9 @@ namespace Variedades
         //Rellena los datos insertados
         public void SearchProductosDeUnaImportacion ()
         {
-            ProductosDeUnaImportacion.Clear();
-            List<Especificacion_producto> _Productos = _context.Especificacion_producto.Where(t => t.Proveedor_Producto == this.SelectedImportacion.Proveedor_Productos).ToList();
-            ProductosDeUnaImportacion = new ObservableCollection<Especificacion_producto>(_Productos);
+            var import = SelectedImportacion;
+            //List<Especificacion_producto> _Productos = _context.Especificacion_producto.Where(t => t.Proveedor_Producto.DetalleProveedor.IdDetalleProveedor == import.IdDetalleProveedor).ToList();
+            //ProductosDeUnaImportacion = new ObservableCollection<Especificacion_producto>(_Productos);
         }
 
         //Find Proveedor

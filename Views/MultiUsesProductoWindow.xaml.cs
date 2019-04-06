@@ -47,9 +47,9 @@ namespace Variedades.Views
         ObservableCollection<EspecificacionClass> EspecificacionList;
 
         ObservableCollection<Especificacion_producto> EspecificacionesToEditProductoList;
+        private Proveedor_producto ImportacionProducto;
 
-
-        public MultiUsesProductoWindow(PageViewModel viewModel, Producto producto = null)
+        public MultiUsesProductoWindow(PageViewModel viewModel, Producto producto = null, Proveedor_producto proveedor_ = null)
         {
             InitializeComponent();
             ViewModel = viewModel;
@@ -68,6 +68,8 @@ namespace Variedades.Views
                 SetAndChangeWindowAppareance();
             }
 
+            if (proveedor_ != null)
+                ImportacionProducto = proveedor_;
         }
 
         //Validación
@@ -577,29 +579,38 @@ namespace Variedades.Views
                         ElementoProducto.Producto = _Product;
                         ElementoProducto.Descripcion = i.Descripcion;
 
-                        var ProveedorAsignado = new DetalleProveedor()
+                        if (ImportacionProducto != null)
                         {
-                            Garantia_Original = i.Garantia,
-                            Precio_Costo = i.Precio_Costo,
-                            Proveedor = ViewModel.GetProveedor(i.ProveedorId),
-                            Estado = "Completado"
-                        };
+                            ElementoProducto.Proveedor_Producto = ImportacionProducto;
+                        }
 
-                        var ListProductos = new List<Especificacion_producto>();
-                        ListProductos.Add(ElementoProducto);
-
-                        var TablaSeguimiento = new Proveedor_producto()
+                        else
                         {
-                            Especificacion_Productos = ListProductos,
-                            DetalleProveedor = ProveedorAsignado,
-                            
-                        };
+                            var ProveedorAsignado = new DetalleProveedor()
+                            {
+                                Garantia_Original = i.Garantia,
+                                Precio_Costo = i.Precio_Costo,
+                                Proveedor = ViewModel.GetProveedor(i.ProveedorId),
+                                Estado = "Completado"
+                            };
 
-                        //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
+                            var ListProductos = new List<Especificacion_producto>();
+                            ListProductos.Add(ElementoProducto);
 
-                        ElementoProducto.Proveedor_Producto = TablaSeguimiento;
-                        ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
+                            var TablaSeguimiento = new Proveedor_producto()
+                            {
+                                Especificacion_Productos = ListProductos,
+                                DetalleProveedor = ProveedorAsignado,
 
+                            };
+
+                            //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
+
+                            ElementoProducto.Proveedor_Producto = TablaSeguimiento;
+                            ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
+                        }
+
+                       
                         //Si la columnas estan visibles, agregar el dato insertado a la relacion
                         if (GarantiaColumn.Visibility == Visibility.Visible)
                         {
@@ -619,29 +630,45 @@ namespace Variedades.Views
 
                     EventoPaginacion();
 
-                    if (MessageBox.Show("Se ha ingresado correctamente el producto, ¿desea seguir ingresando productos?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                    if (ImportacionProducto == null)
                     {
-                        this.Close();
+                        if (MessageBox.Show("Se ha ingresado correctamente el producto, ¿desea seguir ingresando productos?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                        {
+                            this.Close();
+                        }
+                        else
+                        {
+                            //Limpiamos los campos para volver a insertar
+                            TextBoxCantidad.Text = String.Empty;
+                            MarcaTextBox.Text = String.Empty;
+                            ModeloTextBox.Text = String.Empty;
+                            CategoriaComboBox.Text = String.Empty;
+                            PrecioTextBox.Text = String.Empty;
+                            ComboBoxImei.Text = String.Empty;
+                            ComboBoxGarantia.Text = String.Empty;
+                            ComboBoxCredito.Text = String.Empty;
+                            TxtGarantiaVenta.Text = String.Empty;
+
+                            EspecificacionList.Clear();
+
+                            PanelImei.Visibility = Visibility.Hidden;
+                            ProductosDatagrid.Visibility = Visibility.Hidden;
+                            InsertarButton.Visibility = Visibility.Hidden;
+                        }
                     }
+
                     else
                     {
-                        //Limpiamos los campos para volver a insertar
-                        TextBoxCantidad.Text = String.Empty;
-                        MarcaTextBox.Text = String.Empty;
-                        ModeloTextBox.Text = String.Empty;
-                        CategoriaComboBox.Text = String.Empty;
-                        PrecioTextBox.Text = String.Empty;
-                        ComboBoxImei.Text = String.Empty;
-                        ComboBoxGarantia.Text = String.Empty;
-                        ComboBoxCredito.Text = String.Empty;
-                        TxtGarantiaVenta.Text = String.Empty;
+                        MessageBoxResult result = MessageBox.Show("Se ha insertado y seleccionado correctamente, clickee para cerrar esta ventana",
+                                                      "Confirmation",
+                                                      MessageBoxButton.OK,
+                                                      MessageBoxImage.Exclamation);
 
-                        EspecificacionList.Clear();
+                        EventoImportacion();
 
-                        PanelImei.Visibility = Visibility.Hidden;
-                        ProductosDatagrid.Visibility = Visibility.Hidden;
-                        InsertarButton.Visibility = Visibility.Hidden;
+                        this.Close();
                     }
+                    
 
 
                 }
