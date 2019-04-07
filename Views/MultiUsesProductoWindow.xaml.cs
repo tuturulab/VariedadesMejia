@@ -69,7 +69,11 @@ namespace Variedades.Views
             }
 
             if (proveedor_ != null)
+            {
                 ImportacionProducto = proveedor_;
+                Console.WriteLine(proveedor_.Idproveedor_producto);
+            }
+                
         }
 
         //Validación

@@ -64,7 +64,7 @@ namespace Variedades
         public ObservableCollection<Especificacion_producto> ListaProductosDeUnaImportacion
         {
             get { return ProductosDeUnaImportacion; }
-            set { ProductosDeUnaImportacion = value; NotifyPropertyChanged("ProductosDeUnaImportacion"); }
+            set { ProductosDeUnaImportacion = value; NotifyPropertyChanged("ListaProductosDeUnaImportacion"); }
         }
 
 
@@ -196,6 +196,13 @@ namespace Variedades
             set { _SelectedVenta = value; NotifyPropertyChanged("SelectedVenta"); }
         }
 
+        private Especificacion_producto _SelectedEspecificacionProductoInImport;
+        public Especificacion_producto SelectedEspecificacionProductoInImport
+        {
+            get { return _SelectedEspecificacionProductoInImport; }
+            set { _SelectedEspecificacionProductoInImport = value; NotifyPropertyChanged("SelectedEspecificacionProductoInImport"); }
+        }
+
         private Especificacion_pedido _SelectedEspecificacion_Pedido;
         public Especificacion_pedido SelectedEspecificacionPedido
         {
@@ -285,11 +292,12 @@ namespace Variedades
         }
 
         //Rellena los datos insertados
-        public void SearchProductosDeUnaImportacion ()
+        public void SearchProductosDeUnaImportacion (int Importacion)
         {
-            var import = SelectedImportacion;
-            //List<Especificacion_producto> _Productos = _context.Especificacion_producto.Where(t => t.Proveedor_Producto.DetalleProveedor.IdDetalleProveedor == import.IdDetalleProveedor).ToList();
-            //ProductosDeUnaImportacion = new ObservableCollection<Especificacion_producto>(_Productos);
+            var _Productos = _context.Especificacion_producto.Where(t => t.Proveedor_Producto.Idproveedor_producto == Importacion).ToList();
+
+            ListaProductosDeUnaImportacion = new ObservableCollection<Especificacion_producto>(_Productos);
+            
         }
 
         //Find Proveedor
@@ -312,6 +320,15 @@ namespace Variedades
         {
             _context.Producto.Add(product);
             _context.SaveChanges();
+        }
+
+        public void DeleteEspecificacionProducto ()
+        {          
+            _context.Especificacion_producto.Remove(SelectedEspecificacionProductoInImport);
+            ListaProductosDeUnaImportacion.Remove(SelectedEspecificacionProductoInImport);
+            _context.SaveChanges();
+            
+            UpdateProducts(3);
         }
         
         //Agregar existencias a x producto

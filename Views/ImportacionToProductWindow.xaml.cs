@@ -23,8 +23,10 @@ namespace Variedades.Views
     {
         PageViewModel ViewModel;
         MultiUsesProductoWindow window;
-        Proveedor_producto Importacion;
+        public Proveedor_producto Importacion;
 
+
+        int IdProveedorProducto;
 
         public ImportacionToProductWindow(PageViewModel viewModel)
         {
@@ -33,9 +35,13 @@ namespace Variedades.Views
             ViewModel = viewModel;
             DataContext = ViewModel;
 
-            Importacion = ViewModel.SelectedImportacion.Proveedor_Productos.FirstOrDefault();
-
             var DetalleImportacion = ViewModel.SelectedImportacion;
+
+            foreach (var i in DetalleImportacion.Proveedor_Productos)
+            {
+                IdProveedorProducto = i.Idproveedor_producto;
+                Importacion = i;
+            }
 
             SeguimientoTextBox.Text = DetalleImportacion.Numero_Seguimiento;
 
@@ -49,7 +55,7 @@ namespace Variedades.Views
 
         private void UtilidadProductos()
         {
-            ViewModel.SearchProductosDeUnaImportacion();
+            ViewModel.SearchProductosDeUnaImportacion(IdProveedorProducto);
         }
 
         private void BtnCompletar (object sender, RoutedEventArgs e)
@@ -59,7 +65,15 @@ namespace Variedades.Views
 
         private void BtnBorrarClick (object sender, RoutedEventArgs e)
         {
-            //
+            if (MessageBox.Show("Esta seguro que desea eliminar este producto?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            {
+
+            }
+            else
+            {
+                ViewModel.DeleteEspecificacionProducto();
+            }
+            
         }
 
         //Validar que en los campos numericos solo se escriban numeros
@@ -77,7 +91,7 @@ namespace Variedades.Views
         private void BtnInsertarProducto (object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            window = new MultiUsesProductoWindow(ViewModel, null ,Importacion);
+            window = new MultiUsesProductoWindow(ViewModel, null , Importacion );
 
             //Subscribimos al evento
             window.UpdateImportaciones += new EventHandler(EventoInsertarProductos);

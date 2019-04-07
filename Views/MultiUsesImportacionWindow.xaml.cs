@@ -133,6 +133,13 @@ namespace Variedades.Views
 
                     ViewModel.AddImportacion(detalleProveedor, ProductosList.ToList() );
 
+                    var Proveedor = new Proveedor_producto()
+                    {
+                        DetalleProveedor = detalleProveedor      
+                    };
+
+                    ViewModel.AddProveedorProducto(Proveedor);
+
                     //Cambiamos el estado del pedido
                     ViewModel.ChangeEstatusPedido(_pedido);
 

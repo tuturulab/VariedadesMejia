@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Variedades.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         Title="ImportacionToProductWindow" Height="480" Width="900">
     <Grid>
 
@@ -122,16 +123,16 @@
                 
 
                 <DockPanel Height="230">
-                    <DataGrid ItemsSource="{Binding ListaProductosDeUnaImportacion}" SelectedItem="{Binding SelectedProductImportado, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    <DataGrid SelectedItem="{Binding SelectedEspecificacionProductoInImport, Mode=TwoWay}" ItemsSource="{Binding ListaProductosDeUnaImportacion}"  Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
 
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Nombre, IsAsync=True}" Header="Nombre" Width="2*" ></DataGridTextColumn>
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Nombre, IsAsync=False}" Header="Nombre" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Descripcion, IsAsync=False}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
 
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Precio, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Precio, IsAsync=False}" Header="Precio" Width="2*" ></DataGridTextColumn>
                             
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding NombreProveedor, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding NombreProveedor, IsAsync=False}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
 
                             <DataGridTemplateColumn  Header="Eliminar">
                                 <DataGridTemplateColumn.CellTemplate>
