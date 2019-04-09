@@ -361,7 +361,7 @@ namespace Variedades.Views
                     }
                     
                     //Insertamos si tiene opcion de credito este producto
-                    if (ComboBoxCredito.Text == "Si")
+                    if(ComboBoxCredito.Text == "Si")
                     {
                         _Product.Credito_Disponible = 1;
                     }
@@ -371,7 +371,7 @@ namespace Variedades.Views
                     }
 
                     //Insertamos si tiene Imei este producto
-                    if (ComboBoxCredito.Text == "Si")
+                    if (ComboBoxImei.Text == "Si")
                     {
                         _Product.Imei_Disponible = 1;
                     }

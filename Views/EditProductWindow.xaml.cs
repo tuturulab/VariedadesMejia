@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -38,30 +39,32 @@ namespace Variedades.Views
             if(producto != null)
             {
                 _Producto = producto;
-                EspecificacionList = new ObservableCollection<Especificacion_producto>();
+                SetDataToWindow();
 
+                //Add items to observable
+                EspecificacionList = new ObservableCollection<Especificacion_producto>();
                 _Producto.Especificaciones_producto.ToList().ForEach(item =>
                 {
                     EspecificacionList.Add(item);
                 });
-
-                //Emei check
-                if(_Producto.Imei_Disponible != 1)
-                {
-                    ImeiColumn.Visibility = Visibility.Hidden;
-                }
-
                 ProductosDatagrid.ItemsSource = EspecificacionList;
             }
         }
 
         private void SetDataToWindow()
         {
+
+            //Emei check
+            if (_Producto.Imei_Disponible != 1)
+            {
+                ImeiColumn.Visibility = Visibility.Hidden;
+            }
+
             MarcaTextBox.Text = _Producto.Marca;
             ModeloTextBox.Text = _Producto.Modelo;
             PrecioTextBox.Text = _Producto.Precio_Venta.ToString();
             ComboBoxCredito.SelectedIndex = _Producto.Credito_Disponible == 1 ? 0 : 1;
-            ComboBoxImei.SelectedIndex = _Producto.Imei_Disponible == 1 ? 1 : 0;
+            ComboBoxImei.SelectedIndex = _Producto.Imei_Disponible == 1 ? 0 : 1;
             ComboBoxGarantia.SelectedIndex = _Producto.Garantia_Disponible == 1 ? 0 : 1;
             CategoriaComboBox.SelectedIndex = GetIndexCategory(_Producto.Tipo_Producto);
 
@@ -104,7 +107,13 @@ namespace Variedades.Views
 
         public void BtnActualizarProducto(object sender, RoutedEventArgs e)
         {
-
+            //Get data from xaml
+            _Producto.Marca = MarcaTextBox.Text;
+            _Producto.Modelo = ModeloTextBox.Text;
+            _Producto.Precio_Venta = int.Parse(PrecioTextBox.Text);
+            _Producto.Credito_Disponible = ComboBoxCredito.Text == "Si" ? 1 : 0;
+            _Producto.Imei_Disponible = ComboBoxCredito.Text == "Si" ? 1 : 0;
+            _Producto.Garantia_Disponible = ComboBoxGarantia.Text == "Si" ? 1 : 0;
         }
 
         //Validar que en los campos numericos solo se escriban numeros

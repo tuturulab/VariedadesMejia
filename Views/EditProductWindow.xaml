@@ -155,8 +155,8 @@
                     <DataGrid SelectedItem="{Binding SelectedEspecificacionProductoInProductoWindow, Mode=TwoWay}" DataGridCell.GotFocus="DataGrid_CellGotFocus"  Visibility="Hidden" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
-                            
-                            <DataGridTextColumn x:Name="ImeiColumn" Binding="{Binding Imei, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
+
+                            <DataGridTextColumn x:Name="ImeiColumn" Binding="{Binding IMEI, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
                             <DataGridTextColumn x:Name="Precio_CostoColumn" Binding="{Binding PrecioCosto, IsAsync=True}" Header="Precio Costo" Width="3*"></DataGridTextColumn>
                             <DataGridTextColumn x:Name="Descripcion_Column" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="3*"></DataGridTextColumn>
                             <DataGridTextColumn x:Name="Garantia_Column" Binding="{Binding Garantia, IsAsync=True}" Header="Garantia" Width="3*"></DataGridTextColumn>
