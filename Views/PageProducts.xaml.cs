@@ -40,8 +40,6 @@ namespace Variedades.Views
             UtilidadPaginacion();
         }
 
-
-
         //Pdf export method
         /*private void ExportToPdf(object sender, RoutedEventArgs e)
         {
