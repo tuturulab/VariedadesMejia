@@ -63,7 +63,14 @@ namespace Variedades.Views
                 _SelectedProduct = producto;
                 EspecificacionesToEditProductoList = new ObservableCollection<Especificacion_producto>();
                 _SelectedProduct.Especificaciones_producto.ToList().ForEach(item => EspecificacionesToEditProductoList.Add(item));
+                ProductosDatagrid.ItemsSource = null;
                 ProductosDatagrid.ItemsSource = EspecificacionesToEditProductoList;
+
+
+                EspecificacionesToEditProductoList.ToList().ForEach(item =>
+                {
+                    Debug.WriteLine("Imei: " + item.IMEI + "Nombre: " + item.Nombre + "Precio: " + item.Precio);
+                });
 
                 SetAndChangeWindowAppareance();
             }
@@ -400,7 +407,6 @@ namespace Variedades.Views
         {
             _Proveedor = ViewModel.SelectedProveedorWindow;
             TextBoxProveedor.Text = _Proveedor.Empresa;
-   
         }
 
         private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)

@@ -40,6 +40,54 @@ namespace Variedades.Views
             UtilidadPaginacion();
         }
 
+        //Pdf export method
+        /*private void ExportToPdf(object sender, RoutedEventArgs e)
+        {
+
+            Document document = new Document(PageSize.A4);
+            PdfWriter.GetInstance(document, new FileStream(@"c:\outputs\sample.pdf", FileMode.Create));
+            document.Open();
+
+            IEnumerable<Producto> itemsOnGrid = product_table.ItemsSource as IEnumerable<Producto>;
+
+            //Tabla de header
+            PdfPTable tableHeader = new PdfPTable(4);
+
+            tableHeader.AddCell(new PdfPCell(new Phrase("IMEI", FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD, BaseColor.BLUE))));
+            tableHeader.AddCell(new PdfPCell(new Phrase("Marca", FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD, BaseColor.BLUE))));
+            tableHeader.AddCell(new PdfPCell(new Phrase("Modelo", FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD, BaseColor.BLUE))));
+            tableHeader.AddCell(new PdfPCell(new Phrase("Precio", FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.BOLD, BaseColor.BLUE))));
+
+            document.Add(tableHeader);
+
+
+            //Count numero de items en ienumerable
+            int countProducts = 0;
+            using (IEnumerator<Producto> enumerator = itemsOnGrid.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                    countProducts++;
+            }
+
+            //body tabla -- datos de todos los productos
+            PdfPTable tableBody = new PdfPTable(4);
+
+            //add items to body
+            foreach (Producto p in itemsOnGrid)
+            {
+                //Debug.WriteLine(p.Marca);
+                tableBody.AddCell(new PdfPCell(new Phrase(p.Imei_Disponible.ToString())));
+                tableBody.AddCell(new PdfPCell(new Phrase(p.Marca)));
+                tableBody.AddCell(new PdfPCell(new Phrase(p.Modelo)));
+                tableBody.AddCell(new PdfPCell(new Phrase(p.Precio_Venta.ToString())));
+            }
+
+            document.Add(tableBody);
+            document.Close();
+
+            Process.Start(@"c:\outputs\sample.pdf");
+        }*/
+
         //Botones de edicion
         private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
