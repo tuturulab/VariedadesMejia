@@ -168,6 +168,9 @@
     <Compile Include="Views\AddToExistentProductWindow.xaml.cs">
       <DependentUpon>AddToExistentProductWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditProductWindow.xaml.cs">
+      <DependentUpon>EditProductWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MultiUsesClienteWindow.xaml.cs">
       <DependentUpon>MultiUsesClienteWindow.xaml</DependentUpon>
     </Compile>
@@ -228,6 +231,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddToExistentProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

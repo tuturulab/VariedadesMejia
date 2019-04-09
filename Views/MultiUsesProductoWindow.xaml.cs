@@ -58,7 +58,7 @@ namespace Variedades.Views
             EspecificacionList = new ObservableCollection<EspecificacionClass>();
             ProductosDatagrid.ItemsSource = EspecificacionList;
 
-            if (producto != null)
+            /*if (producto != null)
             {
                 _SelectedProduct = producto;
                 EspecificacionesToEditProductoList = new ObservableCollection<Especificacion_producto>();
@@ -73,7 +73,7 @@ namespace Variedades.Views
                 });
 
                 SetAndChangeWindowAppareance();
-            }
+            }*/
 
             if (proveedor_ != null)
             {
@@ -96,53 +96,53 @@ namespace Variedades.Views
             UpdateImportaciones?.Invoke(this, EventArgs.Empty);
         }
 
-        private void SetAndChangeWindowAppareance()
-        {
-            WindowTitle.Text = "Editar Producto";
-            MarcaTextBox.Text = _SelectedProduct.Marca;
-            ModeloTextBox.Text = _SelectedProduct.Modelo;
-            PrecioTextBox.Text = _SelectedProduct.Precio_Venta.ToString();
-            ComboBoxCredito.SelectedIndex = _SelectedProduct.Credito_Disponible == 1 ? 0 : 1;
-            ComboBoxImei.SelectedIndex = _SelectedProduct.Imei_Disponible == 1 ? 1 : 0;
-            ComboBoxGarantia.SelectedIndex = _SelectedProduct.Garantia_Disponible == 1 ? 0 : 1;
-            CategoriaComboBox.SelectedIndex = GetIndexCategory(_SelectedProduct.Tipo_Producto);
+        //private void SetAndChangeWindowAppareance()
+        //{
+        //    WindowTitle.Text = "Editar Producto";
+        //    MarcaTextBox.Text = _SelectedProduct.Marca;
+        //    ModeloTextBox.Text = _SelectedProduct.Modelo;
+        //    PrecioTextBox.Text = _SelectedProduct.Precio_Venta.ToString();
+        //    ComboBoxCredito.SelectedIndex = _SelectedProduct.Credito_Disponible == 1 ? 0 : 1;
+        //    ComboBoxImei.SelectedIndex = _SelectedProduct.Imei_Disponible == 1 ? 1 : 0;
+        //    ComboBoxGarantia.SelectedIndex = _SelectedProduct.Garantia_Disponible == 1 ? 0 : 1;
+        //    CategoriaComboBox.SelectedIndex = GetIndexCategory(_SelectedProduct.Tipo_Producto);
 
-            if(ComboBoxImei.Text == "Si")
-            {
-                ImeiColumn.Visibility = Visibility.Visible;
-            }
+        //    if(ComboBoxImei.Text == "Si")
+        //    {
+        //        ImeiColumn.Visibility = Visibility.Visible;
+        //    }
 
-            if (ComboBoxGarantia.Text == "Si")
-            {
-                GarantiaColumn.Visibility = Visibility.Visible;
-            }
+        //    if (ComboBoxGarantia.Text == "Si")
+        //    {
+        //        GarantiaColumn.Visibility = Visibility.Visible;
+        //    }
 
-            if (ComboBoxGarantia.SelectedIndex > -1 && ComboBoxImei.SelectedIndex > -1)
-            {
-                //EspecificacionList.Clear();
-                ChangeBetweenImei();
+        //    if (ComboBoxGarantia.SelectedIndex > -1 && ComboBoxImei.SelectedIndex > -1)
+        //    {
+        //        //EspecificacionList.Clear();
+        //        ChangeBetweenImei();
 
-                /*
-                TextBoxProveedor.Text = _SelectedProduct.Especificaciones_producto.FirstOrDefault()
-                    .Proveedor_Producto.DetalleProveedor.Proveedor
-                    .Empresa;
+        //        /*
+        //        TextBoxProveedor.Text = _SelectedProduct.Especificaciones_producto.FirstOrDefault()
+        //            .Proveedor_Producto.DetalleProveedor.Proveedor
+        //            .Empresa;
 
-                */
+        //        */
 
-                TextBoxCantidad.Text = _SelectedProduct.NumeroDeEspecificacionesDisponibles.ToString();
-                TextBoxCantidad.IsEnabled = false;
+        //        TextBoxCantidad.Text = _SelectedProduct.NumeroDeEspecificacionesDisponibles.ToString();
+        //        TextBoxCantidad.IsEnabled = false;
 
-                AgregarATablaBtn.IsEnabled = false;
-                AgregarATablaBtn.Visibility = Visibility.Hidden;
+        //        AgregarATablaBtn.IsEnabled = false;
+        //        AgregarATablaBtn.Visibility = Visibility.Hidden;
 
-                //Grid productos - Cambiar los bindings
-                //Este codigo no funciona Maykol revisar aca ya que cambiamos la propiedad que se va a mostrar en el codigo xaml con el fin de que solo se puedan meter numeros
-                //ImeiColumn.Binding = new Binding("IMEI");
-                //Precio_Costo_Column.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Precio_Costo");
-                //ProveedorColumn.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Proveedor.Empresa");
+        //        //Grid productos - Cambiar los bindings
+        //        //Este codigo no funciona Maykol revisar aca ya que cambiamos la propiedad que se va a mostrar en el codigo xaml con el fin de que solo se puedan meter numeros
+        //        //ImeiColumn.Binding = new Binding("IMEI");
+        //        //Precio_Costo_Column.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Precio_Costo");
+        //        //ProveedorColumn.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Proveedor.Empresa");
 
-            }
-        }
+        //    }
+        //}
 
         public int GetIndexCategory(string Category)
         {
@@ -315,18 +315,18 @@ namespace Variedades.Views
         //Acción del boton insertar
         private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
-            if (EspecificacionesToEditProductoList != null && EspecificacionesToEditProductoList.Count > 0)
-            {
-                _SelectedProduct.Especificaciones_producto.Clear();
+            //if (EspecificacionesToEditProductoList != null && EspecificacionesToEditProductoList.Count > 0)
+            //{
+            //    _SelectedProduct.Especificaciones_producto.Clear();
 
-                foreach (var item in EspecificacionesToEditProductoList)
-                {
-                    _SelectedProduct.Especificaciones_producto.Add(item);
-                }
+            //    foreach (var item in EspecificacionesToEditProductoList)
+            //    {
+            //        _SelectedProduct.Especificaciones_producto.Add(item);
+            //    }
 
-                ViewModel.UpdateProduct(_SelectedProduct);
-                this.Close();
-            }
+            //    ViewModel.UpdateProduct(_SelectedProduct);
+            //    this.Close();
+            //}
 
             if (EspecificacionList.Count < 1)
             {

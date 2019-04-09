@@ -1,4 +1,4 @@
-﻿<Window x:Class="Variedades.Views.MultiUsesProductoWindow"
+﻿<Window x:Class="Variedades.Views.EditProductWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,7 +15,7 @@
         <StackPanel Background="white">
 
             <DockPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
-                <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Agregar Producto" FontSize="17" ></TextBlock>
+                <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Editar producto" FontSize="17" ></TextBlock>
             </DockPanel>
 
             <StackPanel Margin="10,10,10,5">
@@ -40,7 +40,7 @@
                         <ComboBoxItem FontSize="16">Si</ComboBoxItem>
                         <ComboBoxItem FontSize="16">No</ComboBoxItem>
                     </ComboBox>
-                   
+
 
                     <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" Text="Imei" Width="30px"></TextBlock>
 
@@ -84,15 +84,14 @@
                             <TextBox IsReadOnly="True" Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxProveedor" FontSize="20" HorizontalAlignment="Left" Width="140" Height="30" Margin="30,0,20,0"/>
                         </DockPanel>
 
-                        
+
                         <DockPanel Margin="0,10,0,0">
                             <TextBlock HorizontalAlignment="Left" Visibility="Visible" Margin="0,0,0,0" Name="TxtCantidad" VerticalAlignment="Center" Text="Cantidad" Width="100px"></TextBlock>
                             <TextBox Visibility="Visible" PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" Name="TextBoxCantidad" FontSize="20" HorizontalAlignment="Left" Width="140" Height="30" Margin="30,0,20,0"/>
                         </DockPanel>
-                        
+
 
                     </StackPanel>
-
 
 
 
@@ -149,48 +148,20 @@
 
                     </StackPanel>
 
-
-
-                    <Button Name="AgregarATablaBtn" Click="AgregarATablaClick" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="10,0,0,0"  VerticalAlignment="Center" Width="80px" Content="Agregar"  Height="60px">
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-
-                            </Style>
-                        </Button.Style>
-                    </Button>
-
-
-
                 </DockPanel>
-                
- 
+
+
                 <DockPanel Height="170">
                     <DataGrid SelectedItem="{Binding SelectedEspecificacionProductoInProductoWindow, Mode=TwoWay}" DataGridCell.GotFocus="DataGrid_CellGotFocus"  Visibility="Hidden" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
-                           
-
+                            
+                            <DataGridTextColumn x:Name="ImeiColumn" Binding="{Binding Imei, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
+                            <DataGridTextColumn x:Name="Precio_CostoColumn" Binding="{Binding PrecioCosto, IsAsync=True}" Header="Precio Costo" Width="3*"></DataGridTextColumn>
+                            <DataGridTextColumn x:Name="Descripcion_Column" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="3*"></DataGridTextColumn>
+                            <DataGridTextColumn x:Name="Garantia_Column" Binding="{Binding Garantia, IsAsync=True}" Header="Garantia" Width="3*"></DataGridTextColumn>
                             <!--
-                             <DataGridTextColumn MaxWidth="0" x:Name="Precio_Costo_Column" Binding="{Binding Precio_Costo, IsAsync=True}" Header="PrecioCosto" Width="2*" ></DataGridTextColumn>
-                                <DataGridTextColumn x:Name="ImeiColumn" Binding="{Binding Imei, IsAsync=True}" Header="IMEI" Width="3*" ></DataGridTextColumn>
-                            -->
-                            <DataGridTemplateColumn Header="Imei" x:Name="ImeiColumn" Width="2*">
+                                                        <DataGridTemplateColumn Header="Imei" x:Name="ImeiColumn" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Imei}"/>
@@ -251,9 +222,6 @@
                                         Click="BtnBorrarClick"
                                         BorderBrush="{x:Null}"
                                             >
-
-
-                                            <!--    -->
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
                                                     <Setter Property="Background" Value="#dc4636" />
@@ -283,13 +251,13 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
+                            -->
 
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
 
-                <Button Visibility="Hidden" Name="InsertarButton" Click="BtnInsertarProducto" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Producto"  Height="40px">
+                <Button Visibility="Hidden" Name="InsertarButton" Click="BtnActualizarProducto" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Producto"  Height="40px">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="{StaticResource ColorBotones}" />
