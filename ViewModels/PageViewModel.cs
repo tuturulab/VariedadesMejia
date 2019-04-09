@@ -353,7 +353,7 @@ namespace Variedades
             ListaProductosDeUnaImportacion.Remove(SelectedEspecificacionProductoInImport);
             _context.SaveChanges();
             
-            UpdateProducts(3);
+            UpdateProducts(10);
         }
         
         //Agregar existencias a x producto
@@ -387,7 +387,7 @@ namespace Variedades
                 Console.WriteLine("Error al agregar en la base de datos");
             }
 
-            UpdateProducts(3);
+            UpdateProducts(10);
         }
 
         //Metodo de busqueda en la base de datos 
@@ -401,12 +401,12 @@ namespace Variedades
 
 
 
-                UpdateProducts(3, SearchProductList);
+                UpdateProducts(10, SearchProductList);
             }
             else
             {
                 SearchProductList = null;
-                UpdateProducts(3, ProductosList);
+                UpdateProducts(10, ProductosList);
             }
 
         }
@@ -522,7 +522,7 @@ namespace Variedades
 
 
             //Obtenemos el total de calculos
-            float calculo = (float)count / 3;
+            float calculo = (float)count / 10;
 
             
             //Si es decimal le sumamos 1
@@ -564,11 +564,11 @@ namespace Variedades
             //ClientesFullCollection = new ObservableCollection<Cliente>( _context.Cliente.ToList());
             
             //Paginacion
-            PagedProductTable.SomeMethod(ProductosList, 3);
-            PagedClientTable.SomeMethod(ClientesList, 3);
-            PagedVentaTable.SomeMethod(VentasList, 3);
-            PagedImportacionTable.SomeMethod(ImportacionList, 3);
-            PagedPedidoTable.SomeMethod(PedidosList, 3);
+            PagedProductTable.SomeMethod(ProductosList, 10);
+            PagedClientTable.SomeMethod(ClientesList, 10);
+            PagedVentaTable.SomeMethod(VentasList, 10);
+            PagedImportacionTable.SomeMethod(ImportacionList, 10);
+            PagedPedidoTable.SomeMethod(PedidosList, 10);
 
             //Vaciando las colecciones anteriores
             ProductosCollection = null;
@@ -609,7 +609,7 @@ namespace Variedades
             _context.Entry(entity).CurrentValues.SetValues(item);
             _context.SaveChanges();
 
-            UpdateProducts(3);
+            UpdateProducts(10);
         }
 
         //Modulo de borrado
@@ -625,7 +625,7 @@ namespace Variedades
             _context.SaveChanges();
 
             //Actualizamos el datagrid
-            UpdateProducts(3);
+            UpdateProducts(10);
             
         }
 
@@ -657,7 +657,7 @@ namespace Variedades
 
           
 
-            UpdateClients(3);
+            UpdateClients(10);
         }
 
         // Botones de la paginacion de la tabla productos
@@ -667,12 +667,12 @@ namespace Variedades
             if (FiltroClient != string.Empty)
             {
                 SearchClientList = ClientesList.Where(c => (c.Nombre.ToLower().Contains(FiltroClient.ToLower())) || (c.Compania.ToLower().Contains(FiltroClient.ToLower())) ).ToList();
-                UpdateClients(3, SearchClientList);
+                UpdateClients(10, SearchClientList);
             }
             else
             {
                 SearchClientList = null;
-                UpdateClients(3, ClientesList);
+                UpdateClients(10, ClientesList);
             }
 
         }
@@ -766,7 +766,7 @@ namespace Variedades
         {
             int count = ClientesList.Count;
             //Obtenemos el total de calculos
-            float calculo = (float)count / 3;
+            float calculo = (float)count / 10;
             
             //Si es decimal le sumamos 1
             if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
@@ -803,7 +803,7 @@ namespace Variedades
             _context.SaveChanges();
 
             //Actualizamos el datagrid
-            UpdateClients(3);
+            UpdateClients(10);
         }
 
 
@@ -819,12 +819,12 @@ namespace Variedades
             if (FiltroVenta != string.Empty)
             {
                 SearchVentaList = VentasList.Where(v => (v.Orden_Pagare.ToLower().Contains(FiltroVenta.ToLower())) || (v.Cliente.Nombre.ToLower().Contains(FiltroVenta.ToLower()))).ToList();
-                UpdateVentas(3, SearchVentaList);
+                UpdateVentas(10, SearchVentaList);
             }
             else
             {
                 SearchVentaList = null;
-                UpdateVentas(3, VentasList);
+                UpdateVentas(10, VentasList);
             }
 
         }
@@ -842,7 +842,7 @@ namespace Variedades
                 Console.WriteLine("Error al agregar en la base de datos");
             }
 
-            UpdateVentas(3);
+            UpdateVentas(10);
         }
 
         // Botones de la paginacion de la tabla productos
@@ -936,7 +936,7 @@ namespace Variedades
         {
             int count = VentasList.Count;
             //Obtenemos el total de calculos
-            float calculo = (float)count / 3;
+            float calculo = (float)count / 10;
 
             //Si es decimal le sumamos 1
             if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
@@ -972,7 +972,7 @@ namespace Variedades
             _context.SaveChanges();
 
             //Actualizamos el datagrid
-            UpdateVentas(3);
+            UpdateVentas(10);
         }
 
         /*
@@ -995,7 +995,7 @@ namespace Variedades
             
             _context.SaveChanges();
 
-            UpdateImportacion(3);
+            UpdateImportacion(10);
         }
 
         // Botones de la paginacion de la tabla productos
@@ -1047,7 +1047,7 @@ namespace Variedades
         {
             int count = ImportacionList.Count;
             //Obtenemos el total de calculos
-            float calculo = (float)count / 3;
+            float calculo = (float)count / 10;
 
             //Si es decimal le sumamos 1
             if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
@@ -1071,20 +1071,16 @@ namespace Variedades
         }
 
         //Modulo de borrado de venta
-        public void DeleteImportacion(int id)
+        public void DeleteImportacion(DetalleProveedor _import)
         {
-            //Buscamos el producto seleccionado y lo eliminamos de la base de datos
-            var venta = _context.Pedido.Find(id);
-            _context.Pedido.Remove(venta);
-
-            //Eliminar del observable collection
-            //Pedido.Remove(venta);
-
-            //Guardamos los cambios de la base de datos
-            _context.SaveChanges();
-
+            if (_import != null)
+            {
+                _context.DetalleProveedor.Remove(_import);
+                _context.SaveChanges();
+            }
+            
             //Actualizamos el datagrid
-            UpdateImportacion(3);
+            UpdateImportacion(10);
         }
 
         /*
@@ -1100,7 +1096,7 @@ namespace Variedades
             {
                 _context.Pedido.Add(_Pedido);
                 _context.SaveChanges();
-                UpdatePedido(3);
+                UpdatePedido(10);
             }
             catch
             {
@@ -1166,7 +1162,7 @@ namespace Variedades
         {
             int count = PedidosList.Count;
             //Obtenemos el total de calculos
-            float calculo = (float)count / 3;
+            float calculo = (float)count / 10;
 
             //Si es decimal le sumamos 1
             if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
@@ -1203,7 +1199,7 @@ namespace Variedades
             _context.SaveChanges();
 
             //Actualizamos el datagrid
-            UpdatePedido(3);
+            UpdatePedido(10);
         }
 
         //Metodo de busqueda en la base de datos 
@@ -1215,12 +1211,12 @@ namespace Variedades
 
                 SearchPedidoList = PedidosList.Where(s => s.cliente.Nombre.ToLower().Contains(filtro.ToLower() )).ToList();
 
-                UpdatePedido(3,SearchPedidoList);
+                UpdatePedido(10,SearchPedidoList);
             }
             else
             {
                 SearchPedidoList = null;
-                UpdatePedido(3);
+                UpdatePedido(10);
             }
 
         }

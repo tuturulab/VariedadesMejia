@@ -139,21 +139,15 @@ namespace Variedades.Views
 
         private void BtnBorrarClick(object sender, RoutedEventArgs e)
         {
-            //Obtenemos el Id del Producto seleccionado 
-            object item = product_table.SelectedItem;
-            string IdImportacion = (product_table.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
-            string Nombre = (product_table.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text + " " +
-                (product_table.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
+            Models.DetalleProveedor _import = ViewModel.SelectedImportacion;
 
-            //Pestaña de confirmación
-
-            if (MessageBox.Show(" Estás seguro que deseas eliminar el pedido de importacion: " + Nombre + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (MessageBox.Show(" Estás seguro que deseas eliminar el pedido de importacion con N# Seguimiento: " + _import.Numero_Seguimiento + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
                 //
             }
             else
             {
-                ViewModel.DeleteImportacion(int.Parse(IdImportacion));
+                ViewModel.DeleteImportacion(_import);
                 UtilidadPaginacion();
             }
 

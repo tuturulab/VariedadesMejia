@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Height="700" Width="600">
+        Height="700" Width="620">
     <Grid>
 
         <StackPanel Background="white">
