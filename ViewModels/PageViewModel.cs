@@ -1283,6 +1283,10 @@ namespace Variedades
             }
         }
 
+  
+
+        
+
         //Agregar Proveedor
         public void AddProveedor(Proveedor proveedor)
         {
