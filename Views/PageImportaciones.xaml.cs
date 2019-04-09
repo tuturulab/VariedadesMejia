@@ -152,5 +152,13 @@ namespace Variedades.Views
             }
 
         }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filtro = SearchBox.Text;
+
+            ViewModel.SearchImportacionList(filtro);
+
+        }
     }
 }
