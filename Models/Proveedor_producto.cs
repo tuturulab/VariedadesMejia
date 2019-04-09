@@ -15,8 +15,7 @@ namespace Variedades.Models
         [Key]
         public int Idproveedor_producto { get; set; }
         public int Cantidad_Recibida { get; set; }
-        
-
+       
         public virtual DetalleProveedor DetalleProveedor { get; set; }
 
         public virtual ICollection<Especificacion_producto> Especificacion_Productos { get; set; }

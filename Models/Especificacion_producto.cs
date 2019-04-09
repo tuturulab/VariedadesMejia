@@ -20,7 +20,9 @@ namespace Variedades.Models
         public virtual Venta Venta { get; set; }
         public virtual Producto Producto { get; set; }
 
-        
+        public double PrecioCosto { get; set; }
+        public DateTime? Garantia_Original { get; set; }
+
         //Variable para mostrar el nombre del producto al que fue asignado
         [NotMapped]
         public string Nombre { get { return Producto.Marca + " " + Producto.Modelo; } }
@@ -35,5 +37,7 @@ namespace Variedades.Models
         public string GarantiaDisponible { get { if (Producto.Garantia_Disponible == 0) return "No"; else return "Si";  } }
 
         public virtual Proveedor_producto Proveedor_Producto { get; set; }
+
+        public virtual Proveedor Proveedor { get; set; }
     }
 }

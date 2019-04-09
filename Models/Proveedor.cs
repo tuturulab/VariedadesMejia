@@ -12,7 +12,7 @@ namespace Variedades.Models
     {
         public Proveedor()
         {
-            this.DetalleProveedor = new HashSet<DetalleProveedor>();
+            this.Productos = new HashSet<Especificacion_producto>();
         }
 
         [Key]
@@ -20,6 +20,6 @@ namespace Variedades.Models
         public string Empresa { get; set; }
         public string Lugar_Importacion { get; set; }
 
-        public virtual ICollection<DetalleProveedor> DetalleProveedor { get; set; }
+        public virtual ICollection<Especificacion_producto> Productos { get; set; }
     }
 }

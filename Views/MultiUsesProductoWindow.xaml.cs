@@ -71,7 +71,6 @@ namespace Variedades.Views
             if (proveedor_ != null)
             {
                 ImportacionProducto = proveedor_;
-                Console.WriteLine(proveedor_.Idproveedor_producto);
             }
                 
         }
@@ -116,9 +115,12 @@ namespace Variedades.Views
                 //EspecificacionList.Clear();
                 ChangeBetweenImei();
 
+                /*
                 TextBoxProveedor.Text = _SelectedProduct.Especificaciones_producto.FirstOrDefault()
                     .Proveedor_Producto.DetalleProveedor.Proveedor
                     .Empresa;
+
+                */
 
                 TextBoxCantidad.Text = _SelectedProduct.NumeroDeEspecificacionesDisponibles.ToString();
                 TextBoxCantidad.IsEnabled = false;
@@ -550,6 +552,7 @@ namespace Variedades.Views
                         Modelo = ModeloTextBox.Text,
                         Precio_Venta = double.Parse(PrecioTextBox.Text),
                         Tipo_Producto = CategoriaComboBox.Text,
+                        Garantia = int.Parse(  TextBoxGarantiaVenta.Text ),
                     };
 
                     //Insertamos si el producto tiene garantia o no
@@ -572,6 +575,17 @@ namespace Variedades.Views
                         _Product.Credito_Disponible = 0;
                     }
 
+                    //Insertamos si tiene Imei este producto
+                    if (ComboBoxCredito.Text == "Si")
+                    {
+                        _Product.Imei_Disponible = 1;
+                    }
+                    else
+                    {
+                        _Product.Imei_Disponible = 0;
+                    }
+
+
                     ViewModel.AddProduct(_Product);
 
                     List<Especificacion_producto> ListaEspecificaciones = new List<Especificacion_producto>();
@@ -583,36 +597,9 @@ namespace Variedades.Views
                         ElementoProducto.Producto = _Product;
                         ElementoProducto.Descripcion = i.Descripcion;
 
-                        if (ImportacionProducto != null)
-                        {
-                            ElementoProducto.Proveedor_Producto = ImportacionProducto;
-                        }
-
-                        else
-                        {
-                            var ProveedorAsignado = new DetalleProveedor()
-                            {
-                                Garantia_Original = i.Garantia,
-                                Precio_Costo = i.Precio_Costo,
-                                Proveedor = ViewModel.GetProveedor(i.ProveedorId),
-                                Estado = "Completado"
-                            };
-
-                            var ListProductos = new List<Especificacion_producto>();
-                            ListProductos.Add(ElementoProducto);
-
-                            var TablaSeguimiento = new Proveedor_producto()
-                            {
-                                Especificacion_Productos = ListProductos,
-                                DetalleProveedor = ProveedorAsignado,
-
-                            };
-
-                            //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
-
-                            ElementoProducto.Proveedor_Producto = TablaSeguimiento;
-                            ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
-                        }
+                        ElementoProducto.Garantia_Original = i.Garantia;
+                        ElementoProducto.PrecioCosto = i.Precio_Costo;
+                        ElementoProducto.Proveedor = ViewModel.GetProveedor(i.ProveedorId);
 
                        
                         //Si la columnas estan visibles, agregar el dato insertado a la relacion
@@ -629,6 +616,7 @@ namespace Variedades.Views
                         ListaEspecificaciones.Add(ElementoProducto);
 
                     }
+
                     //Agregamos existencias al producto
                     ViewModel.AddEspecificacionProducto(ListaEspecificaciones);
 

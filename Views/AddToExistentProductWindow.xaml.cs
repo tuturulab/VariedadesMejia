@@ -24,8 +24,6 @@ namespace Variedades.Views
     {
         PageViewModel ViewModel;
 
-        private Proveedor _Proveedor;
-
         AddProveedorWindow addProveedorWindow;
         SelectProveedorWindow selectProveedorWindow;
 
@@ -36,12 +34,18 @@ namespace Variedades.Views
 
         ObservableCollection<EspecificacionClass> EspecificacionList;
 
-        DetalleProveedor ProveedorFromImportacion;
+
+        public Proveedor _Proveedor;
+
+        //Evento doble para llegar hasta ImportacionToProductWindow
+        public event EventHandler UpdateSelect;
 
         //Numero de registros
         public int n = 0;
 
-        public AddToExistentProductWindow(PageViewModel viewModel, Producto _Product, DetalleProveedor proveedor_Producto = null)
+        private Proveedor_producto ImportacionProducto;
+
+        public AddToExistentProductWindow(PageViewModel viewModel, Producto _Product, Proveedor_producto proveedor_ = null)
         {
             ViewModel = viewModel;
             DataContext = ViewModel;
@@ -56,9 +60,11 @@ namespace Variedades.Views
             NombreTextBox.Text = _Product.Marca + " " + _Product.Modelo;
 
             //Se lo asignamos en caso de que fuese llamado por la ventana ImportacionToProduct
-            if (proveedor_Producto != null)
-                ProveedorFromImportacion = proveedor_Producto;
-            
+            if (proveedor_ != null)
+            {
+                ImportacionProducto = proveedor_;
+            }
+
 
             //Seteamos los campos editables en la tabla
             if (_Product.Imei_Disponible == 1)
@@ -98,7 +104,11 @@ namespace Variedades.Views
             UpdatePagination?.Invoke(this, EventArgs.Empty);
         }
 
-       
+        //Pasa productos insertados a la ventana ImportacionToProductWindow
+        private void EventoImportacion()
+        {
+            UpdateSelect?.Invoke(this, EventArgs.Empty);
+        }
 
         private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)
         {
@@ -169,9 +179,10 @@ namespace Variedades.Views
         //Ingresar Existencias
         public void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result;
             if (EspecificacionList.Count < 1)
             {
-                MessageBoxResult result = MessageBox.Show("Por favor Especifique almenos 1 en los campo asociados a este producto",
+                result = MessageBox.Show("Por favor Agregue almenos 1 producto",
                                                  "Confirmation",
                                                  MessageBoxButton.OK,
                                                  MessageBoxImage.Exclamation);
@@ -188,38 +199,11 @@ namespace Variedades.Views
                     ElementoProducto.Producto = _Producto;
                     ElementoProducto.Descripcion = i.Descripcion;
 
-                    //Conecto a la importacion conectada con el pedido de un cliente en caso de que sea llamada desde la ventana ImportacionToProductWindow
-                    if (ProveedorFromImportacion != null)
-                    {
-                        ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorFromImportacion;
-                        ElementoProducto.Proveedor_Producto = ProveedorFromImportacion.Proveedor_Productos.FirstOrDefault();
-                    }
-
-                    else
-                    {
-                        var ProveedorAsignado = new DetalleProveedor()
-                        {
-                            Garantia_Original = i.Garantia,
-                            Precio_Costo = i.Precio_Costo,
-                            Proveedor = ViewModel.GetProveedor(i.ProveedorId),
-                        };
-
-                        var ListProductos = new List<Especificacion_producto>();
-                        ListProductos.Add(ElementoProducto);
-
-                        var TablaSeguimiento = new Proveedor_producto()
-                        {
-                            Especificacion_Productos = ListProductos,
-                            DetalleProveedor = ProveedorAsignado,
-                        };
-
-                        //ProveedorAsignado.Proveedor_producto = TablaSeguimiento;
-
-                        ElementoProducto.Proveedor_Producto = TablaSeguimiento;
-                        ElementoProducto.Proveedor_Producto.DetalleProveedor = ProveedorAsignado;
-
-                    }
-
+                    ElementoProducto.Garantia_Original = i.Garantia;
+                    ElementoProducto.PrecioCosto = i.Precio_Costo;
+                    ElementoProducto.Proveedor = ViewModel.GetProveedor(i.ProveedorId);
+                   
+                    
                     //Si la columnas estan visibles, agregar el dato insertado a la relacion
                     if (GarantiaColumn.Visibility == Visibility.Visible)
                     {
@@ -249,6 +233,12 @@ namespace Variedades.Views
                 }
 
             }
+
+            result = MessageBox.Show("Se han agregado correctamente a existencias",
+                                                "Confirmation",
+                                                MessageBoxButton.OK,
+                                                MessageBoxImage.Exclamation);
+
             this.Close();
         }
 

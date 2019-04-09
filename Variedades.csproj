@@ -126,6 +126,10 @@
     <Compile Include="Migrations\201904060321597_EstadoEncargo.Designer.cs">
       <DependentUpon>201904060321597_EstadoEncargo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904090301296_fixing-updates-change.cs" />
+    <Compile Include="Migrations\201904090301296_fixing-updates-change.Designer.cs">
+      <DependentUpon>201904090301296_fixing-updates-change.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -151,12 +155,6 @@
     </ApplicationDefinition>
     <Compile Include="Views\AddToExistentProductWindow.xaml.cs">
       <DependentUpon>AddToExistentProductWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ImportacionToProductWindow.xaml.cs">
-      <DependentUpon>ImportacionToProductWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ImportToProduct.xaml.cs">
-      <DependentUpon>ImportToProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MultiUsesClienteWindow.xaml.cs">
       <DependentUpon>MultiUsesClienteWindow.xaml</DependentUpon>
@@ -200,6 +198,9 @@
     <Compile Include="Views\SelectClientWindow.xaml.cs">
       <DependentUpon>SelectClientWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SelectFatherProduct.xaml.cs">
+      <DependentUpon>SelectFatherProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SelectPedidoWindow.xaml.cs">
       <DependentUpon>SelectPedidoWindow.xaml</DependentUpon>
     </Compile>
@@ -218,14 +219,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddToExistentProductWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ImportacionToProductWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ImportToProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,6 +278,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SelectFatherProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SelectPedidoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -338,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904060321597_EstadoEncargo.resx">
       <DependentUpon>201904060321597_EstadoEncargo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904090301296_fixing-updates-change.resx">
+      <DependentUpon>201904090301296_fixing-updates-change.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -120,14 +120,14 @@ namespace Variedades.Views
                     
                     detalleProveedor.Numero_Seguimiento = SeguimientoTextBox.Text;
 
+
+                    //Calculamos el precio total
                     double precio = 0;
 
                     foreach (var i in ProductosList.ToList() )
                     {
-                        precio = precio + i.Precio * i.Cantidad;
+                        precio = precio +  (i.Precio * i.Cantidad) ;
                     }
-
-                    Console.WriteLine(precio);
 
                     detalleProveedor.Precio_Costo = precio;
 
@@ -143,15 +143,15 @@ namespace Variedades.Views
                     //Cambiamos el estado del pedido
                     ViewModel.ChangeEstatusPedido(_pedido);
 
-                    if (MessageBox.Show("Se ha ingresado correctamente la importación, ¿desea seguir ingresando importaciones?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                    {
-                        this.Close();
-                    }
-                    else
-                    {
-                       
+                    MessageBoxResult result = MessageBox.Show("Se ha ingresado correctamente",
+                                                 "Confirmation",
+                                                 MessageBoxButton.OK,
+                                                 MessageBoxImage.Exclamation);
 
-                    }
+
+                    EventoPaginacion();
+
+                    this.Close();
                 }
             }
         }

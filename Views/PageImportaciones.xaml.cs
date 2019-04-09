@@ -14,7 +14,7 @@ namespace Variedades.Views
     {
         public PageViewModel ViewModel;
         MultiUsesImportacionWindow window;
-        ImportacionToProductWindow windowProduct;
+       
         
         //static Paging PagedTable = new Paging();
         //AgregarImportacionWindow window;
@@ -46,20 +46,11 @@ namespace Variedades.Views
             window = new MultiUsesImportacionWindow(ViewModel);
 
             //Subscribimos al evento
-            //window.UpdatePagination += new EventHandler(EventoPaginacion);
+            window.UpdatePagination += new EventHandler(EventoPaginacion);
             window.Show();
         }
 
-        private void BtnPassProduct (object sender, RoutedEventArgs e)
-        {
-            //Iniciamos ventana 
-            windowProduct = new ImportacionToProductWindow(ViewModel);
-
-
-            //Subscribimos al evento
-            windowProduct.Show();
-
-        }
+       
     
         private void BtnEditarImportacion(object sender, RoutedEventArgs e)
         {

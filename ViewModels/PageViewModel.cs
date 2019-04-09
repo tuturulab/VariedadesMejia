@@ -117,6 +117,24 @@ namespace Variedades
             set { Pedidos = value; NotifyPropertyChanged("PedidosCollection"); }
         }
 
+        //Observable for Product Father Collection
+
+        private ObservableCollection<Producto> ProductosFather;
+        public ObservableCollection<Producto> ProductosFatherCollection
+        {
+            get { return ProductosFather;  }
+            set { ProductosFather = value; NotifyPropertyChanged("ProductosFatherCollection"); }
+        }
+
+        private Producto _SelectedFatherProduct;
+        public Producto SelectedFatherProduct
+        {
+            get { return _SelectedFatherProduct; }
+            set { _SelectedFatherProduct = value; NotifyPropertyChanged("SelectedFatherProduct"); }
+        }
+
+
+
         //Observable for ImportacionList
         private ObservableCollection<DetalleProveedor> Importaciones;
         public ObservableCollection<DetalleProveedor> ImportacionesCollection
@@ -276,6 +294,13 @@ namespace Variedades
         {
             _context = new DbmejiaEntities();
             UpdateAll();
+        }
+
+        public void FillProductoFatherFullList ()
+        {
+            var Lista = _context.Producto.ToList();
+            ProductosFatherCollection = new ObservableCollection<Producto>(Lista);
+            
         }
 
         //Rellenamos los productos importados de una importacion para la ventana ImportacionToProductWindow
@@ -969,6 +994,8 @@ namespace Variedades
             _context.DetalleProveedor.Add(_Detalle);
             
             _context.SaveChanges();
+
+            UpdateImportacion(3);
         }
 
         // Botones de la paginacion de la tabla productos
