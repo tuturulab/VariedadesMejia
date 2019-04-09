@@ -983,7 +983,7 @@ namespace Variedades
 
         public void ChangeEstatusPedido(Pedido pedido)
         {
-            pedido.Estado_Pedido = "En Trámite";
+            pedido.Estado_Pedido = "Completado";
             _context.SaveChanges();
         }
 

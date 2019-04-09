@@ -97,6 +97,8 @@
                 <DataGridTextColumn Header="Cliente" Binding="{Binding NombreCliente, IsAsync=False}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Numero de Productos" Binding="{Binding NumeroProductos, IsAsync=False}" Width="*" ></DataGridTextColumn>
 
+                <DataGridTextColumn Header="Estado del pedido" Binding="{Binding Estado_Pedido, IsAsync=False}" Width="*" ></DataGridTextColumn>
+                
                 <DataGridTemplateColumn Header="Detalle">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
