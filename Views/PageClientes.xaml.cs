@@ -72,25 +72,25 @@ namespace Variedades.Views
 
         private void BtnNextClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.NextClient(3);
+            ViewModel.NextClient(10);
             UtilidadPaginacion();
         }
 
         private void BtnPreviousClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.PreviousClient(3);
+            ViewModel.PreviousClient(10);
             UtilidadPaginacion();
         }
 
         private void BtnFirstClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.FirstClient(3);
+            ViewModel.FirstClient(10);
             UtilidadPaginacion();
         }
 
         private void BtnLastClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.LastClient(3);
+            ViewModel.LastClient(10);
             UtilidadPaginacion();
         }
 
@@ -107,7 +107,7 @@ namespace Variedades.Views
             //Hotfix si se elimina el ultimo registro y se queda fuera de tabla
             if (NumeroPaginaActual > NumeroPaginaMax && NumeroPaginaMax != 0)
             {
-                ViewModel.PreviousClient(3);
+                ViewModel.PreviousClient(10);
                 NumeroPaginaActual--;
             }
 

@@ -210,9 +210,6 @@
     <Compile Include="Views\SelectClientWindow.xaml.cs">
       <DependentUpon>SelectClientWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SelectFatherProduct.xaml.cs">
-      <DependentUpon>SelectFatherProduct.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\SelectPedidoWindow.xaml.cs">
       <DependentUpon>SelectPedidoWindow.xaml</DependentUpon>
     </Compile>
@@ -287,10 +284,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SelectClientWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SelectFatherProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
