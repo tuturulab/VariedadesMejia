@@ -61,7 +61,7 @@
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Tipo de producto" Width="100px"></TextBlock>
-                    <ComboBox Width="420" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Height="30" Margin="30,0,0,0" Name="CategoriaComboBox">
+                    <ComboBox DropDownClosed="CategoriaComboBox_SelectionChanged" Width="420" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Height="30" Margin="30,0,0,0" Name="CategoriaComboBox">
                         <ComboBoxItem>Celular</ComboBoxItem>
                         <ComboBoxItem>Tablet</ComboBoxItem>
                         <ComboBoxItem>Laptop</ComboBoxItem>
@@ -257,7 +257,7 @@
                     </DataGrid>
                 </DockPanel>
 
-                <Button Visibility="Hidden" Name="InsertarButton" Click="BtnActualizarProducto" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Producto"  Height="40px">
+                <Button Visibility="Hidden" Name="UpdateButton" Click="BtnActualizarProducto" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Content="Actualizar Producto"  Height="40px">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="{StaticResource ColorBotones}" />
