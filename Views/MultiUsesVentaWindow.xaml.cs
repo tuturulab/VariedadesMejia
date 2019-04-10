@@ -130,22 +130,6 @@ namespace Variedades.Views
                             if (TipoPagoComboBox.Text == "Crédito")
                             {
                                 venta.VentaCompletada = "No";
-                                if (CantidadTextBox.Text != String.Empty)
-                                {
-                                    int cantidad = int.Parse(CantidadTextBox.Text);
-
-                                    for (int i = 0; i < cantidad; i++)
-                                    {
-                                        var pago = new Pago
-                                        {
-                                            Venta = venta
-                                           
-                                        };
-                                        Pagos.Add(pago);
-                                    }
-
-                                    //venta.Pagos = Pagos;
-                                }
                             }
                             //Venta al contado
                             else
@@ -153,9 +137,11 @@ namespace Variedades.Views
                                 venta.VentaCompletada = "Si";
                                 var pago = new Pago
                                 {
-                                    Venta = venta
+                                    Venta = venta,
+                                    Monto = TotalPago,
+                                    Fecha_Pago = DateTime.Now
                                 };
-                                Pagos.Add(pago);
+                                venta.Pagos.Add(pago);
                             }
 
                             //Si el producto vendido tiene un cliente asociado
@@ -163,9 +149,10 @@ namespace Variedades.Views
                             {
                                 venta.Cliente = cliente;
                             }
-
+                            
                             //Finalmente agregamos la venta y actualizamos la pagina venta
                             ViewModel.AddVenta(venta);
+
                             EventoPaginacion();
 
                             if (MessageBox.Show("Se ha ingresado correctamente la venta, ¿desea seguir ingresando ventas?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
@@ -185,7 +172,6 @@ namespace Variedades.Views
                                 PagosPanel.Visibility = Visibility.Hidden;
 
                                 ProductosList.Clear();
-                                ProductosDatagrid.Visibility = Visibility.Hidden;
 
                                 ViewModel.FillEspecificacionesProducts();
                             }

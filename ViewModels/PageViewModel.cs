@@ -133,6 +133,20 @@ namespace Variedades
             set { _SelectedFatherProduct = value; NotifyPropertyChanged("SelectedFatherProduct"); }
         }
 
+        //Ventana Detalle Venta
+        private ObservableCollection<Pago> Pagos;
+        public ObservableCollection<Pago> PagosCollection
+        {
+            get { return Pagos; }
+            set { Pagos = value; NotifyPropertyChanged("PagosCollection"); }
+        }
+
+        private ObservableCollection<Especificacion_producto> ProductosComprados;
+        public ObservableCollection<Especificacion_producto> ProductosCompradosCollection
+        {
+            get { return ProductosComprados;  }
+            set { ProductosComprados = value; NotifyPropertyChanged("ProductosCompradosCollection"); }
+        }
 
 
         //Observable for ImportacionList
@@ -301,6 +315,41 @@ namespace Variedades
             var Lista = _context.Producto.ToList();
             ProductosFatherCollection = new ObservableCollection<Producto>(Lista);
             
+        }
+
+        public void AddPago ( Pago pago_)
+        {
+            _context.Pago.Add(pago_);
+            _context.SaveChanges();
+        }
+
+        public void VerificarVentaEstado (Venta venta_)
+        {
+            double saldo = 0;
+            foreach (var i in venta_.Pagos)
+            {
+                saldo = saldo + i.Monto;
+            }
+
+            if (saldo == venta_.MontoVenta)
+            {
+                var ventaNueva = _context.Venta.Find(venta_.IdVenta);
+                ventaNueva.VentaCompletada = "Si";
+
+                _context.SaveChanges();
+            }
+        }
+
+        public void FillProductosDeUnaVenta (int idVenta)
+        {
+            var Lista = _context.Venta.Find(idVenta).Especificaciones_producto.ToList();
+
+            ProductosCompradosCollection = new ObservableCollection<Especificacion_producto>(Lista);
+
+            var ListaPagos = _context.Venta.Find(idVenta).Pagos.ToList();
+
+            PagosCollection = new ObservableCollection<Pago>(ListaPagos);
+
         }
 
         //Rellenamos los productos importados de una importacion para la ventana ImportacionToProductWindow
@@ -666,7 +715,7 @@ namespace Variedades
         {
             if (FiltroClient != string.Empty)
             {
-                SearchClientList = ClientesList.Where(c => (c.Nombre.ToLower().Contains(FiltroClient.ToLower())) || (c.Compania.ToLower().Contains(FiltroClient.ToLower())) ).ToList();
+                SearchClientList = ClientesList.Where(c => (c.Nombre.ToLower().Contains(FiltroClient.ToLower())) || (c.Compania.ToLower().Contains(FiltroClient.ToLower())) || (c.Cedula.ToLower().Contains(FiltroClient.ToLower() ) ) ).ToList()  ;
                 UpdateClients(10, SearchClientList);
             }
             else

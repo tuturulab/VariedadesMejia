@@ -1,0 +1,69 @@
+﻿<Window x:Class="Variedades.Views.AgregarPagoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Variedades.Views"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Title="AgregarPagoWindow" Height="350" Width="450">
+    <Grid>
+        <StackPanel Background="white">
+
+            <DockPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
+                <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Agregar un Pago" FontSize="17" ></TextBlock>
+            </DockPanel>
+
+            <StackPanel Margin="10,10,10,5">
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Monto Total de Venta" Width="120px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="260" Height="30" Name="TotalTextBox" Margin="30,0,0,0"/>
+
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+
+                    <TextBlock VerticalAlignment="Center" Text="Saldo pendiente" Width="120px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="260" Height="30" Name="SaldoTextBox" Margin="30,0,0,0"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,20,0,0">
+
+                    <TextBlock VerticalAlignment="Center" Text="Monto a Pagar" Width="120px"></TextBlock>
+                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="260" Height="30" Name="AbonoTextBox" Margin="30,0,0,0"/>
+                </DockPanel>
+                
+                
+                
+            </StackPanel>
+
+            <StackPanel>
+                <Button  Name="InsertarButton" Click="BtnInsertarPago" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Pago"  Height="40px">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Window>

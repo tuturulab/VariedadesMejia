@@ -93,6 +93,7 @@
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="" MaxWidth="0"  Binding="{Binding IdCliente, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Cédula" Binding="{Binding Cedula, IsAsync=True}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre, IsAsync=True}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email, IsAsync=True}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Domicilio" Binding="{Binding Domicilio, IsAsync=True}" Width="*" ></DataGridTextColumn>

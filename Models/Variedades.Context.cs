@@ -36,6 +36,11 @@ namespace Variedades.Models
                 .WithOptional(x => x.Producto)
                 .WillCascadeOnDelete(true);
 
+            modelBuilder.Entity<Cliente>()
+               .HasMany(c => c.Ventas)
+               .WithOptional(x => x.Cliente)
+               .WillCascadeOnDelete(true);
+
             modelBuilder.Entity<Proveedor_producto>()
                 .HasMany(x => x.Especificacion_Productos)
                 .WithOptional(x => x.Proveedor_Producto)
@@ -51,26 +56,36 @@ namespace Variedades.Models
                 .WithOptional(x => x.Cliente)
                 .WillCascadeOnDelete(true);
 
-            modelBuilder.Entity<Cliente>()
-                .HasMany(c => c.Ventas)
-                .WithOptional(x => x.Cliente)
-                .WillCascadeOnDelete(true);
-
             modelBuilder.Entity<Venta>()
                 .HasMany(c => c.Pagos)
                 .WithOptional(c => c.Venta)
-                .WillCascadeOnDelete(true);
-
-            modelBuilder.Entity<Cliente>()
-                .HasMany(c => c.Pedidos)
-                .WithOptional(c => c.cliente)
                 .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Pedido>()
                 .HasMany(c => c.Especificaciones_pedido)
                 .WithOptional(c => c.Pedido)
                 .WillCascadeOnDelete(true);
-            
+
+            modelBuilder.Entity<DetalleProveedor>()
+               .HasMany(c => c.Producto_Importados)
+               .WithOptional(c => c.DetalleProveedor)
+               .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Producto>()
+               .HasMany(c => c.Especificaciones_producto)
+               .WithOptional(c => c.Producto)
+               .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Venta>()
+                .HasMany(c => c.Especificaciones_producto)
+                .WithOptional(c => c.Venta)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Proveedor>()
+                .HasMany(c => c.Productos)
+                .WithOptional(c => c.Proveedor)
+                .WillCascadeOnDelete(true);
+
         }
     }
 }

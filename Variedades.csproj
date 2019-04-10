@@ -142,6 +142,10 @@
     <Compile Include="Migrations\201904090301296_fixing-updates-change.Designer.cs">
       <DependentUpon>201904090301296_fixing-updates-change.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904101413435_cascade-deletes.cs" />
+    <Compile Include="Migrations\201904101413435_cascade-deletes.Designer.cs">
+      <DependentUpon>201904101413435_cascade-deletes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -167,6 +171,12 @@
     </ApplicationDefinition>
     <Compile Include="Views\AddToExistentProductWindow.xaml.cs">
       <DependentUpon>AddToExistentProductWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgregarPagoWindow.xaml.cs">
+      <DependentUpon>AgregarPagoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetalleVentaWindow.xaml.cs">
+      <DependentUpon>DetalleVentaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MultiUsesClienteWindow.xaml.cs">
       <DependentUpon>MultiUsesClienteWindow.xaml</DependentUpon>
@@ -228,6 +238,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddToExistentProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgregarPagoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetalleVentaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -343,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904090301296_fixing-updates-change.resx">
       <DependentUpon>201904090301296_fixing-updates-change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904101413435_cascade-deletes.resx">
+      <DependentUpon>201904101413435_cascade-deletes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

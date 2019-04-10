@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Variedades.Views"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="SelectClientWindow" Height="550" Width="600">
     <Grid>
         <StackPanel Background="white">

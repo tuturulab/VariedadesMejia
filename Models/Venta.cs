@@ -29,7 +29,7 @@ namespace Variedades.Models
         public virtual Cliente Cliente { get; set; }
         
         [NotMapped]
-        public String NombreCliente { get { if (this.Cliente != null) return Cliente.Nombre; else return "No tiene cliente"; } }
+        public String NombreCliente { get { if (this.Cliente != null) return Cliente.Cedula; else return "No tiene cliente"; } }
 
         [NotMapped]
         public int CantidadProductos { get { return Especificaciones_producto.Count; } }

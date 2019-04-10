@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Variedades.Utils;
+using Variedades.Models;
 
 namespace Variedades.Views
 {
@@ -16,7 +17,10 @@ namespace Variedades.Views
     {
         public PageViewModel ViewModel;
         static Paging PagedTable = new Paging();
+
         MultiUsesVentaWindow window;
+        DetalleVentaWindow ventaWindow;
+        AgregarPagoWindow windowPagos;
 
         //Numeros a mostrar de pagina
         public int NumeroPaginaActual;
@@ -52,6 +56,25 @@ namespace Variedades.Views
         private void BtnEditarVenta(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void BtnAgregarPago (object sender, RoutedEventArgs e)
+        {
+            //Iniciamos la ventana de detallar pagos
+            Venta venta = ViewModel.SelectedVenta;
+            windowPagos = new AgregarPagoWindow(ViewModel, venta);
+
+            windowPagos.UpdatePagination += new EventHandler(EventoPaginacion);
+            windowPagos.Show();
+        }
+
+        private void BtnDetalleVenta (object sender, RoutedEventArgs e)
+        {
+            //Iniciamos la ventana de detallar un producto
+            Venta venta = ViewModel.SelectedVenta;
+
+            ventaWindow = new DetalleVentaWindow(ViewModel, venta );
+            ventaWindow.Show();
         }
 
 
