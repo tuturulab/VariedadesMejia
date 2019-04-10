@@ -177,6 +177,8 @@
     </Compile>
     <Compile Include="Views\DetalleVentaWindow.xaml.cs">
       <DependentUpon>DetalleVentaWindow.xaml</DependentUpon>
+    <Compile Include="Views\EditProductWindow.xaml.cs">
+      <DependentUpon>EditProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MultiUsesClienteWindow.xaml.cs">
       <DependentUpon>MultiUsesClienteWindow.xaml</DependentUpon>
@@ -246,6 +248,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetalleVentaWindow.xaml">
+    <Page Include="Views\EditProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

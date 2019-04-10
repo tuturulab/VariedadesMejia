@@ -55,7 +55,7 @@
 
                     </Button>
 
-                    <TextBox Name="SearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0"/>
+                    <TextBox Name="SearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0" TextChanged="SearchBox_TextChanged"/>
                    
                 </DockPanel>
 

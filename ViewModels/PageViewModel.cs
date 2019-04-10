@@ -867,7 +867,7 @@ namespace Variedades
 
             if (FiltroVenta != string.Empty)
             {
-                SearchVentaList = VentasList.Where(v => (v.Orden_Pagare.ToLower().Contains(FiltroVenta.ToLower())) || (v.Cliente.Nombre.ToLower().Contains(FiltroVenta.ToLower()))).ToList();
+                SearchVentaList = VentasList.Where(v => (v.Cliente.Nombre.ToLower().Contains(FiltroVenta.ToLower()))).ToList();
                 UpdateVentas(10, SearchVentaList);
             }
             else
@@ -1327,6 +1327,23 @@ namespace Variedades
                 ClientesFullCollection = new ObservableCollection<Cliente>(_context.Cliente.ToList());
             }
         }
+
+
+        public void SearchImportacionList(string Filtro)
+        {
+            if(Filtro != string.Empty)
+            {
+                ImportacionCollection = new ObservableCollection<DetalleProveedor>(_context.DetalleProveedor.Where(s => (s.Numero_Seguimiento.ToLower().Contains(Filtro.ToLower()))));
+            }
+            else
+            {
+                ImportacionCollection = new ObservableCollection<DetalleProveedor>(_context.DetalleProveedor.ToList());
+            }
+        }
+
+  
+
+        
 
         //Agregar Proveedor
         public void AddProveedor(Proveedor proveedor)

@@ -58,5 +58,12 @@ namespace Variedades.Views
                 this.Close();
             }
         }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filtro = SearchBar.Text;
+
+            ViewModel.SearchPedido(filtro);
+        }
     }
 }

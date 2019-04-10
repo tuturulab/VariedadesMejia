@@ -16,7 +16,7 @@
             </DockPanel>
 
             <DockPanel>
-                <TextBox Name="SearchBar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450px" Margin="30,0,0,0" FontSize="20"></TextBox>
+                <TextBox Name="SearchBar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450px" Margin="30,0,0,0" FontSize="20" TextChanged="SearchBar_TextChanged"></TextBox>
                 <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="45,0,5,0" HorizontalAlignment="Left">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
