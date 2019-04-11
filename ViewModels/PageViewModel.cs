@@ -1361,6 +1361,22 @@ namespace Variedades
         }
 
 
+        //Busqueda en SelectProductWindow
+
+        public void SearchProductoselect(string filtro)
+        {
+            if(filtro != string.Empty)
+            {
+                ProductosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(_context.Especificacion_producto.Where(s => ((s.Producto.Marca.ToLower().Contains(filtro.ToLower())) || (s.Producto.Modelo.ToLower().Contains(filtro.ToLower())) || (s.Descripcion.ToLower().Contains(filtro.ToLower()))) && (s.Venta == null)));
+            }
+            else
+            {
+                ProductosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(_context.Especificacion_producto.Where(t => (t.Venta ==null)).ToList());
+            }
+            
+        }
+
+
         public void SearchImportacionList(string Filtro)
         {
             if(Filtro != string.Empty)

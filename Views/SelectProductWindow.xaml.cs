@@ -63,5 +63,12 @@ namespace Variedades.Views
             }
 
         }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filtro = SearchBar.Text;
+
+            ViewModel.SearchProductoselect(filtro);
+        }
     }
 }
