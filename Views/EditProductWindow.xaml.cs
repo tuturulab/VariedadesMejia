@@ -121,6 +121,7 @@ namespace Variedades.Views
             _Producto.Credito_Disponible = ComboBoxCredito.Text == "Si" ? 1 : 0;
             _Producto.Imei_Disponible = ComboBoxImei.Text == "Si" ? 1 : 0;
             _Producto.Garantia_Disponible = ComboBoxGarantia.Text == "Si" ? 1 : 0;
+            _Producto.Garantia = int.Parse(TextBoxGarantiaVenta.Text);
 
             ICollection<Especificacion_producto> i_especificacion_Productos = EspecificacionList as ICollection<Especificacion_producto>;
 

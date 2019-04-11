@@ -307,6 +307,13 @@ namespace Variedades
             set { _SelectedTelefonoAdd = value; NotifyPropertyChanged("SelectedTelefonoAdd"); }
         }
 
+        private Telefono _SelectedTelefono;
+        public Telefono SelectedEditTelefono
+        {
+            get { return _SelectedTelefono; }
+            set { _SelectedTelefono = value; NotifyPropertyChanged("SelectedEditTelefono"); }
+        }
+
         //Selected Client in SelectClientWindow
         private Cliente _SelectedClientWindow;
         public Cliente SelectedClientWindow
@@ -756,6 +763,21 @@ namespace Variedades
             }
 
           
+
+            UpdateClients(10);
+        }
+
+        //Update cliente
+        public void UpdateCliente<T>(T item) where T : Cliente
+        {
+            var entity = _context.Cliente.Find(item.IdCliente);
+            if (entity == null)
+            {
+                return;
+            }
+
+            _context.Entry(entity).CurrentValues.SetValues(item);
+            _context.SaveChanges();
 
             UpdateClients(10);
         }
