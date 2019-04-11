@@ -346,9 +346,13 @@ namespace Variedades.Views
                         Marca = MarcaTextBox.Text,
                         Modelo = ModeloTextBox.Text,
                         Precio_Venta = double.Parse(PrecioTextBox.Text),
-                        Tipo_Producto = CategoriaComboBox.Text,
-                        Garantia = int.Parse(  TextBoxGarantiaVenta.Text ),
+                        Tipo_Producto = CategoriaComboBox.Text
                     };
+
+                    if (String.IsNullOrEmpty(TextBoxGarantiaVenta.Text) != false && ComboBoxGarantia.Text == "Si"  )
+                    {
+                        _Product.Garantia = int.Parse(TextBoxGarantiaVenta.Text);
+                    }
 
                     //Insertamos si el producto tiene garantia o no
                     if (ComboBoxGarantia.Text == "Si")
