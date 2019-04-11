@@ -53,6 +53,11 @@ namespace Variedades.Views
 
         private void SetDataToWindow()
         {
+            //If has garantia
+            if(_Producto.Garantia_Disponible == 1)
+            {
+                PanelGarantia.Visibility = Visibility.Visible;
+            }
 
             //Emei check
             if (_Producto.Imei_Disponible != 1)
@@ -67,6 +72,8 @@ namespace Variedades.Views
             ComboBoxImei.SelectedIndex = _Producto.Imei_Disponible == 1 ? 0 : 1;
             ComboBoxGarantia.SelectedIndex = _Producto.Garantia_Disponible == 1 ? 0 : 1;
             CategoriaComboBox.SelectedIndex = GetIndexCategory(_Producto.Tipo_Producto);
+            TextBoxProveedor.Text = _Producto.Especificaciones_producto.FirstOrDefault().Proveedor.Empresa;
+            TextBoxGarantiaVenta.Text = _Producto.Garantia.ToString();
 
             if (ComboBoxImei.Text == "Si")
             {
@@ -107,13 +114,57 @@ namespace Variedades.Views
 
         public void BtnActualizarProducto(object sender, RoutedEventArgs e)
         {
-            //Get data from xaml
+            //Get data from view
             _Producto.Marca = MarcaTextBox.Text;
             _Producto.Modelo = ModeloTextBox.Text;
             _Producto.Precio_Venta = int.Parse(PrecioTextBox.Text);
             _Producto.Credito_Disponible = ComboBoxCredito.Text == "Si" ? 1 : 0;
-            _Producto.Imei_Disponible = ComboBoxCredito.Text == "Si" ? 1 : 0;
+            _Producto.Imei_Disponible = ComboBoxImei.Text == "Si" ? 1 : 0;
             _Producto.Garantia_Disponible = ComboBoxGarantia.Text == "Si" ? 1 : 0;
+
+            ICollection<Especificacion_producto> i_especificacion_Productos = EspecificacionList as ICollection<Especificacion_producto>;
+
+            //Remove previous especs
+            //_Producto.Especificaciones_producto.Clear();
+
+            //Set grid data
+            i_especificacion_Productos.Zip(_Producto.Especificaciones_producto, (toItem, item) => 
+            {
+                item.IMEI = toItem.IMEI;
+                item.PrecioCosto = toItem.PrecioCosto;
+                item.Garantia = toItem.Garantia;
+                return true;
+            });
+
+            //Set new proveedor if we have
+            if (_Proveedor != null)
+            {
+                _Producto.Especificaciones_producto.ToList().ForEach(item => item.Proveedor = pageViewModel.GetProveedor(_Proveedor.IdProveedor));
+            }
+            else
+            {
+                Debug.WriteLine("Proveedor is null");
+            }
+
+            //if Emei is no
+            //then delete all emais
+            if (ComboBoxImei.Text == "No")
+            {
+                _Producto.Especificaciones_producto.ToList().ForEach(item => item.IMEI = null);
+            }
+
+            //if garantia is no
+            //
+            if(ComboBoxGarantia.Text == "No")
+            {
+                _Producto.Garantia = null;
+            }
+
+            //Do update
+            pageViewModel.UpdateProduct(_Producto);
+
+            ///Close window
+            this.Close();
         }
 
         //Validar que en los campos numericos solo se escriban numeros
@@ -175,7 +226,7 @@ namespace Variedades.Views
             //Si se seleccionaron las dos opciones
             if (ComboBoxGarantia.SelectedIndex > -1 && ComboBoxImei.SelectedIndex > -1)
             {
-                EspecificacionList.Clear();
+                //EspecificacionList.Clear();
                 //EspecificacionesToEditProductoList.Clear();
                 ChangeBetweenImei();
             }
@@ -223,7 +274,7 @@ namespace Variedades.Views
         {
             PanelImei.Visibility = Visibility.Visible;
             ProductosDatagrid.Visibility = Visibility.Visible;
-            InsertarButton.Visibility = Visibility.Visible;
+            UpdateButton.Visibility = Visibility.Visible;
         }
 
         public int GetIndexCategory(string Category)
@@ -238,6 +289,30 @@ namespace Variedades.Views
         public void EventoPaginacion()
         {
             UpdatePagination?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void CategoriaComboBox_SelectionChanged(object sender, EventArgs e)
+        {
+            string _selected = CategoriaComboBox.Text;
+            Debug.WriteLine(_selected.ToString());
+            if(_selected == "Celular")
+            {
+                //if its tablet
+                _Producto.Tipo_Producto = _selected;
+            } else if(_selected == "Tablet")
+            {
+                //if its tablet
+                _Producto.Tipo_Producto = _selected;
+            } else if(_selected == "Laptop")
+            {
+                _Producto.Tipo_Producto = _selected;
+            } else if(_selected == "Accesorio")
+            {
+                _Producto.Tipo_Producto = _selected;
+            } else if(_selected == "Otro")
+            {
+                _Producto.Tipo_Producto = _selected;
+            }
         }
     }
 }
