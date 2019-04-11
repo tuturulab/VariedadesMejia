@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,20 @@ namespace Variedades
             //Instantiate Viewmodel
             MainViewModel = new PageViewModel();
             DataContext = MainViewModel;
+
+            using(var context = new DbmejiaEntities())
+            {
+                try
+                {
+                    context.Database.Connection.Open();
+                    context.Database.Connection.Close();
+                }
+                catch(SqlException e)
+                {
+                    MessageBox.Show("Verifica tus servicios de base de datos");
+                    this.Close();
+                }
+            }
 
         }
 

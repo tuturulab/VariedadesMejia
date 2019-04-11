@@ -120,7 +120,6 @@ namespace Variedades.Views
             {
                 _TelefonosList.Add(new Telefono() { Numero = " ", Tipo_Numero = Tipo_Numero, Empresa = Empresa });
             }
-
             else
             {
                 MessageBoxResult result = MessageBox.Show("Por favor ingrese los campos requeridos para añadir un telefono",
@@ -132,42 +131,73 @@ namespace Variedades.Views
 
         private void ActualizarCliente_Click(object sender, RoutedEventArgs e)
         {
-            //Get all the data
-            _Cliente.Nombre = NombreTextBox.Text;
-            _Cliente.Email = EmailTextBox.Text;
-            _Cliente.Domicilio = DomicilioTextBox.Text;
-            _Cliente.Tipo_Pago = TipoPagoComboBox.Text;
-            _Cliente.Cedula = CedulaTextBox.Text;
-            _Cliente.Compania = CompaniaTextBox.Text;
-            _Cliente.Fecha_Pago_1 = int.Parse(DiaPago1TextBox.Text);
-
-            //Parametro opcional
-            if (String.IsNullOrEmpty(DiaPago2TextBox.Text) == false)
+            try
             {
-                _Cliente.Fecha_Pago_2 = int.Parse(DiaPago2TextBox.Text);
+                if (String.IsNullOrEmpty(NombreTextBox.Text) == false)
+                {
+                    if (String.IsNullOrEmpty(DiaPago1TextBox.Text) == true || int.Parse(DiaPago1TextBox.Text) > 31 || int.Parse(DiaPago1TextBox.Text) < 1)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Por Favor Ingrese almenos un dia de pago, y asegurese de que sea entre 1 y 30 dias", "Confirmation",
+                                                MessageBoxButton.OK,
+                                                MessageBoxImage.Exclamation);
+                    }
+                    else
+                    {
+                        //Get all the data
+                        _Cliente.Nombre = NombreTextBox.Text;
+                        _Cliente.Email = EmailTextBox.Text;
+                        _Cliente.Domicilio = DomicilioTextBox.Text;
+                        _Cliente.Tipo_Pago = TipoPagoComboBox.Text;
+                        _Cliente.Cedula = CedulaTextBox.Text;
+                        _Cliente.Compania = CompaniaTextBox.Text;
+                        _Cliente.Fecha_Pago_1 = int.Parse(DiaPago1TextBox.Text);
+
+                        //Parametro opcional
+                        if (String.IsNullOrEmpty(DiaPago2TextBox.Text) == false)
+                        {
+                            _Cliente.Fecha_Pago_2 = int.Parse(DiaPago2TextBox.Text);
+                        }
+
+                        ICollection<Telefono> i_telefonos = _TelefonosList as ICollection<Telefono>;
+
+                        //Iterate over 2 collections
+                        i_telefonos.Zip(_Cliente.Telefonos, (toItem, item) =>
+                        {
+                            item.Empresa = toItem.Empresa;
+                            item.Numero = toItem.Numero;
+                            item.Tipo_Numero = toItem.Tipo_Numero;
+                            return true;
+                        });
+
+                        //Do update
+                        pageViewModel.UpdateCliente(_Cliente);
+
+                        EventoPaginacion();
+
+                        this.Close();
+                    }
+                }
             }
-
-            ICollection<Telefono> i_telefonos = _TelefonosList as ICollection<Telefono>;
-
-            i_telefonos.Zip(_Cliente.Telefonos, (toItem, item) =>
+            catch
             {
-                item.Empresa = toItem.Empresa;
-                item.Numero = toItem.Numero;
-                item.Tipo_Numero = toItem.Tipo_Numero;
-                return true;
-            });
-
-            pageViewModel.UpdateCliente(_Cliente);
-
-            this.Close();
+                MessageBoxResult result = MessageBox.Show("Error al ingresar en la base de datos",
+                                 "Confirmation",
+                                 MessageBoxButton.OK,
+                                 MessageBoxImage.Exclamation);
+            }
 
         }
 
         private void BtnBorrarClick(object sender, RoutedEventArgs e)
         {
+            //Get selected number
             var Numero = pageViewModel.SelectedEditTelefono;
 
+            //Delete form observable
             _TelefonosList.Remove(Numero);
+
+            //Delete also from Cliente.Telefonos;
+            _Cliente.Telefonos.Remove(Numero);
 
         }
 

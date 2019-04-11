@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -325,7 +326,28 @@ namespace Variedades
         public PageViewModel()
         {
             _context = new DbmejiaEntities();
-            UpdateAll();
+
+            if (isAvaliable())
+            {
+                Debug.WriteLine("Database is avaliable");
+                UpdateAll();
+            }
+            //UpdateAll();
+        }
+
+        public bool isAvaliable()
+        {
+            try
+            {
+                _context.Database.Connection.Open();
+                _context.Database.Connection.Close();
+
+                return true;
+            }
+            catch(SqlException)
+            {
+                return false;
+            }
         }
 
         public void FillProductoFatherFullList ()
