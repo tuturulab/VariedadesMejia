@@ -80,7 +80,7 @@ namespace Variedades.Views
                             Nombre = NombreTextBox.Text,
                             Email = EmailTextBox.Text,
                             Domicilio = DomicilioTextBox.Text,
-                            Tipo_Pago = "Cordobas",
+                            Tipo_Pago = TipoPagoComboBox.Text,
                             Cedula = CedulaTextBox.Text,
                             Compania = CompañiaTextBox.Text,
                             Fecha_Pago_1 = int.Parse(DiaPago1TextBox.Text),

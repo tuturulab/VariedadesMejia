@@ -62,6 +62,9 @@
     <Reference Include="itextsharp.xtra, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>packages\itextsharp.xtra.5.5.13\lib\itextsharp.xtra.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -160,6 +163,10 @@
     <Compile Include="Migrations\201904110214529_nullable-product-garantia.Designer.cs">
       <DependentUpon>201904110214529_nullable-product-garantia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904110444264_makefechaspago-nullables.cs" />
+    <Compile Include="Migrations\201904110444264_makefechaspago-nullables.Designer.cs">
+      <DependentUpon>201904110444264_makefechaspago-nullables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -189,8 +196,14 @@
     <Compile Include="Views\AgregarPagoWindow.xaml.cs">
       <DependentUpon>AgregarPagoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DetalleProductWindow.xaml.cs">
+      <DependentUpon>DetalleProductWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DetalleVentaWindow.xaml.cs">
       <DependentUpon>DetalleVentaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditClienteWindow.xaml.cs">
+      <DependentUpon>EditClienteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditProductWindow.xaml.cs">
       <DependentUpon>EditProductWindow.xaml</DependentUpon>
@@ -262,7 +275,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DetalleProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DetalleVentaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditClienteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -388,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904110214529_nullable-product-garantia.resx">
       <DependentUpon>201904110214529_nullable-product-garantia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904110444264_makefechaspago-nullables.resx">
+      <DependentUpon>201904110444264_makefechaspago-nullables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
