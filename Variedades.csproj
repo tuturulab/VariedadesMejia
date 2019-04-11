@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201904110214529_nullable-product-garantia.Designer.cs">
       <DependentUpon>201904110214529_nullable-product-garantia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904110444264_makefechaspago-nullables.cs" />
+    <Compile Include="Migrations\201904110444264_makefechaspago-nullables.Designer.cs">
+      <DependentUpon>201904110444264_makefechaspago-nullables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -191,6 +195,9 @@
     </Compile>
     <Compile Include="Views\DetalleVentaWindow.xaml.cs">
       <DependentUpon>DetalleVentaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditClienteWindow.xaml.cs">
+      <DependentUpon>EditClienteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditProductWindow.xaml.cs">
       <DependentUpon>EditProductWindow.xaml</DependentUpon>
@@ -263,6 +270,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetalleVentaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditClienteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -389,6 +400,9 @@
     <EmbeddedResource Include="Migrations\201904110214529_nullable-product-garantia.resx">
       <DependentUpon>201904110214529_nullable-product-garantia.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904110444264_makefechaspago-nullables.resx">
+      <DependentUpon>201904110444264_makefechaspago-nullables.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -410,6 +424,8 @@
   <ItemGroup>
     <Resource Include="Assets\LogoMakr_8JKPva.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

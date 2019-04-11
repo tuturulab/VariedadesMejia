@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using Variedades.Utils;
+using Variedades.Models;
 
 namespace Variedades.Views
 {
@@ -49,23 +50,14 @@ namespace Variedades.Views
 
         private void BtnEditarCliente(object sender, RoutedEventArgs e)
         {
-            //Obtenemos el Id del Producto seleccionado 
-            /*object item = product_table.SelectedItem;
-            string IdProducto = (product_table.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
-            string Nombre = (product_table.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text + " " +
-                (product_table.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;*/
 
-            //var producto = ViewModel.SelectedProduct;
+            var cliente = ViewModel.SelectedClientWindow;
 
-            //Iniciamos la ventana de crear un producto
-            //window = new MultiUsesProductoWindow(producto) { DataContext = this.DataContext };
+            var window = new EditClienteWindow(ViewModel, cliente);
 
+            window.UpdatePagination += new EventHandler(EventoPaginacion);
 
-
-            //window.UpdatePagination += new EventHandler(EventoPaginacion);
-
-            //window.Show();
-
+            window.Show();
 
         }
 
@@ -151,23 +143,17 @@ namespace Variedades.Views
 
         private void BtnBorrarCliente(object sender, RoutedEventArgs e)
         {
-            //Obtenemos el Id del Cliente seleccionado 
-
-
-            object item = client_table.SelectedItem;
-            string IdCliente = (client_table.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
-            string Nombre = (client_table.SelectedCells[2].Column.GetCellContent(item) as TextBlock).Text + " " +
-                (client_table.SelectedCells[1].Column.GetCellContent(item) as TextBlock).Text;
+            Cliente cliente = ViewModel.SelectedClient;
 
             //Pestaña de confirmación
 
-            if (MessageBox.Show(" Estás seguro que deseas eliminar al cliente: " + Nombre + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (MessageBox.Show(" Estás seguro que deseas eliminar al cliente: " + cliente.Nombre + "?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
                 //
             }
             else
             {
-                ViewModel.DeleteClient(int.Parse(IdCliente));
+                ViewModel.DeleteClient(cliente);
                 UtilidadPaginacion();
             }
 

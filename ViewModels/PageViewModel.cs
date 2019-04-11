@@ -259,12 +259,27 @@ namespace Variedades
             set { _SelectedTelefonoAdd = value; NotifyPropertyChanged("SelectedTelefonoAdd"); }
         }
 
+        private Telefono _SelectedTelefono;
+        public Telefono SelectedEditTelefono
+        {
+            get { return _SelectedTelefono; }
+            set { _SelectedTelefono = value; NotifyPropertyChanged("SelectedEditTelefono"); }
+        }
+
         //Selected Client in SelectClientWindow
         private Cliente _SelectedClientWindow;
         public Cliente SelectedClientWindow
         {
             get { return _SelectedClientWindow; }
             set { _SelectedClientWindow = value; NotifyPropertyChanged("SelectedClientWindow"); }
+        }
+
+        //Selected Client in SelectClient
+        private Cliente _SelectedClient;
+        public Cliente SelectedClient
+        {
+            get { return _SelectedClient; }
+            set { _SelectedClient = value; NotifyPropertyChanged("SelectedClient"); }
         }
 
         //Selected Product in SelectProductWindow
@@ -712,6 +727,21 @@ namespace Variedades
             UpdateClients(10);
         }
 
+        //Update cliente
+        public void UpdateCliente<T>(T item) where T : Cliente
+        {
+            var entity = _context.Cliente.Find(item.IdCliente);
+            if (entity == null)
+            {
+                return;
+            }
+
+            _context.Entry(entity).CurrentValues.SetValues(item);
+            _context.SaveChanges();
+
+            UpdateClients(10);
+        }
+
         // Botones de la paginacion de la tabla productos
 
         public void SearchClient(string FiltroClient)
@@ -842,14 +872,13 @@ namespace Variedades
         }
 
         //Modulo de borrado
-        public void DeleteClient(int id)
+        public void DeleteClient(Cliente cliente_)
         {
-            //Buscamos el producto seleccionado y lo eliminamos de la base de datos
-            var cliente = _context.Cliente.Find(id);
-            _context.Cliente.Remove(cliente);
+            
+            _context.Cliente.Remove(cliente_);
 
             //Eliminar del observable collection
-            Clientes.Remove(cliente);
+            Clientes.Remove(cliente_);
 
             //Guardamos los cambios de la base de datos
             _context.SaveChanges();

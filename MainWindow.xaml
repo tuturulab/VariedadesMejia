@@ -30,7 +30,7 @@
             </Grid.RowDefinitions>
 
             <Grid>
-                <Image Margin="20,20,20,20" Source="./Assets/LogoMakr_8JKPva.png" />
+                <Image Margin="5,5,5,5" Source="./Assets/logo.png" />
 
             </Grid>
 
@@ -104,7 +104,7 @@
                     <fa5:SvgAwesome Foreground="{StaticResource ColorIconosNegros}" Margin="0,0,0,0" Width="20px" Icon="Solid_Bars" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <!--Logo title-->
-                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource ColorLetraBlanca}" VerticalAlignment="Center" FontSize="22"> Variedades Mejía</TextBlock>
+                <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource ColorLetraBlanca}" VerticalAlignment="Center" FontSize="22"> Variedades Mejia</TextBlock>
                 <!--Notification Image Button-->
 
                 <extToolkit:DropDownButton FlowDirection="RightToLeft" Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,70,5" HorizontalAlignment="Right" >
