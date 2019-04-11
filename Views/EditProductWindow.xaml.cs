@@ -127,24 +127,28 @@ namespace Variedades.Views
             //Remove previous especs
             //_Producto.Especificaciones_producto.Clear();
 
-            //Set grid data, perhaps new proveedor if we have
+            //Set grid data
             i_especificacion_Productos.Zip(_Producto.Especificaciones_producto, (toItem, item) => 
             {
-                if(_Proveedor != null)
-                {
-                    item.Proveedor = _Proveedor;
-                }
-
                 item.IMEI = toItem.IMEI;
                 item.PrecioCosto = toItem.PrecioCosto;
                 item.Garantia = toItem.Garantia;
                 return true;
             });
 
+            //Set new proveedor if we have
+            if (_Proveedor != null)
+            {
+                _Producto.Especificaciones_producto.ToList().ForEach(item => item.Proveedor = pageViewModel.GetProveedor(_Proveedor.IdProveedor));
+            }
+            else
+            {
+                Debug.WriteLine("Proveedor is null");
+            }
 
             //if Emei is no
             //then delete all emais
-            if(ComboBoxImei.Text == "No")
+            if (ComboBoxImei.Text == "No")
             {
                 _Producto.Especificaciones_producto.ToList().ForEach(item => item.IMEI = null);
             }
