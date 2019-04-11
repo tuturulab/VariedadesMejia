@@ -106,7 +106,7 @@
 
                             <DataGridTextColumn IsReadOnly="True" Binding="{Binding IdNumero, IsAsync=True}" Header="Id" Width="*" ></DataGridTextColumn>
 
-                            <DataGridTemplateColumn Width="2*">
+                            <DataGridTemplateColumn Header="Numero" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Numero}"/>
