@@ -255,5 +255,10 @@ namespace Variedades.Views
             UtilidadPaginacion();
             
         }
+
+        private void BtnDetalle_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
