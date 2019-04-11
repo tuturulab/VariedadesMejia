@@ -161,13 +161,21 @@ namespace Variedades.Views
                         ICollection<Telefono> i_telefonos = _TelefonosList as ICollection<Telefono>;
 
                         //Iterate over 2 collections
-                        i_telefonos.Zip(_Cliente.Telefonos, (toItem, item) =>
+
+                        _Cliente.Telefonos.Clear();
+
+                        i_telefonos.ToList().ForEach(item =>
                         {
-                            item.Empresa = toItem.Empresa;
-                            item.Numero = toItem.Numero;
-                            item.Tipo_Numero = toItem.Tipo_Numero;
-                            return true;
+                            _Cliente.Telefonos.Add(item);
                         });
+
+                        //i_telefonos.Zip(_Cliente.Telefonos, (toItem, item) =>
+                        //{
+                        //    item.Empresa = toItem.Empresa;
+                        //    item.Numero = toItem.Numero;
+                        //    item.Tipo_Numero = toItem.Tipo_Numero;
+                        //    return true;
+                        //});
 
                         //Do update
                         pageViewModel.UpdateCliente(_Cliente);
