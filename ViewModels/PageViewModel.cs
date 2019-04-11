@@ -17,9 +17,6 @@ namespace Variedades
 {
     public class PageViewModel : INotifyPropertyChanged
     {
-        
-
-
         //DbContext
         private DbmejiaEntities _context;
 
@@ -151,7 +148,7 @@ namespace Variedades
             set { ProductosComprados = value; NotifyPropertyChanged("ProductosCompradosCollection"); }
         }
 
-
+       
         //Observable for ImportacionList
         private ObservableCollection<DetalleProveedor> Importaciones;
         public ObservableCollection<DetalleProveedor> ImportacionesCollection
@@ -341,6 +338,20 @@ namespace Variedades
             _context.SaveChanges();
         }
 
+
+        public void ChangeEstadoImportacion( DetalleProveedor _Importacion )
+        {
+            DetalleProveedor Importacion = _context.DetalleProveedor.Find(_Importacion.IdDetalleProveedor);
+
+            Importacion.Fecha_Llegada = DateTime.Now;
+            Importacion.Estado = "Llegado";
+
+            _context.SaveChanges();
+
+            UpdateImportacion(10);
+
+        }
+    
         public void VerificarVentaEstado (Venta venta_)
         {
             double saldo = 0;
@@ -569,7 +580,7 @@ namespace Variedades
         public void FillEspecificacionesProducts()
         {
             //Obtener los productos que no se han vendido
-            especificacion_Productos = new ObservableCollection<Especificacion_producto>(_context.Especificacion_producto.Where(t => t.Venta == null).ToList());
+            especificacion_Productos = new ObservableCollection<Especificacion_producto>(_context.Especificacion_producto.Where(t => t.Vendido.Equals("No") ).ToList());
         }
 
         //Obtener el maximo numero de paginas ()
@@ -617,6 +628,14 @@ namespace Variedades
             PedidosCollection = new ObservableCollection<Pedido>(_context.Pedido.Where(t => t.Estado_Pedido != "Completado"));
         }
 
+        public void SetProductosVendidos(Especificacion_producto producto_)
+        {
+            var Producto = _context.Especificacion_producto.Find(producto_.IdEspecificaciones_Producto);
+
+            Producto.Vendido = "Si";
+            _context.SaveChanges();
+            
+        }
         
         //Actualizamos todas las lista de todas las datagrid de cada una de las paginas
         private void UpdateAll()

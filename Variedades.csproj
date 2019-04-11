@@ -167,6 +167,14 @@
     <Compile Include="Migrations\201904110444264_makefechaspago-nullables.Designer.cs">
       <DependentUpon>201904110444264_makefechaspago-nullables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904111651314_ChangeCascade.cs" />
+    <Compile Include="Migrations\201904111651314_ChangeCascade.Designer.cs">
+      <DependentUpon>201904111651314_ChangeCascade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904111657086_ChangeCascade2.cs" />
+    <Compile Include="Migrations\201904111657086_ChangeCascade2.Designer.cs">
+      <DependentUpon>201904111657086_ChangeCascade2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -412,6 +420,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904110444264_makefechaspago-nullables.resx">
       <DependentUpon>201904110444264_makefechaspago-nullables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904111651314_ChangeCascade.resx">
+      <DependentUpon>201904111651314_ChangeCascade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904111657086_ChangeCascade2.resx">
+      <DependentUpon>201904111657086_ChangeCascade2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

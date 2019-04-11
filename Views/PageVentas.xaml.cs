@@ -58,7 +58,6 @@ namespace Variedades.Views
 
         private void BtnExportarExcel (object sender, RoutedEventArgs e)
         {
-
             try
             {
                 String Fecha = DateTime.Now.ToString("dd-MM-yyyy");
@@ -114,7 +113,6 @@ namespace Variedades.Views
                     
                     List<Venta> VentasPendientes = ViewModel.VentasList.Where(t => t.VentaCompletada == "No").ToList();
                     
-
                     Row row1 = new Row();
                     row1.RowIndex = (UInt32)1;
                     row1.AppendChild(AddCellWithText("Nombre Cliente"));
@@ -140,6 +138,7 @@ namespace Variedades.Views
                         row.AppendChild(AddCellWithText(emp.Cliente.Cedula));
                         row.AppendChild(AddCellWithText(emp.Cliente.Compania));
 
+                        
                         
                         double montoPago = 0;
 
@@ -170,23 +169,33 @@ namespace Variedades.Views
                         row.AppendChild(AddCellWithText(emp.MontoVenta.ToString()));
 
                         String productos = "";
-                        var cantidadProductos = emp.Especificaciones_producto.Count();
 
-                        //Mostramos los productos comprados
-                        foreach (var i in emp.Especificaciones_producto)
+                        if (emp.Especificaciones_producto.Count() == 0  )
                         {
-                            if (cantidadProductos > 1)
+                            row.AppendChild(AddCellWithText( "El producto no está registrado"));
+                        }
+                        else
+                        {
+                            var cantidadProductos = emp.Especificaciones_producto.Count();
+
+                            //Mostramos los productos comprados
+                            foreach (var i in emp.Especificaciones_producto)
                             {
-                                productos = productos + i.Nombre + ", ";
+                                if (cantidadProductos > 1)
+                                {
+                                    productos = productos + i.Nombre + ", ";
+                                }
+
+                                else
+                                {
+                                    productos = i.Nombre;
+                                }
                             }
 
-                            else
-                            {
-                                productos = i.Nombre;
-                            }
+                            row.AppendChild(AddCellWithText(productos));
                         }
 
-                        row.AppendChild(AddCellWithText(productos));
+                       
 
                         sheetData.AppendChild(row);
                         rowindex++;
@@ -258,7 +267,7 @@ namespace Variedades.Views
                         row.AppendChild(AddCellWithText(emp.Cliente.Cedula));
                         row.AppendChild(AddCellWithText(emp.Cliente.Compania));
 
-                        
+
                         row.AppendChild(AddCellWithText(emp.Pagos.Count().ToString()));
                         row.AppendChild(AddCellWithText(emp.Pagos.Last().Fecha_Pago.ToString()));
 
@@ -275,31 +284,39 @@ namespace Variedades.Views
 
                         row.AppendChild(AddCellWithText(emp.MontoVenta.ToString()));
 
+
                         String productos = "";
-                        var cantidadProductos = emp.Especificaciones_producto.Count();
 
-                        //Mostramos los productos comprados
-                        foreach (var i in emp.Especificaciones_producto)
+                        if (emp.Especificaciones_producto.Count() == 0)
                         {
-                            if (cantidadProductos > 1)
+                            row.AppendChild(AddCellWithText("El producto no está registrado"));
+                        }
+                        else
+                        {
+                            var cantidadProductos = emp.Especificaciones_producto.Count();
+
+                            //Mostramos los productos comprados
+                            foreach (var i in emp.Especificaciones_producto)
                             {
-                                productos = productos + i.Nombre + ", ";
+                                if (cantidadProductos > 1)
+                                {
+                                    productos = productos + i.Nombre + ", ";
+                                }
+
+                                else
+                                {
+                                    productos = i.Nombre;
+                                }
                             }
 
-                            else
-                            {
-                                productos = i.Nombre;
-                            }
+                            row.AppendChild(AddCellWithText(productos));
+
+                            sheetData2.AppendChild(row);
+                            rowindex2++;
                         }
 
-                        row.AppendChild(AddCellWithText(productos));
-
-                        sheetData2.AppendChild(row);
-                        rowindex2++;
+                        wbPart.Workbook.Sheets.AppendChild(sheet2);
                     }
-
-                    wbPart.Workbook.Sheets.AppendChild(sheet2);
-
                     //Hoja 3
 
                     WorksheetPart worksheetPart3 = null;
@@ -375,26 +392,35 @@ namespace Variedades.Views
 
 
                         String productos = "";
-                        var cantidadProductos = emp.Especificaciones_producto.Count();
 
-                        //Mostramos los productos comprados
-                        foreach (var i in emp.Especificaciones_producto)
+                        if (emp.Especificaciones_producto.Count() == 0)
                         {
-                            if (cantidadProductos > 1)
-                            {
-                                productos = productos + i.Nombre + ", ";
-                            }
-
-                            else
-                            {
-                                productos = i.Nombre;
-                            }
+                            row.AppendChild(AddCellWithText("El producto no está registrado"));
                         }
+                        else
+                        {
+                            var cantidadProductos = emp.Especificaciones_producto.Count();
 
-                        row.AppendChild(AddCellWithText(productos));
+                            //Mostramos los productos comprados
+                            foreach (var i in emp.Especificaciones_producto)
+                            {
+                                if (cantidadProductos > 1)
+                                {
+                                    productos = productos + i.Nombre + ", ";
+                                }
 
-                        sheetData3.AppendChild(row);
-                        rowindex3++;
+                                else
+                                {
+                                    productos = i.Nombre;
+                                }
+                            }
+
+                            row.AppendChild(AddCellWithText(productos));
+
+
+                            sheetData3.AppendChild(row);
+                            rowindex3++;
+                        }
                     }
 
                     wbPart.Workbook.Sheets.AppendChild(sheet3);

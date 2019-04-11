@@ -103,6 +103,10 @@ namespace Variedades.Views
                             {
                                 contadorProductosGarantia++;
                             }
+
+                            i.Vendido = "Si";
+
+                            ViewModel.SetProductosVendidos(i);
                         }
                         
                         if (contadorProductosGarantia > 0 && cliente == null)

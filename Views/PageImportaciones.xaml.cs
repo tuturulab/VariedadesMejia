@@ -4,6 +4,8 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using Variedades.Utils;
+using Variedades.Models;
+
 
 namespace Variedades.Views
 {
@@ -50,8 +52,25 @@ namespace Variedades.Views
             window.Show();
         }
 
-       
-    
+        //Boton para completar la importacion al llegar
+        private void BtnCompletarImportacion (object sender, RoutedEventArgs e)
+        {
+            DetalleProveedor Importacion = ViewModel.SelectedImportacion;
+
+            if (MessageBox.Show("Seleccione si, en caso de que le haya llegado esta importacion, Numero Seguimiento: " + Importacion.Numero_Seguimiento , "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            {
+                //No
+            }
+            else
+            {
+                ViewModel.ChangeEstadoImportacion(Importacion);
+                UtilidadPaginacion();
+            }
+
+        }
+
+
+
         private void BtnEditarImportacion(object sender, RoutedEventArgs e)
         {
             

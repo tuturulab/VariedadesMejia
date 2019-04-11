@@ -30,6 +30,9 @@ namespace Variedades.Models
         public string Numero_Seguimiento { get ; set; }
 
         [NotMapped]
+        public String Llegada { get { if (this.Fecha_Llegada == null) return "No ha llegado"; else return this.Fecha_Llegada.ToString();    }  }
+
+        [NotMapped]
         public string Seguimiento { get { if (this.Numero_Seguimiento != null) return Numero_Seguimiento; else return "No Tiene";  } }
 
         [NotMapped]
