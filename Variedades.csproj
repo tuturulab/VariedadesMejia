@@ -408,10 +408,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\LogoMakr_8JKPva.png" />
+    <Resource Include="Assets\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\logo.png" />
+    <Resource Include="Assets\logoMin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icono.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
