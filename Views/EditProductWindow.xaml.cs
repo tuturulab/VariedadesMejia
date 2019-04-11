@@ -53,6 +53,11 @@ namespace Variedades.Views
 
         private void SetDataToWindow()
         {
+            //If has garantia
+            if(_Producto.Garantia_Disponible == 1)
+            {
+                PanelGarantia.Visibility = Visibility.Visible;
+            }
 
             //Emei check
             if (_Producto.Imei_Disponible != 1)
@@ -68,6 +73,7 @@ namespace Variedades.Views
             ComboBoxGarantia.SelectedIndex = _Producto.Garantia_Disponible == 1 ? 0 : 1;
             CategoriaComboBox.SelectedIndex = GetIndexCategory(_Producto.Tipo_Producto);
             TextBoxProveedor.Text = _Producto.Especificaciones_producto.FirstOrDefault().Proveedor.Empresa;
+            TextBoxGarantiaVenta.Text = _Producto.Garantia.ToString();
 
             if (ComboBoxImei.Text == "Si")
             {
@@ -108,7 +114,7 @@ namespace Variedades.Views
 
         public void BtnActualizarProducto(object sender, RoutedEventArgs e)
         {
-            //Get data from xaml
+            //Get data from view
             _Producto.Marca = MarcaTextBox.Text;
             _Producto.Modelo = ModeloTextBox.Text;
             _Producto.Precio_Venta = int.Parse(PrecioTextBox.Text);
@@ -121,9 +127,14 @@ namespace Variedades.Views
             //Remove previous especs
             //_Producto.Especificaciones_producto.Clear();
 
-            //Show all data
+            //Set grid data, perhaps new proveedor if we have
             i_especificacion_Productos.Zip(_Producto.Especificaciones_producto, (toItem, item) => 
             {
+                if(_Proveedor != null)
+                {
+                    item.Proveedor = _Proveedor;
+                }
+
                 item.IMEI = toItem.IMEI;
                 item.PrecioCosto = toItem.PrecioCosto;
                 item.Garantia = toItem.Garantia;
@@ -138,8 +149,18 @@ namespace Variedades.Views
                 _Producto.Especificaciones_producto.ToList().ForEach(item => item.IMEI = null);
             }
 
+            //if garantia is no
+            //
+            if(ComboBoxGarantia.Text == "No")
+            {
+                _Producto.Garantia = null;
+            }
+
             //Do update
             pageViewModel.UpdateProduct(_Producto);
+
+            ///Close window
+            this.Close();
         }
 
         //Validar que en los campos numericos solo se escriban numeros

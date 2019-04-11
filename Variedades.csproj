@@ -146,6 +146,10 @@
     <Compile Include="Migrations\201904101413435_cascade-deletes.Designer.cs">
       <DependentUpon>201904101413435_cascade-deletes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904110214529_nullable-product-garantia.cs" />
+    <Compile Include="Migrations\201904110214529_nullable-product-garantia.Designer.cs">
+      <DependentUpon>201904110214529_nullable-product-garantia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Especificacion_pedido.cs" />
@@ -371,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904101413435_cascade-deletes.resx">
       <DependentUpon>201904101413435_cascade-deletes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904110214529_nullable-product-garantia.resx">
+      <DependentUpon>201904110214529_nullable-product-garantia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
