@@ -34,9 +34,8 @@ namespace Variedades.Models
 
         //Variable para guardar el numero de especificaciones a mostrae en la base de datos
         [NotMapped]
-        public int NumeroDeEspecificacionesDisponibles { get { return Especificaciones_producto.Where(x => x.Venta == null).Count(); }  }
-
-
+        public int NumeroDeEspecificacionesDisponibles { get { return Especificaciones_producto.Where(x => x.Vendido.Equals("No") ).Count(); }  }
+        
         [NotMapped]
         public int NumeroDeEspecificacionesTotales { get; set; }
         

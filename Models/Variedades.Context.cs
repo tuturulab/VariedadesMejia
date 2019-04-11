@@ -39,7 +39,7 @@ namespace Variedades.Models
             modelBuilder.Entity<Cliente>()
                .HasMany(c => c.Ventas)
                .WithOptional(x => x.Cliente)
-               .WillCascadeOnDelete(true);
+               .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Proveedor_producto>()
                 .HasMany(x => x.Especificacion_Productos)
@@ -77,9 +77,10 @@ namespace Variedades.Models
                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Venta>()
-                .HasMany(c => c.Especificaciones_producto)
-                .WithOptional(c => c.Venta)
-                .WillCascadeOnDelete(true);
+              .HasMany(c => c.Especificaciones_producto)
+              .WithOptional(c => c.Venta)
+              .WillCascadeOnDelete(false);
+
 
             modelBuilder.Entity<Proveedor>()
                 .HasMany(c => c.Productos)

@@ -399,7 +399,7 @@ namespace Variedades.Views
                         ElementoProducto.Garantia_Original = i.Garantia;
                         ElementoProducto.PrecioCosto = i.Precio_Costo;
                         ElementoProducto.Proveedor = ViewModel.GetProveedor(i.ProveedorId);
-
+                        ElementoProducto.Vendido = "No";
                        
                         //Si la columnas estan visibles, agregar el dato insertado a la relacion
                         if (GarantiaColumn.Visibility == Visibility.Visible)

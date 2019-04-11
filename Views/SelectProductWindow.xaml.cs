@@ -70,5 +70,6 @@ namespace Variedades.Views
 
             ViewModel.SearchProductoselect(filtro);
         }
+
     }
 }
