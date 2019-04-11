@@ -424,6 +424,8 @@
   <ItemGroup>
     <Resource Include="Assets\LogoMakr_8JKPva.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
