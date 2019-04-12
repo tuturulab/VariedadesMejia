@@ -51,7 +51,7 @@ namespace Variedades.Views
         private void BtnEditarCliente(object sender, RoutedEventArgs e)
         {
 
-            var cliente = ViewModel.SelectedClientWindow;
+            var cliente = ViewModel.SelectedClient;
 
             var window = new EditClienteWindow(ViewModel, cliente);
 
