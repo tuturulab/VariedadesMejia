@@ -41,11 +41,31 @@ namespace Variedades.Views
             _context = new DbmejiaEntities();
             //Calculate
 
-            List<Producto> productos = _context.Producto.ToList();
-            _context.Venta.ToList().ForEach(item =>
-            {
+            List<Especificacion_producto> productos = _context.Especificacion_producto.Where(t => t.Vendido.Equals("Si")).ToList();
+            int NumeroCelulares = 0;
+            int NumeroLaptop = 0;
+            int NumeroOtros = 0;
+            int NumeroTablets = 0;
+            int NumeroAccesorios = 0;
 
-            });
+            foreach (var pr in productos)
+            {
+                if (pr.Tipo_Producto.Equals("Celular"))
+                    NumeroCelulares++;
+                else if (pr.Tipo_Producto.Equals("Tablet"))
+                    NumeroTablets++;
+                else if (pr.Tipo_Producto.Equals("Laptop"))
+                    NumeroLaptop++;
+                else if (pr.Tipo_Producto.Equals("Accesorio"))
+                    NumeroAccesorios++;
+                else
+                    NumeroOtros++;
+            }
+
+            Celular_Label.Values = new ChartValues<double> { NumeroCelulares };
+            Tablet_Label.Values = new ChartValues<double> { NumeroTablets };
+            Laptop_Label.Values = new ChartValues<double> { NumeroLaptop };
+            Acc_Label.Values = new ChartValues<double> { NumeroAccesorios };
 
         }
 
