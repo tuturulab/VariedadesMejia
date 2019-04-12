@@ -1,0 +1,94 @@
+﻿<Window x:Class="Variedades.Models.DetalleImportacionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Variedades.Models"
+        mc:Ignorable="d"
+        Title="DetalleImportacionWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
+            <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Detalle de Importación" FontSize="17" ></TextBlock>
+        </StackPanel>
+
+        <DockPanel Margin="0,50,0,0" Background="white">
+            <StackPanel Width="360" HorizontalAlignment="Left" Margin="10,10,10,5">
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Fecha Llegada" Width="100px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="210" Height="30" Name="LlegadaTextBox" Margin="30,0,20,0"/>
+
+
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Precio Costo" Width="100px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="210" Height="30" Name="PrecioCostoTextBox" Margin="30,0,20,0"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Estado" Width="100px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="210" Height="30" Name="EstadoTextBox" Margin="30,0,20,0"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="Información del pedido" Width="130px"></TextBlock>
+
+                    <Button  Name="VerInformacion" Click="BtnDetallePedido" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,0"  VerticalAlignment="Center" Width="130px" Content="Ver información"  Height="40px">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                </DockPanel>
+
+               
+
+
+            </StackPanel>
+
+            <StackPanel Width="380" Margin="10,10,10,5" HorizontalAlignment="Right" >
+
+                <DockPanel Margin="10,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Numero Seguimiento" Width="120px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="200" Height="30" Name="SeguimientoTextBox" Margin="20,0,0,0"/>
+                </DockPanel>
+
+                <DockPanel Height="200">
+                    <DataGrid ItemsSource="{Binding ListaProductosImportados}" Visibility="Visible" Name="PagosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Nombre, IsAsync=True}" Header="Nombre" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Cantidad, IsAsync=True}" Header="Cantidad" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding NombreProveedor, IsAsync=True}" Header="Proveedor" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Precio, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </StackPanel>
+
+
+
+        </DockPanel>
+    </Grid>
+</Window>

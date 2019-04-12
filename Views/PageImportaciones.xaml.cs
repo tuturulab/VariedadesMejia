@@ -16,8 +16,11 @@ namespace Variedades.Views
     {
         public PageViewModel ViewModel;
         MultiUsesImportacionWindow window;
-       
-        
+
+        //Iniciamos la ventana de crear una importación
+        DetalleImportacionWindow detalleWindow;
+
+
         //static Paging PagedTable = new Paging();
         //AgregarImportacionWindow window;
 
@@ -50,6 +53,17 @@ namespace Variedades.Views
             //Subscribimos al evento
             window.UpdatePagination += new EventHandler(EventoPaginacion);
             window.Show();
+
+        }
+
+        //Abre ventana detalles
+        private void BtnDetalle (object sender, RoutedEventArgs e)
+        {
+            DetalleProveedor detalleProveedor = ViewModel.SelectedImportacion;
+            detalleWindow = new DetalleImportacionWindow(ViewModel, detalleProveedor);
+
+            detalleWindow.Show();
+
         }
 
         //Boton para completar la importacion al llegar

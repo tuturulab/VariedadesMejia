@@ -159,28 +159,36 @@ namespace Variedades.Views
 
                             EventoPaginacion();
 
+                            MessageBoxResult result = MessageBox.Show("Se ha ingresado correctamente la venta",
+                                             "Confirmation",
+                                             MessageBoxButton.OK,
+                                             MessageBoxImage.Information);
+
                             this.Close();
 
-                            //if (MessageBox.Show("Se ha ingresado correctamente la venta, ¿desea seguir ingresando ventas?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                            //{
-                            //    this.Close();
-                            //}
-                            //else
-                            //{
-                            //    CantidadTextBox.Text = String.Empty;
-                            //    ProductoTextBox.Text = String.Empty;
-                            //    PrecioFinalTextBox.Text = String.Empty;
-                            //    TotalPago = 0;
-                            //    cliente = null;
-                            //    ClienteTextBox.Text = String.Empty;
-                            //    TipoPagoComboBox.Text = String.Empty;
+                            /*
+                            if (MessageBox.Show("Se ha ingresado correctamente la venta, ¿desea seguir ingresando ventas?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                            {
+                                this.Close();
+                            }
+                            else
+                            {
+                                CantidadTextBox.Text = String.Empty;
+                                ProductoTextBox.Text = String.Empty;
+                                PrecioFinalTextBox.Text = String.Empty;
+                                TotalPago = 0;
+                                cliente = null;
+                                ClienteTextBox.Text = String.Empty;
+                                TipoPagoComboBox.Text = String.Empty;
 
-                            //    PagosPanel.Visibility = Visibility.Hidden;
+                                PagosPanel.Visibility = Visibility.Hidden;
 
-                            //    ProductosList.Clear();
+                                ProductosList.Clear();
 
-                            //    ViewModel.FillEspecificacionesProducts();
-                            //}
+                                ViewModel.FillEspecificacionesProducts();
+                            }
+
+                            */
                         }
                     }
                 }
