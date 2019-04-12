@@ -114,58 +114,79 @@ namespace Variedades.Views
 
         public void BtnActualizarProducto(object sender, RoutedEventArgs e)
         {
-            //Get data from view
-            _Producto.Marca = MarcaTextBox.Text;
-            _Producto.Modelo = ModeloTextBox.Text;
-            _Producto.Precio_Venta = int.Parse(PrecioTextBox.Text);
-            _Producto.Credito_Disponible = ComboBoxCredito.Text == "Si" ? 1 : 0;
-            _Producto.Imei_Disponible = ComboBoxImei.Text == "Si" ? 1 : 0;
-            _Producto.Garantia_Disponible = ComboBoxGarantia.Text == "Si" ? 1 : 0;
-            _Producto.Garantia = int.Parse(TextBoxGarantiaVenta.Text);
-
-            ICollection<Especificacion_producto> i_especificacion_Productos = EspecificacionList as ICollection<Especificacion_producto>;
-
-            //Remove previous especs
-            //_Producto.Especificaciones_producto.Clear();
-
-            //Set grid data
-            i_especificacion_Productos.Zip(_Producto.Especificaciones_producto, (toItem, item) => 
+            if (string.IsNullOrWhiteSpace(MarcaTextBox.Text) != true && string.IsNullOrWhiteSpace(ModeloTextBox.Text) != true && string.IsNullOrWhiteSpace(PrecioTextBox.Text) != true )
             {
-                item.IMEI = toItem.IMEI;
-                item.PrecioCosto = toItem.PrecioCosto;
-                item.Garantia = toItem.Garantia;
-                return true;
-            });
 
-            //Set new proveedor if we have
-            if (_Proveedor != null)
-            {
-                _Producto.Especificaciones_producto.ToList().ForEach(item => item.Proveedor = pageViewModel.GetProveedor(_Proveedor.IdProveedor));
+                //Get data from view
+                _Producto.Marca = MarcaTextBox.Text;
+                _Producto.Modelo = ModeloTextBox.Text;
+                _Producto.Precio_Venta = int.Parse(PrecioTextBox.Text);
+                _Producto.Credito_Disponible = ComboBoxCredito.Text == "Si" ? 1 : 0;
+                _Producto.Imei_Disponible = ComboBoxImei.Text == "Si" ? 1 : 0;
+                _Producto.Garantia_Disponible = ComboBoxGarantia.Text == "Si" ? 1 : 0;
+
+
+                ICollection<Especificacion_producto> i_especificacion_Productos = EspecificacionList as ICollection<Especificacion_producto>;
+
+                //Remove previous especs
+                //_Producto.Especificaciones_producto.Clear();
+
+                //Set grid data
+                i_especificacion_Productos.Zip(_Producto.Especificaciones_producto, (toItem, item) =>
+                {
+                    item.IMEI = toItem.IMEI;
+                    item.PrecioCosto = toItem.PrecioCosto;
+                    item.Garantia = toItem.Garantia;
+                    return true;
+                });
+
+                //Set new proveedor if we have
+                if (_Proveedor != null)
+                {
+                    _Producto.Especificaciones_producto.ToList().ForEach(item => item.Proveedor = pageViewModel.GetProveedor(_Proveedor.IdProveedor));
+                }
+                else
+                {
+                    Debug.WriteLine("Proveedor is null");
+                }
+
+                //if Emei is no
+                //then delete all emais
+                if (ComboBoxImei.Text.Equals("No") )
+                {
+                    _Producto.Especificaciones_producto.ToList().ForEach(item => item.IMEI = null);
+                }
+
+                //if garantia is no
+                //
+                if (ComboBoxGarantia.Text.Equals("No") )
+                {
+                    _Producto.Garantia = null;
+                }
+
+                else
+                {
+                    _Producto.Garantia = int.Parse(TextBoxGarantiaVenta.Text);
+                }
+
+                //Do update
+                pageViewModel.UpdateProduct(_Producto);
+
+                MessageBoxResult result = MessageBox.Show("Se ha actualizado correctamente el producto",
+                                                     "Confirmation",
+                                                     MessageBoxButton.OK,
+                                                     MessageBoxImage.Information);
+
+                ///Close window
+                this.Close();
             }
             else
             {
-                Debug.WriteLine("Proveedor is null");
+                MessageBoxResult result = MessageBox.Show("Por favor ingrese los campos a editar",
+                                                     "Confirmation",
+                                                     MessageBoxButton.OK,
+                                                     MessageBoxImage.Exclamation);
             }
-
-            //if Emei is no
-            //then delete all emais
-            if (ComboBoxImei.Text == "No")
-            {
-                _Producto.Especificaciones_producto.ToList().ForEach(item => item.IMEI = null);
-            }
-
-            //if garantia is no
-            //
-            if(ComboBoxGarantia.Text == "No")
-            {
-                _Producto.Garantia = null;
-            }
-
-            //Do update
-            pageViewModel.UpdateProduct(_Producto);
-
-            ///Close window
-            this.Close();
         }
 
         //Validar que en los campos numericos solo se escriban numeros

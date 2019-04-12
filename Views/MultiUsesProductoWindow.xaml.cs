@@ -273,7 +273,7 @@ namespace Variedades.Views
                         Tipo_Producto = CategoriaComboBox.Text
                     };
 
-                    if (String.IsNullOrEmpty(TextBoxGarantiaVenta.Text) != false && ComboBoxGarantia.Text == "Si"  )
+                    if (string.IsNullOrWhiteSpace(TextBoxGarantiaVenta.Text) != true  && ComboBoxGarantia.Text.Equals("Si")  )
                     {
                         _Product.Garantia = int.Parse(TextBoxGarantiaVenta.Text);
                     }
