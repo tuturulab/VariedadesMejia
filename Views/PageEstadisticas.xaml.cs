@@ -29,6 +29,8 @@ namespace Variedades.Views
         {
             InitializeComponent();
             model = new StatictisModel();
+
+
             DataContext = model;
         }
     }
