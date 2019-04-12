@@ -332,6 +332,14 @@ namespace Variedades
             //UpdateAll();
         }
 
+        public void FillProductosDeUnaImportacion(DetalleProveedor _importacion)
+        {
+            List<Producto_importado> Productos = _importacion.Producto_Importados.ToList();
+            ListaProductosImportados = new ObservableCollection<Producto_importado>(Productos);
+
+
+        }
+
         public bool isAvaliable()
         {
             try

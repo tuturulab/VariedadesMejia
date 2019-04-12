@@ -159,6 +159,14 @@ namespace Variedades.Views
 
                             EventoPaginacion();
 
+                            MessageBoxResult result = MessageBox.Show("Se ha ingresado correctamente la venta",
+                                             "Confirmation",
+                                             MessageBoxButton.OK,
+                                             MessageBoxImage.Information);
+
+                            this.Close();
+
+                            /*
                             if (MessageBox.Show("Se ha ingresado correctamente la venta, ¿desea seguir ingresando ventas?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                             {
                                 this.Close();
@@ -180,7 +188,7 @@ namespace Variedades.Views
                                 ViewModel.FillEspecificacionesProducts();
                             }
 
-
+                            */
                         }
                     }
                 }
