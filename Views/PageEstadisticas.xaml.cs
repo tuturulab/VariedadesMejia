@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Variedades.Models;
 using Variedades.ViewModels;
 
 namespace Variedades.Views
@@ -25,6 +26,7 @@ namespace Variedades.Views
     public partial class PageEstadisticas : Page
     {
         //private StatictisModel model;
+        private DbmejiaEntities _context;
         public PageEstadisticas()
         {
             InitializeComponent();
@@ -35,6 +37,16 @@ namespace Variedades.Views
                 string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
 
             DataContext = this;
+
+            _context = new DbmejiaEntities();
+            //Calculate
+
+            List<Producto> productos = _context.Producto.ToList();
+            _context.Venta.ToList().ForEach(item =>
+            {
+
+            });
+
         }
 
         public Func<ChartPoint, string> PointLabel { get; set; }
