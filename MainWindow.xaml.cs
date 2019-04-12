@@ -48,6 +48,9 @@ namespace Variedades
                 }
             }
 
+            //Pagina Inicial
+            var PaginaEstadisticas = new Views.PageEstadisticas();
+            ContentMain.Navigate(PaginaEstadisticas);
         }
 
         private void BtnOpenManual(object sender, RoutedEventArgs e)

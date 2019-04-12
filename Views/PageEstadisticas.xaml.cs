@@ -3,6 +3,8 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,6 +68,10 @@ namespace Variedades.Views
             Tablet_Label.Values = new ChartValues<double> { NumeroTablets };
             Laptop_Label.Values = new ChartValues<double> { NumeroLaptop };
             Acc_Label.Values = new ChartValues<double> { NumeroAccesorios };
+
+            CantidadVentas.Text = "- Usted ha realizado un total de " + _context.Venta.Count().ToString() + " Ventas"; 
+            var today = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+            CantidadVentasHoy.Text = "- La cantidad de ventas de hoy es de: " + _context.Venta.Where(t => (t.Fecha_Venta.Value.Year == today.Year && t.Fecha_Venta.Value.Month == today.Month && t.Fecha_Venta.Value.Day == today.Day)  ).Count().ToString() ;
 
         }
 

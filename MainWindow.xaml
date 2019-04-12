@@ -48,6 +48,13 @@
                         </Style.Triggers>
                     </Style>
                 </ListView.ItemContainerStyle>
+                <ListViewItem x:Name="ItemStats" Height="55">
+                    <StackPanel Orientation="Horizontal">
+                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ChartPie" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="Estadísticas" VerticalAlignment="Center"  Margin="20 10"/>
+                    </StackPanel>
+                </ListViewItem>
+                
                 <!--- Elements -->
                 <ListViewItem x:Name="ItemProducts" Height="55">
                     <StackPanel Orientation="Horizontal">
@@ -67,25 +74,18 @@
                         <TextBlock Text="Ventas" VerticalAlignment="Center"  Margin="20 10"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem x:Name="ItemImports" Height="55">
-                    <StackPanel Orientation="Horizontal">
-                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_PlaneArrival" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBlock Text="Encargos" VerticalAlignment="Center"  Margin="20 10"/>
-                    </StackPanel>
-                </ListViewItem>
                 <ListViewItem x:Name="ItemPedidos" Height="55">
                     <StackPanel Orientation="Horizontal">
                         <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_Boxes" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <TextBlock Text="Pedidos" VerticalAlignment="Center"  Margin="20 10"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem x:Name="ItemStats" Height="55">
+                <ListViewItem x:Name="ItemImports" Height="55">
                     <StackPanel Orientation="Horizontal">
-                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ChartPie" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBlock Text="Estadísticas" VerticalAlignment="Center"  Margin="20 10"/>
+                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_PlaneArrival" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="Encargos" VerticalAlignment="Center"  Margin="20 10"/>
                     </StackPanel>
                 </ListViewItem>
-
 
             </ListView>
 

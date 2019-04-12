@@ -129,6 +129,7 @@ namespace Variedades.Views
                                 DiaPago1TextBox.Text = String.Empty;
                                 DiaPago2TextBox.Text = String.Empty;
                                 CompañiaTextBox.Text = String.Empty;
+                                CedulaTextBox.Text = String.Empty;
                                 TelefonosList.Clear();
                             }
                         }

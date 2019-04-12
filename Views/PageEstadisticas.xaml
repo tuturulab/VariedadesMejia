@@ -14,27 +14,45 @@
         <Grid>
             <!--Main Layout-->
             <Grid.ColumnDefinitions>
+                
                 <ColumnDefinition Name="Primero" Width="*"/>
-                <ColumnDefinition Name="Segundo" Width="*"/>
+                <ColumnDefinition Width="2*"/>
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+            
             </Grid.RowDefinitions>
 
-            <lvc:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}">
-                <lvc:PieChart.Series>
-                    <lvc:PieSeries Name="Celular_Label" Title="Celular" Values="3" DataLabels="True"
+            <StackPanel Grid.Row="0" Grid.Column="0">
+                <TextBlock FontSize="20" Padding="10,10,10,10" Text="Bienvenid@ a Variedades Mejia"></TextBlock>
+
+                <TextBlock FontSize="15" Margin="10,50,10,10" Name="CantidadVentas" ></TextBlock>
+                <TextBlock FontSize="15" Margin="10,50,10,10" Name="CantidadVentasHoy" ></TextBlock>
+                
+            </StackPanel>
+
+            <TextBlock  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="20" Padding="10,10,10,10" Text="Tipo de Productos más comprados"></TextBlock>
+            
+            <DockPanel Height="300" Grid.Row="0" Grid.Column="1" >
+
+                
+
+                <lvc:PieChart  LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}">
+                    <lvc:PieChart.Series>
+                        <lvc:PieSeries Name="Celular_Label" Title="Celular" Values="3" DataLabels="True"
                                LabelPoint="{Binding PointLabel}"/>
-                    <lvc:PieSeries Name="Tablet_Label" Title="Tablet" Values="4" DataLabels="True" 
+                        <lvc:PieSeries Name="Tablet_Label" Title="Tablet" Values="4" DataLabels="True" 
                                LabelPoint="{Binding PointLabel}"/>
-                    <lvc:PieSeries Name="Laptop_Label" Title="Laptop" Values="6" DataLabels="True" 
+                        <lvc:PieSeries Name="Laptop_Label" Title="Laptop" Values="6" DataLabels="True" 
                                LabelPoint="{Binding PointLabel}"/>
-                    <lvc:PieSeries Name="Acc_Label" Title="Accesorios" Values="2" DataLabels="True" 
+                        <lvc:PieSeries Name="Acc_Label" Title="Accesorios" Values="2" DataLabels="True" 
                                LabelPoint="{Binding PointLabel}"/>
-                </lvc:PieChart.Series>
-            </lvc:PieChart>
+                    </lvc:PieChart.Series>
+                </lvc:PieChart>
+            </DockPanel>
+            
+           
 
             <!--<lvc:CartesianChart Grid.Row="0" Grid.Column="1" Series="{Binding seriesCollection}" />-->
 
