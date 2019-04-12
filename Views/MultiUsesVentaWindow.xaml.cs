@@ -159,28 +159,28 @@ namespace Variedades.Views
 
                             EventoPaginacion();
 
-                            if (MessageBox.Show("Se ha ingresado correctamente la venta, ¿desea seguir ingresando ventas?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                            {
-                                this.Close();
-                            }
-                            else
-                            {
-                                CantidadTextBox.Text = String.Empty;
-                                ProductoTextBox.Text = String.Empty;
-                                PrecioFinalTextBox.Text = String.Empty;
-                                TotalPago = 0;
-                                cliente = null;
-                                ClienteTextBox.Text = String.Empty;
-                                TipoPagoComboBox.Text = String.Empty;
+                            this.Close();
 
-                                PagosPanel.Visibility = Visibility.Hidden;
+                            //if (MessageBox.Show("Se ha ingresado correctamente la venta, ¿desea seguir ingresando ventas?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                            //{
+                            //    this.Close();
+                            //}
+                            //else
+                            //{
+                            //    CantidadTextBox.Text = String.Empty;
+                            //    ProductoTextBox.Text = String.Empty;
+                            //    PrecioFinalTextBox.Text = String.Empty;
+                            //    TotalPago = 0;
+                            //    cliente = null;
+                            //    ClienteTextBox.Text = String.Empty;
+                            //    TipoPagoComboBox.Text = String.Empty;
 
-                                ProductosList.Clear();
+                            //    PagosPanel.Visibility = Visibility.Hidden;
 
-                                ViewModel.FillEspecificacionesProducts();
-                            }
+                            //    ProductosList.Clear();
 
-
+                            //    ViewModel.FillEspecificacionesProducts();
+                            //}
                         }
                     }
                 }
