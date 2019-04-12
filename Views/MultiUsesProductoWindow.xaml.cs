@@ -58,23 +58,7 @@ namespace Variedades.Views
             EspecificacionList = new ObservableCollection<EspecificacionClass>();
             ProductosDatagrid.ItemsSource = EspecificacionList;
 
-            /*if (producto != null)
-            {
-                _SelectedProduct = producto;
-                EspecificacionesToEditProductoList = new ObservableCollection<Especificacion_producto>();
-                _SelectedProduct.Especificaciones_producto.ToList().ForEach(item => EspecificacionesToEditProductoList.Add(item));
-                ProductosDatagrid.ItemsSource = null;
-                ProductosDatagrid.ItemsSource = EspecificacionesToEditProductoList;
-
-
-                EspecificacionesToEditProductoList.ToList().ForEach(item =>
-                {
-                    Debug.WriteLine("Imei: " + item.IMEI + "Nombre: " + item.Nombre + "Precio: " + item.Precio);
-                });
-
-                SetAndChangeWindowAppareance();
-            }*/
-
+           
             if (proveedor_ != null)
             {
                 ImportacionProducto = proveedor_;
@@ -88,62 +72,14 @@ namespace Variedades.Views
             UpdatePagination?.Invoke(this, EventArgs.Empty);
         }
 
-
-
+        
         //Pasa productos insertados a la ventana ImportacionToProductWindow
         private void EventoImportacion()
         {
             UpdateImportaciones?.Invoke(this, EventArgs.Empty);
         }
 
-        //private void SetAndChangeWindowAppareance()
-        //{
-        //    WindowTitle.Text = "Editar Producto";
-        //    MarcaTextBox.Text = _SelectedProduct.Marca;
-        //    ModeloTextBox.Text = _SelectedProduct.Modelo;
-        //    PrecioTextBox.Text = _SelectedProduct.Precio_Venta.ToString();
-        //    ComboBoxCredito.SelectedIndex = _SelectedProduct.Credito_Disponible == 1 ? 0 : 1;
-        //    ComboBoxImei.SelectedIndex = _SelectedProduct.Imei_Disponible == 1 ? 1 : 0;
-        //    ComboBoxGarantia.SelectedIndex = _SelectedProduct.Garantia_Disponible == 1 ? 0 : 1;
-        //    CategoriaComboBox.SelectedIndex = GetIndexCategory(_SelectedProduct.Tipo_Producto);
-
-        //    if(ComboBoxImei.Text == "Si")
-        //    {
-        //        ImeiColumn.Visibility = Visibility.Visible;
-        //    }
-
-        //    if (ComboBoxGarantia.Text == "Si")
-        //    {
-        //        GarantiaColumn.Visibility = Visibility.Visible;
-        //    }
-
-        //    if (ComboBoxGarantia.SelectedIndex > -1 && ComboBoxImei.SelectedIndex > -1)
-        //    {
-        //        //EspecificacionList.Clear();
-        //        ChangeBetweenImei();
-
-        //        /*
-        //        TextBoxProveedor.Text = _SelectedProduct.Especificaciones_producto.FirstOrDefault()
-        //            .Proveedor_Producto.DetalleProveedor.Proveedor
-        //            .Empresa;
-
-        //        */
-
-        //        TextBoxCantidad.Text = _SelectedProduct.NumeroDeEspecificacionesDisponibles.ToString();
-        //        TextBoxCantidad.IsEnabled = false;
-
-        //        AgregarATablaBtn.IsEnabled = false;
-        //        AgregarATablaBtn.Visibility = Visibility.Hidden;
-
-        //        //Grid productos - Cambiar los bindings
-        //        //Este codigo no funciona Maykol revisar aca ya que cambiamos la propiedad que se va a mostrar en el codigo xaml con el fin de que solo se puedan meter numeros
-        //        //ImeiColumn.Binding = new Binding("IMEI");
-        //        //Precio_Costo_Column.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Precio_Costo");
-        //        //ProveedorColumn.Binding = new Binding("Proveedor_Producto.DetalleProveedor.Proveedor.Empresa");
-
-        //    }
-        //}
-
+        
         public int GetIndexCategory(string Category)
         {
             //Iterar sobre el contenido las propiedades del combobox categoria, para obtener una list<string> de las categorias
@@ -315,22 +251,10 @@ namespace Variedades.Views
         //Acción del boton insertar
         private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
-            //if (EspecificacionesToEditProductoList != null && EspecificacionesToEditProductoList.Count > 0)
-            //{
-            //    _SelectedProduct.Especificaciones_producto.Clear();
-
-            //    foreach (var item in EspecificacionesToEditProductoList)
-            //    {
-            //        _SelectedProduct.Especificaciones_producto.Add(item);
-            //    }
-
-            //    ViewModel.UpdateProduct(_SelectedProduct);
-            //    this.Close();
-            //}
-
+           
             if (EspecificacionList.Count < 1)
             {
-                MessageBoxResult result = MessageBox.Show("Por favor Especifique almenos 1 en los campo asociados a este producto",
+                MessageBoxResult result = MessageBox.Show("Por favor ingrese almenos un producto con estas características",
                                                  "Confirmation",
                                                  MessageBoxButton.OK,
                                                  MessageBoxImage.Exclamation);
@@ -476,174 +400,9 @@ namespace Variedades.Views
             
         }
 
-            /*
+            
+    }
 
-            //Obtiene el proveedor creado desde la ventana ProveedorWindow
-            void EventoProveedor(Proveedor proveedor)
-            {
-                _Proveedor = proveedor;
-
-                if (_Proveedor != null)
-                {
-                    ProveedorTextBox.Text = _Proveedor.Empresa;
-                }
-            }
-
-            //Agregar proveedor
-            private void BtnInsertarProveedor(object sender, RoutedEventArgs e)
-            {
-                //Iniciamos la ventana de crear de proveedor
-                var window = new ProveedorWindow(ViewModel);
-
-                //Subscribimos al evento
-                //window.ActualizarProveedor += EventoProveedor;
-                window.Show();
-            }
-
-
-            //Add the Imei Box
-            private void BtnInsertarImei(object sender, RoutedEventArgs e)
-            {
-                if (ImeiDatagrid.Visibility == Visibility.Visible)
-                {
-                    ImeiDatagrid.Visibility = Visibility.Hidden;
-                    ImeiCheck = false;
-                }
-                else
-                {
-                    //Limpiamos los anteriores Imei
-                    if (ImeiList.Count > 0)
-                        ImeiList.Clear();
-
-                    ImeiDatagrid.Visibility = Visibility.Visible;
-                    ImeiCheck = true;
-
-                    //Intentamos agregar el numero de Imeis ingresados para que sean editables y validamos 
-                    try
-                    {
-                        var cantidad = int.Parse(TextBoxCantidad.Text);
-
-                        for (int i = 0; i < cantidad; i++)
-                        {
-                            ImeiList.Add(new ImeiClass() { Numero = (i + 1), Imei = " " });
-                        }
-
-                        ImeiDatagrid.ItemsSource = ImeiList;
-                    }
-                    catch
-                    {
-                        MessageBoxResult result = MessageBox.Show("Por favor Ingrese un numero correcto y que sea entero.",
-                                                  "Confirmation",
-                                                  MessageBoxButton.OK,
-                                                  MessageBoxImage.Exclamation);
-                    }
-                }
-
-            }
-
-            //Acción del boton insertar
-            private void BtnInsertarProducto(object sender, RoutedEventArgs e)
-            {
-                //Checkbox acerca de si el producto ingresado tiene acceso a comprarse con credito
-                int CreditoBox = (CreditoCheckBox.IsChecked == true) ? 1 : 0;
-
-                try
-                {
-                    //Ingresando el producto 
-                    var product = new Producto()
-                    {
-                        Marca = MarcaTextBox.Text,
-                        Modelo = ModeloTextBox.Text,
-                        Credito_Disponible = CreditoBox,
-                        Tipo_Producto = CategoriaComboBox.Text,
-                        Precio_Venta = double.Parse(PrecioTextBox.Text)
-                    };
-
-                    //Ingresando sus especificaciones
-                    var Especificaciones = new List<Especificacion_producto>();
-
-                    try
-                    {
-                        //Si el producto tiene Imeis se agregan, de lo contrario no
-                        var cantidad = int.Parse(TextBoxCantidad.Text);
-                        if (ImeiCheck == true && ImeiList.Count() != 0)
-                        {
-                            foreach (var item in ImeiList)
-                            {
-                                Especificaciones.Add(new Especificacion_producto() { Producto = product, IMEI = item.Imei });
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < cantidad; i++)
-                            {
-                                Especificaciones.Add(new Especificacion_producto() { Producto = product });
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        MessageBoxResult result = MessageBox.Show("Por favor Ingrese un numero de menor tamaño y que sea entero.",
-                                                      "Confirmation",
-                                                      MessageBoxButton.OK,
-                                                      MessageBoxImage.Exclamation);
-                    }
-
-                    Especificaciones.ForEach(item =>
-                    {
-                        product.Especificaciones_producto.Add(item);
-                    });
-
-                    if (_producto != null)
-                    {
-                        //Llamar al viewmodel para agregarlo a la base de datos
-                        product.IdProducto = _producto.IdProducto;
-                        ViewModel.UpdateProduct(product);
-                    }
-                    else
-                    {
-                        //ViewModel.AddProduct(product, _Proveedor);
-                        //ViewModel.AddProduct(product, Especificaciones);
-                    }
-
-                    //Llamamos a actualizar la paginacion
-                    EventoPaginacion();
-
-                    if (MessageBox.Show("Se ha ingresado correctamente el producto, ¿desea seguir ingresando productos?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                    {
-                        this.Close();
-                    }
-                    else
-                    {
-                        //Limpiamos los campos para volver a insertar
-                        TextBoxCantidad.Text = String.Empty;
-                        MarcaTextBox.Text = String.Empty;
-                        ModeloTextBox.Text = String.Empty;
-                        CategoriaComboBox.Text = String.Empty;
-                        PrecioTextBox.Text = String.Empty;
-
-                        if (ImeiDatagrid.Visibility == Visibility.Visible)
-                        {
-                            ImeiDatagrid.Visibility = Visibility.Hidden;
-                            ImeiCheck = false;
-                            ImeiList.Clear();
-                        }
-
-                    }
-                }
-                catch
-                {
-                    MessageBoxResult result = MessageBox.Show("Por favor Ingrese Los campos correctamente",
-                                                     "Confirmation",
-                                                     MessageBoxButton.OK,
-                                                     MessageBoxImage.Question);
-                }
-            }
-
-            */
-        }
-
-    
     public class EspecificacionClass
     {
         public string Imei { get; set; }

@@ -106,62 +106,14 @@
                 </Button>
                 <!--Logo title-->
                 <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource ColorLetraBlanca}" VerticalAlignment="Center" FontSize="22"> Variedades Mejia</TextBlock>
-                <!--Notification Image Button-->
-
-                <extToolkit:DropDownButton FlowDirection="RightToLeft" Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,70,5" HorizontalAlignment="Right" >
-                    <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="20px" Icon="Solid_Bell" VerticalAlignment="Center" HorizontalAlignment="Center" />
-
-                    <extToolkit:DropDownButton.DropDownContent>
-                        <ListView FlowDirection="RightToLeft" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="#3b3c40" Foreground="White" >
-
-                            <ListViewItem  Height="60">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ExclamationCircle" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <TextBlock Text="Notificacion 1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
-                                </StackPanel>
-                            </ListViewItem>
-                            <ListViewItem  Height="60">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ExclamationCircle" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <TextBlock Text="Notification 2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
-                                </StackPanel>
-                            </ListViewItem>
-                            <ListViewItem  Height="60">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_ArrowsAlt" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <TextBlock Text="Ver más" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
-                                </StackPanel>
-                            </ListViewItem>
-
-                        </ListView>
-                    </extToolkit:DropDownButton.DropDownContent>
-                </extToolkit:DropDownButton>
-
-                <!--Account Image Button-->
-                <extToolkit:DropDownButton FlowDirection="RightToLeft" Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,10,5" HorizontalAlignment="Right" >
-                    <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="20px" Icon="Solid_User" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                    <extToolkit:DropDownButton.DropDownContent>
-
-                        <ListView FlowDirection="RightToLeft" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="#3b3c40" Foreground="White" >
-
-                            <ListViewItem  Height="60">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_UsersCog" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <TextBlock Text="Configuración" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
-                                </StackPanel>
-                            </ListViewItem>
-                            <ListViewItem  Height="60">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_SignOutAlt" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <TextBlock Text="Cerrar Sesión" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 10"/>
-                                </StackPanel>
-                            </ListViewItem>
-
-
-
-                        </ListView>
-                    </extToolkit:DropDownButton.DropDownContent>
-                </extToolkit:DropDownButton>
+           
+                
+                <!--Help Button-->
+                <Button  Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,10,5" HorizontalAlignment="Right" >
+                    <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="20px" Icon="Solid_Question" VerticalAlignment="Center" HorizontalAlignment="Center"  />
+                    
+                    
+                </Button>
 
 
             </Grid>
