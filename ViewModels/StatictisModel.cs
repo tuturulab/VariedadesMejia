@@ -1,0 +1,42 @@
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Variedades.ViewModels
+{
+    class StatictisModel : PageViewModel, INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChangedd;
+        public new void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChangedd?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private SeriesCollection _SeriesCollection;
+        public SeriesCollection seriesCollection
+        {
+            get { return _SeriesCollection; }
+            set { _SeriesCollection = value; NotifyPropertyChanged("seriesCollection"); }
+        }
+
+        public StatictisModel()
+        {
+            seriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Values = new ChartValues<double> { 3, 5, 7, 4 }
+                },
+                new ColumnSeries
+                {
+                    Values = new ChartValues<decimal> { 5, 6, 2, 7 }
+                }
+            };
+        }
+    }
+}
