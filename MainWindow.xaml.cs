@@ -50,6 +50,25 @@ namespace Variedades
 
         }
 
+        private void BtnOpenManual(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                String file = "Assets/Manual.pdf";
+                process.StartInfo.FileName = file;
+                process.Start();
+            }
+            
+            catch
+            {
+                MessageBoxResult result = MessageBox.Show("Error al abrir el manual de usuario" ,
+                                             "Confirmation",
+                                             MessageBoxButton.OK,
+                                             MessageBoxImage.Exclamation);
+            }
+        }
+
         //Hide and show sidebar menu
         private void ToggleMenu(object sender, RoutedEventArgs e)
         {

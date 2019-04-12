@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Variedades.Models;
 
 namespace Variedades.Views
 {
@@ -19,9 +20,31 @@ namespace Variedades.Views
     /// </summary>
     public partial class DetallePedidoWindow : Window
     {
-        public DetallePedidoWindow()
+        PageViewModel ViewModel;
+        Pedido Pedido;
+
+
+        public DetallePedidoWindow(PageViewModel viewModel, Pedido _pedido)
         {
             InitializeComponent();
+
+            ViewModel = viewModel;
+            DataContext = viewModel;
+
+            Pedido = _pedido;
+
+            FillCampos();
         }
+
+        public void FillCampos()
+        {
+
+            ClienteTextBox.Text = Pedido.NombreCliente;
+            FechaPedidoTextBox.Text = Pedido.Fecha_Pedido.ToString();
+            EstadoTextBox.Text = Pedido.Estado_Pedido;
+
+            ViewModel.FillProductosDeUnPedido(Pedido);
+        }
+
     }
 }

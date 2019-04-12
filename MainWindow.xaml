@@ -109,7 +109,7 @@
            
                 
                 <!--Help Button-->
-                <Button  Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,10,5" HorizontalAlignment="Right" >
+                <Button Click="BtnOpenManual"  Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,10,5" HorizontalAlignment="Right" >
                     <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="20px" Icon="Solid_Question" VerticalAlignment="Center" HorizontalAlignment="Center"  />
                     
                     

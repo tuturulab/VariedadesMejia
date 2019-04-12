@@ -5,8 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Variedades.Views"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="DetallePedidoWindow" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
+            <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Detalle de un Pedido" FontSize="17" ></TextBlock>
+        </StackPanel>
+
+        <DockPanel Margin="0,50,0,0" Background="white">
+            <StackPanel Width="360" HorizontalAlignment="Left" Margin="10,10,10,5">
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Cliente" Width="100px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="210" Height="30" Name="ClienteTextBox" Margin="30,0,20,0"/>
+
+
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Fecha Pedido" Width="100px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="210" Height="30" Name="FechaPedidoTextBox" Margin="30,0,20,0"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Estado" Width="100px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="210" Height="30" Name="EstadoTextBox" Margin="30,0,20,0"/>
+                </DockPanel>
+
+                <DockPanel Margin="0,10,0,10"/>
+
+
+
+
+            </StackPanel>
+
+            <StackPanel Width="380" Margin="10,10,10,5" HorizontalAlignment="Right" >
+
+                <DockPanel Margin="10,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Productos Solicitados" HorizontalAlignment="Center" Width="120px"></TextBlock>
+                   
+                </DockPanel>
+
+                <DockPanel Height="200">
+                    <DataGrid ItemsSource="{Binding ProductosPedidoCollection}" Visibility="Visible" Name="PagosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Nombre, IsAsync=True}" Header="Nombre" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Cantidad, IsAsync=True}" Header="Cantidad" Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding Tipo_Producto, IsAsync=True}" Header="Tipo_Producto" Width="2*" ></DataGridTextColumn>
+                        
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </StackPanel>
+
+
+
+        </DockPanel>
     </Grid>
 </Window>
