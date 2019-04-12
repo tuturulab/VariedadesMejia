@@ -52,21 +52,11 @@ namespace Variedades
 
         private void BtnOpenManual(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
-                String file = "Assets/Manual.pdf";
-                process.StartInfo.FileName = file;
-                process.Start();
-            }
-            
-            catch
-            {
-                MessageBoxResult result = MessageBox.Show("Error al abrir el manual de usuario" ,
-                                             "Confirmation",
-                                             MessageBoxButton.OK,
-                                             MessageBoxImage.Exclamation);
-            }
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            string file = System.IO.Path.Combine(Environment.CurrentDirectory, @"Assets\\Manual.pdf");
+                
+            process.StartInfo.FileName = file;
+            process.Start();   
         }
 
         //Hide and show sidebar menu
