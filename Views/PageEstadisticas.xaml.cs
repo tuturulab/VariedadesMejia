@@ -1,5 +1,8 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Variedades.ViewModels;
 
 namespace Variedades.Views
 {
@@ -20,9 +24,12 @@ namespace Variedades.Views
     /// </summary>
     public partial class PageEstadisticas : Page
     {
+        private StatictisModel model;
         public PageEstadisticas()
         {
             InitializeComponent();
+            model = new StatictisModel();
+            DataContext = model;
         }
     }
 }
