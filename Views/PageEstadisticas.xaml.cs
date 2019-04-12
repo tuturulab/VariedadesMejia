@@ -24,14 +24,31 @@ namespace Variedades.Views
     /// </summary>
     public partial class PageEstadisticas : Page
     {
-        private StatictisModel model;
+        //private StatictisModel model;
         public PageEstadisticas()
         {
             InitializeComponent();
-            model = new StatictisModel();
+            //model = new StatictisModel();
+            //DataContext = model;
 
+            PointLabel = chartPoint =>
+                string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
 
-            DataContext = model;
+            DataContext = this;
+        }
+
+        public Func<ChartPoint, string> PointLabel { get; set; }
+
+        private void Chart_OnDataClick(object sender, ChartPoint chartPoint)
+        {
+            var chart = (LiveCharts.Wpf.PieChart)chartPoint.ChartView;
+
+            //clear selected slice.
+            foreach (PieSeries series in chart.Series)
+                series.PushOut = 0;
+
+            var selectedSeries = (PieSeries)chartPoint.SeriesView;
+            selectedSeries.PushOut = 8;
         }
     }
 }
