@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Variedades.Models"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="DetalleImportacionWindow" Height="450" Width="800">
     <Grid>
         <StackPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
@@ -30,7 +31,7 @@
                     <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="210" Height="30" Name="EstadoTextBox" Margin="30,0,20,0"/>
                 </DockPanel>
 
-                <DockPanel Margin="0,10,0,10">
+                <DockPanel Name="PedidoPanel" Visibility="Hidden" Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="Información del pedido" Width="130px"></TextBlock>
 
                     <Button  Name="VerInformacion" Click="BtnDetallePedido" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,0"  VerticalAlignment="Center" Width="130px" Content="Ver información"  Height="40px">

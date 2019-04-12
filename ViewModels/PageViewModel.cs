@@ -191,6 +191,14 @@ namespace Variedades
             set { Importacion = value; NotifyPropertyChanged("ImportacionCollection"); }
         }
 
+        //Observable for Productos de un pedido
+        private ObservableCollection<Especificacion_pedido> ProductosPedido;
+        public ObservableCollection<Especificacion_pedido> ProductosPedidoCollection
+        {
+            get { return ProductosPedido; }
+            set { ProductosPedido = value; NotifyPropertyChanged("ProductosPedidoCollection"); }
+        }
+
         //Observable for ClientFullList
         private ObservableCollection<Pedido> Pedido;
         public ObservableCollection<Pedido> PedidoCollection
@@ -330,6 +338,44 @@ namespace Variedades
                 UpdateAll();
             }
             //UpdateAll();
+
+            /* Algoritmo Maykol 
+            List<Especificacion_producto> Productos = _context.Especificacion_producto.Where(t => t.Vendido.Equals("Si")).ToList();
+
+            int NumeroCelulares = 0;
+            int NumeroLaptop = 0;
+            int NumeroOtros = 0;
+            int NumeroTablets = 0;
+            int NumeroAccesorios = 0;
+             
+
+            foreach (var pr in Productos)
+            {
+                if (pr.Tipo_Producto.Equals("Celular"))
+                    NumeroCelulares++;
+                else if (pr.Tipo_Producto.Equals("Tablet"))
+                    NumeroTablets++;
+                else if (pr.Tipo_Producto.Equals("Laptop"))
+                    NumeroLaptop++;
+                else if (pr.Tipo_Producto.Equals("Accesorio"))
+                    NumeroAccesorios++;
+                else
+                    NumeroOtros++;
+            }
+
+            Console.WriteLine(NumeroCelulares.ToString());
+            Console.WriteLine(NumeroTablets.ToString());
+            Console.WriteLine(NumeroLaptop.ToString());
+            Console.WriteLine(NumeroAccesorios.ToString());
+            Console.WriteLine(NumeroOtros.ToString());
+            */
+            
+        }
+
+        public void FillProductosDeUnPedido(Pedido _pedido)
+        {
+            List<Especificacion_pedido> Productos = _pedido.Especificaciones_pedido.ToList();
+            ProductosPedidoCollection = new ObservableCollection<Especificacion_pedido>(Productos);
         }
 
         public void FillProductosDeUnaImportacion(DetalleProveedor _importacion)
@@ -396,6 +442,8 @@ namespace Variedades
                 ventaNueva.VentaCompletada = "Si";
 
                 _context.SaveChanges();
+
+                UpdateVentas(10);
             }
         }
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Variedades.Models;
+using Variedades.Views;
 
 namespace Variedades.Models
 {
@@ -22,6 +23,10 @@ namespace Variedades.Models
     {
         PageViewModel ViewModel;
         DetalleProveedor Importacion;
+
+        DetallePedidoWindow window;
+
+        Pedido MainPedido;
 
         public DetalleImportacionWindow(PageViewModel viewModel, DetalleProveedor _Importacion)
         {
@@ -44,11 +49,28 @@ namespace Variedades.Models
 
 
             ViewModel.FillProductosDeUnaImportacion(Importacion);
+
+            Pedido pedido = Importacion.Pedido;
+
+            if (pedido == null)
+            {
+                PedidoPanel.Visibility = Visibility.Hidden;
+            }
+
+            else
+            {
+                PedidoPanel.Visibility = Visibility.Visible;
+                MainPedido = pedido;
+            }
         }
 
         private void BtnDetallePedido (object sender, RoutedEventArgs e)
         {
-            //
+            
+            window = new DetallePedidoWindow(ViewModel, MainPedido);
+
+            window.Show();
+
         }
     }
 }
