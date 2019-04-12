@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Variedades.ViewModels
 {
-    class StatictisModel : PageViewModel, INotifyPropertyChanged
+    class StatictisModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChangedd;
-        public new void NotifyPropertyChanged(string propertyName)
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string propertyName)
         {
-            PropertyChangedd?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private SeriesCollection _SeriesCollection;
