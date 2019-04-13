@@ -32,7 +32,7 @@
                 
             </StackPanel>
 
-            <TextBlock  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="20" Padding="10,10,10,10" Text="Tipo de Productos más comprados"></TextBlock>
+            <TextBlock  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="20" Padding="10,10,10,10" Text="Tipo de Productos más vendidos"></TextBlock>
             
             <DockPanel Height="300" Grid.Row="0" Grid.Column="1" >
 
