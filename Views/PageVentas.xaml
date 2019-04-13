@@ -124,7 +124,7 @@
 
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Orden Pagare" Binding="{Binding IdVenta, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Orden Pagare" Binding="{Binding Orden_Pagare, IsAsync=True}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Tipo de Venta" Binding="{Binding Tipo_Venta, IsAsync=True}" Width="*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Fecha de Venta" Binding="{Binding Fecha_Venta, IsAsync=True}" Width="2*" ></DataGridTextColumn>
                 <DataGridTextColumn Header="Cedula Cliente" Binding="{Binding NombreCliente, IsAsync=False}" Width="*" ></DataGridTextColumn>

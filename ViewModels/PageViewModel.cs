@@ -372,6 +372,12 @@ namespace Variedades
             
         }
 
+        public int ExistPagare(String OrdenPagare )
+        {
+            var cantidad = _context.Venta.Where(t => t.Orden_Pagare.Equals(OrdenPagare)).Count();
+            return cantidad;
+        }
+
         public void FillProductosDeUnPedido(Pedido _pedido)
         {
             List<Especificacion_pedido> Productos = _pedido.Especificaciones_pedido.ToList();
