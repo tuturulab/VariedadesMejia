@@ -59,11 +59,14 @@ namespace Variedades.Views
 
         private void BtnExportarExcel (object sender, RoutedEventArgs e)
         {
+            string FileName;
+
             //string filetoOpen;
             try
             {
                 String Fecha = DateTime.Now.ToString("dd-MM-yyyy");
                 String FilePath = "Ventas " + Fecha + ".xlsx ";
+                FileName = FilePath;
 
                 //filetoOpen = FilePath;
 
@@ -437,6 +440,13 @@ namespace Variedades.Views
                                                  MessageBoxButton.OK,
                                                  MessageBoxImage.Information);
 
+
+                //Start the process
+
+                //Get current process Path
+                string ActualFile = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\" + FileName;
+
+                Process.Start(ActualFile);
                 //openexcel
                 //Process.Start(filetoOpen); 
             }
