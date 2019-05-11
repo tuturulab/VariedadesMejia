@@ -21,56 +21,64 @@
             <StackPanel Margin="10,10,10,5">
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Marca" Width="100px"></TextBlock>
-                    <TextBox VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="420" Height="30" Name="MarcaTextBox" Margin="30,0,0,0"/>
+                    <TextBox TextChanged="MarcaTextBox_TextChanged" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="420" Height="30" Name="MarcaTextBox" Margin="30,0,0,0"/>
+                    <TextBlock Name="MarcaCheck" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Modelo" Width="100px"></TextBlock>
-                    <TextBox VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="420" Height="30" Name="ModeloTextBox" Margin="30,0,0,0"/>
+                    <TextBox TextChanged="ModeloTextBox_TextChanged"  VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="420" Height="30" Name="ModeloTextBox"  Margin="30,0,0,0"/>
+                    <TextBlock Name="ModeloCheck" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Precio de Venta" Width="100px"></TextBlock>
-                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="80" Height="30" Name="PrecioTextBox" Margin="30,0,0,0"/>
+                    <TextBox TextChanged="PrecioTextBox_TextChanged" PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="80" Height="30" Name="PrecioTextBox" Margin="30,0,0,0"/>
 
 
 
                     <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" Text="Credito" Width="40px"></TextBlock>
-                    <ComboBox DropDownClosed="OnComboBoxImeiSelect" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" Name="ComboBoxCredito">
+                    <ComboBox SelectionChanged="ComboBoxSelectable_SelectionChanged" DropDownClosed="OnComboBoxImeiSelect" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" Name="ComboBoxCredito">
                         <ComboBoxItem FontSize="16">Si</ComboBoxItem>
                         <ComboBoxItem FontSize="16">No</ComboBoxItem>
                     </ComboBox>
-                   
+                           
 
                     <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" Text="Imei" Width="30px"></TextBlock>
 
-                    <ComboBox DropDownClosed="OnComboBoxImeiSelect" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" Name="ComboBoxImei">
+                    <ComboBox SelectionChanged="ComboBoxSelectable_SelectionChanged" DropDownClosed="OnComboBoxImeiSelect" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" Name="ComboBoxImei">
                         <ComboBoxItem FontSize="16">Si</ComboBoxItem>
                         <ComboBoxItem FontSize="16">No</ComboBoxItem>
                     </ComboBox>
 
-                    <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" Text="Garantia" Width="50px"></TextBlock>
+                    <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" Text="Garantia" Width="45px"></TextBlock>
 
-                    <ComboBox DropDownClosed="OnComboBoxImeiSelect" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" Name="ComboBoxGarantia">
+                    <ComboBox DropDownClosed="OnComboBoxImeiSelect" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" Name="ComboBoxGarantia" SelectionChanged="ComboBoxSelectable_SelectionChanged">
                         <ComboBoxItem FontSize="16">Si</ComboBoxItem>
                         <ComboBoxItem FontSize="16">No</ComboBoxItem>
                     </ComboBox>
 
-
+                    <TextBlock Name="selectableCheck" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Tipo de producto" Width="100px"></TextBlock>
-                    <ComboBox Width="420" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Height="30" Margin="30,0,0,0" Name="CategoriaComboBox">
+                    <ComboBox SelectionChanged="CategoriaComboBox_SelectionChanged" Width="420" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Height="30" Margin="30,0,0,0" Name="CategoriaComboBox">
                         <ComboBoxItem>Celular</ComboBoxItem>
                         <ComboBoxItem>Tablet</ComboBoxItem>
                         <ComboBoxItem>Laptop</ComboBoxItem>
                         <ComboBoxItem>Accesorio</ComboBoxItem>
                         <ComboBoxItem>Otro</ComboBoxItem>
+                      
                     </ComboBox>
 
+                    <TextBlock Name="TipoProductoCheck" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
                 </DockPanel>
 
+                <DockPanel>
+                    
+                </DockPanel>
+                
                 <DockPanel Name="PanelGarantia" Visibility="Hidden" Margin="0,10,0,0">
                     <TextBlock HorizontalAlignment="Left" PreviewTextInput="TextBoxNumerico" Visibility="Visible" Margin="0,0,0,0" Name="TxtGarantiaVenta" VerticalAlignment="Center" Text="Garantía de venta (N# de Meses)" Width="190px"></TextBlock>
                     <TextBox PreviewTextInput="TextBoxNumerico" Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxGarantiaVenta" FontSize="20" HorizontalAlignment="Left" Width="330" Height="30" Margin="30,0,20,0"/>

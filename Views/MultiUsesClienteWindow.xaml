@@ -20,7 +20,8 @@
             <StackPanel Margin="10,10,10,5">
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Nombre" Width="100px"></TextBlock>
-                    <TextBox VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="300" Height="30" Name="NombreTextBox" Margin="30,0,0,0"  />
+                    <TextBox TextChanged="NombreTextBox_TextChanged" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="300" Height="30" Name="NombreTextBox" Margin="30,0,0,0"  />
+                    <TextBlock Name="NombreCheck" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">
@@ -41,12 +42,14 @@
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Cédula" Width="100px"></TextBlock>
                     <TextBox VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="300" Height="30" Name="CedulaTextBox" Margin="30,0,0,0"/>
+                   
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Dia de Pago" Width="100px"></TextBlock>
-                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="100" Height="30" Name="DiaPago1TextBox" Margin="30,0,0,0"/>
-                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="100" Height="30" Name="DiaPago2TextBox" Margin="100,0,0,0"/>
+                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="100" Height="30" TextChanged="DiaPago1TextBox_TextChanged" Name="DiaPago1TextBox" Margin="30,0,0,0"/>
+                    <TextBox PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="100" Height="30" TextChanged="DiaPago2TextBox_TextChanged" Name="DiaPago2TextBox" Margin="100,0,0,0"/>
+                    <TextBlock Name="PagoCheck" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">

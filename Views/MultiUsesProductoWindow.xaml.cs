@@ -400,7 +400,49 @@ namespace Variedades.Views
             
         }
 
-            
+        private void MarcaTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = MarcaTextBox.Text;
+
+            if (textBox == String.Empty)
+                MarcaCheck.Visibility = Visibility.Visible;
+            else
+                MarcaCheck.Visibility = Visibility.Hidden;
+        }
+
+
+
+        private void ComboBoxSelectable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ComboBoxGarantia.SelectedIndex != -1 && ComboBoxCredito.SelectedIndex != -1 && ComboBoxImei.SelectedIndex != -1 && PrecioTextBox.Text != String.Empty)
+                selectableCheck.Visibility = Visibility.Hidden;
+        }
+
+        private void PrecioTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = PrecioTextBox.Text;
+
+            if (textBox != String.Empty && ComboBoxGarantia.SelectedIndex != -1 && ComboBoxCredito.SelectedIndex != -1 && ComboBoxImei.SelectedIndex != -1  )
+                selectableCheck.Visibility = Visibility.Hidden;
+            else
+                selectableCheck.Visibility = Visibility.Visible;
+        }
+
+        private void ModeloTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (ModeloTextBox.Text != String.Empty)
+                ModeloCheck.Visibility = Visibility.Hidden;
+            else
+                ModeloCheck.Visibility = Visibility.Visible;
+        }
+
+        private void CategoriaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CategoriaComboBox.SelectedIndex != -1)
+                TipoProductoCheck.Visibility = Visibility.Hidden;
+            else
+                TipoProductoCheck.Visibility = Visibility.Visible;
+        }
     }
 
     public class EspecificacionClass

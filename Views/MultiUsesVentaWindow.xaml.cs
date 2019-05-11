@@ -351,5 +351,13 @@ namespace Variedades.Views
            
             window2.Show();
         }
+
+        private void OrdenPagareTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (OrdenPagareTextBox.Text != String.Empty)
+                PagareCheck.Visibility = Visibility.Hidden;
+            else
+                PagareCheck.Visibility = Visibility.Visible;
+        }
     }
 }

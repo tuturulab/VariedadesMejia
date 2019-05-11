@@ -87,6 +87,8 @@ namespace Variedades.Models
                 .WithOptional(c => c.Proveedor)
                 .WillCascadeOnDelete(true);
 
+          
+
         }
     }
 }
