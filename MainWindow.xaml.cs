@@ -26,13 +26,17 @@ namespace Variedades
     public partial class MainWindow : Window
     {
         public PageViewModel MainViewModel;
+        public User thisUser;
 
-        public MainWindow()
+
+        public MainWindow(PageViewModel viewModel, User user)
         {
             InitializeComponent();
             //Instantiate Viewmodel
-            MainViewModel = new PageViewModel();
+            MainViewModel = viewModel;
             DataContext = MainViewModel;
+
+            thisUser = user;
 
             using(var context = new DbmejiaEntities())
             {

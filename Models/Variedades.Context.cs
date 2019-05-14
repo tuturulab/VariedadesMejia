@@ -24,13 +24,15 @@ namespace Variedades.Models
         public virtual DbSet<Proveedor_producto> Proveedor_producto { get; set; }
         public virtual DbSet<Telefono> Telefono { get; set; }
 
+        //Useraccounts model
+        public virtual DbSet<User> Users { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
             //Disable pluralization convention
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            //Borrado en cascada
+            //Delete cascade or null if case
             modelBuilder.Entity<Producto>()
                 .HasMany(c => c.Especificaciones_producto)
                 .WithOptional(x => x.Producto)

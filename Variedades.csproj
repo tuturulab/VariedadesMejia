@@ -154,8 +154,20 @@
     <Compile Include="Migrations\201904111657086_ChangeCascade2.Designer.cs">
       <DependentUpon>201904111657086_ChangeCascade2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905131859410_userAccounts.cs" />
+    <Compile Include="Migrations\201905131859410_userAccounts.Designer.cs">
+      <DependentUpon>201905131859410_userAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905140244191_userName.cs" />
+    <Compile Include="Migrations\201905140244191_userName.Designer.cs">
+      <DependentUpon>201905140244191_userName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Views\CrearCuentaWindow.xaml.cs">
+      <DependentUpon>CrearCuentaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DetalleImportacionWindow.xaml.cs">
       <DependentUpon>DetalleImportacionWindow.xaml</DependentUpon>
     </Compile>
@@ -254,6 +266,10 @@
       <DependentUpon>SelectProveedorWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CrearCuentaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -420,6 +436,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904111657086_ChangeCascade2.resx">
       <DependentUpon>201904111657086_ChangeCascade2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905131859410_userAccounts.resx">
+      <DependentUpon>201905131859410_userAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905140244191_userName.resx">
+      <DependentUpon>201905140244191_userName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
