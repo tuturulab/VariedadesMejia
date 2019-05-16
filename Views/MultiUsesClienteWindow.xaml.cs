@@ -240,9 +240,29 @@ namespace Variedades.Views
             return null;
         }
 
-      
+        private void DiaPago2TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (DiaPago1TextBox.Text != String.Empty && DiaPago2TextBox.Text != String.Empty)
+                PagoCheck.Visibility = Visibility.Hidden;
+            else
+                PagoCheck.Visibility = Visibility.Visible;
+        }
 
-      
+        private void DiaPago1TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (DiaPago1TextBox.Text != String.Empty && DiaPago2TextBox.Text != String.Empty)
+                PagoCheck.Visibility = Visibility.Hidden;
+            else
+                PagoCheck.Visibility = Visibility.Visible;
+        }
+
+        private void NombreTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (NombreTextBox.Text != String.Empty)
+                NombreCheck.Visibility = Visibility.Hidden;
+            else
+                NombreCheck.Visibility = Visibility.Visible;
+        }
     }
 
     //Clase para generar la lista de Telefonos

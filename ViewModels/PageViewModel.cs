@@ -337,39 +337,45 @@ namespace Variedades
                 Debug.WriteLine("Database is avaliable");
                 UpdateAll();
             }
-            //UpdateAll();
+            
+        }
 
-            /* Algoritmo Maykol 
-            List<Especificacion_producto> Productos = _context.Especificacion_producto.Where(t => t.Vendido.Equals("Si")).ToList();
+        public User Login (String Email, String Password)
+        {
+            var user = _context.Users.FirstOrDefault(t => t.Email.Equals(Email));
 
-            int NumeroCelulares = 0;
-            int NumeroLaptop = 0;
-            int NumeroOtros = 0;
-            int NumeroTablets = 0;
-            int NumeroAccesorios = 0;
-             
-
-            foreach (var pr in Productos)
+            if (user == null)
             {
-                if (pr.Tipo_Producto.Equals("Celular"))
-                    NumeroCelulares++;
-                else if (pr.Tipo_Producto.Equals("Tablet"))
-                    NumeroTablets++;
-                else if (pr.Tipo_Producto.Equals("Laptop"))
-                    NumeroLaptop++;
-                else if (pr.Tipo_Producto.Equals("Accesorio"))
-                    NumeroAccesorios++;
-                else
-                    NumeroOtros++;
+                return null;
             }
 
-            Console.WriteLine(NumeroCelulares.ToString());
-            Console.WriteLine(NumeroTablets.ToString());
-            Console.WriteLine(NumeroLaptop.ToString());
-            Console.WriteLine(NumeroAccesorios.ToString());
-            Console.WriteLine(NumeroOtros.ToString());
-            */
-            
+            if (user.Password.Equals(Password) == false )
+            {
+                return null;
+            }
+
+            return user;
+
+        }
+
+        public bool CheckIfAccountsExist ()
+        {
+            int num = _context.Users.Count();
+
+            if (num == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public User CreateAccount (User user)
+        {
+            var UserNew = _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return UserNew;
         }
 
         public int ExistPagare(String OrdenPagare )

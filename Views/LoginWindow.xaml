@@ -1,9 +1,9 @@
-﻿<Window x:Class="Variedades.LoginWindow"
+﻿<Window x:Class="Variedades.Views.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Variedades"
+        xmlns:local="clr-namespace:Variedades.Views"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
@@ -23,7 +23,7 @@
                 <TextBox VerticalAlignment="Center" FontSize="20" Width="350" Height="30" Grid.Row="1" Name="UserTextBox" Margin="5"/>
                 <TextBlock Margin="0,20,0,0" FontSize="24" Text="Contraseña"/>
                 <PasswordBox VerticalAlignment="Center" FontSize="15" Width="350" Height="30" Grid.Row="1" Name="PassTextBox" Margin="5"/>
-                <Button Click="LoginButton" Margin="0,20,0,0" Width="100px" Height="50px" Grid.Row="2" Content="Iniciar sesión" />
+                <Button Background="{StaticResource ColorPrimario}" Foreground="White"  Click="LoginButton" Margin="0,20,0,0" Width="100px" Height="50px" Grid.Row="2" Content="Iniciar sesión" />
             </StackPanel>
 
         </Grid>
