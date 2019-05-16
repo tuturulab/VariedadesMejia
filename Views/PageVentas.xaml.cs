@@ -444,9 +444,12 @@ namespace Variedades.Views
                 //Start the process
 
                 //Get current process Path
-                string ActualFile = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) + "\\" + FileName;
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
 
-                Process.Start(ActualFile);
+                string file = System.IO.Path.Combine(Environment.CurrentDirectory, FileName);
+
+                process.StartInfo.FileName = file;
+                process.Start();
                 //openexcel
                 //Process.Start(filetoOpen); 
             }
