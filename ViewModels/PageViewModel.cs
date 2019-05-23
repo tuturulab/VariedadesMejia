@@ -730,15 +730,24 @@ namespace Variedades
         //Actualizamos todas las lista de todas las datagrid de cada una de las paginas
         private void UpdateAll()
         {
-            ProductosList = _context.Producto.ToList();
-            ClientesList = _context.Cliente.ToList();
-            VentasList = _context.Venta.ToList();
-            ImportacionList = _context.DetalleProveedor.ToList();
-            PedidosList = _context.Pedido.ToList();
+            /* entity procedure call */
+            //ProductosList = _context.Producto.ToList();
+            ProductosList = _context.Database.SqlQuery<Producto>("dbo.GetAllProductos").ToList();
+
+            ClientesList = _context.Database.SqlQuery<Cliente>("dbo.GetAllClientes").ToList();
+
+            //VentasList = _context.Venta.ToList();
+            VentasList = _context.Database.SqlQuery<Venta>("dbo.GetAllVentas").ToList();
+
+            //ImportacionList = _context.DetalleProveedor.ToList();
+            ImportacionList = _context.Database.SqlQuery<DetalleProveedor>("dbo.GetAllImportaciones").ToList();
+
+            //PedidosList = _context.Pedido.ToList();
+            PedidosList = _context.Database.SqlQuery<Pedido>("dbo.GetAllPedidos").ToList();
 
             //Collecciones usadas en las ventanas donde saldra para seleccionar
             //ClientesFullCollection = new ObservableCollection<Cliente>( _context.Cliente.ToList());
-            
+
             //Paginacion
             PagedProductTable.SomeMethod(ProductosList, 10);
             PagedClientTable.SomeMethod(ClientesList, 10);
