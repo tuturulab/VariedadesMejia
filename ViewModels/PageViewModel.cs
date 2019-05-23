@@ -1506,14 +1506,6 @@ namespace Variedades
                 ImportacionCollection = new ObservableCollection<DetalleProveedor>(_context.DetalleProveedor.ToList());
             }
         }
-
-  
-<<<<<<< HEAD
-        /* BRANCH 2 */
-        /* TEST */
-=======
-
->>>>>>> parent of ef44a08... Test branch2
         
 
         //Agregar Proveedor
