@@ -24,6 +24,8 @@ namespace Variedades.ViewModels
             set { _SeriesCollection = value; NotifyPropertyChanged("seriesCollection"); }
         }
 
+        /* Monkas from test */
+
         public StatictisModel()
         {
             seriesCollection = new SeriesCollection
