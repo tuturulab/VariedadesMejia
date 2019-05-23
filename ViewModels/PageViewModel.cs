@@ -825,18 +825,41 @@ namespace Variedades
         {
             try
             {
-                var cliente =_context.Cliente.Add(Cliente);
+                //var cliente = _context.Cliente.Add(Cliente);
+
+                SqlParameter[] _params = {
+                    new SqlParameter("@Nombre", Cliente.Nombre),
+                    new SqlParameter("@Email", Cliente.Email),
+                    new SqlParameter("@Domicilio", Cliente.Domicilio),
+                    new SqlParameter("@Tipo_Pago", Cliente.Tipo_Pago),
+                    new SqlParameter("@Compania", Cliente.Compania),
+                    new SqlParameter("@Cedula", Cliente.Cedula),
+                    new SqlParameter("@Fecha_Pago_1", Cliente.Fecha_Pago_1),
+                    new SqlParameter("@Fecha_Pago_2", Cliente.Fecha_Pago_2)
+                };
+
+                _context.Database.ExecuteSqlCommand("dbo.InsertClient @Nombre, @Email, @Domicilio, @Tipo_Pago, @Compania, @Cedula, @Fecha_Pago_1, @Fecha_Pago_2", _params);
 
                 foreach (var telefono in telefonos)
                 {
                     _context.Telefono.Add(telefono);
+                    /*SqlParameter[] _telparams = {
+                        new SqlParameter("@Id_Cliente", _cliente.IdCliente),
+                        new SqlParameter("@Numero", telefono.Numero),
+                        new SqlParameter("@Tipo_Numero", telefono.Tipo_Numero),
+                        new SqlParameter("@Empresa", telefono.Empresa)
+                    };
+
+                    _context.Database.ExecuteSqlCommand("dbo.InsertarTelefono @Id_Cliente, @Numero, @Tipo_Numero, @Empresa", _telparams);*/
                 }
 
                 _context.SaveChanges();
 
             }
-            catch
+            catch(Exception e)
             {
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e.StackTrace);
                 Console.WriteLine("Error Al ingresar en la base de datos");
             }
 
@@ -992,8 +1015,9 @@ namespace Variedades
         //Modulo de borrado
         public void DeleteClient(Cliente cliente_)
         {
-            
-            _context.Cliente.Remove(cliente_);
+
+            //_context.Cliente.Remove(cliente_);
+            _context.Database.ExecuteSqlCommand("dbo.DeleteCliente @IdCliente", new SqlParameter("@IdCliente", cliente_.IdCliente));
 
             //Eliminar del observable collection
             Clientes.Remove(cliente_);
