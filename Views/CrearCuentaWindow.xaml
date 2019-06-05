@@ -32,8 +32,8 @@
                     <TextBlock Margin="0,20,0,0" FontSize="22" Text="Tipo de Cuenta"/>
                     <ComboBox Width="350" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" Height="30" Margin="5" Name="CategoriaComboBox">
                         <ComboBoxItem>Administrador</ComboBoxItem>
-                        <ComboBoxItem>Usuario</ComboBoxItem>
                         <ComboBoxItem>Gerente</ComboBoxItem>
+                        <ComboBoxItem>Operador</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
                 

@@ -115,31 +115,31 @@ namespace Variedades
             {
                 case "ItemClients":
                     MainViewModel.UpdateClients(10);
-                    var PaginaClientes = new Views.PageClientes(MainViewModel);
+                    var PaginaClientes = new Views.PageClientes(MainViewModel, thisUser);
                     ContentMain.Navigate(PaginaClientes);
                     break;
 
                 case "ItemProducts":
                     MainViewModel.UpdateProducts(10);
-                    var PaginaProductos = new Views.PageProducts(MainViewModel);
+                    var PaginaProductos = new Views.PageProducts(MainViewModel, thisUser);
                     ContentMain.Navigate(PaginaProductos);
                     break;
 
                 case "ItemSales":
                     MainViewModel.UpdateVentas(10);
-                    var PaginaVentas = new Views.PageVentas (MainViewModel);
+                    var PaginaVentas = new Views.PageVentas (MainViewModel, thisUser);
                     ContentMain.Navigate(PaginaVentas);
                     break;
 
                 case "ItemImports":
                     MainViewModel.UpdateImportacion(10);
-                    var PaginaImportaciones = new Views.PageImportaciones(MainViewModel) ;
+                    var PaginaImportaciones = new Views.PageImportaciones(MainViewModel, thisUser) ;
                     ContentMain.Navigate(PaginaImportaciones);
                     break;
 
                 case "ItemPedidos":
                     MainViewModel.UpdatePedido(10);
-                    var PaginaPedidos = new Views.PagePedidos(MainViewModel);
+                    var PaginaPedidos = new Views.PagePedidos(MainViewModel , thisUser);
                     ContentMain.Navigate(PaginaPedidos);
                     break;
 
