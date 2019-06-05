@@ -340,9 +340,9 @@ namespace Variedades
             
         }
 
-        public User Login (String Email, String Password)
+        public User Login (String Nombre, String Password)
         {
-            var user = _context.Users.FirstOrDefault(t => t.Email.Equals(Email));
+            var user = _context.Users.FirstOrDefault(t => t.Nombre.Equals(Nombre));
 
             if (user == null)
             {

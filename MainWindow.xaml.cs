@@ -60,7 +60,7 @@ namespace Variedades
         private void BtnOpenManual(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
-            string file = System.IO.Path.Combine(Environment.CurrentDirectory, @"Assets\\Manual.pdf");
+            string file = System.IO.Path.Combine(Environment.CurrentDirectory, @"Manual.pdf");
                 
             process.StartInfo.FileName = file;
             process.Start();   
@@ -70,13 +70,13 @@ namespace Variedades
         private void ToggleMenu(object sender, RoutedEventArgs e)
         {
             //Codigo para generar un diagrama de Db para tener una foto 
-            using (var ctx = new Models.DbmejiaEntities())
+            /*using (var ctx = new Models.DbmejiaEntities())
             {
                 using (var writer = new XmlTextWriter("./Model.edmx", Encoding.Default))
                 {
                     EdmxWriter.WriteEdmx(ctx, writer);
                 }
-            }            
+            } */           
             
 
             if (Sidebar.Width == new GridLength(1, GridUnitType.Star))
