@@ -162,6 +162,10 @@
     <Compile Include="Migrations\201905140244191_userName.Designer.cs">
       <DependentUpon>201905140244191_userName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905230834164_cascademayorqueall.cs" />
+    <Compile Include="Migrations\201905230834164_cascademayorqueall.Designer.cs">
+      <DependentUpon>201905230834164_cascademayorqueall.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\User.cs" />
@@ -442,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905140244191_userName.resx">
       <DependentUpon>201905140244191_userName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905230834164_cascademayorqueall.resx">
+      <DependentUpon>201905230834164_cascademayorqueall.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
