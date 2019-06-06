@@ -888,7 +888,7 @@ namespace Variedades
             _context.SaveChanges();*/
             try
             {
-                SqlParameter[] _params = {
+                SqlParameter[] cliente_params = {
                     new SqlParameter("@IdCliente", item.IdCliente),
                     new SqlParameter("@Nombre", item.Nombre),
                     new SqlParameter("@Email", item.Email),
@@ -900,8 +900,20 @@ namespace Variedades
                     new SqlParameter("@Fecha_Pago_2", item.Fecha_Pago_2)
                 };
 
-                _context.Database.ExecuteSqlCommand("dbo.UpdateCliente @IdCliente, @Nombre, @Email, @Domicilio, @Tipo_Pago, @Compania, @Cedula, @Fecha_Pago_1, @Fecha_Pago_2", _params);
+                //Do Cliente Update
+                _context.Database.ExecuteSqlCommand("dbo.UpdateCliente @IdCliente, @Nombre, @Email, @Domicilio, @Tipo_Pago, @Compania, @Cedula, @Fecha_Pago_1, @Fecha_Pago_2", cliente_params);
 
+                foreach(Telefono tel in item.Telefonos)
+                {
+                    SqlParameter[] telefono_params = {
+                        new SqlParameter("@IdTelefono", tel.IdTelefono),
+                        new SqlParameter("@Numero", tel.Numero),
+                        new SqlParameter("@Tipo_Numero", tel.Tipo_Numero),
+                        new SqlParameter("@Empresa", tel.Empresa)
+                    };
+
+                    _context.Database.ExecuteSqlCommand("dbo.UpdateTelefono @IdTelefono, @Numero, @Tipo_Numero, @Empresa", telefono_params);
+                }
             }
             catch (Exception e)
             {

@@ -107,7 +107,7 @@
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
 
-                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding IdNumero, IsAsync=True}" Header="Id" Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Binding="{Binding IdTelefono, IsAsync=True}" Header="Id" Width="*" ></DataGridTextColumn>
 
                             <DataGridTemplateColumn Header="Numero" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
