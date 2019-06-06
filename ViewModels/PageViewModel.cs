@@ -835,22 +835,30 @@ namespace Variedades
                     new SqlParameter("@Compania", Cliente.Compania),
                     new SqlParameter("@Cedula", Cliente.Cedula),
                     new SqlParameter("@Fecha_Pago_1", Cliente.Fecha_Pago_1),
-                    new SqlParameter("@Fecha_Pago_2", Cliente.Fecha_Pago_2)
+                    new SqlParameter("@Fecha_Pago_2", Cliente.Fecha_Pago_2),
+                    new SqlParameter()
+                    {
+                        ParameterName = "@IdCliente",
+                        SqlDbType = SqlDbType.Int,
+                        Direction = ParameterDirection.Output
+                    }
                 };
 
-                _context.Database.ExecuteSqlCommand("dbo.InsertClient @Nombre, @Email, @Domicilio, @Tipo_Pago, @Compania, @Cedula, @Fecha_Pago_1, @Fecha_Pago_2", _params);
+                _context.Database.ExecuteSqlCommand("dbo.InsertClient @Nombre, @Email, @Domicilio, @Tipo_Pago, @Compania, @Cedula, @Fecha_Pago_1, @Fecha_Pago_2, @IdCliente OUT", _params);
+
+                int ClienteId = (int)_params.Last().Value;
 
                 foreach (var telefono in telefonos)
                 {
-                    _context.Telefono.Add(telefono);
-                    /*SqlParameter[] _telparams = {
-                        new SqlParameter("@Id_Cliente", _cliente.IdCliente),
+                    //_context.Telefono.Add(telefono);
+                    SqlParameter[] _telparams = {
+                        new SqlParameter("@Id_Cliente", ClienteId),
                         new SqlParameter("@Numero", telefono.Numero),
                         new SqlParameter("@Tipo_Numero", telefono.Tipo_Numero),
                         new SqlParameter("@Empresa", telefono.Empresa)
                     };
 
-                    _context.Database.ExecuteSqlCommand("dbo.InsertarTelefono @Id_Cliente, @Numero, @Tipo_Numero, @Empresa", _telparams);*/
+                    _context.Database.ExecuteSqlCommand("dbo.InsertarTelefono @Id_Cliente, @Numero, @Tipo_Numero, @Empresa", _telparams);
                 }
 
                 _context.SaveChanges();
@@ -860,25 +868,47 @@ namespace Variedades
             {
                 Debug.WriteLine(e.Message);
                 Debug.WriteLine(e.StackTrace);
-                Console.WriteLine("Error Al ingresar en la base de datos");
+                Debug.WriteLine("Error Al ingresar en la base de datos");
             }
-
-          
 
             UpdateClients(10);
         }
 
         //Update cliente
-        public void UpdateCliente<T>(T item) where T : Cliente
+        //public void UpdateCliente<T>(T item) where T : Cliente
+        public void UpdateCliente(Cliente item)
         {
-            var entity = _context.Cliente.Find(item.IdCliente);
+            /*var entity = _context.Cliente.Find(item.IdCliente);
             if (entity == null)
             {
                 return;
             }
 
             _context.Entry(entity).CurrentValues.SetValues(item);
-            _context.SaveChanges();
+            _context.SaveChanges();*/
+            try
+            {
+                SqlParameter[] _params = {
+                    new SqlParameter("@IdCliente", item.IdCliente),
+                    new SqlParameter("@Nombre", item.Nombre),
+                    new SqlParameter("@Email", item.Email),
+                    new SqlParameter("@Domicilio", item.Domicilio),
+                    new SqlParameter("@Tipo_Pago", item.Tipo_Pago),
+                    new SqlParameter("@Compania", item.Compania),
+                    new SqlParameter("@Cedula", item.Cedula),
+                    new SqlParameter("@Fecha_Pago_1", item.Fecha_Pago_1),
+                    new SqlParameter("@Fecha_Pago_2", item.Fecha_Pago_2)
+                };
+
+                _context.Database.ExecuteSqlCommand("dbo.UpdateCliente @IdCliente, @Nombre, @Email, @Domicilio, @Tipo_Pago, @Compania, @Cedula, @Fecha_Pago_1, @Fecha_Pago_2", _params);
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e.StackTrace);
+                Debug.WriteLine("Error Al ingresar en la base de datos");
+            }
 
             UpdateClients(10);
         }

@@ -45,7 +45,7 @@ namespace Variedades
                     context.Database.Connection.Open();
                     context.Database.Connection.Close();
                 }
-                catch(SqlException e)
+                catch (SqlException)
                 {
                     MessageBox.Show("Verifica tus servicios de base de datos");
                     this.Close();
@@ -115,7 +115,7 @@ namespace Variedades
             {
                 case "ItemClients":
                     MainViewModel.UpdateClients(10);
-                    var PaginaClientes = new Views.PageClientes(MainViewModel, thisUser);
+                    var PaginaClientes = new Views.PageClientes(MainViewModel);
                     ContentMain.Navigate(PaginaClientes);
                     break;
 
@@ -127,7 +127,7 @@ namespace Variedades
 
                 case "ItemSales":
                     MainViewModel.UpdateVentas(10);
-                    var PaginaVentas = new Views.PageVentas (MainViewModel, thisUser);
+                    var PaginaVentas = new Views.PageVentas (MainViewModel);
                     ContentMain.Navigate(PaginaVentas);
                     break;
 
