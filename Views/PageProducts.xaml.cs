@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using Variedades.Models;
 using Variedades.Utils;
 
 namespace Variedades.Views
@@ -24,7 +25,9 @@ namespace Variedades.Views
         public int NumeroPaginaActual;
         public int NumeroPaginaMax;
 
-        public PageProducts(PageViewModel pageViewModel)
+        public User thisUser;
+
+        public PageProducts(PageViewModel pageViewModel, User user_)
         {
             InitializeComponent();
 
@@ -33,6 +36,8 @@ namespace Variedades.Views
             DataContext = ViewModel;
 
             UtilidadPaginacion();
+
+            thisUser = user_;
         }
 
         public void EventoPaginacion(object sender, EventArgs e)
@@ -91,12 +96,26 @@ namespace Variedades.Views
         //Botones de edicion
         private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
-            //Iniciamos la ventana de crear un producto
-            window = new MultiUsesProductoWindow(ViewModel);
+            if (thisUser.Role.Equals("Gerente") || thisUser.Role.Equals("Administrador"))
+            {
+                //Iniciamos la ventana de crear un producto
+                window = new MultiUsesProductoWindow(ViewModel);
 
-            //Subscribimos al evento
-            window.UpdatePagination += new EventHandler(EventoPaginacion);
-            window.Show();
+                //Subscribimos al evento
+                window.UpdatePagination += new EventHandler(EventoPaginacion);
+                window.Show();
+            }
+
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Usted no tiene derechos para acceder a esta opción",
+                                                 "Confirmation",
+                                                 MessageBoxButton.OK,
+                                                 MessageBoxImage.Exclamation);
+
+            }
+
+                
         }
 
         //Botones de edicion

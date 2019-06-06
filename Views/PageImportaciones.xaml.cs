@@ -28,7 +28,9 @@ namespace Variedades.Views
         public int NumeroPaginaActual;
         public int NumeroPaginaMax;
 
-        public PageImportaciones(PageViewModel pageViewModel)
+        public User thisUser;
+
+        public PageImportaciones(PageViewModel pageViewModel, User user_)
         {
             InitializeComponent();
 
@@ -37,6 +39,7 @@ namespace Variedades.Views
             DataContext = ViewModel;
 
             UtilidadPaginacion();
+            thisUser = user_;
         }
 
         public void EventoPaginacion(object sender, EventArgs e)
@@ -47,12 +50,24 @@ namespace Variedades.Views
         //Botones de edicion
         private void BtnInsertarImportacion(object sender, RoutedEventArgs e)
         {
-            //Iniciamos la ventana de crear una importación
-            window = new MultiUsesImportacionWindow(ViewModel);
+            if (thisUser.Role.Equals("Gerente") || thisUser.Role.Equals("Administrador"))
+            {
+                //Iniciamos la ventana de crear una importación
+                window = new MultiUsesImportacionWindow(ViewModel);
 
-            //Subscribimos al evento
-            window.UpdatePagination += new EventHandler(EventoPaginacion);
-            window.Show();
+                //Subscribimos al evento
+                window.UpdatePagination += new EventHandler(EventoPaginacion);
+                window.Show();
+            }
+
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Usted no tiene derechos para acceder a esta opción",
+                                               "Confirmation",
+                                               MessageBoxButton.OK,
+                                               MessageBoxImage.Exclamation);
+            }
+                
 
         }
 

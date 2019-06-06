@@ -32,7 +32,9 @@ namespace Variedades.Views
         public int NumeroPaginaActual;
         public int NumeroPaginaMax;
 
-        public PagePedidos(PageViewModel pageViewModel)
+        public User thisUser;
+
+        public PagePedidos(PageViewModel pageViewModel, User _user)
         {
             InitializeComponent();
 
@@ -59,7 +61,8 @@ namespace Variedades.Views
         //Botones de edicion
         private void BtnInsertarPedido(object sender, RoutedEventArgs e)
         {
-            //Iniciamos la ventana de crear un producto
+           
+            //Iniciamos la ventana de crear un pedido
             window = new MultiUsesPedidoWindow(ViewModel);
 
             //Subscribimos al evento
