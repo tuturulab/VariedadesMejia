@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Variedades.Models;
 
 namespace Variedades.Views
 {
@@ -30,13 +32,14 @@ namespace Variedades.Views
         }
 
 
-        public SelectProductWindow(PageViewModel viewModel)
+        public SelectProductWindow(PageViewModel viewModel, ObservableCollection<Especificacion_producto> ProductosList)
         {
             InitializeComponent();
 
             ViewModel = viewModel;
             DataContext = ViewModel;
 
+            ViewModel.FillSearchEspecificacionesProducts();
         }
 
         private void BtnSelectProduct(object sender, RoutedEventArgs e)
@@ -56,8 +59,7 @@ namespace Variedades.Views
                 //Pasamos el dato a la ventana que lo invoque
                 EventoPasarProducto();
 
-                //Removemos el producto temporalmente para evitar que el usuario agregue este denuevo
-                ViewModel.especificacion_Productos.Remove(idSelected);
+                
 
                 this.Close();
             }

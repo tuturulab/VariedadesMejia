@@ -41,6 +41,7 @@ namespace Variedades
         public List<Cliente> SearchClientList;
         public List<Pedido> SearchPedidoList;
 
+        public List<Especificacion_producto> ListaNoComprados;
         
         //Declaracion del evento para llamar a la paginacion de la pagina productos una vez se llena la observable productos
         //public event EventHandler EventPaginationProduct;
@@ -669,8 +670,15 @@ namespace Variedades
         //Set the Especificaciones Product List 
         public void FillEspecificacionesProducts()
         {
+            ListaNoComprados = new List<Especificacion_producto>(_context.Especificacion_producto.Where(t => t.Vendido.Equals("No")).ToList());
+
             //Obtener los productos que no se han vendido
-            especificacion_Productos = new ObservableCollection<Especificacion_producto>(_context.Especificacion_producto.Where(t => t.Vendido.Equals("No") ).ToList());
+            especificacion_Productos = new ObservableCollection<Especificacion_producto>(ListaNoComprados);
+        }
+
+        public void FillSearchEspecificacionesProducts()
+        {
+            especificacion_Productos = new ObservableCollection<Especificacion_producto>(ListaNoComprados);
         }
 
         //Obtener el maximo numero de paginas ()
@@ -1476,11 +1484,12 @@ namespace Variedades
         {
             if(filtro != string.Empty)
             {
-                ProductosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(_context.Especificacion_producto.Where(s => ((s.Producto.Marca.ToLower().Contains(filtro.ToLower())) || (s.Producto.Modelo.ToLower().Contains(filtro.ToLower())) || (s.Descripcion.ToLower().Contains(filtro.ToLower()))) && (s.Venta == null)));
+                
+                ProductosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(ListaNoComprados.Where(s => ((s.Producto.Marca.ToLower().Contains(filtro.ToLower())) || (s.Producto.Modelo.ToLower().Contains(filtro.ToLower())) || (s.Descripcion.ToLower().Contains(filtro.ToLower()))) && (s.Venta == null)));
             }
             else
             {
-                ProductosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(_context.Especificacion_producto.Where(t => (t.Venta ==null)).ToList());
+                ProductosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(ListaNoComprados.Where(t => (t.Venta ==null)).ToList());
             }
             
         }

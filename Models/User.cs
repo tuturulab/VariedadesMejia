@@ -20,5 +20,9 @@ namespace Variedades.Models
 
         public string Role { get; set; }
         
+        public string Code { get; set; }
+
+        public DateTime? ValidUntil { get; set; }
+        
     }
 }

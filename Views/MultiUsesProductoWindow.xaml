@@ -21,19 +21,19 @@
             <StackPanel Margin="10,10,10,5">
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Marca" Width="100px"></TextBlock>
-                    <TextBox TextChanged="MarcaTextBox_TextChanged" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="420" Height="30" Name="MarcaTextBox" Margin="30,0,0,0"/>
+                    <TextBox PreviewTextInput="MarcaTextBox_PreviewTextInput" TextChanged="MarcaTextBox_TextChanged" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="420" Height="30" Name="MarcaTextBox" Margin="30,0,0,0"/>
                     <TextBlock Name="MarcaCheck" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Modelo" Width="100px"></TextBlock>
-                    <TextBox TextChanged="ModeloTextBox_TextChanged"  VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="420" Height="30" Name="ModeloTextBox"  Margin="30,0,0,0"/>
+                    <TextBox PreviewTextInput="ModeloTextBox_PreviewTextInput"  TextChanged="ModeloTextBox_TextChanged"  VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="420" Height="30" Name="ModeloTextBox"  Margin="30,0,0,0"/>
                     <TextBlock Name="ModeloCheck" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Precio de Venta" Width="100px"></TextBlock>
-                    <TextBox TextChanged="PrecioTextBox_TextChanged" PreviewTextInput="TextBoxNumerico" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="80" Height="30" Name="PrecioTextBox" Margin="30,0,0,0"/>
+                    <TextBox TextChanged="PrecioTextBox_TextChanged" PreviewTextInput="PrecioTextBox_PreviewTextInput" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="80" Height="30" Name="PrecioTextBox" Margin="30,0,0,0"/>
 
 
 
@@ -79,9 +79,9 @@
                     
                 </DockPanel>
                 
-                <DockPanel Name="PanelGarantia" Visibility="Hidden" Margin="0,10,0,0">
+                <DockPanel Visibility="Hidden" Name="PanelGarantia"  Margin="0,10,0,0">
                     <TextBlock HorizontalAlignment="Left" PreviewTextInput="TextBoxNumerico" Visibility="Visible" Margin="0,0,0,0" Name="TxtGarantiaVenta" VerticalAlignment="Center" Text="Garantía de venta (N# de Meses)" Width="190px"></TextBlock>
-                    <TextBox PreviewTextInput="TextBoxNumerico" Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxGarantiaVenta" FontSize="20" HorizontalAlignment="Left" Width="330" Height="30" Margin="30,0,20,0"/>
+                    <TextBox PreviewTextInput="TextBoxGarantiaVenta_PreviewTextInput" Visibility="Visible"  VerticalAlignment="Center" Name="TextBoxGarantiaVenta" FontSize="20" HorizontalAlignment="Left" Width="330" Height="30" Margin="30,0,20,0"/>
                 </DockPanel>
 
                 <DockPanel Visibility="Hidden" Name="PanelImei" Margin="0,10,0,0">

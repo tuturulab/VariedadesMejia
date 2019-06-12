@@ -236,8 +236,13 @@ namespace Variedades.Views
         //Boton para borrar productos del datagrid
         private void BtnBorrarClick (object sender, RoutedEventArgs e)
         {
+            //Agregamos nuevamente el producto a la lista 
             ViewModel.especificacion_Productos.Add(ViewModel.SelectedEspecificacionProducto);
+            ViewModel.ListaNoComprados.Add(ViewModel.SelectedEspecificacionProducto);
+
+            //Removemos del carrito de compras
             ProductosList.Remove(ViewModel.SelectedEspecificacionProducto);
+            //Actualizamos el total del monto
             ObtenerTotalPago();
         }
 
@@ -264,6 +269,11 @@ namespace Variedades.Views
                 TotalPago = 0;
 
                 ObtenerTotalPago();
+
+                //Removemos el producto temporalmente para evitar que el usuario agregue este denuevo
+
+                ViewModel.ListaNoComprados.Remove(_producto);
+                ViewModel.especificacion_Productos.Remove(_producto);
 
                 PrecioFinalTextBox.Text = TotalPago.ToString();
 
@@ -324,7 +334,7 @@ namespace Variedades.Views
         private void BtnSelectProduct(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            ProductWindow = new SelectProductWindow(ViewModel);
+            ProductWindow = new SelectProductWindow(ViewModel, ProductosList);
 
             ProductWindow.UpdateProduct += new EventHandler(EventoPasarProducto);
             ProductWindow.Show();

@@ -162,6 +162,14 @@
     <Compile Include="Migrations\201905140244191_userName.Designer.cs">
       <DependentUpon>201905140244191_userName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906100318062_tools.cs" />
+    <Compile Include="Migrations\201906100318062_tools.Designer.cs">
+      <DependentUpon>201906100318062_tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906112344399_addUserCode.cs" />
+    <Compile Include="Migrations\201906112344399_addUserCode.Designer.cs">
+      <DependentUpon>201906112344399_addUserCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\User.cs" />
@@ -442,6 +450,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905140244191_userName.resx">
       <DependentUpon>201905140244191_userName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906100318062_tools.resx">
+      <DependentUpon>201906100318062_tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906112344399_addUserCode.resx">
+      <DependentUpon>201906112344399_addUserCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

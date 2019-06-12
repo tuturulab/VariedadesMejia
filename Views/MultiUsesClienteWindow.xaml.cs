@@ -63,15 +63,17 @@ namespace Variedades.Views
             try
             {
 
-                if (String.IsNullOrEmpty(NombreTextBox.Text) == false)
+                if (String.IsNullOrEmpty(NombreTextBox.Text) == false && String.IsNullOrEmpty(CedulaTextBox.Text) == false )
                 {
-                    if (String.IsNullOrEmpty(DiaPago1TextBox.Text) == true || int.Parse(DiaPago1TextBox.Text) >31 || int.Parse(DiaPago1TextBox.Text) < 1)
+                    String AllowedCedula = "\\d{3}-(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])\\d\\d-\\d{4}[a-zA-Z]{1}" ;
+
+                    if (Regex.IsMatch(CedulaTextBox.Text, AllowedCedula) == false )
                     {
-                        MessageBoxResult result = MessageBox.Show("Por Favor Ingrese almenos un dia de pago, y asegurese de que sea entre 1 y 30 dias", "Confirmation",
+                        MessageBoxResult result = MessageBox.Show("Por Favor Ingrese una cédula correcta.", "Confirmation",
                                                 MessageBoxButton.OK,
                                                 MessageBoxImage.Exclamation);
                     }
-                    
+ 
                     else
                     {
                         //Ingresando el Cliente
@@ -167,7 +169,7 @@ namespace Variedades.Views
         //Validar que en los campos numericos solo se escriban numeros
         public void TextBoxNumerico(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
+            Regex regex = new Regex(@"[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
@@ -262,6 +264,86 @@ namespace Variedades.Views
                 NombreCheck.Visibility = Visibility.Hidden;
             else
                 NombreCheck.Visibility = Visibility.Visible;
+
+       
+        }
+
+        private void NombreTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"(?i)^[a-z]+");
+
+            if (NombreTextBox.Text.Length < 20 && regex.IsMatch(e.Text) )
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void EmailTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            
+            if (EmailTextBox.Text.Length < 20 )
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void DomicilioTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+            if (DomicilioTextBox.Text.Length > 30)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void CedulaTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (CedulaTextBox.Text.Length > 15)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void DiaPago1TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (DiaPago1TextBox.Text.Length > 1)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void DiaPago2TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            
+            if (DiaPago2TextBox.Text.Length > 1)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
         }
     }
 

@@ -443,6 +443,46 @@ namespace Variedades.Views
             else
                 TipoProductoCheck.Visibility = Visibility.Visible;
         }
+
+        private void MarcaTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (MarcaTextBox.Text.Length > 25)
+                e.Handled = true;
+            else
+                e.Handled = false;
+        }
+
+        private void ModeloTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (ModeloTextBox.Text.Length > 25)
+                e.Handled = true;
+            else
+                e.Handled = false;
+        }
+
+        private void PrecioTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+
+            if (PrecioTextBox.Text.Length > 3)
+                e.Handled = true;
+            else
+                e.Handled = false;
+        }
+
+        private void TextBoxGarantiaVenta_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+
+            if (PrecioTextBox.Text.Length > 2)
+                e.Handled = true;
+            else
+                e.Handled = false;
+        }
+
+
     }
 
     public class EspecificacionClass
