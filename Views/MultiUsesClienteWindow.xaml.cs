@@ -65,7 +65,7 @@ namespace Variedades.Views
 
                 if (String.IsNullOrEmpty(NombreTextBox.Text) == false && String.IsNullOrEmpty(CedulaTextBox.Text) == false )
                 {
-                    String AllowedCedula = "\\d{3}-(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])\\d\\d-\\d{4}[a-zA-Z]{1}" ;
+                    string AllowedCedula = "\\d{3}-(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])\\d\\d-\\d{4}[a-zA-Z]{1}" ;
 
                     if (Regex.IsMatch(CedulaTextBox.Text, AllowedCedula) == false )
                     {

@@ -112,13 +112,13 @@
                             <DataGridTemplateColumn Header="Numero" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Numero}"/>
+                                        <TextBox MaxLength="9" PreviewTextInput="TextBoxNumerico" Text="{Binding Numero}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <TextBox PreviewTextInput="TextBoxNumerico" Text="{Binding Numero}"/>
-                                    </DataTemplate>
+                                        <TextBlock Text="{Binding Numero}"/>
+                                    </DataTemplate> 
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
 
