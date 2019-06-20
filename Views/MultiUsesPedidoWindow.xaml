@@ -120,7 +120,7 @@
                             <DataGridTemplateColumn Header="Cantidad" x:Name="Precio_Costo_Columns" Width="2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Cantidad}"/>
+                                        <TextBox MaxLength="3" Text="{Binding Cantidad}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>

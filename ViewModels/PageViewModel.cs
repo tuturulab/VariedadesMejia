@@ -676,6 +676,11 @@ namespace Variedades
             especificacion_Productos = new ObservableCollection<Especificacion_producto>(ListaNoComprados);
         }
 
+        public List<Especificacion_producto> GetProductosSinComprar()
+        {
+            return ListaNoComprados;
+        }
+
         public void FillSearchEspecificacionesProducts()
         {
             especificacion_Productos = new ObservableCollection<Especificacion_producto>(ListaNoComprados);
