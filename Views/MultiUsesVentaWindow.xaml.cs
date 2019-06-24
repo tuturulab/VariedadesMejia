@@ -54,6 +54,8 @@ namespace Variedades.Views
 
             //Seteamos los productos disponibles
             ViewModel.FillEspecificacionesProducts();
+
+            ViewModel.FillProductosPadres();
         }
 
         //Validación
@@ -321,8 +323,8 @@ namespace Variedades.Views
         //Obtener el cliente desde la ventana de productos
         public void EventoPasarProducto (object sender, EventArgs e)
         {
-            _producto = ViewModel.SelectedProductWindow;
-            ProductoTextBox.Text = _producto.Nombre;
+            var Productos = ViewModel.ProductosHijosSeleccionados;
+            ProductoTextBox.Text = Productos.FirstOrDefault().Producto.Nombre;
         }
 
         public void EventoInsertarCliente (object sender, EventArgs e)
@@ -335,6 +337,9 @@ namespace Variedades.Views
         {
             //Iniciamos la ventana de crear un producto
             ProductWindow = new SelectProductWindow(ViewModel, ProductosList);
+
+            //Reseteamos la lista seleccionada
+            ViewModel.ProductosHijosSeleccionados.Clear();
 
             ProductWindow.UpdateProduct += new EventHandler(EventoPasarProducto);
             ProductWindow.Show();

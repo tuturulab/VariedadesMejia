@@ -60,5 +60,12 @@ namespace Variedades.Views
                 ViewModel.SearchProveedorList(busqueda);
             }
         }
+
+        private void Client_table_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //Llamamos al evento para cerrar la ventana
+            ActivarEventoProveedor();
+            this.Close();
+        }
     }
 }

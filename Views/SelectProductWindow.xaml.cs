@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,17 +45,7 @@ namespace Variedades.Views
             DataContext = ViewModel;
 
             ViewModel.FillSearchEspecificacionesProducts();
-
-            SetProductosInTree();
-        }
-
-        public void SetProductosInTree()
-        {
-            ProductosNoComprados = ViewModel.GetProductosSinComprar();
-
-            FillProductosParent();
-
-            InsertInTreeView();
+    
         }
 
 
@@ -64,7 +55,7 @@ namespace Variedades.Views
             {
                 TreeViewItem newChild = new TreeViewItem();
                 newChild.Header = i.Marca + " " + i.Modelo;
-                ProductTreeView.Items.Add(newChild);
+                //ProductTreeView.Items.Add(newChild);
 
                 foreach (var x in ProductosNoComprados)
                 {
@@ -108,7 +99,100 @@ namespace Variedades.Views
 
         private void BtnSelectProduct(object sender, RoutedEventArgs e)
         {
-            var idSelected = ViewModel.SelectedProductWindow;
+            
+            if (TipoSeleccionComboBox.SelectedIndex == 0)
+            {
+                SelectProduct();
+            }
+
+            else
+            {
+                
+                if ( Int32.Parse (StockTextBox.Text) > ViewModel.SelectedProductParent.Especificaciones_producto.Where(t => t.Vendido.Equals("No")).Count() )
+                {
+                    MessageBoxResult result = MessageBox.Show("Por favor seleccione una cantidad menor al stock disponible del producto seleccionado.",
+                                                     "Confirmation",
+                                                     MessageBoxButton.OK,
+                                                     MessageBoxImage.Exclamation);
+                }
+
+                else
+                {
+                    var num = 0;
+
+                    for (int i=0; i<Int32.Parse (StockTextBox.Text); i++)
+                    {
+                        var idSelected = ViewModel.SelectedProductParent;
+                     
+                        foreach (var z in idSelected.Especificaciones_producto)
+                        {
+                            if (num < Int32.Parse(StockTextBox.Text) )
+                            {
+                                ViewModel.ProductosHijosSeleccionados.Add(z);
+                                num++;
+                            }
+                            
+                        }
+                        
+                    }
+
+                    EventoPasarProducto();
+                    this.Close();
+                   
+                }
+
+            }
+            
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filtro = SearchBar.Text;
+
+            ViewModel.SearchProductoselect(filtro);
+        }
+
+        private void ParentTable_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ViewModel.FilLProductosHijos();
+        }
+
+        private void StockTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+
+            if (StockTextBox.Text.Length > 2)
+                e.Handled = true;
+            else
+                e.Handled = false;
+
+
+        }
+
+        private void TipoSeleccionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TipoSeleccionComboBox.SelectedIndex == 1)
+            {
+                PanelSeleccion.Visibility = Visibility.Hidden;
+                SelectStockPanel.Visibility = Visibility.Visible; 
+            }
+            else
+            {
+                PanelSeleccion.Visibility = Visibility.Visible;
+
+                if (SelectStockPanel != null)
+                {
+                    SelectStockPanel.Visibility = Visibility.Hidden;
+                }
+            }
+        }
+
+        private void SelectProduct ()
+        {
+            var idSelected = ViewModel.SelectedProductHijo;
+
+            ViewModel.ProductosHijosSeleccionados.Add(idSelected);
 
             if (idSelected == null)
             {
@@ -123,19 +207,13 @@ namespace Variedades.Views
                 //Pasamos el dato a la ventana que lo invoque
                 EventoPasarProducto();
 
-                
-
                 this.Close();
             }
-
         }
 
-        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        private void ChildTable_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            string filtro = SearchBar.Text;
-
-            ViewModel.SearchProductoselect(filtro);
+            SelectProduct();
         }
-
     }
 }

@@ -46,7 +46,7 @@
             </DockPanel>
 
             <DockPanel Height="300">
-                <DataGrid SelectedItem="{Binding SelectedProveedorWindow, Mode=TwoWay}" Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProveedorFullCollection}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" Name="client_table" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                <DataGrid MouseDoubleClick="Client_table_MouseDoubleClick" SelectedItem="{Binding SelectedProveedorWindow, Mode=TwoWay}" Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProveedorFullCollection}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" Name="client_table" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                 AlternatingRowBackground="Gainsboro" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
 
 

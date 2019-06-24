@@ -200,6 +200,27 @@ namespace Variedades
             set { ProductosPedido = value; NotifyPropertyChanged("ProductosPedidoCollection"); }
         }
 
+        //Observable for Productos padres a la hora de escoger su venta
+        private ObservableCollection<Producto> ProductosPadres;
+        public ObservableCollection<Producto> ProductosParentEspecificacionesCollection
+        {
+            get { return ProductosPadres; }
+            set { ProductosPadres = value; NotifyPropertyChanged("ProductosParentEspecificacionesCollection"); }
+        }
+
+
+        //Observable for Productos hijos de un padre a la hora de escoger su venta
+        private ObservableCollection<Especificacion_producto> ProductosHijos;
+        public ObservableCollection<Especificacion_producto> ProductosHijosEspecificacionesCollection
+        {
+            get { return ProductosHijos; }
+            set { ProductosHijos = value; NotifyPropertyChanged("ProductosHijosEspecificacionesCollection"); }
+        }
+
+
+        public List<Especificacion_producto> ProductosHijosSeleccionados = new List<Especificacion_producto>();
+
+
         //Observable for ClientFullList
         private ObservableCollection<Pedido> Pedido;
         public ObservableCollection<Pedido> PedidoCollection
@@ -236,6 +257,20 @@ namespace Variedades
         {
             get { return _SelectedVenta; }
             set { _SelectedVenta = value; NotifyPropertyChanged("SelectedVenta"); }
+        }
+
+        private Producto _SelectedProductParent;
+        public Producto SelectedProductParent
+        {
+            get { return _SelectedProductParent; }
+            set { _SelectedProductParent = value; NotifyPropertyChanged("SelectedProductParent"); }
+        }
+
+        private Especificacion_producto _SelectedProductHijo;
+        public Especificacion_producto SelectedProductHijo
+        {
+            get { return _SelectedProductHijo; }
+            set { _SelectedProductHijo = value; NotifyPropertyChanged("SelectedProductHijo"); }
         }
 
         private Especificacion_producto _SelectedEspecificacionProductoInImport;
@@ -340,6 +375,54 @@ namespace Variedades
             }
             
         }
+
+        public void FillProductosPadres()
+        {
+            ProductosPadres = new ObservableCollection<Producto>();
+            List<Producto> ProductosRaizPadres = new List<Producto>();
+            var ProductosNoComprados = GetProductosSinComprar();
+
+            //Search the parents products
+            foreach (var i in ProductosNoComprados)
+            {
+                int numPadres = 0;
+
+                
+                //Compare if already exists
+                foreach (var x in ProductosRaizPadres)
+                {
+                    if (i.Producto.IdProducto == x.IdProducto)
+                    {
+                        numPadres++;
+                    }
+                }
+
+                //if it is not repeated, then add to the list
+                if (numPadres == 0)
+                {
+                    ProductosRaizPadres.Add(i.Producto);
+                }
+
+                //First fill
+                if (ProductosRaizPadres.Count == 0)
+                {
+                    ProductosRaizPadres.Add(i.Producto);
+                }
+
+            }
+
+            ProductosPadres = new ObservableCollection<Producto>(ProductosRaizPadres);
+        }
+
+        public void FilLProductosHijos ()
+        {
+            List<Especificacion_producto> ProductosFromParent = SelectedProductParent.Especificaciones_producto.Where(t => t.Vendido.Equals("No")).ToList();
+
+
+
+            ProductosHijosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(  ProductosFromParent  );
+        }
+
 
         public User Login (String Nombre, String Password)
         {
@@ -743,6 +826,7 @@ namespace Variedades
         //Actualizamos todas las lista de todas las datagrid de cada una de las paginas
         private void UpdateAll()
         {
+           
             ProductosList = _context.Producto.ToList();
             ClientesList = _context.Cliente.ToList();
             VentasList = _context.Venta.ToList();

@@ -8,14 +8,14 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="SelectProductWindow" Height="550" Width="600">
+        Title="SelectProductWindow" Height="550" Width="800">
     <Grid>
         <StackPanel Background="white">
             <DockPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
                 <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Seleccionar Producto" FontSize="17" ></TextBlock>
             </DockPanel>
 
-            <DockPanel>
+            <DockPanel HorizontalAlignment="Center">
                 <TextBox Name="SearchBar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450px" Margin="30,0,0,0" FontSize="20" TextChanged="SearchBar_TextChanged"></TextBox>
                 <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="45,0,5,0" HorizontalAlignment="Left">
                     <Button.Style>
@@ -46,58 +46,88 @@
                 </Button>
             </DockPanel>
 
-            <DockPanel Height="300">
+            <DockPanel Height="330">
+
+                <DockPanel Margin="10,10,10,10" Height="300" Width="450">
+                    <DataGrid MouseDoubleClick="ParentTable_MouseDoubleClick" Name="ParentTable" SelectedItem="{Binding SelectedProductParent, Mode=TwoWay}" Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductosParentEspecificacionesCollection}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    AlternatingRowBackground="Gainsboro" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
 
 
-                <TreeView Name="ProductTreeView">
-                    
-                </TreeView>
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre, IsAsync=False}" Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Precio venta" Binding="{Binding Precio_Venta, IsAsync=False}" Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Tipo Producto" Binding="{Binding Tipo_Producto, IsAsync=True}" Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Stock" Binding="{Binding NumeroDeEspecificacionesDisponibles, IsAsync=False}" Width="*" ></DataGridTextColumn>
+
+
+                        </DataGrid.Columns>
+
+                        
+
+                    </DataGrid>
+
+                </DockPanel>
+
+                <DockPanel Name="PanelSeleccion" Margin="10,10,10,10" Height="300" Width="280">
+                    <DataGrid MouseDoubleClick="ChildTable_MouseDoubleClick" SelectedItem="{Binding SelectedProductHijo, Mode=TwoWay}" Name="ChildTable" Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductosHijosEspecificacionesCollection}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+                    AlternatingRowBackground="Gainsboro" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
+
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion, IsAsync=False}" Width="*" ></DataGridTextColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </DockPanel>
+
                 
-                
-                
-                <!--
-                <DataGrid  SelectedItem="{Binding SelectedProductWindow, Mode=TwoWay}" Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductosEspecificacionesCollection}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" Name="client_table" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
-            AlternatingRowBackground="Gainsboro" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
-
-                    
-                    <DataGrid.Columns>
-
-                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre, IsAsync=False}" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Precio venta" Binding="{Binding Precio, IsAsync=False}" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Garantia Disponible" Binding="{Binding GarantiaDisponible, IsAsync=True}" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion, IsAsync=True}" Width="*" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Tipo Producto" Binding="{Binding Tipo_Producto, IsAsync=True}" Width="*" ></DataGridTextColumn>
-
-
-                    </DataGrid.Columns>
-                </DataGrid>
-                    -->
-
             </DockPanel>
 
-            <Button Content="Seleccionar Producto"  Click="BtnSelectProduct" Name="SeleccionarBtn" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="130px" Height="40px">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="{StaticResource ColorBotones}" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
+            <DockPanel>
 
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
-                            </Trigger>
-                        </Style.Triggers>
+                <ComboBox SelectionChanged="TipoSeleccionComboBox_SelectionChanged" Width="180" SelectedIndex="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" Height="30" Margin="30,0,0,0" Name="TipoSeleccionComboBox">
+                    <ComboBoxItem>Seleccion Individual</ComboBoxItem>
+                    <ComboBoxItem>Seleccion por Stock</ComboBoxItem>
+                </ComboBox>
 
-                    </Style>
-                </Button.Style>
-            </Button>
+                <DockPanel Name="SelectStockPanel" Visibility="Hidden" Margin="10,0,10,0">
+                    <TextBlock VerticalAlignment="Center" Text="Stock" Width="40px"></TextBlock>
+                    <TextBox PreviewTextInput="StockTextBox_PreviewTextInput" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="100" Height="30" Name="StockTextBox" Margin="30,0,0,0"  />
+                </DockPanel>
+
+                <DockPanel  Margin="10,0,10,0">
+                    <Button Content="Seleccionar Producto"  Click="BtnSelectProduct" Name="SseleccionarBtn" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="130px" Height="40px">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </DockPanel>
+
+               
+            </DockPanel>
+
+            
 
         </StackPanel>
     </Grid>

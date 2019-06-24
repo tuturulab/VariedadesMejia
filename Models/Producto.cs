@@ -38,7 +38,11 @@ namespace Variedades.Models
         
         [NotMapped]
         public int NumeroDeEspecificacionesTotales { get; set; }
-        
+
+        //Variable para mostrar el nombre del producto al que fue asignado
+        [NotMapped]
+        public string Nombre { get { return Marca + " " + Modelo; } }
+
         public virtual ICollection<Especificacion_producto> Especificaciones_producto { get; set; }
         
     }

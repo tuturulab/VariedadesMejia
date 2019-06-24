@@ -40,12 +40,12 @@ namespace Variedades.Views
             ViewModel.FillClientesFullCollection();
         }
 
-        private void BtnSelectClient(object sender, RoutedEventArgs e)
-        { 
+        private void Insertado ()
+        {
             //Necesito una manera de limpiar el cliente window selecccionado cada vez que se resetee la ventana, siempre se selecciona el 1 si no hay un item seleccionado
             var idSelected = ViewModel.SelectedClientWindow;
 
-            if (idSelected == null )
+            if (idSelected == null)
             {
                 MessageBoxResult result = MessageBox.Show("Por favor seleccione un cliente de la lista, del que desea realizar una venta ",
                                                  "Confirmation",
@@ -61,6 +61,11 @@ namespace Variedades.Views
                 this.Close();
             }
         }
+
+        private void BtnSelectClient(object sender, RoutedEventArgs e)
+        {
+            Insertado();
+        }
         //NOT YET 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -68,6 +73,11 @@ namespace Variedades.Views
 
             ViewModel.SearchClienteFullList(busqueda);
 
+        }
+
+        private void Client_table_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Insertado();
         }
     }
 }

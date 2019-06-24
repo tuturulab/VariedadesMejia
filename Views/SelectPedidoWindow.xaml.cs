@@ -37,7 +37,7 @@ namespace Variedades.Views
             ViewModel.FillPedidos();
         }
 
-        private void BtnSelectPedido (object sender, RoutedEventArgs e)
+        private void SeleccionadoPedido ()
         {
             //Necesito una manera de limpiar el cliente window selecccionado cada vez que se resetee la ventana, siempre se selecciona el 1 si no hay un item seleccionado
             var idSelected = ViewModel.SelectedPedidoWindow;
@@ -59,11 +59,21 @@ namespace Variedades.Views
             }
         }
 
+        private void BtnSelectPedido (object sender, RoutedEventArgs e)
+        {
+            SeleccionadoPedido();
+        }
+
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             string filtro = SearchBar.Text;
 
             ViewModel.SearchPedido(filtro);
+        }
+
+        private void Client_table_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SeleccionadoPedido();
         }
     }
 }
