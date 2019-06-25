@@ -176,5 +176,17 @@ namespace Variedades.Views
                 ViewModel.SearchClient(vacio);
             }
         }
+
+        private void Client_table_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var cliente = ViewModel.SelectedClient;
+
+            var window = new EditClienteWindow(ViewModel, cliente);
+
+            window.UpdatePagination += new EventHandler(EventoPaginacion);
+
+            window.Show();
+
+        }
     }
 }

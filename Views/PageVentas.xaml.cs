@@ -615,5 +615,14 @@ namespace Variedades.Views
                 ViewModel.SearchVenta(FiltradoVenta);
             }
         }
+
+        private void Venta_table_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            //Iniciamos la ventana de detallar un producto
+            Venta venta = ViewModel.SelectedVenta;
+
+            ventaWindow = new DetalleVentaWindow(ViewModel, venta);
+            ventaWindow.Show();
+        }
     }
 }

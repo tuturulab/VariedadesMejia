@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\ProductoEnVenta.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Views\CrearCuentaWindow.xaml.cs">
       <DependentUpon>CrearCuentaWindow.xaml</DependentUpon>

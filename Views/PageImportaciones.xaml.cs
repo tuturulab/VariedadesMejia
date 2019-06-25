@@ -208,5 +208,13 @@ namespace Variedades.Views
             ViewModel.SearchImportacionList(filtro);
 
         }
+
+        private void Product_table_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DetalleProveedor detalleProveedor = ViewModel.SelectedImportacion;
+            detalleWindow = new DetalleImportacionWindow(ViewModel, detalleProveedor);
+
+            detalleWindow.Show();
+        }
     }
 }

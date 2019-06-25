@@ -34,6 +34,20 @@ namespace Variedades.Models
         [NotMapped]
         public int CantidadProductos { get { return Especificaciones_producto.Count; } }
 
+        //Propiedad para ver el saldo pendiente
+        [NotMapped]
+        public double SaldoPendiente { get
+            {
+                double dineroPagado = 0;
+
+                foreach (var i in Pagos)
+                {
+                    dineroPagado = dineroPagado + i.Monto;
+                }
+
+                return MontoVenta - dineroPagado;
+            }
+        }
 
         public virtual ICollection<Pago> Pagos { get; set;  }
         public virtual ICollection<Especificacion_producto> Especificaciones_producto{ get; set; }

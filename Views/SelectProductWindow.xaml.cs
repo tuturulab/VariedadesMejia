@@ -37,14 +37,12 @@ namespace Variedades.Views
         }
 
 
-        public SelectProductWindow(PageViewModel viewModel, ObservableCollection<Especificacion_producto> ProductosList)
+        public SelectProductWindow(PageViewModel viewModel)
         {
             InitializeComponent();
 
             ViewModel = viewModel;
             DataContext = ViewModel;
-
-            ViewModel.FillSearchEspecificacionesProducts();
     
         }
 
@@ -124,7 +122,7 @@ namespace Variedades.Views
                     {
                         var idSelected = ViewModel.SelectedProductParent;
                      
-                        foreach (var z in idSelected.Especificaciones_producto)
+                        foreach (var z in idSelected.Especificaciones_producto.Where(t => t.Vendido.Equals("No")))
                         {
                             if (num < Int32.Parse(StockTextBox.Text) )
                             {
@@ -166,8 +164,7 @@ namespace Variedades.Views
                 e.Handled = true;
             else
                 e.Handled = false;
-
-
+            
         }
 
         private void TipoSeleccionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

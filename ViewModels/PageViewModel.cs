@@ -69,6 +69,14 @@ namespace Variedades
             set { ProductosDeUnaImportacion = value; NotifyPropertyChanged("ListaProductosDeUnaImportacion"); }
         }
 
+      
+        private ObservableCollection<ProductoEnVenta> ProductosListadosDeUnaVenta;
+        public ObservableCollection<ProductoEnVenta> ListaProductosListadosDeUnaVenta
+        {
+            get { return ProductosListadosDeUnaVenta; }
+            set { ProductosListadosDeUnaVenta = value; NotifyPropertyChanged("ListaProductosListadosDeUnaVenta"); }
+        }
+
 
         //Observable for Pedidos Importados in ImportacionToProductWindow
         private ObservableCollection<Producto_importado> ProductosImportados;
@@ -76,6 +84,14 @@ namespace Variedades
         {
             get { return ProductosImportados; }
             set { ProductosImportados = value; NotifyPropertyChanged("ListaProductosImportados"); }
+        }
+
+        //Observable for Pedidos Importados in ImportacionToProductWindow
+        private ObservableCollection<ProductoEnVenta> ProductosVendiendose;
+        public ObservableCollection<ProductoEnVenta> ListaProductosVendiendose
+        {
+            get { return ProductosVendiendose; }
+            set { ProductosVendiendose = value; NotifyPropertyChanged("ListaProductosVendiendose"); }
         }
 
 
@@ -133,6 +149,13 @@ namespace Variedades
         {
             get { return _SelectedFatherProduct; }
             set { _SelectedFatherProduct = value; NotifyPropertyChanged("SelectedFatherProduct"); }
+        }
+
+        private ProductoEnVenta _SelectedEspecificacionProducto;
+        public ProductoEnVenta SelectedEspecificacionProducto
+        {
+            get { return _SelectedEspecificacionProducto; }
+            set { _SelectedEspecificacionProducto = value; NotifyPropertyChanged("SelectedEspecificacionProducto"); }
         }
 
         //Ventana Detalle Venta
@@ -356,14 +379,6 @@ namespace Variedades
             set { _SelectedProveedorWindow = value; NotifyPropertyChanged("SelectedProveedorWindow"); }
         }
 
-        private Especificacion_producto _SelectedEspecificacionProducto;
-        public Especificacion_producto SelectedEspecificacionProducto
-        {
-            get { return _SelectedEspecificacionProducto; }
-            set { _SelectedEspecificacionProducto = value; NotifyPropertyChanged("SelectedEspecificacionProducto"); }
-        }
-
-
         public PageViewModel()
         {
             _context = new DbmejiaEntities();
@@ -376,17 +391,28 @@ namespace Variedades
             
         }
 
-        public void FillProductosPadres()
+        public void FillProductosPadres(string filtro = null)
         {
-            ProductosPadres = new ObservableCollection<Producto>();
+            ProductosParentEspecificacionesCollection = new ObservableCollection<Producto>();
             List<Producto> ProductosRaizPadres = new List<Producto>();
-            var ProductosNoComprados = GetProductosSinComprar();
+
+            List<Especificacion_producto> ProductosNoComprados;
+
+            if (filtro == null)
+            {
+                ProductosNoComprados = GetProductosSinComprar();
+            }
+
+            else
+            {
+                ProductosNoComprados = new List<Especificacion_producto>(ListaNoComprados.Where(s => ((s.Producto.Marca.ToLower().Contains(filtro.ToLower())) || (s.Producto.Modelo.ToLower().Contains(filtro.ToLower())) || (s.Descripcion.ToLower().Contains(filtro.ToLower()))) && (s.Venta == null)));
+            }
+     
 
             //Search the parents products
             foreach (var i in ProductosNoComprados)
             {
                 int numPadres = 0;
-
                 
                 //Compare if already exists
                 foreach (var x in ProductosRaizPadres)
@@ -411,14 +437,20 @@ namespace Variedades
 
             }
 
-            ProductosPadres = new ObservableCollection<Producto>(ProductosRaizPadres);
+            ProductosParentEspecificacionesCollection = new ObservableCollection<Producto>(ProductosRaizPadres);
         }
 
         public void FilLProductosHijos ()
         {
-            List<Especificacion_producto> ProductosFromParent = SelectedProductParent.Especificaciones_producto.Where(t => t.Vendido.Equals("No")).ToList();
+            List<Especificacion_producto> ProductosFromParent = new List<Especificacion_producto>();
 
-
+            foreach (var i in GetProductosSinComprar() )
+            {
+                if (i.Producto == SelectedProductParent)
+                {
+                    ProductosFromParent.Add(i);
+                }
+            }
 
             ProductosHijosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(  ProductosFromParent  );
         }
@@ -1571,14 +1603,16 @@ namespace Variedades
 
         public void SearchProductoselect(string filtro)
         {
-            if(filtro != string.Empty)
+            if (ProductosHijosEspecificacionesCollection != null)
+                ProductosHijosEspecificacionesCollection.Clear();
+
+            if (filtro != string.Empty)
             {
-                
-                ProductosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(ListaNoComprados.Where(s => ((s.Producto.Marca.ToLower().Contains(filtro.ToLower())) || (s.Producto.Modelo.ToLower().Contains(filtro.ToLower())) || (s.Descripcion.ToLower().Contains(filtro.ToLower()))) && (s.Venta == null)));
+                FillProductosPadres(filtro);
             }
             else
             {
-                ProductosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(ListaNoComprados.Where(t => (t.Venta ==null)).ToList());
+                FillProductosPadres();
             }
             
         }

@@ -207,13 +207,14 @@
 
 
         <DockPanel VerticalAlignment="Bottom" Height="250">
-            <DataGrid SelectedItem="{Binding SelectedEspecificacionProducto, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+            <DataGrid ItemsSource="{Binding ListaProductosListadosDeUnaVenta}" SelectedItem="{Binding SelectedEspecificacionProducto, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Nombre, IsAsync=True}" Header="Nombre" Width="2*" ></DataGridTextColumn>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Descripcion, IsAsync=True}" Header="Descripcion" Width="2*" ></DataGridTextColumn>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Precio, IsAsync=True}" Header="Precio" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding NombreProducto, IsAsync=True}" Header="Nombre" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Cantidad, IsAsync=True}" Header="Cantidad" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding PrecioProducto, IsAsync=True}" Header="Precio Unitario" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Subtotal, IsAsync=True}" Header="Subtotal" Width="2*" ></DataGridTextColumn>
 
 
 

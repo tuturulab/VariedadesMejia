@@ -192,6 +192,14 @@ namespace Variedades.Views
                 ViewModel.SearchPedido(vacio);
             }
         }
+
+        private void Client_table_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Pedido pedido = ViewModel.SelectedPedido;
+            windowPedido = new DetallePedidoWindow(ViewModel, pedido);
+
+            windowPedido.Show();
+        }
     }
 }
 

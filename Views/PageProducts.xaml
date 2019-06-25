@@ -24,9 +24,10 @@
 
         <StackPanel  Grid.Row="0" Margin="10,10,10,5">
             <Grid Margin="0,0,0,10">
-                <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Catálogo de Productos" FontSize="17" Foreground="black" ></TextBlock>
+                <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Productos" FontSize="17" Foreground="black" ></TextBlock>
+  
+                <DockPanel Margin="0,0,50,0" HorizontalAlignment="Center">
 
-                <DockPanel HorizontalAlignment="Center">
                     <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="5,0,15,0" HorizontalAlignment="Left">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -87,7 +88,7 @@
         </StackPanel>
 
 
-        <DataGrid  Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductosCollection}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" Name="product_table" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
+        <DataGrid MouseDoubleClick="Product_table_MouseDoubleClick" Margin="10,10,10,5" Grid.Row="1" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductosCollection}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"  VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" Name="product_table" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
             AlternatingRowBackground="Gainsboro" VerticalScrollBarVisibility="Auto" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
 
 

@@ -29,13 +29,10 @@ namespace Variedades.Views
 
         public Cliente cliente;
         public Venta venta;
-        public Especificacion_producto _producto;
 
         private double TotalPago = 0;
 
-        public List<Especificacion_producto> Especificacion_Productos;
-
-        ObservableCollection<Especificacion_producto> ProductosList;
+        public List<Especificacion_producto> ListaProductosDetallada = new List<Especificacion_producto>();
 
         //Evento de Actualizar Paginacion
         public event EventHandler UpdatePagination;
@@ -47,15 +44,14 @@ namespace Variedades.Views
 
             InitializeComponent();
 
-            ProductosList = new ObservableCollection<Especificacion_producto>(); 
-    
-            //Los seteamos en el datagris
-            ProductosDatagrid.ItemsSource = ProductosList;
-
             //Seteamos los productos disponibles
             ViewModel.FillEspecificacionesProducts();
 
+            ViewModel.FillSearchEspecificacionesProducts();
             ViewModel.FillProductosPadres();
+
+
+            ViewModel.ListaProductosListadosDeUnaVenta = new ObservableCollection<ProductoEnVenta>();
         }
 
         //Validación
@@ -94,7 +90,7 @@ namespace Variedades.Views
                     {
 
                         //Validando campos
-                        if (ProductosList.Count < 1)
+                        if (ViewModel.ListaProductosListadosDeUnaVenta.Count < 1)
                         {
                             MessageBoxResult result = MessageBox.Show("Por Favor ingrese almenos un producto a vender antes de agregar la venta" + "",
                                                      "Confirmation",
@@ -116,16 +112,10 @@ namespace Variedades.Views
                             {
                                 int contadorProductosGarantia = 0;
                                 //Haciendo un recorrido en la lista de productos, si algun producto tiene garantia, es necesario que se le asocie un cliente
-                                foreach (var i in ProductosList)
+                                foreach (var i in ListaProductosDetallada)
                                 {
-                                    if (i.Producto.Garantia_Disponible == 1)
-                                    {
+                                    if (i.GarantiaDisponible == "Si")
                                         contadorProductosGarantia++;
-                                    }
-
-                                    i.Vendido = "Si";
-
-                                    ViewModel.SetProductosVendidos(i);
                                 }
 
                                 if (contadorProductosGarantia > 0 && cliente == null)
@@ -144,7 +134,7 @@ namespace Variedades.Views
                                         Fecha_Venta = DateTime.Now,
                                         MontoVenta = TotalPago,
                                         Tipo_Venta = TipoPagoComboBox.Text,
-                                        Especificaciones_producto = ProductosList,
+                                        Especificaciones_producto = ListaProductosDetallada,
                                         Orden_Pagare = OrdenPagareTextBox.Text
                                     };
 
@@ -238,35 +228,113 @@ namespace Variedades.Views
         //Boton para borrar productos del datagrid
         private void BtnBorrarClick (object sender, RoutedEventArgs e)
         {
-            //Agregamos nuevamente el producto a la lista 
-            ViewModel.especificacion_Productos.Add(ViewModel.SelectedEspecificacionProducto);
-            ViewModel.ListaNoComprados.Add(ViewModel.SelectedEspecificacionProducto);
+            var ProductoEnTabla = ViewModel.SelectedEspecificacionProducto;
+
+            foreach (var i in ProductoEnTabla.ListaEspecificacionesProductos)
+            { 
+                //Agregamos nuevamente el producto a la lista 
+                ViewModel.especificacion_Productos.Add(i);
+                ViewModel.ListaNoComprados.Add(i);
+
+                ListaProductosDetallada.Remove(i);
+            }
 
             //Removemos del carrito de compras
-            ProductosList.Remove(ViewModel.SelectedEspecificacionProducto);
+            ViewModel.ListaProductosListadosDeUnaVenta.Remove(ProductoEnTabla);
             //Actualizamos el total del monto
             ObtenerTotalPago();
+
+            //Actualizamos los productos seleccionables
+            ViewModel.FillSearchEspecificacionesProducts();
+            ViewModel.FillProductosPadres();
         }
 
         private void ObtenerTotalPago()
         {
             TotalPago = 0;
             //Actualizamos el total a pagar
-            foreach (var i in ProductosList)
+            foreach (var i in ViewModel.ListaProductosListadosDeUnaVenta)
             {
-                TotalPago = TotalPago + i.Precio;
+                TotalPago = TotalPago + i.Subtotal;
             }
 
             PrecioFinalTextBox.Text = TotalPago.ToString();
         }
+
+        private void AddToObservableCollection ()
+        {
+            int contador = 0;
+            var ProductosHijos = ViewModel.ProductosHijosSeleccionados;
+
+            ProductoEnVenta Element = new ProductoEnVenta();
+
+            foreach (var i in ListaProductosDetallada)
+            {
+                //Si ya existe ese producto en la tabla entonces solo lo actualizamos
+                if (ProductosHijos.FirstOrDefault().Producto == i.Producto )
+                {
+               
+                    if (contador != 1)
+                    {
+                        var ElementFromCollection = ViewModel.ListaProductosListadosDeUnaVenta.FirstOrDefault(z => z.IdProducto == z.IdProducto);
+                        Console.WriteLine(ElementFromCollection.Cantidad);
+                        ElementFromCollection.Cantidad = ElementFromCollection.Cantidad + ProductosHijos.Count();
+                        ElementFromCollection.Subtotal = ElementFromCollection.Cantidad * ElementFromCollection.PrecioProducto;
+
+                        CollectionViewSource.GetDefaultView(this.ViewModel.ListaProductosListadosDeUnaVenta).Refresh();
+                    }
+
+                    contador = 1;
+                }
+            }
+
+            //Si no se hallo elementos coincidientes, quiere decir que es un producto nuevo
+            if (contador == 0)
+            {
+                Element.IdProducto = ProductosHijos.FirstOrDefault().Producto.IdProducto;
+                Element.NombreProducto = ProductosHijos.FirstOrDefault().Producto.Nombre;
+                Element.PrecioProducto = ProductosHijos.FirstOrDefault().Precio;
+                Element.Cantidad = ProductosHijos.Count();
+                Element.Subtotal = Element.Cantidad * Element.PrecioProducto;
+            }
+            
+            foreach (var i in ProductosHijos)
+            {
+                if (contador == 0)
+                {
+                    //Agregamos en la lista de esta ventana
+                    Element.ListaEspecificacionesProductos.Add(i);
+                }
+
+                else
+                {
+                    var ElementFromCollection = ViewModel.ListaProductosListadosDeUnaVenta.FirstOrDefault(z => z.IdProducto == z.IdProducto);
+                    ElementFromCollection.ListaEspecificacionesProductos.Add(i);
+                }
+
+                ListaProductosDetallada.Add(i);
+                //Removemos en las listas del ViewModel
+                ViewModel.ListaNoComprados.Remove(i);
+                ViewModel.especificacion_Productos.Remove(i);
+            }
+
+            if (contador == 0)
+            {
+                //Finalmente agregamos al observable
+                ViewModel.ListaProductosListadosDeUnaVenta.Add(Element);
+            }
+
+        }
+
+
         
         //Boton de agregar productos a la tabla de venta
         private void BtnAddProduct (object sender, RoutedEventArgs e)
         {
-            if (_producto != null)
+            if (ViewModel.ProductosHijosSeleccionados.Count > 0)
             {
                 //Agregamos a la lista
-                ProductosList.Add(_producto);
+                AddToObservableCollection();
 
                 TotalPago = 0;
 
@@ -274,13 +342,24 @@ namespace Variedades.Views
 
                 //Removemos el producto temporalmente para evitar que el usuario agregue este denuevo
 
-                ViewModel.ListaNoComprados.Remove(_producto);
-                ViewModel.especificacion_Productos.Remove(_producto);
-
+                foreach (var i in ViewModel.ProductosHijosSeleccionados)
+                {
+                    ViewModel.ListaNoComprados.Remove(i);
+                    ViewModel.especificacion_Productos.Remove(i);
+                }
+                
                 PrecioFinalTextBox.Text = TotalPago.ToString();
 
                 //Reseteamos los valores
-                _producto = null;
+                ViewModel.ProductosHijosSeleccionados.Clear();
+                ViewModel.FillSearchEspecificacionesProducts();
+
+                if (ViewModel.ProductosHijosEspecificacionesCollection != null)
+                {
+                    ViewModel.ProductosHijosEspecificacionesCollection.Clear();
+                }
+                
+                ViewModel.FillProductosPadres();
                 ProductoTextBox.Text = String.Empty;
             }
 
@@ -320,7 +399,7 @@ namespace Variedades.Views
             ClienteTextBox.Text = cliente.Nombre;
         }
 
-        //Obtener el cliente desde la ventana de productos
+        //Obtener el producto desde la ventana de productos
         public void EventoPasarProducto (object sender, EventArgs e)
         {
             var Productos = ViewModel.ProductosHijosSeleccionados;
@@ -336,7 +415,7 @@ namespace Variedades.Views
         private void BtnSelectProduct(object sender, RoutedEventArgs e)
         {
             //Iniciamos la ventana de crear un producto
-            ProductWindow = new SelectProductWindow(ViewModel, ProductosList);
+            ProductWindow = new SelectProductWindow(ViewModel);
 
             //Reseteamos la lista seleccionada
             ViewModel.ProductosHijosSeleccionados.Clear();

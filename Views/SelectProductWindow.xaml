@@ -15,16 +15,16 @@
                 <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Seleccionar Producto" FontSize="17" ></TextBlock>
             </DockPanel>
 
-            <DockPanel HorizontalAlignment="Center">
-                <TextBox Name="SearchBar" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450px" Margin="30,0,0,0" FontSize="20" TextChanged="SearchBar_TextChanged"></TextBox>
-                <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="45,0,5,0" HorizontalAlignment="Left">
+            <DockPanel Width="500" HorizontalAlignment="Center">
+
+                <Button BorderBrush="{x:Null}" Height="40px" Width="40px" IsEnabled="False" Margin="65,0,65,0" HorizontalAlignment="Right" >
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                            <Setter Property="Background" Value="{x:Null}" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
+                                        <Border Background="{x:Null}">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
@@ -41,9 +41,12 @@
                     </Button.Style>
 
 
-                    <fa5:SvgAwesome Foreground="White" Margin="0,0,0,0" Width="15px" Icon="Solid_Search" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="17px" Icon="Solid_Search" VerticalAlignment="Center" HorizontalAlignment="Left" />
 
                 </Button>
+
+                <TextBox Name="SearchBar" HorizontalAlignment="Left" VerticalAlignment="Center" Width="330px" Margin="0,0,0,0" FontSize="20" TextChanged="SearchBar_TextChanged"></TextBox>
+                
             </DockPanel>
 
             <DockPanel Height="330">

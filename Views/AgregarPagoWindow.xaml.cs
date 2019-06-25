@@ -51,16 +51,7 @@ namespace Variedades.Views
         {
             TotalTextBox.Text = venta.MontoVenta.ToString();
 
-            double dineroPagado = 0;
-
-            foreach (var i in venta.Pagos)
-            {
-                dineroPagado = dineroPagado + i.Monto;
-            }
-
-            saldo = (venta.MontoVenta - dineroPagado);
-
-            SaldoTextBox.Text = (saldo).ToString();
+            SaldoTextBox.Text = venta.SaldoPendiente.ToString();
         }
 
         //Validar que en los campos numericos solo se escriban numeros
@@ -76,9 +67,9 @@ namespace Variedades.Views
             {
                 double Abono = Double.Parse(AbonoTextBox.Text);
 
-                if (Abono > saldo)
+                if (Abono > saldo || Abono == 0)
                 {
-                    MessageBoxResult result = MessageBox.Show("Por favor ingrese un pago menor al saldo restante indicado",
+                    MessageBoxResult result = MessageBox.Show("Por favor ingrese un pago menor al saldo restante indicado o diferente de 0",
                                                 "Confirmation",
                                                 MessageBoxButton.OK,
                                                 MessageBoxImage.Exclamation);
@@ -95,7 +86,7 @@ namespace Variedades.Views
 
                     ViewModel.VerificarVentaEstado(venta);
 
-                    MessageBoxResult result = MessageBox.Show("Se ha ingresado correctamente el pago",
+                    MessageBoxResult result = MessageBox.Show("Su saldo restante es de: " +venta.SaldoPendiente ,
                                                "Confirmation",
                                                MessageBoxButton.OK,
                                                MessageBoxImage.Exclamation);
