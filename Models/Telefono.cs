@@ -18,6 +18,8 @@ namespace Variedades.Models
         //Claro , Movistar 
         public string Empresa { get; set; }
 
+
+
         public virtual Cliente Cliente { get; set; }
     }
 }

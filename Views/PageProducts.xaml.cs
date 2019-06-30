@@ -194,14 +194,8 @@ namespace Variedades.Views
             }
 
         }
-
-
         
-
         //Boton de Busqueda
-       
-
-
         private void ProductSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string vacio = ProductSearchBox.Text;
@@ -212,15 +206,10 @@ namespace Variedades.Views
             }
             else
             {
-                
-
                 ViewModel.SearchProduct(vacio);
             }
 
             UtilidadPaginacion();
-            
         }
-
-
     }
 }
