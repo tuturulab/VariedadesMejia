@@ -46,7 +46,7 @@ namespace Variedades
                     context.Database.Connection.Open();
                     context.Database.Connection.Close();
                 }
-                catch(SqlException e)
+                catch(SqlException)
                 {
                     MessageBox.Show("Verifica tus servicios de base de datos");
                     this.Close();
@@ -54,8 +54,8 @@ namespace Variedades
             }
 
             //Pagina Inicial
-            var PaginaEstadisticas = new Views.PageEstadisticas();
-            ContentMain.Navigate(PaginaEstadisticas);
+            //var PaginaEstadisticas = new Views.PageEstadisticas();
+            ContentMain.Navigate(new Pages.HomePage());
         }
 
         private void BtnOpenManual(object sender, RoutedEventArgs e)
@@ -153,6 +153,11 @@ namespace Variedades
                 default:
                     break;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ContentMain.Navigate(new Pages.HomePage());
         }
     }
 }

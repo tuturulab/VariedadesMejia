@@ -84,7 +84,7 @@
                                            VerticalAlignment="Center"
                                            Width="Auto"
                                            Padding="200 0 200 0"
-                                           Foreground="Black"
+                                           Foreground="White"
                                            Panel.ZIndex="0"
                                            IsEnabled="{TemplateBinding IsActive}"/>
 
