@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Variedades"
+                    xmlns:windows="clr-namespace:Variedades.Views">
+    <Style TargetType="local:MainWindow" BasedOn="{StaticResource SWWindowStyle}"/>
+    <Style TargetType="windows:LoginWindow" BasedOn="{StaticResource SWWindowStyle}" />
+</ResourceDictionary>

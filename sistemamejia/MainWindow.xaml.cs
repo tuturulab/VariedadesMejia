@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChromeCustom;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
@@ -23,7 +24,7 @@ namespace Variedades
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : SWWindow
     {
         public PageViewModel MainViewModel;
         public User thisUser;
