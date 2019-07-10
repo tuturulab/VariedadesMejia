@@ -8,7 +8,6 @@
         Icon="./Assets/icono.ico"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:vconverters="clr-namespace:Variedades.ValueConverters"    
         mc:Ignorable="d"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -124,14 +123,13 @@
             <!--Main Content-->
 
             <Border Grid.Row="1" Background="LightGray">
-                <Grid Grid.Row="1"  Background="#ecf0f1">
+                <Grid Grid.Row="1"  Background="White">
                     <!--Contenido-->
                     <Frame
                     x:Name="ContentMain"
                     Grid.Column="1" Grid.Row="0"
                     Grid.RowSpan="8"
-                    NavigationUIVisibility="Hidden"
-                    Content="{Binding CurrentPage, Converter={vconverters:ApplicationPageValueConverter}}"/>
+                    NavigationUIVisibility="Hidden"/>
 
                 </Grid>
             </Border>

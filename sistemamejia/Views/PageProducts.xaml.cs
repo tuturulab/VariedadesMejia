@@ -27,17 +27,17 @@ namespace Variedades.Views
 
         public User thisUser;
 
-        public PageProducts()
+        public PageProducts(PageViewModel pageViewModel, User user_)
         {
             InitializeComponent();
 
-            /*//Obtener el viewmodel de la ventana principal y lo incializamos
+            //Obtener el viewmodel de la ventana principal y lo incializamos
             ViewModel = pageViewModel;
             DataContext = ViewModel;
 
             UtilidadPaginacion();
 
-            thisUser = user_;*/
+            thisUser = user_;
         }
 
         public void EventoPaginacion(object sender, EventArgs e)
