@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChromeCustom;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Variedades.ViewModels;
 using Variedades.Views;
 
 namespace Variedades.Views
@@ -18,7 +20,7 @@ namespace Variedades.Views
     /// <summary>
     /// Lógica de interacción para LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginWindow : SWWindow
     {
         MainWindow mainWindow;
         public PageViewModel MainViewModel;
@@ -30,13 +32,23 @@ namespace Variedades.Views
             MainViewModel = new PageViewModel();
             DataContext = MainViewModel;
 
-            bool firstExecution = MainViewModel.CheckIfAccountsExist();
+             bool firstExecution = MainViewModel.CheckIfAccountsExist();
 
-            if (firstExecution == false)
-            {
-                CreateFirstAccout();
-            }
+             if (firstExecution == false)
+             {
+                 CreateFirstAccout();
+             }
 
+        }
+
+        // Hidde maximize button - Temporal fix
+        // Try to figure out whty if i put the same code in the constructor does not work
+        // I tried calling the base class constructor thought but nothing
+        //
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);
+            MaximizeButton.Visibility = Visibility.Hidden;
         }
 
         private void CreateFirstAccout ()
@@ -45,6 +57,7 @@ namespace Variedades.Views
 
             createAccWindow.Show();
             this.Close();
+
         }
 
         //Start main window
@@ -70,6 +83,7 @@ namespace Variedades.Views
                                                   MessageBoxButton.OK,
                                                   MessageBoxImage.Exclamation);
             }
+
         }
     }
 }
