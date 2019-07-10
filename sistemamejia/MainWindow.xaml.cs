@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using Variedades.Models;
+using Variedades.ViewModels;
 
 namespace Variedades
 {
@@ -30,10 +31,12 @@ namespace Variedades
         public User thisUser;
 
 
-        public MainWindow(PageViewModel viewModel, User user)
+        public MainWindow()
         {
             InitializeComponent();
-            //Instantiate Viewmodel
+            WindowViewModel vm = new WindowViewModel();
+            DataContext = vm;
+            /*//Instantiate Viewmodel
             MainViewModel = viewModel;
             DataContext = MainViewModel;
 
@@ -55,7 +58,7 @@ namespace Variedades
 
             //Pagina Inicial
             var PaginaEstadisticas = new Views.PageEstadisticas();
-            ContentMain.Navigate(PaginaEstadisticas);
+            ContentMain.Navigate(PaginaEstadisticas);*/
         }
 
         private void BtnOpenManual(object sender, RoutedEventArgs e)
@@ -112,7 +115,7 @@ namespace Variedades
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Change usercontrol 
-            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+            /*switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
                 case "ItemClients":
                     MainViewModel.UpdateClients(10);
@@ -152,7 +155,7 @@ namespace Variedades
 
                 default:
                     break;
-            }
+            }*/
         }
     }
 }

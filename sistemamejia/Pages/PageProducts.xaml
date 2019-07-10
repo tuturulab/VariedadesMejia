@@ -1,11 +1,10 @@
-﻿<Page x:Class="Variedades.Views.PageProducts"
+﻿<Page x:Class="Variedades.Pages.PageProducts"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Variedades.Views"
+      xmlns:local="clr-namespace:Variedades.Pages"
       xmlns:fa5="http://schemas.fontawesome.com/icons/"
-      xmlns:variedades="clr-namespace:Variedades"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageProducts">
@@ -22,7 +21,7 @@
         <StackPanel  Grid.Row="0" Margin="10,10,10,5">
             <Grid Margin="0,0,0,10">
                 <TextBlock Padding="5,15,15,15" VerticalAlignment="Center" Text="Productos" FontSize="17" Foreground="black" ></TextBlock>
-  
+
                 <DockPanel Margin="0,0,50,0" HorizontalAlignment="Center">
 
                     <Button BorderBrush="{x:Null}" Height="40px" Width="40px" Margin="5,0,15,0" HorizontalAlignment="Left">
@@ -52,9 +51,9 @@
                         <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="17px" Icon="Solid_Search" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
                     </Button>
-                    
+
                     <TextBox Name="ProductSearchBox" VerticalAlignment="Center" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="200" Height="30" Margin="0,0,0,0" TextChanged="ProductSearchBox_TextChanged" />
-                    
+
                 </DockPanel>
 
                 <Button BorderBrush="{x:Null}" Content="Agregar Producto" x:Name="btnInsertar" Click="BtnInsertarProducto" Height="40px" Width="150px" Foreground="White"  HorizontalAlignment="Right" Padding="10,10,10,10" VerticalAlignment="Center" Margin="0,0,15,0">
@@ -148,7 +147,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-               
+
                 <DataGridTemplateColumn Header="Editar">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

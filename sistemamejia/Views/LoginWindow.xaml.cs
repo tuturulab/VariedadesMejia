@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Variedades.ViewModels;
+using Variedades.ViewModels.Base;
 using Variedades.Views;
 
 namespace Variedades.Views
@@ -20,16 +22,40 @@ namespace Variedades.Views
     /// <summary>
     /// Lógica de interacción para LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : SWWindow
+    public partial class LoginWindow : SWWindow, IHavePassword
     {
-        MainWindow mainWindow;
-        public PageViewModel MainViewModel;
-        CrearCuentaWindow createAccWindow;
+        //MainWindow mainWindow;
+        //public PageViewModel MainViewModel;
+        //CrearCuentaWindow createAccWindow;
 
         public LoginWindow()
         {
             InitializeComponent();
-            MainViewModel = new PageViewModel();
+
+            LoginViewModel vm = new LoginViewModel();
+            this.DataContext = vm;
+
+            /// Open Main Windows action to vm
+            if (vm.OpenMainWindow == null)
+            {
+                vm.OpenMainWindow = new Action(() =>
+                {
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    Close();
+                });
+            }
+
+
+            //Close this windows action to vm
+            if (vm.CloseThis == null)
+            {
+                vm.CloseThis = new Action(() => this.Close());
+            }
+
+
+
+            /*MainViewModel = new PageViewModel();
             DataContext = MainViewModel;
 
              bool firstExecution = MainViewModel.CheckIfAccountsExist();
@@ -37,9 +63,11 @@ namespace Variedades.Views
              if (firstExecution == false)
              {
                  CreateFirstAccout();
-             }
+             }*/
 
         }
+
+        public SecureString Password => PasswordText.SecurePassword;
 
         // Hidde maximize button - Temporal fix
         // Try to figure out whty if i put the same code in the constructor does not work
@@ -53,10 +81,10 @@ namespace Variedades.Views
 
         private void CreateFirstAccout ()
         {
-            createAccWindow = new CrearCuentaWindow(MainViewModel, true);
+            /*createAccWindow = new CrearCuentaWindow(MainViewModel, true);
 
             createAccWindow.Show();
-            this.Close();
+            this.Close();*/
 
         }
 
@@ -64,7 +92,7 @@ namespace Variedades.Views
         private void LoginButton(object sender, RoutedEventArgs e)
         {
 
-            var user = MainViewModel.Login(UserTextBox.Text, PassTextBox.Password);
+            /*var user = MainViewModel.Login(UserTextBox.Text, PassTextBox.Password);
             
             if (user != null)
             {
@@ -82,7 +110,7 @@ namespace Variedades.Views
                                                   "Confirmation",
                                                   MessageBoxButton.OK,
                                                   MessageBoxImage.Exclamation);
-            }
+            }*/
 
         }
     }

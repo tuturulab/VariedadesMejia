@@ -43,7 +43,7 @@ namespace Variedades.Views
 
             if (newUser != null)
             {
-                mainWindow = new MainWindow(ViewModel, newUser);
+                mainWindow = new MainWindow();
                 mainWindow.Show();
                 this.Close();
             }
