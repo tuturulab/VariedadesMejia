@@ -14,7 +14,7 @@ using System.Windows.Interop;
 
 namespace ChromeCustom
 {
-    public partial class SWWindow
+    public partial class Window
     {
         protected virtual Thickness GetDefaultMarginForDpi()
         {

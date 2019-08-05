@@ -43,7 +43,7 @@ namespace ChromeCustom
     ///     <MyNamespace:CustomControl1/>
     ///
     /// </summary>
-    public partial class SWWindow : Window
+    public partial class Window : System.Windows.Window
     {
         private HwndSource _hwndSource;
 
@@ -64,13 +64,13 @@ namespace ChromeCustom
         public double WidthBeforeMaximize { get; private set; }
         public WindowState PreviousState { get; private set; }
 
-        static SWWindow()
+        static Window()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SWWindow),
-                new FrameworkPropertyMetadata(typeof(SWWindow)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Window),
+                new FrameworkPropertyMetadata(typeof(Window)));
         }
 
-        public SWWindow()
+        public Window()
         {
             double currentDPIScaleFactor = (double)SystemHelper.GetCurrentDPIScaleFactor();
             Screen screen = Screen.FromHandle((new WindowInteropHelper(this)).Handle);
@@ -80,8 +80,8 @@ namespace ChromeCustom
             Rectangle workingArea = screen.WorkingArea;
             base.MaxHeight = (double)(workingArea.Height + 16) / currentDPIScaleFactor;
             SystemEvents.DisplaySettingsChanged += new EventHandler(this.SystemEvents_DisplaySettingsChanged);
-            this.AddHandler(Window.MouseLeftButtonUpEvent, new MouseButtonEventHandler(this.OnMouseButtonUp), true);
-            this.AddHandler(Window.MouseMoveEvent, new System.Windows.Input.MouseEventHandler(this.OnMouseMove));
+            this.AddHandler(System.Windows.Window.MouseLeftButtonUpEvent, new MouseButtonEventHandler(this.OnMouseButtonUp), true);
+            this.AddHandler(System.Windows.Window.MouseMoveEvent, new System.Windows.Input.MouseEventHandler(this.OnMouseMove));
 
         }
 

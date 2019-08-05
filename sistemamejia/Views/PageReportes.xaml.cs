@@ -12,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Variedades.Views;
 
-namespace Variedades.Pages
+namespace Variedades.Views
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for PageReportes.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class PageReportes : Page
     {
-        public HomePage()
+        public PageReportes()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CefWindow cefWindow = new CefWindow();
-            cefWindow.Show();
-            
         }
     }
 }

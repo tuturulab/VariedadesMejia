@@ -38,7 +38,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="local:SWWindow" x:Key="SWWindowStyle">
+    <Style TargetType="local:Window" x:Key="SWWindowStyle">
         <Setter Property="Background" Value="#222d32"/>
         <Setter Property="BorderBrush" Value="Black"/>
         <Setter Property="MinHeight" Value="320"/>
@@ -55,7 +55,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:SWWindow}">
+                <ControlTemplate TargetType="{x:Type local:Window}">
 
                     <Grid Background="Transparent" x:Name="WindowRoot">
 
