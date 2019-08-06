@@ -137,7 +137,7 @@ namespace Variedades
                     break;
 
                 case "ItemReports":
-                    ContentMain.Navigate(new Views.PageReportes());
+                    ContentMain.Navigate(new Views.PageReportes(MainViewModel));
                     break;
 
                 default:

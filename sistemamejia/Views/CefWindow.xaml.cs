@@ -25,10 +25,11 @@ namespace Variedades.Views
     public partial class CefWindow : Window
     {
         ChromiumWebBrowser browser;
+        string templateName;
         public CefWindow(string typeReport)
         {
             InitializeComponent();
-
+            templateName = typeReport;
             //Cef settings
             //var settingsCef = new CefSettings();
 
@@ -59,7 +60,7 @@ namespace Variedades.Views
 
         public string GetHtmlPage(string name)
         {
-            string page = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./bundle/" + name + ".html");
+            string page = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Resources/" + name + ".html");
             return page;
         }
 
@@ -67,9 +68,9 @@ namespace Variedades.Views
         {
             //Task.Delay(4000);
             //browser.ShowDevTools();
-            //string resultPage = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./bundle/templateone.html");
+            //string resultPage = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Resources/" + templateName + ".html");
             //string actualPage = System.IO.File.ReadAllText(resultPage);
-           // browser.Load(resultPage);
+            //browser.Load(resultPage);
 
             //string pagePath = @"D:\Github\VariedadesMejia\sistemamejia\bin\x86\Debug\bundle\TemplateOne.html";
             //string page = System.IO.File.ReadAllText(pagePath);

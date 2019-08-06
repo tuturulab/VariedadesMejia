@@ -286,7 +286,7 @@ namespace Variedades.Views
         private void EmailTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             
-            if (EmailTextBox.Text.Length < 20 )
+            if (EmailTextBox.Text.Length < 50 )
             {
                 e.Handled = false;
             }
@@ -299,7 +299,7 @@ namespace Variedades.Views
         private void DomicilioTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
 
-            if (DomicilioTextBox.Text.Length > 30)
+            if (DomicilioTextBox.Text.Length > 80)
             {
                 e.Handled = true;
             }

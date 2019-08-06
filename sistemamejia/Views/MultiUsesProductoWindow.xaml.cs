@@ -476,7 +476,7 @@ namespace Variedades.Views
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
 
-            if (PrecioTextBox.Text.Length > 2)
+            if (TextBoxGarantiaVenta.Text.Length > 1)
                 e.Handled = true;
             else
                 e.Handled = false;
