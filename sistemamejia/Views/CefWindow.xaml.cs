@@ -26,7 +26,7 @@ namespace Variedades.Views
     {
         ChromiumWebBrowser browser;
         string templateName;
-        public CefWindow(string typeReport)
+        public CefWindow(string typeReport, string pagePath)
         {
             InitializeComponent();
             templateName = typeReport;
@@ -43,7 +43,7 @@ namespace Variedades.Views
             //Cef.Initialize(settingsCef);
 
             //Wee cannot initialize cef two times
-            browser = new ChromiumWebBrowser(GetHtmlPage(typeReport));
+            browser = new ChromiumWebBrowser(pagePath);
 
 
             //Set browser settings
@@ -56,12 +56,6 @@ namespace Variedades.Views
             browserContainer.Child = browser;
             //browser.LoadingStateChanged += initalizedBrowser;
             browser.IsBrowserInitializedChanged += IsBrowserInitializedChangedHandler;
-        }
-
-        public string GetHtmlPage(string name)
-        {
-            string page = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Resources/" + name + ".html");
-            return page;
         }
 
         public void IsBrowserInitializedChangedHandler(object sender, DependencyPropertyChangedEventArgs e)

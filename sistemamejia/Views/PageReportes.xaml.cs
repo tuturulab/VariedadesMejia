@@ -39,11 +39,13 @@ namespace Variedades.Views
             var context = BrowsingContext.New(configuration);
             var parser = context.GetService<IHtmlParser>();
 
-            //File path
-            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Resources/" + button.Name + ".html");
+            //File path, in - out
+            string date = DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss-tt");
+            string filePathIn = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Resources/" + button.Name + ".html");
+            string filePathOut = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Resources/" + button.Name + date + ".html");
 
             //Read file as string
-            string source = System.IO.File.ReadAllText(filePath);
+            string source = System.IO.File.ReadAllText(filePathIn);
 
             //Parse string
             var document = parser.ParseDocument(source);
@@ -71,10 +73,10 @@ namespace Variedades.Views
 
             document.GetElementsByClassName("bodyTSource").FirstOrDefault().AppendChild(trElement);
 
-            System.IO.File.WriteAllText(filePath, document.DocumentElement.OuterHtml);
+            System.IO.File.WriteAllText(filePathOut, document.DocumentElement.OuterHtml);
             //System.IO.File.Create
 
-            CefWindow cef = new CefWindow(button.Name);
+            CefWindow cef = new CefWindow(button.Name, filePathOut);
             cef.Show();
         }
     }

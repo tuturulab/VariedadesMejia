@@ -39,6 +39,21 @@ namespace Variedades
                 return;
             }*/
 
+            using(var entities = new DbmejiaEntities())
+            {
+                try
+                {
+                    entities.Database.Connection.Open();
+                    entities.Database.Connection.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Porfavor iniciar el servicio de bases de datos");
+                    Shutdown(1);
+                    return;
+                }
+            }
+
             var settingsCef = new CefSettings();
 
             settingsCef.RegisterScheme(new CefCustomScheme

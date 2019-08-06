@@ -610,7 +610,7 @@
     <Content Include="Resources\Spectre\spectre.min.css" />
     <Content Include="Resources\Styles\ventadiariastyles.css" />
     <Content Include="Resources\Styles\welcomestyles.css" />
-    <Content Include="Resources\VentaDiaria.html" />
+    <Content Include="Resources\01VentaDiaria.html" />
     <Content Include="Resources\Welcome.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
