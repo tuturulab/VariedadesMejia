@@ -31,13 +31,13 @@ namespace Variedades
             }
 #endif
 
-            if (!DatabaseService.IsRunning())
+            /*if (!DatabaseService.IsRunning())
             {
                 MessageBox.Show("Porfavor iniciar el servicio de bases de datos");
                 Shutdown(1);
                 Debugger.Break();
                 return;
-            }
+            }*/
 
             var settingsCef = new CefSettings();
 

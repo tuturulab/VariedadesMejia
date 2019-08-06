@@ -25,7 +25,7 @@ namespace Variedades.Views
     public partial class CefWindow : Window
     {
         ChromiumWebBrowser browser;
-        public CefWindow()
+        public CefWindow(string typeReport)
         {
             InitializeComponent();
 
@@ -42,8 +42,7 @@ namespace Variedades.Views
             //Cef.Initialize(settingsCef);
 
             //Wee cannot initialize cef two times
-            string initialPage = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./bundle/welcome.html");
-            browser = new ChromiumWebBrowser(initialPage);
+            browser = new ChromiumWebBrowser(GetHtmlPage(typeReport));
 
 
             //Set browser settings
@@ -56,6 +55,12 @@ namespace Variedades.Views
             browserContainer.Child = browser;
             //browser.LoadingStateChanged += initalizedBrowser;
             browser.IsBrowserInitializedChanged += IsBrowserInitializedChangedHandler;
+        }
+
+        public string GetHtmlPage(string name)
+        {
+            string page = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./bundle/" + name + ".html");
+            return page;
         }
 
         public void IsBrowserInitializedChangedHandler(object sender, DependencyPropertyChangedEventArgs e)
