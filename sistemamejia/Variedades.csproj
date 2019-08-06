@@ -595,6 +595,9 @@
   <ItemGroup>
     <Resource Include="Assets\report_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Welcome.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -609,4 +612,7 @@
   </Target>
   <Import Project="..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.73.1.130\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.73.1.130\build\CefSharp.Wpf.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(SolutionDir)sistemamejia\Resources" "$(TargetDir)\Resources\" /E /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

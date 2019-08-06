@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace Variedades.Views
         public PageReportes()
         {
             InitializeComponent();
+        }
+
+        private void Reporte1Event(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            CefWindow cef = new CefWindow(button.Name);
+            cef.Show();
         }
     }
 }

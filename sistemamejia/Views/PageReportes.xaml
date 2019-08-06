@@ -74,6 +74,8 @@
                                 <materialDesign:PackIcon Kind="PrintPreview" />
                         </Button>
                         <Button
+                            x:Name="VentaDiaria"
+                            Click="Reporte1Event"
                             Style="{StaticResource MaterialDesignToolButton}"
                             Width="30"
                             Padding="2 0 2 0"

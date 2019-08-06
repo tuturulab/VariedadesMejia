@@ -28,8 +28,8 @@ namespace Variedades.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CefWindow cefWindow = new CefWindow();
-            cefWindow.Show();
+            //CefWindow cefWindow = new CefWindow();
+            //cefWindow.Show();
             
         }
     }
