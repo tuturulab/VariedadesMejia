@@ -1,4 +1,4 @@
-﻿<mcl:SWWindow
+﻿<mcl:Window
         xmlns:mcl="clr-namespace:ChromeCustom;assembly=ChromeCustom" x:Class="Variedades.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,9 +11,9 @@
         mc:Ignorable="d"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="Variedades Mejía" Height="500" Width="1100">
+        Title="Variedades Mejía" Height="600" Width="1300">
 
-    <mcl:SWWindow.Resources>
+    <mcl:Window.Resources>
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
             <Setter Property="Template">
                 <Setter.Value>
@@ -23,10 +23,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </mcl:SWWindow.Resources>
-    
-    <Grid>
+    </mcl:Window.Resources>
 
+    <Grid>
         <!--Main Layout-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="Sidebar" Width="*"/>
@@ -101,6 +100,12 @@
                         <TextBlock Text="Encargos" VerticalAlignment="Center"  Margin="20 10"/>
                     </StackPanel>
                 </ListViewItem>
+                <ListViewItem x:Name="ItemReports">
+                    <StackPanel Orientation="Horizontal">
+                        <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_PaperPlane" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="Reportes" VerticalAlignment="Center" Margin="20 10" />
+                    </StackPanel>
+                </ListViewItem>
 
             </ListView>
 
@@ -121,13 +126,13 @@
                 </Button>
                 <!--Logo title-->
                 <TextBlock HorizontalAlignment="Center" Foreground="{StaticResource ColorLetraBlanca}" VerticalAlignment="Center" FontSize="22"> Variedades Mejia</TextBlock>
-           
-                
+
+
                 <!--Help Button-->
                 <Button Click="BtnOpenManual"  Background="{StaticResource ColorBotonesMenu}" Width="50px" Height="40px" Padding="8,8,8,8" Margin="5,5,10,5" HorizontalAlignment="Right" >
                     <fa5:SvgAwesome Foreground="Black" Margin="0,0,0,0" Width="20px" Icon="Solid_Question" VerticalAlignment="Center" HorizontalAlignment="Center"  />
-                    
-                    
+
+
                 </Button>
 
 
@@ -147,8 +152,5 @@
                 </Grid>
             </Border>
         </Grid>
-
-
-
     </Grid>
-</mcl:SWWindow>
+</mcl:Window>

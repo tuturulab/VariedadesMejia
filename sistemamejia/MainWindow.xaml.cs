@@ -18,13 +18,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using Variedades.Models;
+using Variedades.Views;
 
 namespace Variedades
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : SWWindow
+    public partial class MainWindow : ChromeCustom.Window
     {
         public PageViewModel MainViewModel;
         public User thisUser;
@@ -39,20 +40,6 @@ namespace Variedades
 
             thisUser = user;
 
-            using(var context = new DbmejiaEntities())
-            {
-                try
-                {
-                    context.Database.Connection.Open();
-                    context.Database.Connection.Close();
-                }
-                catch(SqlException)
-                {
-                    MessageBox.Show("Verifica tus servicios de base de datos");
-                    this.Close();
-                }
-            }
-
             //Pagina Inicial
             //var PaginaEstadisticas = new Views.PageEstadisticas();
             ContentMain.Navigate(new Pages.HomePage());
@@ -62,18 +49,18 @@ namespace Variedades
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             string file = System.IO.Path.Combine(Environment.CurrentDirectory, @"Manual.pdf");
-                
+
             process.StartInfo.FileName = file;
-            process.Start();   
+            process.Start();
         }
 
         //Hide and show sidebar menu
         private void ToggleMenu(object sender, RoutedEventArgs e)
         {
-            //Codigo para generar un diagrama de Db para tener una foto 
+            //Codigo para gener un diagrama de Db para tener una foto 
             /*using (var ctx = new Models.DbmejiaEntities())
             {
-                using (var writer = new XmlTextWriter("./Model.edmx", Encoding.Default))
+               using (var writer = new XmlTextWriter("./Model.edmx", Encoding.Default))
                 {
                     EdmxWriter.WriteEdmx(ctx, writer);
                 }
@@ -146,8 +133,11 @@ namespace Variedades
 
 
                 case "ItemStats":
-
                     ContentMain.Navigate(new Views.PageEstadisticas());
+                    break;
+
+                case "ItemReports":
+                    ContentMain.Navigate(new Views.PageReportes());
                     break;
 
                 default:

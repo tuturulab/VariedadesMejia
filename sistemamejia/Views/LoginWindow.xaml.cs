@@ -20,7 +20,7 @@ namespace Variedades.Views
     /// <summary>
     /// Lógica de interacción para LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : SWWindow
+    public partial class LoginWindow : ChromeCustom.Window
     {
         MainWindow mainWindow;
         public PageViewModel MainViewModel;
@@ -48,7 +48,7 @@ namespace Variedades.Views
         protected override void OnContentRendered(EventArgs e)
         {
             base.OnContentRendered(e);
-            MaximizeButton.Visibility = Visibility.Hidden;
+            //MaximizeButton.Visibility = Visibility.Hidden;
         }
 
         private void CreateFirstAccout ()

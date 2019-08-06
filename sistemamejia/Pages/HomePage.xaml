@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Variedades.Pages"
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage"
@@ -31,5 +31,12 @@
         <materialDesign:Card Padding="32" Margin="16" Background="#367fa9">
             <TextBlock HorizontalAlignment="Center" Style="{DynamicResource MaterialDesignTitleTextBlock}">Mejia Business</TextBlock>
         </materialDesign:Card>
+        <Button
+            Click="Button_Click"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Width="100"
+            ToolTip="Resource name: MaterialDesignRaisedLightButton">
+            OpenCEF
+        </Button>
     </Grid>
 </Page>

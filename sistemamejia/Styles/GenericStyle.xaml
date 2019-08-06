@@ -4,4 +4,6 @@
                     xmlns:windows="clr-namespace:Variedades.Views">
     <Style TargetType="local:MainWindow" BasedOn="{StaticResource SWWindowStyle}"/>
     <Style TargetType="windows:LoginWindow" BasedOn="{StaticResource SWWindowStyle}" />
+    <!--<Style TargetType="windows:CefWindow" BasedOn="{StaticResource SWWindowStyle}"/>-->
+    
 </ResourceDictionary>
