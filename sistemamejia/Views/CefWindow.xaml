@@ -34,10 +34,11 @@
             Grid.Column="1">
             <StackPanel>
                 <Button
-                Margin="15,15,9,0"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                ToolTip="Genera reporte en formato pdf">
-                    _Reporte PDF
+                    Click="Button_Click"
+                    Margin="15,15,9,0"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    ToolTip="Genera reporte en formato pdf">
+                        _Reporte PDF
                 </Button>
             </StackPanel>
         </Border>

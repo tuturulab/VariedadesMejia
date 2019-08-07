@@ -114,6 +114,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=17.2400.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Licensing, Version=17.2400.0.34, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Pdf.Base, Version=17.2400.0.34, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -610,7 +613,7 @@
     <Content Include="Resources\Spectre\spectre.min.css" />
     <Content Include="Resources\Styles\ventadiariastyles.css" />
     <Content Include="Resources\Styles\welcomestyles.css" />
-    <Content Include="Resources\01VentaDiaria.html" />
+    <Content Include="Resources\VentaDiaria.html" />
     <Content Include="Resources\Welcome.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

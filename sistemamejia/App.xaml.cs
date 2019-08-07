@@ -20,6 +20,12 @@ namespace Variedades
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            //Key license here
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTI5NDgzQDMxMzcyZTMyMmUzMG5sSzFWZS84V1Z6THR1d3MxemJRZXFJWnpCdnBwcHp1TTB0elg1dWJ3N3M9");
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
 

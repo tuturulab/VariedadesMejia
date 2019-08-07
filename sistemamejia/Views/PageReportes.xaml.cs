@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AngleSharp;
 using AngleSharp.Html.Parser;
+using Variedades.Models;
 
 namespace Variedades.Views
 {
@@ -50,26 +51,42 @@ namespace Variedades.Views
             //Parse string
             var document = parser.ParseDocument(source);
 
-            //tr Element
             var trElement = document.CreateElement("tr");
-            trElement.SetAttribute("class", "active");
 
-            //td elements
-            var td1 = document.CreateElement("td");
-            td1.TextContent = "From C#";
-            trElement.AppendChild(td1);
-            var td2 = document.CreateElement("td");
-            td2.TextContent = "From C#";
-            trElement.AppendChild(td2);
-            var td3 = document.CreateElement("td");
-            td3.TextContent = "From C#";
-            trElement.AppendChild(td3);
-            var td4 = document.CreateElement("td");
-            td4.TextContent = "From C#";
-            trElement.AppendChild(td4);
-            var td5 = document.CreateElement("td");
-            td5.TextContent = "From C#";
-            trElement.AppendChild(td5);
+            IEnumerable<Venta> ventas = viewModel.GetAllTodayVentas();
+
+            foreach(Venta venta in ventas)
+            {
+                //tr element
+                trElement = document.CreateElement("tr");
+                trElement.SetAttribute("class", "active");
+
+                //td elements
+                var tdPagare = document.CreateElement("td");
+                tdPagare.TextContent = venta.Orden_Pagare;
+                trElement.AppendChild(tdPagare);
+
+                var tdTipoPago = document.CreateElement("td");
+                tdTipoPago.TextContent = venta.Tipo_Venta;
+                trElement.AppendChild(tdTipoPago);
+
+                var tdClienteId= document.CreateElement("td");
+                tdClienteId.TextContent = venta.Cliente.Cedula;
+                trElement.AppendChild(tdClienteId);
+
+                var tdCantidad = document.CreateElement("td");
+                tdCantidad.TextContent = venta.CantidadProductos.ToString();
+                trElement.AppendChild(tdCantidad);
+
+                var tdCompletado = document.CreateElement("td");
+                tdCompletado.TextContent = venta.VentaCompletada;
+                trElement.AppendChild(tdCompletado);
+
+                var tdMonto = document.CreateElement("td");
+                tdMonto.TextContent = "$" + (venta.MontoVenta.ToString());
+                trElement.AppendChild(tdMonto);
+
+            }
 
             document.GetElementsByClassName("bodyTSource").FirstOrDefault().AppendChild(trElement);
 

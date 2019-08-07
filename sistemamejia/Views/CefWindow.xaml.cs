@@ -16,6 +16,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Variedades.CefConfig;
 using System.ComponentModel;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using System.Drawing;
+using System.Diagnostics;
 
 namespace Variedades.Views
 {
@@ -108,6 +112,25 @@ namespace Variedades.Views
             //Clear memory allocations used by CEF
             browser.Dispose();
             //Cef.Shutdown();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PdfDocument document = new PdfDocument();
+
+            PdfPage page = document.Pages.Add();
+
+            PdfGraphics pdfGraphics = page.Graphics;
+
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 14);
+
+            pdfGraphics.DrawString("Testing!!", font, PdfBrushes.Black, new PointF(0,0));
+
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Pdf/DocTest.pdf");
+
+            document.Save(filePath);
+
+            Process.Start(filePath);
         }
     }
 }

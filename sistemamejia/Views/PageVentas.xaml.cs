@@ -59,16 +59,12 @@ namespace Variedades.Views
 
         private void BtnExportarExcel (object sender, RoutedEventArgs e)
         {
-            string FileName;
+            string Fecha = DateTime.Now.ToString("dd-MM-yyyy");
+            string FilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Excel/" + Fecha + ".xlsx");
 
             //string filetoOpen;
             try
-            {
-                String Fecha = DateTime.Now.ToString("dd-MM-yyyy");
-                String FilePath = "Ventas " + Fecha + ".xlsx ";
-                FileName = FilePath;
-
-                //filetoOpen = FilePath;
+            {  
 
                 using (SpreadsheetDocument spreedDoc = SpreadsheetDocument.Create(FilePath,
                 DocumentFormat.OpenXml.SpreadsheetDocumentType.Workbook))
@@ -441,17 +437,7 @@ namespace Variedades.Views
                                                  MessageBoxImage.Information);
 
 
-                //Start the process
-
-                //Get current process Path
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
-
-                string file = System.IO.Path.Combine(Environment.CurrentDirectory, FileName);
-
-                process.StartInfo.FileName = file;
-                process.Start();
-                //openexcel
-                //Process.Start(filetoOpen); 
+                Process.Start(FilePath); 
             }
 
             catch

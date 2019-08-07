@@ -1642,6 +1642,22 @@ namespace Variedades
 
             SelectedProveedorWindow = proveedor;
         }
+
+        //Posible method to get ventas diarias
+        public IEnumerable<Venta> GetAllTodayVentas()
+        {
+            DateTime todayDate = DateTime.Now;
+
+            return _context
+                .Venta
+                .ToList()
+                .Where(venta => 
+                    venta.Fecha_Venta.Value.DayOfWeek == todayDate.DayOfWeek && 
+                    venta.Fecha_Venta.Value.Month == todayDate.Month && 
+                    venta.Fecha_Venta.Value.Year == todayDate.Year
+                );
+        }
+
         
     }
 
