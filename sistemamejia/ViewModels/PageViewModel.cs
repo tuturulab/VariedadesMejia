@@ -1648,7 +1648,7 @@ namespace Variedades
         {
             DateTime todayDate = DateTime.Now;
 
-            return _context
+            var lista1 = _context
                 .Venta
                 .ToList()
                 .Where(venta => 
@@ -1656,6 +1656,8 @@ namespace Variedades
                     venta.Fecha_Venta.Value.Month == todayDate.Month && 
                     venta.Fecha_Venta.Value.Year == todayDate.Year
                 );
+
+            return lista1;
         }
 
         

@@ -59,7 +59,7 @@ namespace Variedades.Views
             {
                 //tr element
                 trElement = document.CreateElement("tr");
-                trElement.SetAttribute("class", "active");
+                //trElement.SetAttribute("class", "active");
 
                 //td elements
                 var tdPagare = document.CreateElement("td");
@@ -89,6 +89,8 @@ namespace Variedades.Views
             }
 
             document.GetElementsByClassName("bodyTSource").FirstOrDefault().AppendChild(trElement);
+
+            Debug.WriteLine(trElement.ToHtml().ToString());
 
             System.IO.File.WriteAllText(filePathOut, document.DocumentElement.OuterHtml);
             //System.IO.File.Create

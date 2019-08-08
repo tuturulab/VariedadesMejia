@@ -45,6 +45,7 @@ namespace Variedades
                 return;
             }*/
 
+            /*
             using(var entities = new DbmejiaEntities())
             {
                 try
@@ -60,6 +61,7 @@ namespace Variedades
                 }
             }
 
+            */
             var settingsCef = new CefSettings();
 
             settingsCef.RegisterScheme(new CefCustomScheme

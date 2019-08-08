@@ -608,6 +608,7 @@
     <Resource Include="Assets\report_icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Img\logo.png" />
     <Content Include="Resources\Spectre\spectre-exp.min.css" />
     <Content Include="Resources\Spectre\spectre-icons.min.css" />
     <Content Include="Resources\Spectre\spectre.min.css" />
