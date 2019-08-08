@@ -52,7 +52,21 @@ namespace Variedades
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        
+
+        private DateTime _PickedDate1;
+        public DateTime PickedDate1
+        {
+            get { return _PickedDate1; }
+            set { _PickedDate1 = value; NotifyPropertyChanged("PickedDate1"); }
+        }
+
+        private DateTime _PickedDate2;
+        public DateTime PickedDate2
+        {
+            get { return _PickedDate2; }
+            set { _PickedDate2 = value; NotifyPropertyChanged("PickedDate2"); }
+        }
+
         //Observable for ImeiList
         private ObservableCollection<ImeiClass> ImeiList;
         public ObservableCollection<ImeiClass> ImeiCollection
@@ -1660,7 +1674,39 @@ namespace Variedades
             return lista1;
         }
 
-        
+        //Get ranged ventas
+        public IEnumerable<Venta> GetRangedVentas()
+        {
+            //List<Venta> toReturn = new List<Venta>();
+
+            //var test1 = _context.Venta.ToList();
+            //test1.ForEach(v =>
+            //{
+            //    if(v.Fecha_Venta.Value >= PickedDate1 && v.Fecha_Venta.Value <= PickedDate2)
+            //    {
+            //        toReturn.Add(v);
+            //    }
+            //});
+
+            var lista1 = _context
+               .Venta
+               .ToList()
+               .Where(v =>
+                    v.Fecha_Venta.Value >= PickedDate1 &&
+                    v.Fecha_Venta.Value <= PickedDate2
+               );
+            return lista1;
+        }
+
+
+        public bool CheckIfCedulaExist(string cedula)
+        {
+            Cliente cliente = _context.Cliente.ToList().FirstOrDefault(c => c.Cedula == cedula);
+
+            return cliente != null ? true: false;
+        }
+
+
     }
 
     //Clase usada para rellenar la datagrid de los Imei

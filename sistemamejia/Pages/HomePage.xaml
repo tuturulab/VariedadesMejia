@@ -28,15 +28,17 @@
     </Page.Resources>
 
     <Grid>
-        <materialDesign:Card Padding="32" Margin="16" Background="#367fa9">
-            <TextBlock HorizontalAlignment="Center" Style="{DynamicResource MaterialDesignTitleTextBlock}">Mejia Business</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <materialDesign:Card Padding="32" Margin="0,0,0,0" Background="#222d32">
+            <TextBlock Foreground="AntiqueWhite" HorizontalAlignment="Center" Style="{DynamicResource MaterialDesignTitleTextBlock}">Bienvenido a Variedades Mejia</TextBlock>
         </materialDesign:Card>
-        <Button
-            Click="Button_Click"
-            Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Width="100"
-            ToolTip="Resource name: MaterialDesignRaisedLightButton">
-            OpenCEF
-        </Button>
+
+        <Border Background="#CE93D8" Margin="0,88,0,-0.4" Grid.RowSpan="2">
+            <Image Source="../Assets/logo.png" Margin="70,62,66,42.6" />
+        </Border>
+        
     </Grid>
 </Page>

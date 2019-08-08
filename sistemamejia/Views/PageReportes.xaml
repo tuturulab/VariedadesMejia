@@ -53,12 +53,12 @@
                         Margin="8 24 8 0">
                         <TextBlock
                             FontWeight="Bold">
-                            Ventas diarias
+                            Ventas del Dia
                         </TextBlock>
                         <TextBlock
                             TextWrapping="Wrap"
                             VerticalAlignment="Center">
-                            Reporte de ventas diarias.
+                            Reporte de ventas del dia.
                         </TextBlock>
                     </StackPanel>
                     <StackPanel
@@ -113,12 +113,12 @@
                         Margin="8 24 8 0">
                             <TextBlock
                                 FontWeight="Bold">
-                                Clientes 1
+                                Ventas por fecha
                             </TextBlock>
                             <TextBlock
                                 TextWrapping="Wrap"
                                 VerticalAlignment="Center">
-                                Reporte de clientes fisca.
+                                Ventas por rango de fechas.
                             </TextBlock>
                     </StackPanel>
                     <StackPanel
@@ -134,6 +134,7 @@
                                 <materialDesign:PackIcon Kind="PrintPreview" />
                         </Button>
                         <Button
+                            Click="Reporte2Event"
                             Style="{StaticResource MaterialDesignToolButton}"
                             Width="30"
                             Padding="2 0 2 0"

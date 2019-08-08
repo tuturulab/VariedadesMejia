@@ -251,7 +251,7 @@ namespace Variedades.Views
         //Acción del boton insertar
         private void BtnInsertarProducto(object sender, RoutedEventArgs e)
         {
-           
+            
             if (EspecificacionList.Count < 1)
             {
                 MessageBoxResult result = MessageBox.Show("Por favor ingrese almenos un producto con estas características",

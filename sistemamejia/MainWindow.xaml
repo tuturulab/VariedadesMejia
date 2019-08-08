@@ -10,6 +10,7 @@
         xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStyle="None"
+    WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         Title="Variedades Mejía" Height="600" Width="1300">
 

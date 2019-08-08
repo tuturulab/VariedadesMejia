@@ -72,8 +72,12 @@ namespace Variedades.Views
                         MessageBoxResult result = MessageBox.Show("Por Favor Ingrese una cédula correcta.", "Confirmation",
                                                 MessageBoxButton.OK,
                                                 MessageBoxImage.Exclamation);
+                    } else if(ViewModel.CheckIfCedulaExist(CedulaTextBox.Text))
+                    {
+                        MessageBoxResult result = MessageBox.Show("El cliente ya existe.", "Confirmation",
+                                                MessageBoxButton.OK,
+                                                MessageBoxImage.Exclamation);
                     }
- 
                     else
                     {
                         //Ingresando el Cliente

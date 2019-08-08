@@ -353,6 +353,9 @@
     <Compile Include="Views\AddProveedorWindow.xaml.cs">
       <DependentUpon>AddProveedorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PickRangedDate.xaml.cs">
+      <DependentUpon>PickRangedDate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SelectClientWindow.xaml.cs">
       <DependentUpon>SelectClientWindow.xaml</DependentUpon>
     </Compile>
@@ -474,6 +477,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddProveedorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PickRangedDate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -615,6 +622,7 @@
     <Content Include="Resources\Styles\ventadiariastyles.css" />
     <Content Include="Resources\Styles\welcomestyles.css" />
     <Content Include="Resources\VentaDiaria.html" />
+    <Content Include="Resources\VentaRanged.html" />
     <Content Include="Resources\Welcome.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
