@@ -569,6 +569,15 @@ namespace Variedades
             UpdateImportacion(10);
 
         }
+
+        public void LimpiarProducto (int id)
+        {
+            var producto = _context.Especificacion_producto.Find(id);
+            producto.Vendido = "Si";
+
+            _context.SaveChanges();
+
+        }
     
         public void VerificarVentaEstado (Venta venta_)
         {

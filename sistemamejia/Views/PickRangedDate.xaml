@@ -15,34 +15,30 @@
         </Grid.RowDefinitions>
 
         <wpfx:DateTimePicker
-            Margin="70,0,0,0"
+            Margin="55,52,0,54"
             Format="Custom" 
             FormatString="M/d/yyyy" 
-            Height="55" 
             HorizontalAlignment="Left" 
-            Width="120"
+            Width="190"
             IsEnabled="True" 
-            x:Name="dateTimePicker1" >
-        </wpfx:DateTimePicker>
-        
+            x:Name="dateTimePicker1" />
+
         <wpfx:DateTimePicker
-            Margin="70,0,0,40"
+            Margin="55,19,0,83"
             Grid.Row="1"
             Format="Custom" 
             FormatString="M/d/yyyy" 
-            Height="55" 
             HorizontalAlignment="Left" 
-            Width="120"
+            Width="190"
             IsEnabled="True" 
-            x:Name="dateTimePicker2">
-        </wpfx:DateTimePicker>
+            x:Name="dateTimePicker2"/>
         <Button Grid.Row="1"
                 Click="Button_Click"
-                Margin="0,70,30,0"
-                Height="20"
-                Width="70">
+                Margin="119,83,124,21">
             OK
         </Button>
+        <Label Content="Fecha de Inicio&#xD;&#xA;" HorizontalAlignment="Left" Margin="88,10,0,0" VerticalAlignment="Top" Width="129" Height="27"/>
+        <Label Content="Fecha de Corte&#xD;&#xA;&#xA;" HorizontalAlignment="Left" Margin="88,97,0,0" VerticalAlignment="Top" Width="129" Height="27"/>
 
     </Grid>
 </Window>

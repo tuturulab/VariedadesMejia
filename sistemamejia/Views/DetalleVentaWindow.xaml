@@ -7,7 +7,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="DetalleVentaWindow" Height="400" Width="800">
+        Title="DetalleVentaWindow" Height="500" Width="800">
     <Grid>
         <StackPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
             <TextBlock Name="WindowTitle" Foreground="White" Padding="5,15,15,15" VerticalAlignment="Center" Text="Detalle de venta" FontSize="17" ></TextBlock>
@@ -24,15 +24,16 @@
 
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Cedula Cliente" Width="40px"></TextBlock>
-                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Left" Width="100" Height="30" Name="ClienteTextBox" Margin="30,0,20,0"/>
-
-                    <TextBlock VerticalAlignment="Center" Text="Monto" Width="40px"></TextBlock>
-                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Left" Width="80" Height="30" Name="MontoTextBox" Margin="30,0,20,0"/>
-
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Left" Width="260" Height="30" Name="ClienteTextBox" Margin="30,0,20,0"/>
 
                 </DockPanel>
+
+                <DockPanel Margin="0,10,0,10">
+                    <TextBlock VerticalAlignment="Center" Text="Monto" Width="40px"></TextBlock>
+                    <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="18" HorizontalAlignment="Left" Width="180" Height="30" Name="MontoTextBox" Margin="30,0,20,0"/>
+                </DockPanel>
                 
-                <DockPanel Height="200">
+                <DockPanel Height="250">
                     <DataGrid Visibility="Visible" ItemsSource="{Binding ProductosCompradosCollection}" Name="CompraDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>
@@ -56,7 +57,7 @@
                     <TextBox IsReadOnly="True" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="200" Height="30" Name="SaldoTextBox" Margin="0,0,0,0"/>
                 </DockPanel>
 
-                <DockPanel Height="200">
+                <DockPanel Height="300">
                     <DataGrid ItemsSource="{Binding PagosCollection}" Visibility="Visible" Name="PagosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
                     AlternatingRowBackground="Gainsboro" CanUserAddRows="False" CanUserDeleteRows="False" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.Columns>

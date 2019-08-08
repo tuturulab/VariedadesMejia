@@ -49,6 +49,7 @@ namespace Variedades
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             string file = System.IO.Path.Combine(Environment.CurrentDirectory, @"Manual.pdf");
+            Console.WriteLine(file);
 
             process.StartInfo.FileName = file;
             process.Start();

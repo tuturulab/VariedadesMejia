@@ -44,6 +44,9 @@ namespace Variedades.Views
             DataContext = ViewModel;
             venta = venta_;
 
+
+            saldo = venta.SaldoPendiente;
+
             FillData();
         }
 

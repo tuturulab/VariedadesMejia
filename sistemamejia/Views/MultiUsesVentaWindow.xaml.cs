@@ -138,6 +138,11 @@ namespace Variedades.Views
                                         Orden_Pagare = OrdenPagareTextBox.Text
                                     };
 
+                                    foreach (var i in ListaProductosDetallada)
+                                    {
+                                        ViewModel.LimpiarProducto(i.IdEspecificaciones_Producto);
+                                    }
+
                                     List<Pago> Pagos = new List<Pago>();
 
                                     //Validamos que datos insertaremos según si es una venta al crédito o venta al contado

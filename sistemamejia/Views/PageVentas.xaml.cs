@@ -62,6 +62,8 @@ namespace Variedades.Views
             string Fecha = DateTime.Now.ToString("dd-MM-yyyy");
             string FilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Excel/" + Fecha + ".xlsx");
 
+            Console.WriteLine(FilePath);
+
             //string filetoOpen;
             try
             {  
@@ -440,14 +442,18 @@ namespace Variedades.Views
                 Process.Start(FilePath); 
             }
 
-            catch
+            catch (Exception err)
             {
+                Console.WriteLine(err);
+            
                 MessageBoxResult result = MessageBox.Show("Hubo un error al generar la hoja de Excel, revise la documentación por favor.",
                                                   "Confirmation",
                                                   MessageBoxButton.OK,
                                                   MessageBoxImage.Exclamation);
+
+                   
             }
-           
+            
 
         }
 
