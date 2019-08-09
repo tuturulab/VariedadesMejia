@@ -18,6 +18,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using Variedades.Models;
+using Variedades.Services;
+using Variedades.Utils;
 using Variedades.Views;
 
 namespace Variedades
@@ -149,6 +151,13 @@ namespace Variedades
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ContentMain.Navigate(new Pages.HomePage());
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            BackupService databaseService = new BackupService();
+            databaseService.BackupWithPowershell();
+           
         }
     }
 }
