@@ -28,6 +28,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Border x:Name="browserContainer"></Border>
+        <ProgressBar x:Name="ProgressBar" Height="10" Width="100" IsIndeterminate="True" />
         <Border
             BorderBrush="Chocolate"
             BorderThickness="1"

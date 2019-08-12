@@ -58,12 +58,30 @@ namespace Variedades.Views
 
             browser.BrowserSettings = settings;
             browserContainer.Child = browser;
+
             //browser.LoadingStateChanged += initalizedBrowser;
             browser.IsBrowserInitializedChanged += IsBrowserInitializedChangedHandler;
+            browser.LoadingStateChanged += LoadingStateChangeHandler;
+            
+        }
+
+        public void LoadingStateChangeHandler(object sender, LoadingStateChangedEventArgs args)
+        {
+            if(args.IsLoading == false)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    ProgressBar.Visibility = Visibility.Hidden;
+                    //browserContainer.Child = browser;
+                });
+                //this.ProgressBar.Visibility = Visibility.Hidden;
+                //browserContainer.Child = browser;
+            }
         }
 
         public void IsBrowserInitializedChangedHandler(object sender, DependencyPropertyChangedEventArgs e)
         {
+            
             //Task.Delay(4000);
             //browser.ShowDevTools();
             //string resultPage = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Resources/" + templateName + ".html");

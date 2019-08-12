@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,12 +50,10 @@ namespace Variedades
 
         private void BtnOpenManual(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            string file = System.IO.Path.Combine(Environment.CurrentDirectory, @"Manual.pdf");
-            Console.WriteLine(file);
+            //System.Diagnostics.Process process = new System.Diagnostics.Process();
+            string file = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Assets/Manual.pdf");
 
-            process.StartInfo.FileName = file;
-            process.Start();
+            Process.Start(file);
         }
 
         //Hide and show sidebar menu

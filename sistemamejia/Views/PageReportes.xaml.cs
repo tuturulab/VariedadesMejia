@@ -101,6 +101,8 @@ namespace Variedades.Views
             System.IO.File.WriteAllText(filePathOut, document.DocumentElement.OuterHtml);
             //System.IO.File.Create
 
+            //Process.Start(filePathOut);
+
             CefWindow cef = new CefWindow(button.Name, filePathOut);
             cef.Show();
         }
@@ -181,6 +183,8 @@ namespace Variedades.Views
 
             System.IO.File.WriteAllText(filePathOut, document.DocumentElement.OuterHtml);
             //System.IO.File.Create
+
+            //Process.Start(filePathOut);
 
             CefWindow cef = new CefWindow("VentaRanged", filePathOut);
             cef.Show();

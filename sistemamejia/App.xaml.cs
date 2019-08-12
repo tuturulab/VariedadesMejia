@@ -29,14 +29,6 @@ namespace Variedades
         protected override void OnStartup(StartupEventArgs e)
         {
 
-#if DEBUG
-            if (!System.Diagnostics.Debugger.IsAttached)
-            {
-                MessageBox.Show("When running this outside of Visual Studio " +
-                                "please make sure you compile in `Release` mode.", "Warning");
-            }
-#endif
-
             /*if (!DatabaseService.IsRunning())
             {
                 MessageBox.Show("Porfavor iniciar el servicio de bases de datos");

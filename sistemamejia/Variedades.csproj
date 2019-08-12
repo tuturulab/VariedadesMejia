@@ -598,13 +598,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\logo.png" />
+    <Resource Include="Assets\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\logoMin.png" />
+    <Resource Include="Assets\logoMin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\icono.ico" />
+    <Resource Include="Assets\icono.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChromeCustom\ChromeCustom.csproj">
@@ -614,7 +620,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="Assets\report_icon.png" />
+    <Resource Include="Assets\report_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Img\logo.png" />
