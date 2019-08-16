@@ -142,6 +142,10 @@ namespace Variedades
                     ContentMain.Navigate(new Views.PageReportes(MainViewModel));
                     break;
 
+                case "ItemBackup":
+                    ContentMain.Navigate(new Views.PageBackup(MainViewModel));
+                    break;
+
                 default:
                     break;
             }
@@ -150,13 +154,6 @@ namespace Variedades
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ContentMain.Navigate(new Pages.HomePage());
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            BackupService databaseService = new BackupService();
-            databaseService.BackupWithPowershell();
-           
         }
     }
 }

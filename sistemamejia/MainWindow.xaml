@@ -110,7 +110,7 @@
                 <ListViewItem x:Name="ItemBackup">
                     <StackPanel Orientation="Horizontal">
                         <fa5:SvgAwesome Foreground="white" Margin="10,0,0,0" Width="20px" Icon="Solid_Database" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <Button Background="#222d32" Foreground="White" Content="Respaldar" VerticalAlignment="Center" Margin="20 10" />
+                        <TextBlock Text="Respaldo" VerticalAlignment="Center" Margin="20 10" />
                     </StackPanel>
                 </ListViewItem>
 

@@ -4,49 +4,63 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Variedades.Services;
 
-namespace Variedades.Services
+namespace Variedades.Views
 {
-    public class BackupService
+    /// <summary>
+    /// Interaction logic for PageBackup.xaml
+    /// </summary>
+    public partial class PageBackup : Page
     {
+        PageViewModel _model;
+        long fileSize;
         static string[] scopes = { DriveService.Scope.Drive,
                            DriveService.Scope.DriveFile };
 
-        public long fileSize;
-        public Google.Apis.Upload.IUploadProgress uploadTask;
-        private PageViewModel _Model;
-        public IProgress<double> progress;
-
-        public BackupService(PageViewModel Vm, IProgress<double> pss)
+        public PageBackup(PageViewModel model)
         {
-            _Model = Vm;
-            progress = pss;
-            //_connectionString = "Data Source=DESKTOP-SEBNLEB\\SQLEXPRESS;Initial Catalog=DbMejia;User ID=administrator;Password=Lagunarr98;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            //_backupFolderFullPath = "C:\\Users\\Lagunez\\Desktop\\Backup";
+            InitializeComponent();
+            _model = model;
         }
 
-        public void DoBackupLocal()
+        private void LocalBackup(object sender, RoutedEventArgs e)
         {
-            //string filePath = BuildBackupPathWithFilename(databaseName);
-            bool backupDone = _Model.DoBackupToFile();
-
-            if (backupDone)
-            {
-                MessageBox.Show("Respaldo hecho");
-            }
+            //BackupService backupService = new BackupService(_model);
+            //backupService.DoBackupLocal();
+            bool result = _model.DoBackupToFile();
+            if (result) MessageBox.Show("Respaldo realizado");
+            Process.Start(@"D:\Backup");
         }
 
-        public async void UploadBackupToDriveAsync()
+        private async void CloudBackup(object sender, RoutedEventArgs e)
+        {
+            //Show progress indicator
+            ProgressIndicator.Visibility = Visibility.Visible;
+            await UploadBackupToDriveAsync();
+
+
+            /*var req = backupService.UploadBackupToDriveAsync();
+            req.ProgressChanged += UploadProgressEvent;
+            req.UploadAsync();*/
+        }
+
+        public async Task UploadBackupToDriveAsync()
         {
             UserCredential credential;
             string credentialsFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./credentials.json");
@@ -86,7 +100,7 @@ namespace Variedades.Services
                 request = service.Files.Create(FileMetadata, stream, "application/octet-stream");
                 request.Fields = "id";
 
-                request.ProgressChanged += ProgressHandler;
+                request.ProgressChanged += UploadProgressEvent;
                 //await request.UploadAsync();
                 //Google.Apis.Upload.IUploadProgress x = await request.UploadAsync();
 
@@ -94,14 +108,29 @@ namespace Variedades.Services
             }
         }
 
-        private void ProgressHandler(Google.Apis.Upload.IUploadProgress uploadProgress)
+        private void UploadProgressEvent(Google.Apis.Upload.IUploadProgress uploadProgress)
         {
-            if(uploadProgress.Status == Google.Apis.Upload.UploadStatus.Uploading)
+            switch (uploadProgress.Status)
             {
-                progress.Report((double)(uploadProgress.BytesSent / fileSize) * 100);
-            } else if(uploadProgress.Status == Google.Apis.Upload.UploadStatus.Completed)
-            {
-                progress.Report(200);
+                case Google.Apis.Upload.UploadStatus.Uploading:
+                    Dispatcher.Invoke(() =>
+                    {
+                        var value = ((uploadProgress.BytesSent * 100) / fileSize);
+                        ProgressIndicator.Value = value;
+                        Debug.WriteLine(value);
+                    });              
+                    break;
+
+                case Google.Apis.Upload.UploadStatus.Completed:
+                    Dispatcher.Invoke(() =>
+                    {
+                        ProgressIndicator.Visibility = Visibility.Hidden;
+                        ProgressIndicator.Value = 0;
+                        MessageBox.Show("Respaldo completado!");
+                    });                   
+                    break;
+
+                default: break;
             }
         }
     }

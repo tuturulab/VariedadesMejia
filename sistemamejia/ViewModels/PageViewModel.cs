@@ -42,7 +42,7 @@ namespace Variedades
         public List<Pedido> SearchPedidoList;
 
         public List<Especificacion_producto> ListaNoComprados;
-        
+
         //Declaracion del evento para llamar a la paginacion de la pagina productos una vez se llena la observable productos
         //public event EventHandler EventPaginationProduct;
 
@@ -83,7 +83,7 @@ namespace Variedades
             set { ProductosDeUnaImportacion = value; NotifyPropertyChanged("ListaProductosDeUnaImportacion"); }
         }
 
-      
+
         private ObservableCollection<ProductoEnVenta> ProductosListadosDeUnaVenta;
         public ObservableCollection<ProductoEnVenta> ListaProductosListadosDeUnaVenta
         {
@@ -137,7 +137,7 @@ namespace Variedades
         private ObservableCollection<Especificacion_pedido> Especificacion_Pedidos;
         public ObservableCollection<Especificacion_pedido> Especificaciones_De_un_Pedido
         {
-            get { return Especificacion_Pedidos;  }
+            get { return Especificacion_Pedidos; }
             set { Especificacion_Pedidos = value; NotifyPropertyChanged("EspecificacionesDePedidoCollection"); }
         }
 
@@ -154,7 +154,7 @@ namespace Variedades
         private ObservableCollection<Producto> ProductosFather;
         public ObservableCollection<Producto> ProductosFatherCollection
         {
-            get { return ProductosFather;  }
+            get { return ProductosFather; }
             set { ProductosFather = value; NotifyPropertyChanged("ProductosFatherCollection"); }
         }
 
@@ -183,11 +183,11 @@ namespace Variedades
         private ObservableCollection<Especificacion_producto> ProductosComprados;
         public ObservableCollection<Especificacion_producto> ProductosCompradosCollection
         {
-            get { return ProductosComprados;  }
+            get { return ProductosComprados; }
             set { ProductosComprados = value; NotifyPropertyChanged("ProductosCompradosCollection"); }
         }
 
-       
+
         //Observable for ImportacionList
         private ObservableCollection<DetalleProveedor> Importaciones;
         public ObservableCollection<DetalleProveedor> ImportacionesCollection
@@ -402,7 +402,7 @@ namespace Variedades
                 Debug.WriteLine("Database is avaliable");
                 UpdateAll();
             }
-            
+
         }
 
         public void FillProductosPadres(string filtro = null)
@@ -421,13 +421,13 @@ namespace Variedades
             {
                 ProductosNoComprados = new List<Especificacion_producto>(ListaNoComprados.Where(s => ((s.Producto.Marca.ToLower().Contains(filtro.ToLower())) || (s.Producto.Modelo.ToLower().Contains(filtro.ToLower())) || (s.Descripcion.ToLower().Contains(filtro.ToLower()))) && (s.Venta == null)));
             }
-     
+
 
             //Search the parents products
             foreach (var i in ProductosNoComprados)
             {
                 int numPadres = 0;
-                
+
                 //Compare if already exists
                 foreach (var x in ProductosRaizPadres)
                 {
@@ -454,11 +454,11 @@ namespace Variedades
             ProductosParentEspecificacionesCollection = new ObservableCollection<Producto>(ProductosRaizPadres);
         }
 
-        public void FilLProductosHijos ()
+        public void FilLProductosHijos()
         {
             List<Especificacion_producto> ProductosFromParent = new List<Especificacion_producto>();
 
-            foreach (var i in GetProductosSinComprar() )
+            foreach (var i in GetProductosSinComprar())
             {
                 if (i.Producto == SelectedProductParent)
                 {
@@ -466,11 +466,11 @@ namespace Variedades
                 }
             }
 
-            ProductosHijosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(  ProductosFromParent  );
+            ProductosHijosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(ProductosFromParent);
         }
 
 
-        public User Login (String Nombre, String Password)
+        public User Login(String Nombre, String Password)
         {
             var user = _context.Users.FirstOrDefault(t => t.Nombre.Equals(Nombre));
 
@@ -479,7 +479,7 @@ namespace Variedades
                 return null;
             }
 
-            if (user.Password.Equals(Password) == false )
+            if (user.Password.Equals(Password) == false)
             {
                 return null;
             }
@@ -488,7 +488,7 @@ namespace Variedades
 
         }
 
-        public bool CheckIfAccountsExist ()
+        public bool CheckIfAccountsExist()
         {
             int num = _context.Users.Count();
 
@@ -500,7 +500,7 @@ namespace Variedades
             return true;
         }
 
-        public User CreateAccount (User user)
+        public User CreateAccount(User user)
         {
             var UserNew = _context.Users.Add(user);
             _context.SaveChanges();
@@ -508,7 +508,7 @@ namespace Variedades
             return UserNew;
         }
 
-        public int ExistPagare(String OrdenPagare )
+        public int ExistPagare(String OrdenPagare)
         {
             var cantidad = _context.Venta.Where(t => t.Orden_Pagare.Equals(OrdenPagare)).Count();
             return cantidad;
@@ -537,27 +537,27 @@ namespace Variedades
 
                 return true;
             }
-            catch(SqlException)
+            catch (SqlException)
             {
                 return false;
             }
         }
 
-        public void FillProductoFatherFullList ()
+        public void FillProductoFatherFullList()
         {
             var Lista = _context.Producto.ToList();
             ProductosFatherCollection = new ObservableCollection<Producto>(Lista);
-            
+
         }
 
-        public void AddPago ( Pago pago_)
+        public void AddPago(Pago pago_)
         {
             _context.Pago.Add(pago_);
             _context.SaveChanges();
         }
 
 
-        public void ChangeEstadoImportacion( DetalleProveedor _Importacion )
+        public void ChangeEstadoImportacion(DetalleProveedor _Importacion)
         {
             DetalleProveedor Importacion = _context.DetalleProveedor.Find(_Importacion.IdDetalleProveedor);
 
@@ -570,7 +570,7 @@ namespace Variedades
 
         }
 
-        public void LimpiarProducto (int id)
+        public void LimpiarProducto(int id)
         {
             var producto = _context.Especificacion_producto.Find(id);
             producto.Vendido = "Si";
@@ -578,8 +578,8 @@ namespace Variedades
             _context.SaveChanges();
 
         }
-    
-        public void VerificarVentaEstado (Venta venta_)
+
+        public void VerificarVentaEstado(Venta venta_)
         {
             double saldo = 0;
             foreach (var i in venta_.Pagos)
@@ -598,7 +598,7 @@ namespace Variedades
             }
         }
 
-        public void FillProductosDeUnaVenta (int idVenta)
+        public void FillProductosDeUnaVenta(int idVenta)
         {
             var Lista = _context.Venta.Find(idVenta).Especificaciones_producto.ToList();
 
@@ -611,25 +611,25 @@ namespace Variedades
         }
 
         //Rellenamos los productos importados de una importacion para la ventana ImportacionToProductWindow
-        public void SetProductosImportados (DetalleProveedor Importacion)
+        public void SetProductosImportados(DetalleProveedor Importacion)
         {
             List<Producto_importado> ListaProductos = Importacion.Producto_Importados.ToList();
             ListaProductosImportados = new ObservableCollection<Producto_importado>(ListaProductos);
         }
 
-        public void SetEspecificacionPedido (Pedido pedido)
+        public void SetEspecificacionPedido(Pedido pedido)
         {
             var Especifificaciones = pedido.Especificaciones_pedido.ToList();
             Especificaciones_De_un_Pedido = new ObservableCollection<Especificacion_pedido>(Especifificaciones);
         }
 
         //Rellena los datos insertados
-        public void SearchProductosDeUnaImportacion (int Importacion)
+        public void SearchProductosDeUnaImportacion(int Importacion)
         {
             var _Productos = _context.Especificacion_producto.Where(t => t.Proveedor_Producto.Idproveedor_producto == Importacion).ToList();
 
             ListaProductosDeUnaImportacion = new ObservableCollection<Especificacion_producto>(_Productos);
-            
+
         }
 
         //Find Proveedor
@@ -654,17 +654,17 @@ namespace Variedades
             _context.SaveChanges();
         }
 
-        public void DeleteEspecificacionProducto ()
-        {          
+        public void DeleteEspecificacionProducto()
+        {
             _context.Especificacion_producto.Remove(SelectedEspecificacionProductoInImport);
             ListaProductosDeUnaImportacion.Remove(SelectedEspecificacionProductoInImport);
             _context.SaveChanges();
-            
+
             UpdateProducts(10);
         }
-        
+
         //Agregar existencias a x producto
-        public void AddEspecificacionProducto (List<Especificacion_producto> _especificacion_producto)
+        public void AddEspecificacionProducto(List<Especificacion_producto> _especificacion_producto)
         {
             foreach (var i in _especificacion_producto)
             {
@@ -674,7 +674,7 @@ namespace Variedades
             _context.SaveChanges();
         }
 
-        public void AddSingleEspecificacionProducto (Especificacion_producto especificacion)
+        public void AddSingleEspecificacionProducto(Especificacion_producto especificacion)
         {
             _context.Especificacion_producto.Add(especificacion);
             _context.SaveChanges();
@@ -740,14 +740,14 @@ namespace Variedades
             {
                 PagedProductTable.Previous(SearchProductList, NumberOfRecords);
                 UpdateProducts(NumberOfRecords, SearchProductList);
-                
+
             }
             else
             {
                 PagedProductTable.Previous(ProductosList, NumberOfRecords);
                 UpdateProducts(NumberOfRecords);
             }
-            
+
         }
 
         public void FirstProduct(int NumberOfRecords)
@@ -781,14 +781,14 @@ namespace Variedades
         //Actualiza unicamente la tabla productos
         public void UpdateProducts(int NumberOfRecords, List<Producto> SearchProductList = null)
         {
-            
 
-            if(SearchProductList !=null)
+
+            if (SearchProductList != null)
             {
                 PagedProductTable.SomeMethod(SearchProductList, NumberOfRecords);
                 ProductosCollection = new ObservableCollection<Producto>(PagedProductTable.Productos);
-               
-            }else
+
+            } else
             {
                 //Consulta
                 ProductosList = _context.Producto.ToList();
@@ -796,7 +796,7 @@ namespace Variedades
                 PagedProductTable.SomeMethod(ProductosList, NumberOfRecords);
                 ProductosCollection = new ObservableCollection<Producto>(PagedProductTable.Productos);
             }
-            
+
         }
 
         //Obtener la pagina actual ()
@@ -843,22 +843,22 @@ namespace Variedades
             //Obtenemos el total de calculos
             float calculo = (float)count / 10;
 
-            
+
             //Si es decimal le sumamos 1
 
-            if ( Math.Abs(calculo % 1) <= (Double.Epsilon * 100) )
+            if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
             {
                 return (int)calculo;
             }
 
             else
             {
-                return (int)calculo + 1;  
+                return (int)calculo + 1;
             }
         }
 
         //Colleciones para rellenar ventanas menores
-        public void FillClientesFullCollection ()
+        public void FillClientesFullCollection()
         {
             //Collecciones usadas en las ventanas donde saldra para seleccionar
             ClientesFullCollection = new ObservableCollection<Cliente>(_context.Cliente.ToList());
@@ -875,13 +875,13 @@ namespace Variedades
 
             Producto.Vendido = "Si";
             _context.SaveChanges();
-            
+
         }
-        
+
         //Actualizamos todas las lista de todas las datagrid de cada una de las paginas
         private void UpdateAll()
         {
-           
+
             ProductosList = _context.Producto.ToList();
             ClientesList = _context.Cliente.ToList();
             VentasList = _context.Venta.ToList();
@@ -890,7 +890,7 @@ namespace Variedades
 
             //Collecciones usadas en las ventanas donde saldra para seleccionar
             //ClientesFullCollection = new ObservableCollection<Cliente>( _context.Cliente.ToList());
-            
+
             //Paginacion
             PagedProductTable.SomeMethod(ProductosList, 10);
             PagedClientTable.SomeMethod(ClientesList, 10);
@@ -907,9 +907,9 @@ namespace Variedades
 
             //Procedemos a actualizar
 
-            ProductosCollection = new ObservableCollection<Producto>( PagedProductTable.Productos);
-            
-            ClientesCollection = new ObservableCollection<Cliente>( PagedClientTable.Clientes );
+            ProductosCollection = new ObservableCollection<Producto>(PagedProductTable.Productos);
+
+            ClientesCollection = new ObservableCollection<Cliente>(PagedClientTable.Clientes);
 
             VentasCollection = new ObservableCollection<Venta>(PagedVentaTable.Ventas);
 
@@ -917,19 +917,19 @@ namespace Variedades
 
             ImportacionCollection = new ObservableCollection<DetalleProveedor>(PagedImportacionTable.Importaciones);
         }
-        
-        
+
+
         //Modulo de editar producto
-        private void EditProduct (int id )
+        private void EditProduct(int id)
         {
             var producto = _context.Producto.Find(id);
         }
 
         //Actualizar producto
-        public void UpdateProduct<T>(T item) where T: Producto
+        public void UpdateProduct<T>(T item) where T : Producto
         {
             var entity = _context.Producto.Find(item.IdProducto);
-            if(entity == null)
+            if (entity == null)
             {
                 return;
             }
@@ -945,7 +945,7 @@ namespace Variedades
         {
             //Buscamos el producto seleccionado y lo eliminamos de la base de datos
             _context.Producto.Remove(_Producto);
-            
+
             //Eliminar del observable collection
             Productos.Remove(_Producto);
 
@@ -954,7 +954,7 @@ namespace Variedades
 
             //Actualizamos el datagrid
             UpdateProducts(10);
-            
+
         }
 
         /*
@@ -968,7 +968,7 @@ namespace Variedades
         {
             try
             {
-                var cliente =_context.Cliente.Add(Cliente);
+                var cliente = _context.Cliente.Add(Cliente);
 
                 foreach (var telefono in telefonos)
                 {
@@ -983,7 +983,7 @@ namespace Variedades
                 Console.WriteLine("Error Al ingresar en la base de datos");
             }
 
-          
+
 
             UpdateClients(10);
         }
@@ -1009,7 +1009,7 @@ namespace Variedades
         {
             if (FiltroClient != string.Empty)
             {
-                SearchClientList = ClientesList.Where(c => (c.Nombre.ToLower().Contains(FiltroClient.ToLower())) || (c.Compania.ToLower().Contains(FiltroClient.ToLower())) || (c.Cedula.ToLower().Contains(FiltroClient.ToLower() ) ) ).ToList()  ;
+                SearchClientList = ClientesList.Where(c => (c.Nombre.ToLower().Contains(FiltroClient.ToLower())) || (c.Compania.ToLower().Contains(FiltroClient.ToLower())) || (c.Cedula.ToLower().Contains(FiltroClient.ToLower()))).ToList();
                 UpdateClients(10, SearchClientList);
             }
             else
@@ -1110,7 +1110,7 @@ namespace Variedades
             int count = ClientesList.Count;
             //Obtenemos el total de calculos
             float calculo = (float)count / 10;
-            
+
             //Si es decimal le sumamos 1
             if (Math.Abs(calculo % 1) <= (Double.Epsilon * 100))
             {
@@ -1124,7 +1124,7 @@ namespace Variedades
         }
 
 
-        
+
         //Modulo de editar producto
         private void EditCliente(int id)
         {
@@ -1135,7 +1135,7 @@ namespace Variedades
         //Modulo de borrado
         public void DeleteClient(Cliente cliente_)
         {
-            
+
             _context.Cliente.Remove(cliente_);
 
             //Eliminar del observable collection
@@ -1247,7 +1247,7 @@ namespace Variedades
 
         //Actualiza unicamente la tabla Ventas
         public void UpdateVentas(int NumberOfRecords, List<Venta> SearchVentaList = null)
-        { 
+        {
             //Si hay algo en la busqueda la mostrara
             if (SearchVentaList != null)
             {
@@ -1256,7 +1256,7 @@ namespace Variedades
 
             }
             else
-            { 
+            {
                 //Consulta
                 VentasList = _context.Venta.ToList();
 
@@ -1334,7 +1334,7 @@ namespace Variedades
         {
             _Detalle.Producto_Importados = producto_Importados;
             _context.DetalleProveedor.Add(_Detalle);
-            
+
             _context.SaveChanges();
 
             UpdateImportacion(10);
@@ -1375,7 +1375,7 @@ namespace Variedades
             //Paginacion
             PagedImportacionTable.SomeMethod(ImportacionList, NumberOfRecords);
             ImportacionCollection = new ObservableCollection<DetalleProveedor>(PagedImportacionTable.Importaciones);
-            
+
         }
 
         //Obtener la pagina actual ()
@@ -1420,7 +1420,7 @@ namespace Variedades
                 _context.DetalleProveedor.Remove(_import);
                 _context.SaveChanges();
             }
-            
+
             //Actualizamos el datagrid
             UpdateImportacion(10);
         }
@@ -1444,7 +1444,7 @@ namespace Variedades
             {
                 Console.WriteLine("Error al guardar en la base de datos");
             }
-           
+
         }
 
         // Botones de la paginacion de la tabla productos
@@ -1551,9 +1551,9 @@ namespace Variedades
             if (filtro != string.Empty)
             {
 
-                SearchPedidoList = PedidosList.Where(s => s.cliente.Nombre.ToLower().Contains(filtro.ToLower() )).ToList();
+                SearchPedidoList = PedidosList.Where(s => s.cliente.Nombre.ToLower().Contains(filtro.ToLower())).ToList();
 
-                UpdatePedido(10,SearchPedidoList);
+                UpdatePedido(10, SearchPedidoList);
             }
             else
             {
@@ -1575,7 +1575,7 @@ namespace Variedades
             _context.SaveChanges();
         }
 
-        public void AddEspecificacionPedido (List<Especificacion_pedido> especificacions)
+        public void AddEspecificacionPedido(List<Especificacion_pedido> especificacions)
         {
             foreach (var i in especificacions)
             {
@@ -1584,7 +1584,7 @@ namespace Variedades
             _context.SaveChanges();
         }
 
-        public void AddDetalleProveedor (DetalleProveedor DetalleProveedor)
+        public void AddDetalleProveedor(DetalleProveedor DetalleProveedor)
         {
             _context.DetalleProveedor.Add(DetalleProveedor);
             _context.SaveChanges();
@@ -1609,7 +1609,7 @@ namespace Variedades
             }
         }
 
-        public void SearchClienteFullList (string Filtro)
+        public void SearchClienteFullList(string Filtro)
         {
             if (Filtro != string.Empty)
             {
@@ -1637,13 +1637,13 @@ namespace Variedades
             {
                 FillProductosPadres();
             }
-            
+
         }
 
 
         public void SearchImportacionList(string Filtro)
         {
-            if(Filtro != string.Empty)
+            if (Filtro != string.Empty)
             {
                 ImportacionCollection = new ObservableCollection<DetalleProveedor>(_context.DetalleProveedor.Where(s => (s.Numero_Seguimiento.ToLower().Contains(Filtro.ToLower()))));
             }
@@ -1653,9 +1653,9 @@ namespace Variedades
             }
         }
 
-  
 
-        
+
+
 
         //Agregar Proveedor
         public void AddProveedor(Proveedor proveedor)
@@ -1666,7 +1666,7 @@ namespace Variedades
             SelectedProveedorWindow = proveedor;
         }
 
-        //Posible method to get ventas diarias
+        //Ventas Diarias method
         public IEnumerable<Venta> GetAllTodayVentas()
         {
             DateTime todayDate = DateTime.Now;
@@ -1674,9 +1674,9 @@ namespace Variedades
             var lista1 = _context
                 .Venta
                 .ToList()
-                .Where(venta => 
-                    venta.Fecha_Venta.Value.DayOfWeek == todayDate.DayOfWeek && 
-                    venta.Fecha_Venta.Value.Month == todayDate.Month && 
+                .Where(venta =>
+                    venta.Fecha_Venta.Value.DayOfWeek == todayDate.DayOfWeek &&
+                    venta.Fecha_Venta.Value.Month == todayDate.Month &&
                     venta.Fecha_Venta.Value.Year == todayDate.Year
                 );
 
@@ -1712,10 +1712,25 @@ namespace Variedades
         {
             Cliente cliente = _context.Cliente.ToList().FirstOrDefault(c => c.Cedula == cedula);
 
-            return cliente != null ? true: false;
+            return cliente != null ? true : false;
         }
 
+        public bool DoBackupToFile()
+        {
+            var query = @"BACKUP DATABASE [DbMejia] TO  DISK = N'D:\Backup\DbMejiaBackup.bak' WITH NOFORMAT, NOINIT,  NAME = N'DbMejia-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
 
+            try
+            {
+                _context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, query);
+            }
+            catch(SqlException ex)
+            {
+                //Debug.WriteLine(ex.StackTrace);
+                return false;
+            }
+
+            return true;
+        }
     }
 
     //Clase usada para rellenar la datagrid de los Imei
