@@ -179,6 +179,8 @@ namespace Variedades.Views
                                                      MessageBoxButton.OK,
                                                      MessageBoxImage.Information);
 
+
+                                    ListaProductosDetallada.Clear();
                                     this.Close();
 
                                     /*
@@ -407,8 +409,16 @@ namespace Variedades.Views
         //Obtener el producto desde la ventana de productos
         public void EventoPasarProducto (object sender, EventArgs e)
         {
-            var Productos = ViewModel.ProductosHijosSeleccionados;
-            ProductoTextBox.Text = Productos.FirstOrDefault().Producto.Nombre;
+            try
+            {
+                var Productos = ViewModel.ProductosHijosSeleccionados;
+                ProductoTextBox.Text = Productos.FirstOrDefault().Producto.Nombre;
+            }
+            catch (Exception g)
+            {
+                Console.WriteLine(g);
+            }
+
         }
 
         public void EventoInsertarCliente (object sender, EventArgs e)
@@ -457,6 +467,29 @@ namespace Variedades.Views
                 PagareCheck.Visibility = Visibility.Hidden;
             else
                 PagareCheck.Visibility = Visibility.Visible;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //Validate close window
+            if (ListaProductosDetallada.Count > 0 )
+            {
+                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Hay una venta en proceso. ¿Está seguro de que desea salir?", "Confirmación de Cierre", System.Windows.MessageBoxButton.YesNo);
+
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    foreach (var i in ListaProductosDetallada)
+                    {
+                        i.Vendido = "No";
+                    }
+
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

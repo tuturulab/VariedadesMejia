@@ -27,6 +27,7 @@ namespace Variedades.Views
         List<Especificacion_producto> ProductosNoComprados;
         List<Producto> ProductosPadres = new List<Producto>();
 
+        String Estado = "Individual";
 
         //Agregar los productos a otra ventana al ser llamada
         public event EventHandler UpdateProduct;
@@ -105,10 +106,10 @@ namespace Variedades.Views
 
             else
             {
-                
-                if ( Int32.Parse (StockTextBox.Text) > ViewModel.SelectedProductParent.Especificaciones_producto.Where(t => t.Vendido.Equals("No")).Count() )
+
+                if ( string.IsNullOrWhiteSpace(StockTextBox.Text) )
                 {
-                    MessageBoxResult result = MessageBox.Show("Por favor seleccione una cantidad menor al stock disponible del producto seleccionado.",
+                    MessageBoxResult result = MessageBox.Show("Por favor Seleccione una cantidad de stock",
                                                      "Confirmation",
                                                      MessageBoxButton.OK,
                                                      MessageBoxImage.Exclamation);
@@ -116,28 +117,44 @@ namespace Variedades.Views
 
                 else
                 {
-                    var num = 0;
-
-                    for (int i=0; i<Int32.Parse (StockTextBox.Text); i++)
+                    if (Int32.Parse(StockTextBox.Text) > ViewModel.SelectedProductParent.Especificaciones_producto.Where(t => t.Vendido.Equals("No")).Count() || Int32.Parse(StockTextBox.Text) == 0)
                     {
-                        var idSelected = ViewModel.SelectedProductParent;
-                     
-                        foreach (var z in idSelected.Especificaciones_producto.Where(t => t.Vendido.Equals("No")))
-                        {
-                            if (num < Int32.Parse(StockTextBox.Text) )
-                            {
-                                ViewModel.ProductosHijosSeleccionados.Add(z);
-                                num++;
-                            }
-                            
-                        }
-                        
+                        MessageBoxResult result = MessageBox.Show("Por favor seleccione una cantidad menor al stock disponible del producto seleccionado.",
+                                                         "Confirmation",
+                                                         MessageBoxButton.OK,
+                                                         MessageBoxImage.Exclamation);
                     }
 
-                    EventoPasarProducto();
-                    this.Close();
-                   
+
+                    else
+                    {
+                        var num = 0;
+
+                        for (int i = 0; i < Int32.Parse(StockTextBox.Text); i++)
+                        {
+                            var idSelected = ViewModel.SelectedProductParent;
+
+                            foreach (var z in idSelected.Especificaciones_producto.Where(t => t.Vendido.Equals("No")))
+                            {
+                                if (num < Int32.Parse(StockTextBox.Text))
+                                {
+                                    z.Vendido = "Si";
+                                    ViewModel.ProductosHijosSeleccionados.Add(z);
+                                    num++;
+                                }
+
+                            }
+
+                        }
+
+                        EventoPasarProducto();
+                        this.Close();
+
+                    }
                 }
+
+
+               
 
             }
             
@@ -171,12 +188,14 @@ namespace Variedades.Views
         {
             if (TipoSeleccionComboBox.SelectedIndex == 1)
             {
+                Estado = "Stock";
                 PanelSeleccion.Visibility = Visibility.Hidden;
                 SelectStockPanel.Visibility = Visibility.Visible; 
             }
             else
             {
                 PanelSeleccion.Visibility = Visibility.Visible;
+                Estado = "Individual";
 
                 if (SelectStockPanel != null)
                 {
@@ -188,6 +207,8 @@ namespace Variedades.Views
         private void SelectProduct ()
         {
             var idSelected = ViewModel.SelectedProductHijo;
+
+            idSelected.Vendido = "Si";
 
             ViewModel.ProductosHijosSeleccionados.Add(idSelected);
 

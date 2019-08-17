@@ -8,7 +8,9 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="Agregar Venta" Height="600" Width="930">
+
     <Grid>
 
         <StackPanel Background="{StaticResource ColorPrimario}"  Margin="0,0,0,10">
