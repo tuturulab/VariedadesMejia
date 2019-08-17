@@ -45,7 +45,7 @@ namespace Variedades.Views
             //backupService.DoBackupLocal();
             bool result = _model.DoBackupToFile();
             if (result) MessageBox.Show("Respaldo realizado");
-            Process.Start(@"D:\Backup");
+            Process.Start(@"C:\Backup");
         }
 
         private async void CloudBackup(object sender, RoutedEventArgs e)

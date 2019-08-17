@@ -61,7 +61,10 @@
                            
 
                         </DataGrid.Columns>
+                        
+                        
                     </DataGrid>
+                    
                 </DockPanel>
                
                 <Button Click="BtnInsertarImportacion" Name="InsertarButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,30,0,0"  VerticalAlignment="Center" Width="150px" Content="Insertar Importación"  Height="40px">
@@ -96,29 +99,62 @@
                     <TextBox VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="250" Height="30" Name="SeguimientoTextBox" Margin="0,0,0,0"/>
                 </DockPanel>
 
-                <Button Click="BtnInsertarProducto" Name="AddButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Un Producto"  Height="40px">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="{StaticResource ColorBotones}" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
+                <DockPanel Margin="00,10,0,10">
 
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
-                                </Trigger>
-                            </Style.Triggers>
+                    <Button Click="BtnPasarProductos" Name="PassButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Left" Margin="60,0,0,0"  VerticalAlignment="Center" Width="130px" Content="Pasar desde Importados"  Height="40px">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
 
-                        </Style>
-                    </Button.Style>
-                </Button>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+
+                    <Button Click="BtnInsertarProducto" Name="AddButton" BorderBrush="{x:Null}" Foreground="White" HorizontalAlignment="Right" Margin="0,0,60,0"  VerticalAlignment="Center" Width="130px" Content="Insertar Un Producto"  Height="40px">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{StaticResource ColorBotones}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{StaticResource ColorBotonesPresionados}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    
+                    
+                </DockPanel>
+               
+
+                   
                 
                 <DockPanel Height="200">
                     <DataGrid DataGridCell.GotFocus="DataGrid_CellGotFocus" SelectedItem="{Binding SelectedProductImportado, Mode=TwoWay}" Visibility="Visible" Name="ProductosDatagrid" Margin="10,10,10,10" VirtualizingPanel.VirtualizationMode="Recycling" HeadersVisibility="Column" AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True"  CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserResizeRows="True" CanUserSortColumns="True" 
@@ -207,6 +243,7 @@
                     </DataGrid>
                 </DockPanel>
             </StackPanel>
+           
 
 
 

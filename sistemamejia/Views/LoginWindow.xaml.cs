@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -84,6 +85,43 @@ namespace Variedades.Views
                                                   MessageBoxImage.Exclamation);
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("mejiabusiness11@gmail.com");
+                mail.To.Add(MainViewModel.getEmailFromMainUser());
+                mail.Subject = "Sistema Variedades Mejia";
+
+                String Cuerpo =" <h1> Sistema Variedades Mejia </h1>  <h3> Datos de acceso a la cuenta </h3>  " +
+                    "<b>Usuario: </b> " + MainViewModel.getData().Nombre  + "<br/>"+
+                    "<b>Contraseña: </b> " + MainViewModel.getData().Password + "<br/>" 
+                    ; 
+
+                mail.Body = Cuerpo;
+
+                mail.IsBodyHtml = true;
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("mejiabusiness11@gmail.com", "Mejia1111");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+                MessageBox.Show("Se ha enviado los detalles del acceso al sistema al correo ingresado " +MainViewModel.getEmailFromMainUser() + " Recuerde revisar en la carpeta spam si no aparece" );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString() );
+
+
+                MessageBox.Show("Error enviando correo de recuperación de datos de acceso, revise su conección a internet, sino contacte a los desarrolladores");
+            
+            }
         }
     }
 }

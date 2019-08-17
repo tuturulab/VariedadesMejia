@@ -469,6 +469,15 @@ namespace Variedades
             ProductosHijosEspecificacionesCollection = new ObservableCollection<Especificacion_producto>(ProductosFromParent);
         }
 
+        public String getEmailFromMainUser()
+        {
+            return _context.Users.FirstOrDefault().Email;
+        }
+
+        public User getData()
+        {
+            return _context.Users.FirstOrDefault();
+        }
 
         public User Login(String Nombre, String Password)
         {

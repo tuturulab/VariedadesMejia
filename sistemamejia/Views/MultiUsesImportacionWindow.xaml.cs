@@ -191,5 +191,29 @@ namespace Variedades.Views
             }
             return null;
         }
+
+        private void BtnPasarProductos(object sender, RoutedEventArgs e)
+        {
+            foreach (var i in PedidosList)
+            {
+                var newPedido = new Producto_importado();
+
+                if (String.IsNullOrEmpty(i.Cantidad) == false)
+                    newPedido.Cantidad = int.Parse(i.Cantidad);
+
+                if (String.IsNullOrEmpty (i.Nombre) == false )
+                    newPedido.Nombre = i.Nombre;
+
+                if ( String.IsNullOrEmpty ( i.Descripcion) == false ) 
+                    newPedido.Descripcion = i.Descripcion;
+
+                ProductosList.Add(newPedido);
+            }
+
+
+
+            PassButton.IsEnabled = false;
+            //PassButton.Background = Colors.LightGray.GetNativeColorValues;
+        }
     }
 }

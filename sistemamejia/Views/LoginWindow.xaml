@@ -26,6 +26,9 @@
                 <TextBlock Margin="0,20,0,0" FontSize="24" Text="Contraseña"/>
                 <PasswordBox VerticalAlignment="Center" FontSize="15" Width="350" Height="30" Grid.Row="1" Name="PassTextBox" Margin="5"/>
                 <Button Background="{StaticResource ColorPrimario}" Foreground="White"  Click="LoginButton" Margin="0,20,0,0" Width="100px" Height="50px" Grid.Row="2" Content="Iniciar sesión" />
+
+                <Button Background="MediumAquamarine" Foreground="White"  Click="Button_Click" Margin="0,40,0,0" Width="150px" Height="50px" Grid.Row="2" Content="Recuperar Contraseña" />
+
             </StackPanel>
 
         </Grid>
