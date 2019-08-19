@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -1726,7 +1727,16 @@ namespace Variedades
 
         public bool DoBackupToFile()
         {
-            var query = @"BACKUP DATABASE [DbMejia] TO  DISK = N'D:\Backup\DbMejiaBackup.bak' WITH NOFORMAT, NOINIT,  NAME = N'DbMejia-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
+            string filepath = @"C:\Users\Public\Documents\SqlBackups\MejiaBackup.bak";
+            using (var stream = File.Open(filepath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {
+                lock (stream)
+                {
+                    stream.SetLength(0);
+                }
+            }
+
+            var query = @"BACKUP DATABASE [DbMejia] TO  DISK = N'C:\Users\Public\Documents\SqlBackups\MejiaBackup.bak' WITH  COPY_ONLY, NOFORMAT, NOINIT,  NAME = N'DbMejia-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
 
             try
             {

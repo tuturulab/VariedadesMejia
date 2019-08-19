@@ -33,6 +33,8 @@ namespace Variedades.Views
         static string[] scopes = { DriveService.Scope.Drive,
                            DriveService.Scope.DriveFile };
 
+        UserCredential credential;
+
         public PageBackup(PageViewModel model)
         {
             InitializeComponent();
@@ -41,11 +43,9 @@ namespace Variedades.Views
 
         private void LocalBackup(object sender, RoutedEventArgs e)
         {
-            //BackupService backupService = new BackupService(_model);
-            //backupService.DoBackupLocal();
             bool result = _model.DoBackupToFile();
             if (result) MessageBox.Show("Respaldo realizado");
-            Process.Start(@"C:\Backup");
+            Process.Start(@"C:\Users\Public\Documents\SqlBackups");
         }
 
         private async void CloudBackup(object sender, RoutedEventArgs e)
@@ -62,19 +62,32 @@ namespace Variedades.Views
 
         public async Task UploadBackupToDriveAsync()
         {
-            UserCredential credential;
+            bool result = _model.DoBackupToFile();
+            if (!result) return;
+
+            //UserCredential credential;
             string credentialsFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./credentials.json");
 
             using (var stream = new FileStream(credentialsFilePath, FileMode.Open, FileAccess.Read))
             {
                 string credPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/token.json");
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+
+                Thread thread = new Thread(() => {
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                         GoogleClientSecrets.Load(stream).Secrets,
                         scopes,
                         "user",
                         CancellationToken.None,
                         new FileDataStore(credPath, true)
                     ).Result;
+                });
+
+                thread.Start();
+                if (!thread.Join(78000))
+                {
+                    MessageBox.Show("Error en iniciar sesión!");
+                    return;
+                }
             }
 
             // Create Drive API service.
@@ -91,7 +104,7 @@ namespace Variedades.Views
 
             //Request
             FilesResource.CreateMediaUpload request;
-            string fileToUploadPath = @"D:\Backup\DbMejiaBackup.bak";
+            string fileToUploadPath = @"C:\Users\Public\Documents\SqlBackups\MejiaBackup.bak";
 
             //Take fileStream and Execute request
             using (var stream = new FileStream(fileToUploadPath, FileMode.Open))
@@ -127,7 +140,8 @@ namespace Variedades.Views
                         ProgressIndicator.Visibility = Visibility.Hidden;
                         ProgressIndicator.Value = 0;
                         MessageBox.Show("Respaldo completado!");
-                    });                   
+                    });
+                    credential.RevokeTokenAsync(CancellationToken.None);
                     break;
 
                 default: break;
