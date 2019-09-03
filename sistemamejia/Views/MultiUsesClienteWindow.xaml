@@ -44,9 +44,12 @@
                 <DockPanel Margin="0,10,0,10">
                     <TextBlock VerticalAlignment="Center" Text="Cédula" Width="100px"></TextBlock>
 
-                    <xctk:MaskedTextBox x:Name="CedulaTextBox" Mask="999-999999-9999?" CaretIndex="0" VerticalAlignment="Center" FontSize="20"  Margin="30,0,0,0"></xctk:MaskedTextBox>
+                    <xctk:MaskedTextBox TextChanged="CedulaTextBox_TextChanged"  HorizontalAlignment="Left"  Width="300"  x:Name="CedulaTextBox" Mask="999-999999-9999?" CaretIndex="0" VerticalAlignment="Center" FontSize="20"  Margin="30,0,0,0"></xctk:MaskedTextBox>
                     <!-- <TextBox PreviewTextInput="CedulaTextBox_PreviewTextInput" VerticalAlignment="Center" FontSize="20" HorizontalAlignment="Left" Width="300" Height="30" Name="CedulaTextBox" Margin="30,0,0,0" TextChanged="CedulaTextBox_TextChanged" /> -->
-                    
+
+
+                    <TextBlock x:Name="CedulaField" Visibility="Visible" VerticalAlignment="Center" FontWeight="Bold" FontSize="22" TextAlignment="Center" Foreground="Red"  Text="*" Width="40px"></TextBlock>
+
                 </DockPanel>
 
                 <DockPanel Margin="0,10,0,10">

@@ -357,7 +357,19 @@ namespace Variedades.Views
 
         private void CedulaTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            try
+            {
+                if (CedulaTextBox.Text != String.Empty && CedulaField != null )
+                    CedulaField.Visibility = Visibility.Hidden;
+                else
+                    CedulaField.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error de cedula: " + ex);
+            }
             
+
         }
     }
 
