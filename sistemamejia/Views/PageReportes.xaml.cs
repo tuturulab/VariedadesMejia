@@ -166,7 +166,7 @@ namespace Variedades.Views
 
             //document.AppendChild(hiddenInput);
 
-            document.GetElementById("contenidobase").InnerHtml = " </br> </br>  <h1 style='color: blue' > Beneficios esperados y Montos abonados </h1> </br> <h4> Monto Esperado: "+montoPagos.ToString() + "</h4> <h4> Montos abonados: "+ montoPagos.ToString() + "  </h4> </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>v   </br></br></br></br></br></br> ";
+            document.GetElementById("contenidobase").InnerHtml = " </br> </br>  <h1 style='color: blue' > Beneficios esperados y Montos abonados </h1> </br> <h4> Monto Esperado: "+montoTotalEsperado.ToString() + "</h4> <h4> Montos abonados: "+ montoPagos.ToString() + "  </h4> </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>v   </br></br></br></br></br></br> ";
 
             document.Body.AppendChild(hiddenInput2);
 

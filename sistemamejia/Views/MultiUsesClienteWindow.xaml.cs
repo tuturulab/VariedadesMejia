@@ -315,12 +315,15 @@ namespace Variedades.Views
 
         private void CedulaTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+            
+
             if (CedulaTextBox.Text.Length > 15)
             {
                 e.Handled = true;
             }
             else
             {
+               
                 e.Handled = false;
             }
         }
@@ -340,6 +343,8 @@ namespace Variedades.Views
         private void DiaPago2TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             
+
+
             if (DiaPago2TextBox.Text.Length > 1)
             {
                 e.Handled = true;
@@ -348,6 +353,11 @@ namespace Variedades.Views
             {
                 e.Handled = false;
             }
+        }
+
+        private void CedulaTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
         }
     }
 

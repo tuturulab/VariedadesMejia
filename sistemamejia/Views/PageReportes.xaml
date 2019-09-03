@@ -172,12 +172,12 @@
                         Margin="8 24 8 0">
                         <TextBlock
                                 FontWeight="Bold">
-                                Ventas por fecha
+                                Reporte de Ganancias
                         </TextBlock>
                         <TextBlock
                                 TextWrapping="Wrap"
                                 VerticalAlignment="Center">
-                                Ventas por rango de fechas.
+                                Pagos obtenidos.
                         </TextBlock>
                     </StackPanel>
                     <StackPanel
