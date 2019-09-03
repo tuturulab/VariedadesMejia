@@ -83,7 +83,7 @@ namespace Variedades.Views
                 });
 
                 thread.Start();
-                if (!thread.Join(78000))
+                if (!thread.Join(60000))
                 {
                     MessageBox.Show("Error en iniciar sesión!");
                     return;

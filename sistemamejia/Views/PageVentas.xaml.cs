@@ -62,8 +62,6 @@ namespace Variedades.Views
             string Fecha = DateTime.Now.ToString("dd-MM-yyyy");
             string FilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Excel/" + Fecha + ".xlsx");
 
-            Console.WriteLine(FilePath);
-
             //string filetoOpen;
             try
             {  
@@ -438,8 +436,7 @@ namespace Variedades.Views
                                                  MessageBoxButton.OK,
                                                  MessageBoxImage.Information);
 
-
-                Process.Start(FilePath); 
+                Process.Start(FilePath);
             }
 
             catch (Exception err)
@@ -453,7 +450,9 @@ namespace Variedades.Views
 
                    
             }
-            
+
+
+
 
         }
 
