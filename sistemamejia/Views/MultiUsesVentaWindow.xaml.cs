@@ -134,14 +134,12 @@ namespace Variedades.Views
                                         Fecha_Venta = DateTime.Now,
                                         MontoVenta = TotalPago,
                                         Tipo_Venta = TipoPagoComboBox.Text,
-                                        Especificaciones_producto = ListaProductosDetallada,
-                                        Orden_Pagare = OrdenPagareTextBox.Text
+                                        //Especificaciones_producto = ListaProductosDetallada,
+                                        Orden_Pagare = OrdenPagareTextBox.Text,
+                                        Cliente = cliente
+                                        
                                     };
 
-                                    foreach (var i in ListaProductosDetallada)
-                                    {
-                                        ViewModel.LimpiarProducto(i.IdEspecificaciones_Producto);
-                                    }
 
                                     List<Pago> Pagos = new List<Pago>();
 
@@ -171,6 +169,18 @@ namespace Variedades.Views
 
                                     //Finalmente agregamos la venta y actualizamos la pagina venta
                                     ViewModel.AddVenta(venta);
+
+                                    Console.WriteLine("Lista Productos: " + ListaProductosDetallada.Count);
+
+                                    foreach (var i in ListaProductosDetallada)
+                                    {
+                                        Console.WriteLine(i.IdEspecificaciones_Producto);
+                                        //i.Venta = venta;
+                                        ViewModel.LimpiarProducto(i.IdEspecificaciones_Producto, venta);
+                                    }
+
+
+
 
                                     EventoPaginacion();
 

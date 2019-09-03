@@ -613,10 +613,14 @@ namespace Variedades
 
         }
 
-        public void LimpiarProducto(int id)
+        public void LimpiarProducto(int id, Venta idVenta)
         {
             var producto = _context.Especificacion_producto.Find(id);
             producto.Vendido = "Si";
+
+            producto.Venta = idVenta;
+            
+            
 
             _context.SaveChanges();
 

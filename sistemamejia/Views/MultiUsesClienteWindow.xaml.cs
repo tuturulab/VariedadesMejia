@@ -276,7 +276,7 @@ namespace Variedades.Views
         {
             Regex regex = new Regex(@"(?i)^[a-z]+");
 
-            if (NombreTextBox.Text.Length < 20 && regex.IsMatch(e.Text) )
+            if (NombreTextBox.Text.Length < 80 && regex.IsMatch(e.Text) )
             {
                 e.Handled = false;
             }
@@ -290,7 +290,7 @@ namespace Variedades.Views
         private void EmailTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             
-            if (EmailTextBox.Text.Length < 50 )
+            if (EmailTextBox.Text.Length < 80 )
             {
                 e.Handled = false;
             }
