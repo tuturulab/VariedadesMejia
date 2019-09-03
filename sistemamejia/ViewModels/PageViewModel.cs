@@ -480,6 +480,39 @@ namespace Variedades
             return _context.Users.FirstOrDefault();
         }
 
+
+        public Double getMontoTotalEsperado ()
+        {
+
+            List<Venta> ventas = _context.Venta.Where(t => t.VentaCompletada == "No").ToList();
+
+
+            double Monto = 0;
+
+            foreach (var i in ventas)
+            {
+                Monto = Monto + i.MontoVenta;
+            }
+
+            return Monto;
+        }
+
+        public Double getTotalPagos()
+        {
+            List<Pago> pagos = _context.Pago.ToList();
+
+            double FloatEro = 0;
+
+            foreach( var i in pagos)
+            {
+                FloatEro = FloatEro + i.Monto;
+            }
+
+            return FloatEro;
+
+        }
+
+
         public User Login(String Nombre, String Password)
         {
             var user = _context.Users.FirstOrDefault(t => t.Nombre.Equals(Nombre));
@@ -715,9 +748,7 @@ namespace Variedades
             {
 
                 SearchProductList = ProductosList.Where(s => (s.Modelo.ToLower().Contains(filtro.ToLower())) || s.Marca.ToLower().Contains(filtro.ToLower())).ToList();
-
-
-
+                
                 UpdateProducts(10, SearchProductList);
             }
             else

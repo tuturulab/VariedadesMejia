@@ -16,10 +16,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Variedades.CefConfig;
 using System.ComponentModel;
-using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System.Drawing;
 using System.Diagnostics;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
+using DocumentFormat.OpenXml.Wordprocessing;
+using PdfSharp.Pdf;
 
 namespace Variedades.Views
 {
@@ -28,12 +30,14 @@ namespace Variedades.Views
     /// </summary>
     public partial class CefWindow : Window
     {
+
+        string path = "";
+
         ChromiumWebBrowser browser;
-        string templateName;
-        public CefWindow(string typeReport, string pagePath)
+        public CefWindow(string pagePath)
         {
             InitializeComponent();
-            templateName = typeReport;
+            //templateName = typeReport;
             //Cef settings
             //var settingsCef = new CefSettings();
 
@@ -52,16 +56,21 @@ namespace Variedades.Views
 
             //Set browser settings
             BrowserSettings settings = new BrowserSettings();
+           
             settings.FileAccessFromFileUrls = CefState.Enabled;
             settings.UniversalAccessFromFileUrls = CefState.Enabled;
             settings.Javascript = CefState.Enabled;
 
+          
             browser.BrowserSettings = settings;
             browserContainer.Child = browser;
 
             //browser.LoadingStateChanged += initalizedBrowser;
             browser.IsBrowserInitializedChanged += IsBrowserInitializedChangedHandler;
             browser.LoadingStateChanged += LoadingStateChangeHandler;
+
+            path = pagePath;
+            
             
         }
 
@@ -134,6 +143,7 @@ namespace Variedades.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            /*
             PdfDocument document = new PdfDocument();
 
             PdfPage page = document.Pages.Add();
@@ -147,8 +157,21 @@ namespace Variedades.Views
             string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./Pdf/DocTest.pdf");
 
             document.Save(filePath);
+            */
 
-            Process.Start(filePath);
+
+
+
+            string html = File.ReadAllText( path );
+            PdfDocument pdf = PdfGenerator.GeneratePdf(html, PdfSharp.PageSize.A4 );
+            
+
+
+            pdf.Save("document.pdf");
+
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "./document.pdf");
+
+            Process.Start(filePath );
         }
     }
 }

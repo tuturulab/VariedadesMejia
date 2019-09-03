@@ -9,7 +9,10 @@
     <!--<link href="Spectre/spectre.min.css" rel="stylesheet" />-->
     <!--<link href="Spectre/spectre-exp.min.css" rel="stylesheet" />-->
     <!--<link href="Spectre/spectre-icons.min.css" rel="stylesheet" />-->
-    <link href="./Styles/ventadiariastyles.css" rel="stylesheet"/> 
+    <link href="Styles/ventadiariastyles.css" rel="stylesheet" />
+    <link href="ChartJs/chart.min.css" rel="stylesheet"/>
+     
+
 </head>
 <body>
 
@@ -20,36 +23,30 @@
         <div class="column middle">
             <center id="logo">
                 <h1 style="color: white"> Variedades Mejía </h1>
-                <h3 style="color: white"> Reporte de Ventas del Día </h3>
+                <h3 style="color: white"> Reporte de ingresos de ventas </h3>
             </center>
         </div>
         <div style="color: white; font-family:Arial" class="column right">
             <center id="logo">
                 <h2>Fecha:</h2>
                 <h3 id="FechaSetter"></h3>
-            </center>   
+            </center>
         </div>
     </div>
+    
+    <div style="text-align: center; position: relative" class="container2">
+        
 
-    <div class="container2">
-        <div class="table-wrapper">
-            <table class="fl-table">
-                <thead>
-                    <tr>
-                        <th>Orden Pagaré </th>
-                        <th>Fecha Venta</th>
-                        <th>Cedula del Cliente</th>
-                        <th>Tipo de Venta</th>
-                        <th>Venta Completada</th>
-                        <th>Unidades Vendidas</th>
-                        <th>Monto Total</th>
-                    </tr>
-                </thead>
-                <tbody class="bodyTSource">
+           <div id="contenidobase">
 
-                <tbody>
-            </table>
-        </div>
+           </div>
+            
+
+            <div  style="position: absolute; right: 0; left: 0; bottom: 20px; margin: auto; width: 300px "   class="">
+                <canvas id="pie" width="200" height="200"></canvas>
+            </div>
+       
+        
     </div>
 
 
@@ -72,11 +69,14 @@
                     Monto Total
                 </h3>
 
-                <h4 id="TotalAmount" style="color: black;">
-                </h4>
-            </center>         
+                <h4 id="TotalAmount" style="color: black;"></h4>
+            </center>
         </div>
     </div>
+
+    <script type="text/javascript" src="ChartJs/Chart.min.js"></script>
+  
+
 
 </body>
 </html>
